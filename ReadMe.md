@@ -3,7 +3,7 @@
 ## Authors
 
 * Grayson Jackson
-* 
+* Haven ("Rabbit") Herring
 * AB Maness
 
 ## Coding Conventions
