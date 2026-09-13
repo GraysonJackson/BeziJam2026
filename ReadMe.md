@@ -10,5 +10,5 @@
 
 * snakeCase
 * Asset Styling = characterVersionEmotionVariation
-* test
+* give our artist unmonitored committing powers to main
 
