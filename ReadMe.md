@@ -10,4 +10,5 @@
 
 * snakeCase
 * Asset Styling = characterVersionEmotionVariation
+* test
 
