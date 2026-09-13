@@ -4,7 +4,7 @@
 
 * Grayson Jackson
 * Haven ("Rabbit") Herring
-* AB Maness
+* AB Maness (Poe\_Beau.png)
 
 ## Coding Conventions
 
