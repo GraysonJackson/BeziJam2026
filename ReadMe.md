@@ -2,7 +2,7 @@
 
 ## Authors
 
-* Grayson Jackson
+* Grayson ("TriUnity") Jackson
 * Haven ("Rabbit") Herring
 * AB Maness (Poe\_Beau.png)
 
