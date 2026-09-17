@@ -3,7 +3,14 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define e = Character("Eileen")
+define w = Character("Winston")
+define d = Character("Dhampir")
+define i = Character("Ica")
+define m = Character("Madeline")
+define r = Character("Razzle Dazzle")
+define n = Character("Nicky")
+define u = Character("Ulysses")
+define f = Character("Freddy")
 
 
 # The game starts here.
@@ -24,9 +31,9 @@ label start:
 
     # These display lines of dialogue.
 
-    e "You've created a new Ren'Py game."
+    w "You've created a new Ren'Py game."
 
-    e "Once you add a story, pictures, and music, you can release it to the world!"
+    w "Once you add a story, pictures, and music, you can release it to the world!"
 
     # This ends the game.
 
