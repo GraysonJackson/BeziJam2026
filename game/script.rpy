@@ -11,6 +11,15 @@ define r = Character("Razzle Dazzle")
 define n = Character("Nicky")
 define u = Character("Ulysses")
 define f = Character("Freddy")
+define v = Character("Victor")
+define j = Character("Jeramiah")
+define b = Character("Barry")
+define c = Character("Carl")
+define t = Character("Tucker")
+define e = Character("Edgar")
+define s = Character("Simon")
+define k = Character("Kyle")
+define a = Character("Alan")
 
 
 # The game starts here.
@@ -21,20 +30,34 @@ label start:
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
-    scene bg room
+    scene bg sky
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show eileen happy
+    # show eileen happy
+    show kibby at truecenter
 
     # These display lines of dialogue.
 
-    w "You've created a new Ren'Py game."
+    k "Did you change the name and save directory of the game in options.rpy?"
 
-    w "Once you add a story, pictures, and music, you can release it to the world!"
+    $ answer = renpy.input("Did you change the values at the top of options.rpy?").strip().lower()
 
+    if answer == "yes":
+        k "Good job"
+    else:
+        k "If not, you should do so right away! Saves will not work properly until you do."
+
+    $ renpy.notify("This is a notification")
+
+    menu:
+        "This is a sample choice menu"
+        "Choice 1":
+            pass
+        "Choice 2":
+            pass
     # This ends the game.
 
     return
