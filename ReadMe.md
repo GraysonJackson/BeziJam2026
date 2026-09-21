@@ -10,5 +10,6 @@
 
 * snakeCase
 * Asset Styling = characterVersionEmotionVariation
+* Background Styling = placeVersionInverted
 * give our artist unmonitored committing powers to main
 
