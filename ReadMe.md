@@ -1,4 +1,4 @@
-# Stanley Stevens: The Miraculous Musical!
+# Date and Deduce: A D&D Spinoff!
 
 ## Authors
 
