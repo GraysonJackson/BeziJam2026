@@ -193,7 +193,6 @@ label start:
     # This ends the game.
     return
 
-
 label dayOneBrief:
     # Day 1, starting the meeting before splitting
     scene black
@@ -898,11 +897,36 @@ label RazzleDayTwo:
 
     return
     
-
-
-
-
 label RazzleDayThree:
+    "You make your way back to Razzle Dazzle's cubicle and see her already standing, getting ready to leave"
+    scene cubicleOutline
+    show razzle at slot(0, total=1), bright zorder 10
+    r "Oh hey newbie! I was actually just about to head out to interview another witness. Wanna come with?"
+
+    menu:
+        "Duh, of course I do!":
+            $ razz +=1
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+            r "Fuck yeah!! That's what I like to hear! Let's roll!"
+        "Yeah. That's why I'm here.":
+            $ razz -= 1
+            r "Well damn you can at least pretend to want to be here. Fine. Let's go."
+    scene black with fade
+    "You and Razzle Dazzle make your way to the next witness's home, arriving to question them"
+
+    show razzle at slot  (0, total=1), bright zorder 10
+    r "Hi there, Brandon right? Is it okay if we ask you some questions about what you saw?"
+
+    "Brandon" "Hi there. Yes, that's fine, can we just make this quick please? I really don't want to keep thinking about this all."
+
+    r "Perfectly understandable. We just wanted to hear anything at all about what the killer looked like. Is there anything you can remember about them?"
+
+    "Brandon" "I think so, everything is just so fuzzy..."
+
+    "It seems that Brandon is struggling to organize his thoughts, see what you can do to help!"
+
+    # Minigame
+    
 
 label RazzleDayFour:
 
@@ -981,3 +1005,7 @@ label UlyssesDayFour:
 label UlyssesDayFive:
 
 label UlyssesDaySix:
+
+label day7:
+
+label endingRouter:
