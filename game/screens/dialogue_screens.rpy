@@ -41,7 +41,7 @@ screen say(who, what):
             vbox:
                 yoffset 10
                 xoffset 50
-                spacing 9
+                spacing 3
                 at rotated
                 style_prefix "quick"
                 hbox:
@@ -54,6 +54,8 @@ screen say(who, what):
                     textbutton _("Log") action ShowMenu('history')
                 hbox:
                     textbutton _("Settings") action ShowMenu('display_prefs') hover_background "gui/hlbig.png"
+                    textbutton _("Suspects") action Show("suspect_notebook") hover_background "gui/hlbig.png"
+                    textbutton _("Notes") action Show("suspect_notepad") hover_background "gui/hlbig.png"
     ## If there's a side image, display it in front of the text.
     add SideImage() xalign 0.0 yalign 1.0
 
@@ -144,12 +146,12 @@ style quick_button:
     hover_background "gui/hl1.png"
     selected_background "gui/none.png"
  
-    padding (15, 6, 15, 0)
+    padding (9, 3, 9, 0)
 
 
 style quick_button_text:
     font "fonts/RandoWB.ttf"
-    size 40
+    size 30
 
     selected_color '#D26143'
     idle_color "#E99067"

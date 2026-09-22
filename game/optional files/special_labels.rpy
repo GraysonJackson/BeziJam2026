@@ -17,4 +17,5 @@ label splashscreen:
 ## Also consider: define config.after_load_callbacks = [ ... ]
 ##
 label after_load():
+    $ initialize_investigation()
     return

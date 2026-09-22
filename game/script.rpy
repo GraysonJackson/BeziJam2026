@@ -74,6 +74,8 @@ transform dim:
 
 label start:
 
+    $ initialize_investigation()
+
     # # Show a background. This uses a placeholder by default, but you can
     # # add a file (named either "bg room.png" or "bg room.jpg") to the
     # # images directory to show it.
@@ -421,16 +423,23 @@ label dayOneBrief:
             $ spendNick = True
             u "Alright, Nicky it is. I'll see you at the end of the day to review your findings."
         "Winston":
-            $ spendWinn = True
+            $ spendWin = True
             u "Alright, Winston it is. I'll see you at the end of the day to review your findings."
         "Ica":
             $ spendIca = True
             u "Alright, Ica it is. I'll see you at the end of the day to review your findings."
 
-    return
+    jump routeDispatch
 
 label dayLoop:
-    "Day {dayWin}: {7 - dayWin} days left until a culprit is decided on. who do you want to spend the day with?"
+    $ spendRazz = False
+    $ spendDham = False
+    $ spendMads = False
+    $ spendNick = False
+    $ spendWin = False
+    $ spendIca = False
+
+    "Day [dayWin]: [7 - dayWin] days left until a culprit is decided on. who do you want to spend the day with?"
     menu:
         "Razzle Dazzle":
             $ spendRazz = True
@@ -441,10 +450,13 @@ label dayLoop:
         "Nicky":
             $ spendNick = True
         "Winston":
-            $ spendWinn = True
+            $ spendWin = True
         "Ica":
             $ spendIca = True
 
+    jump routeDispatch
+
+label routeDispatch:
     if spendRazz:
         jump Razzle
     if spendDham:
@@ -453,18 +465,11 @@ label dayLoop:
         jump Madeline
     if spendNick:
         jump Nicky
-    if spendWinn:
+    if spendWin:
         jump Winston
     if spendIca:
         jump Ica
     jump Ulysses
-    $ spendRazz = False
-    $ spendDham = False
-    $ spendMads = False
-    $ spendNick = False
-    $ spendWinn = False
-    $ spendIca = False
-    return
 
 label Razzle:
     if dayRazz == 1:
@@ -644,14 +649,44 @@ label RazzleDayOne:
 
     "Landon" "Well, I don't remember too much about the suspect since it was so late, but I can for sure say one thing..."
 
-    # Random seed to decide what landon sees.
+    # The selected killer decides which existing witness observation is used.
+    if killer == 1:
+        $ razzleDayOneClueText = "Well I can say for sure that they didn't have any glasses or anything like that."
+        "Landon" "Well I can say for sure that they didn't have any glasses or anything like that."
+    elif killer == 2:
+        $ razzleDayOneClueText = "Well I can say for sure that they didn't have any birthmarks or anything like that."
+        "Landon" "Well I can say for sure that they didn't have any birthmarks or anything like that."
+    elif killer == 3:
+        $ razzleDayOneClueText = "Well I can say for sure that they didn't have any moles on their face or anything like that."
+        "Landon" "Well I can say for sure that they didn't have any moles on their face or anything like that."
+    elif killer == 4:
+        $ razzleDayOneClueText = "Well I can say for sure that they didn't have any piercings or anything like that."
+        "Landon" "Well I can say for sure that they didn't have any piercings or anything like that."
+    elif killer == 5:
+        $ razzleDayOneClueText = "Well I can say for sure that they didn't have any scars or anything like that."
+        "Landon" "Well I can say for sure that they didn't have any scars or anything like that."
+    elif killer == 6:
+        $ razzleDayOneClueText = "Well I can say for sure that they didn't have anything like Vitiligo or anything like that."
+        "Landon" "Well I can say for sure that they didn't have anything like Vitiligo or anything like that."
+    elif killer == 7:
+        $ razzleDayOneClueText = "Well I can say for sure that they didn't have an eye patch or anything like that."
+        "Landon" "Well I can say for sure that they didn't have an eye patch or anything like that."
+    elif killer == 8:
+        $ razzleDayOneClueText = "Well I can say for sure that they didn't have any missing limbs or anything like that."
+        "Landon" "Well I can say for sure that they didn't have any missing limbs or anything like that."
+    elif killer == 9:
+        $ razzleDayOneClueText = "Well I can say for sure that they didn't have any tattoos or anything like that."
+        "Landon" "Well I can say for sure that they didn't have any tattoos or anything like that."
+
+    $ record_planned_route_reveal(
+        "razzle", 1, clue_text=razzleDayOneClueText, expected_count=1)
 
     "Landon" "Is that any help to you guys at all?"
 
     show razzle at slot(0, total=1), bright zorder 10
     r "Actually, yes it is! Thanks dude! We'll be able to use this information to help narrow down the suspects. If you think of anything else, please let us know!"
 
-    show razzle mouth at slot(0, total=1), dim zorder 10
+    show razzle mouth open at slot(0, total=1), dim zorder 10
     r "You see that newbie?? We actually got something!! Fuck yeah!! Hopefully we can talk to some more peeps tomorrow and learn a bit more about what the killer looks like!"
 
     r "Well, I know you gotta get back to report to boss man, but I'm probably gonna head home. See you later newbie!"
