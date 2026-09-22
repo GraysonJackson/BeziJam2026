@@ -563,3 +563,87 @@ label Ulysses:
         jump UlyssesDayFive
     if dayUly == 6:
         jump UlyssesDaySix
+
+label RazzleDayOne:
+
+label RazzleDayTwo:
+
+label RazzleDayThree:
+
+label RazzleDayFour:
+
+label RazzleDayFive:
+
+label RazzleDaySix:
+
+label DhampirDayOne:
+
+label DhampirDayTwo:
+
+label DhampirDayThree:
+
+label DhampirDayFour:
+
+label DhampirDayFive:
+
+label DhampirDaySix:
+
+label MadelineDayOne:
+
+label MadelineDayTwo:
+
+label MadelineDayThree:
+
+label MadelineDayFour:
+
+label MadelineDayFive:
+
+label MadelineDaySix:
+
+label NickyDayOne:
+
+label NickyDayTwo:
+
+label NickyDayThree:
+
+label NickyDayFour:
+
+label NickyDayFive:
+
+label NickyDaySix:
+
+label WinstonDayOne:
+
+label WinstonDayTwo:
+
+label WinstonDayThree:
+
+label WinstonDayFour:
+
+label WinstonDayFive:
+
+label WinstonDaySix:
+
+label IcaDayOne:
+
+label IcaDayTwo:
+
+label IcaDayThree:
+
+label IcaDayFour:
+
+label IcaDayFive:
+
+label IcaDaySix:
+
+label UlyssesDayOne:
+
+label UlyssesDayTwo:
+
+label UlyssesDayThree:
+
+label UlyssesDayFour:
+
+label UlyssesDayFive:
+
+label UlyssesDaySix:
