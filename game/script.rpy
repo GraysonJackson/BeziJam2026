@@ -479,6 +479,7 @@ label Razzle:
         jump RazzleDayFive
     if dayRazz == 6:
         jump RazzleDaySix
+    return
 
 label Dhampir:
     if dayDham == 1:
@@ -493,6 +494,7 @@ label Dhampir:
         jump DhampirDayFive
     if dayDham == 6:
         jump DhampirDaySix
+    return
 
 label Madeline:
     if dayMads == 1:
@@ -507,6 +509,7 @@ label Madeline:
         jump MadelineDayFive
     if dayMads == 6:
         jump MadelineDaySix
+    return
 
 label Nicky:
     if dayNick == 1:
@@ -521,6 +524,7 @@ label Nicky:
         jump NickyDayFive
     if dayNick == 6:
         jump NickyDaySix
+    return
 
 label Winston:
     if dayWin == 1:
@@ -535,6 +539,7 @@ label Winston:
         jump WinstonDayFive
     if dayWin == 6:
         jump WinstonDaySix
+    return
 
 label Ica:
     if dayIca == 1:
@@ -549,6 +554,7 @@ label Ica:
         jump IcaDayFive
     if dayIca == 6:
         jump IcaDaySix
+    return
 
 label Ulysses:
     if dayUly == 1:
@@ -563,8 +569,101 @@ label Ulysses:
         jump UlyssesDayFive
     if dayUly == 6:
         jump UlyssesDaySix
+    return
 
 label RazzleDayOne:
+    scene black
+    "You make your way to Razzle Dazzzle's cubicle to find her waiting for you, seemingly ready to get going."
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    r "Hey partner! You made the right choice to come by today. You ready to get to work?"
+
+    menu :
+        "Hell yeah I am!":
+            $ razz += 1
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+            r "Fuck yeah that's what I like to hear!! Let's go interview the hell out of some witnesses and get this case solved!"
+        "Yeah, let's get this done. I don't have time to waste":
+            $ razz -= 1
+            show razzle sad at slot(0, total=1), bright zorder 10
+            r "Awwww man, I was hoping for a bit more enthusiasm from you. But I guess we can get this done anyway."
+    show razzle at slot(0, total=1), bright zorder 10
+    r "Let's get going! We have a bit of a walk to get to the first witness, so we better start walking!"
+
+    menu:
+        "Walk? Why not drive?":
+            show razzle mouth open at slot(0, total=1), bright zorder 10
+            r "Walking is a great way to get exercise though!! And also, it's a little hard for me to be in cars since I'm literally on fire... but yeah exercise stuff!"
+        "Let's roll!":
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+            r "Hell yeah! Let's get this done!"
+    scene black
+    "You and Razzle Dazzle begin to walk through Los Angeles, heading to the house of the first witness. As you walk, you notice Razzle Dazzle making conversation, mainly just talking aloud, but occasionally asking you questions."
+
+    # Witness scene or something
+
+    show razzle at slot(0, total=1), bright zorder 10
+    r "-And then I was like, 'You better pack a fire extinguisher next time!' Wait, sorry I was yapping the entire way here. I wanted to also get to know you newbie!"
+
+    show razzle question at slot(0, total=1), bright zorder 10
+    r " Like, what do you do for fun? Any special people in life?"
+
+    "Well, there's certainly not anyone in your life, but who knows? Maybe you and Razzle Dazzle might have some chemistry. You decide to answer her question"
+
+    menu:
+        "Not much really, I just do work and then get some sleep":
+            $ razz -= 1
+            show razzle sad at slot(0, total=1), bright zorder 10
+            "Oh man, that sounds like an absolute bore! Surely you do something else right?"
+            show razzle mouth open at slot(0, total=1), bright zorder 10
+            r" If not you need to! Just work and sleep doesn't let you enjoy life at all! "
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+            r" For example, me and Winston go clubbing like ALL the time and it's awesome! We get to drink a shit load, meet new people, drink a shit load, then spend the next day talking about how much we shouldn't do that again. It's a blast! Maybe next time you should come with us!"
+            show razzle at slot(0, total=1), bright zorder 10
+        "I ususally am out all day and night doing whatever the night says!":
+            $ razz += 1
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+            r" Hell yeah! That's what I'm talking about, I'm the same way!"
+            r "Me and Winston go clubbing like ALL the time and it's awesome! We get to drink a shit load, meet new people, drink a shit load, then spend the next day talking about how much we shouldn't do that again. It's a blast! Maybe next time you should come with us!"
+            show razzle at slot(0, total=1), bright zorder 10
+        "Are you an option?":
+            $ razz += 2
+            show razzle flirty at slot(0, total=1), bright zorder 10
+            r"Is that so newbie? I admire the courage, but you're gonna need to have some better lines if you want to get me hot and bothered."
+            r "For now though, maybe you can go clubbing with me sometime! We can go drink, get shit faced, dance, get more shit faced, then see if you can handle a night out with me before a more 'personal' evening."
+            show razzle at slot(0, total=1), bright zorder 10
+    r "For now though it looks like we made it here! Better put on my professional face and talk to them about what they saw. Let's go!"
+    show razzle at slot(0, total=1), dim zorder 10
+
+    "You and Razzle Dazzle talk to the witness, introducing yourselves and getting some more basic statements out of the way."
+
+    show razzle question at slot(0, total=1), bright zorder 10
+
+    r "So, Landon. Can you tell me more about what you say that night? Were there any aspects about the suspect that you can remember? Anything at all? Like if they had a scar, tattoo, hell were they missing an arm??"
+
+    "Landon" "Well, I don't remember too much about the suspect since it was so late, but I can for sure say one thing..."
+
+    # Random seed to decide what landon sees.
+
+    "Landon" "Is that any help to you guys at all?"
+
+    show razzle at slot(0, total=1), bright zorder 10
+    r "Actually, yes it is! Thanks dude! We'll be able to use this information to help narrow down the suspects. If you think of anything else, please let us know!"
+
+    show razzle mouth at slot(0, total=1), dim zorder 10
+    r "You see that newbie?? We actually got something!! Fuck yeah!! Hopefully we can talk to some more peeps tomorrow and learn a bit more about what the killer looks like!"
+
+    r "Well, I know you gotta get back to report to boss man, but I'm probably gonna head home. See you later newbie!"
+
+    if razz > 4:
+        show razzle flirty at slot(0, total=1), bright zorder 10
+        r "Keep thinking of ways to get me hot and bothered newbie, I think you're close to a good line soon!"
+    scene black with fade
+    $ dayRazz += 1
+    jump dayLoop
+        
+
 
 label RazzleDayTwo:
 
