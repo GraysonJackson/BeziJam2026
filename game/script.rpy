@@ -740,7 +740,7 @@ label RazzleDayTwo:
 
     scene black with fade
 
-        "A few minutes later, you're walking through the city with Razzle."
+    "A few minutes later, you're walking through the city with Razzle."
 
     "People occasionally move out of the way when they notice the flames rolling across her shoulders."
 
