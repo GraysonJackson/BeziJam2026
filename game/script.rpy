@@ -188,7 +188,6 @@ label start:
     jump dayLoop
     jump dayLoop
     jump dayLoop
-    jump dayLoop
 
 
     # This ends the game.
@@ -453,8 +452,9 @@ label dayLoop:
             $ spendWin = True
         "Ica":
             $ spendIca = True
-
     jump routeDispatch
+    $ dayWin += 1
+    return
 
 label routeDispatch:
     if spendRazz:
@@ -699,8 +699,208 @@ label RazzleDayOne:
     jump dayLoop
         
 
-
 label RazzleDayTwo:
+    "You make your way back to Razzle Dazzle's cubicle and find her sitting in her flame proof chair, looking at cat videeos on her computer"
+    show razzle at slot(0, total=1), bright zorder 10
+    r "Oh! Hey newbie! Whatcha up to today? Coming back to do some more work?"
+
+    menu:
+        "Yeah, let's get started!":
+            $ razz += 1
+            show razzle mouth open at slot(0, total=1), bright zorder 10
+            r "I like the enthusiasm, but I'm taking today to chill for moment. The rest of this week is going to be a lot, so I wanna chill today!"
+        "Nah, I just wanted to see you again":
+            $ razz += 2
+            show razzle flirty at slot(0, total=1), bright zorder 10
+            r "Oh? I like the sound of that! I was hoping you would come back to see me again!"
+        "I don't have time for this, let's get to work":
+            $ razz -=2 
+            show razzle enraged at slot(0, total=1), bright zorder 10
+            r "Hey man, no need to be a dick. If we're gonna solve the mystery together we need to at least be nice!"
+
+    # Lunch: takes you somewhere nearby, but either gets rejected because she is on fire. She casually heats/cooks something with her hands or gets outside food.
+    r "So, how about we go get some food or somthing? After that we can just walk around ane do absolutely nothing!"
+
+    menu:
+        "That sounds irresponsible.":
+            r "Exactly! You're getting it already."
+            r "Let's just have some fun and not worry about work for a bit."
+        "Sounds like my kind of day.":
+            $ razz += 1
+            show razzle mouth open at slot(0, total=1), bright zorder 10
+            r "See? I knew there was a reason I liked you."
+
+        "Is setting something on fire part of the plan?":
+            r "Okay, first of all, probably."
+            show razzle sad at slot(0, total=1), bright zorder 10
+            r "Second of all, I only accidentally set things on fire like... thirty percent of the time."
+            show razzle at slot(0, total=1), bright zorder 10
+
+    r "Come on already, I'm hungry!"
+
+    scene black with fade
+
+        "A few minutes later, you're walking through the city with Razzle."
+
+    "People occasionally move out of the way when they notice the flames rolling across her shoulders."
+
+    r "Don't mind them. Happens all the time."
+
+    "She says it casually, like she barely even notices anymore."
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    r "So what sounds good? Burgers? Pizza? Tacos?"
+
+    menu:
+        "Pizza sounds good.":
+            r "Correct answer, newbie!! One of my favorites! Cmon, let's go get some!"
+
+        "Whatever you want.":
+            $ razz += 1
+            r "Dangerous thing to tell me. I have terrible financial judgment."
+
+        "Can we even go inside a restaurant with you on fire?":
+            r "..."
+
+            show razzle sad at slot(0, total=1), bright zorder 10
+
+            r "Okay, so there is one tiny problem with the plan."
+            show razzle at slot(0, total=1), bright zorder 10
+            r "We'll figure it out! Let's just go find some pizza!!"
+
+    "The two of you make it to a nearby pizza place before issues begin to arise"
+
+    "Employee" "I'm sorry Ma'am, but you'll set off every fire alarm in our building just by being there."
+
+    menu:
+        "What? That's bullshit! Just let her be on fire!":
+            $ razz += 1
+            show razzle mouth open at slot(0, total=1), bright zorder 10
+            r "It's fine newbie, it happens all the time. Look, can we at least get a box to go or something?"
+        "Razzle, can you turn off your flames?":
+            $ razz -= 1
+            show razzle sad at slot(0, total=1), bright zorder 10
+            r "I uhh... I can't. I'm pretty much always on fire unless Winston cancels my power out purposely"
+            r "Look, can we at least get a box to go or something?"
+    "Employee" "Certainly. Here, I'l send an order back if you can wait outside"
+
+    "After placing your order and waiting what felt like forever, the two of you find yourselves sitting outside with a pizza box."
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    r "See? Worked out perfectly."
+
+    "You and Razzle lift a slice."
+
+    "...it's cold"
+
+    r "Damn..."
+
+    r "Want yours reheated?"
+
+    menu:
+        "Sure.":
+            $ razz += 1
+            "She holds your slice between two fingers for a second."
+
+            r "There, perfectly heated!!"
+
+            "The cheese is bubbling."
+
+            "The crust is smoking."
+
+            r "...Maybe give it a minute."
+
+        "It's fine, I like it cold anyway.":
+            r "Suit yourself, but also cold pizza already?? Usually that's a 'raiding the fridge at midnight' thing and less of a 'right outside the shop' thing."
+
+        "Only if you feed it to me too.":
+            $ razz += 2
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "Oh, we're getting brave now, huh? Don't wanna burn you though so you're on your own"
+    
+    scene black
+    "You and Razzle finish your food and walk around the city a bit more. Eventually, you return to the ATLAS team building and go to the rooftop to enjoy the scenery"
+
+    scene black
+    with dissolve
+
+    "By the time you make it back to ATLAS, the sun is beginning to set."
+
+    "Razzle sits on the edge of the roof, her flames standing out against the darkening sky."
+
+    r "Thanks for hanging out with me today."
+
+    r "I know it probably wasn't exactly what you expected when you signed up to help a superhero team solve a murder."
+
+    menu:
+        "I had fun.":
+            $ razz += 2
+            r "Yeah?"
+
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "Good. Me too."
+
+        "It was definitely different.":
+            $ razz += 1
+            r "Different is basically the ATLAS motto."
+
+        "We really didn't accomplish anything.":
+            $ razz -= 1
+            r "That was literally the point!"
+
+    "For a moment, she's quieter than usual."
+
+    r "People get kinda weird around me sometimes."
+
+    r "Which, y'know, fair. I'm constantly on fire."
+
+    r "But sometimes it feels like that's all they see."
+
+    r "ATLAS is nice because nobody here really cares. I'm not 'the fire girl.' I'm just Razzle."
+
+    "She glances over at you."
+
+    r "Well... usually."
+
+    menu:
+        "You're definitely more than your power.":
+            $ razz += 2
+
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "Careful, newbie. Keep saying stuff like that and I might actually start liking you."
+
+        "I dunno. The fire is pretty cool.":
+            $ razz += 1
+
+            r "Okay, yeah. It is pretty cool."
+
+        "I mostly see a walking fire hazard.":
+            $ razz -= 2
+
+            show razzle annoyed at slot(0, total=1), bright zorder 10
+
+            r "And there goes the moment."
+
+    "A moment of silence passes as you both enjoy the view of the city in each other's company"
+    "Eventually, it's time go back to work."
+    show razzle at slot(0, total=1), bright zorder 10
+    r "Well, guess it's about time to head home. I'll see you around!"
+
+    if razz > 10:
+        r "Maybe I'll see you tomorrow too?"
+    
+    "Razzle leaves, leaving you alone on the rooftop before heading down to report to Ulysses"
+
+    return
+    
+
+
+
 
 label RazzleDayThree:
 
