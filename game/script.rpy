@@ -194,7 +194,8 @@ label start:
 
 
 label dayOneBrief:
-        # Day 1, starting the meeting before splitting
+    # Day 1, starting the meeting before splitting
+    scene black
     "Day One: 6 days left until a culprit is decided on."
 
     "As you walk your way to work, you wonder how everyone will be in person beyond Freddy's introduction. After all, they all seem pretty cool. And maybe a little cute..."
@@ -232,6 +233,7 @@ label dayOneBrief:
     # Angry Uly
     u "Where is everyone??? They should have been here by now!"
 
+    show madeline at slot(1, total=2), bright zorder 10
     m "Aaaaaaand time. I was testing how long it would take you to get upset."
 
     u "You're kidding."
@@ -249,6 +251,7 @@ label dayOneBrief:
     m "Huh? I don't know where they are, I just figured they would be late which is why I did the test."
 
     "As she says this, you see Nicky rush in with a folder, sweat beading on her forehead"
+    show nicky at slot(0, total=2), bright zorder 10
 
     n "Oh my god guys I'm SO sorry! The station is absolutely wild today. We eneded up bringing in a guy who's power is to make everyoen in a 30ft radius throw up, so you can imagine the mess we had to deal with."
 
@@ -263,12 +266,16 @@ label dayOneBrief:
     menu:
         "Shake firmly":
             $ nick+=1
+            hide nicky
+            show nicky content happy at slot(0, total=2), bright zorder 10
             n "Nice handshake! Very profesh."
         "Stare at her hand":
             $ nick -= 1
             n "Okayyyyy, well anyways good to see ya!"
         " Give a super flimsy handshake":
             $ nick += 2
+            hide nicky
+            show nicky content happy at slot(0, total=2), bright zorder 10
             n "Good handshake! We gotta work on your grip a bit more though"
     
     "As you talk with Nicky, you see two more members walk into the room"
@@ -297,35 +304,45 @@ label dayOneBrief:
 
     w "ULY WAIT-"
 
+    scene black with fade
     "A scene out of a cartoon happens right in front of you as Ulysees begins to chase Winston around the room, with the two of them constantly circling the table before Winston eventually starts breathing heavy."
 
     "A sign of weakness. Ulysses springs over the table and begins to throttle Winston"
 
+    scene debriefRoomOutlineInverted
     u "WHO'S THE WET BLANKET NOW WINSTON?? WE'RE HAVING FUN, RIGHT WINSTON??"
 
     d "Whoaaaaa man. You seem a bit angry right now, we should all chill out"
 
+    show madeline madScienist at slot(0, total=1), bright zorder 10
     m "Interesting... Winston seems to whittle down his temper exponentially"
+    hide madeline
 
+    show razzle hoorah at slot(0, total=1), bright zorder 10
     r "OMG ARE WE WRESTLING? COUNT ME IN"
 
     "Razzle Dazzle runs into the room and jumps into the fray right as Ulysses and Winston quickly seperate as to not be burned"
-
+    show razzle at slot(0, total=1), bright zorder 10
     u "No Razzle, sorry. Me and Winston just had a disagreement"
 
     n "Winston called him a wet blanket"
 
+    show razzle sad at slot(0, total=1), bright zorder 10
     r "Awwwww man! I was really looking forward to it! That's fine I guess, there's always time later, right newbie?"
+    show razzle at slot(0, total=1), bright zorder 10
 
     menu:
         "Uhhh I don't think I should speak on this":
             $ razz -= 1
+            show razzle sad at slot(0, total=1), bright zorder 10
             r "Oh man is it another serious one? That's a shame"
         "FUCK YEAH I LOVE WRESTLING":
             $ razz += 1
+            show razzle hoorah at slot(0, total=1), bright zorder 10
             r "YES NEWBIE THAT'S WHAT I'M TALKING ABUT LET'S THROW DOWN"
         "I'd love to wrestle with you later, I'm a fan of 1v1 matches though":
             $ razz += 2
+            show razzle flirty at slot(0, total=1), bright zorder 10
             r "Oh? I hope you can handle some heat then..."
     u "Alright you two, that's enough of that. Looks like we're only missing one more now. Where is she?"
 
