@@ -34,6 +34,7 @@ default spendNick = False
 default spendMads = False
 default spendRazz = False
 default dayWin = 1
+default dayWinn = 1
 default dayIca = 1
 default dayDham = 1
 default dayNick = 1
@@ -182,16 +183,6 @@ label start:
     f "Well that's the team! Hopefully you can spend some quality time with them as you sort this whole mess out. I'll see you at work tomorrow newbie! I'm with you the entire time, so you may see pop up whenever something important needs to be said!"
 
     jump dayOneBrief
-    jump dayLoop
-    jump dayLoop
-    jump dayLoop
-    jump dayLoop
-    jump dayLoop
-    jump dayLoop
-
-
-    # This ends the game.
-    return
 
 label dayOneBrief:
     # Day 1, starting the meeting before splitting
@@ -430,6 +421,9 @@ label dayOneBrief:
     jump routeDispatch
 
 label dayLoop:
+    if dayWin >= 7:
+        jump day7
+
     $ spendRazz = False
     $ spendDham = False
     $ spendMads = False
@@ -437,7 +431,8 @@ label dayLoop:
     $ spendWin = False
     $ spendIca = False
 
-    "Day [dayWin]: [7 - dayWin] days left until a culprit is decided on. who do you want to spend the day with?"
+    $ daysLeft = 7 - dayWin
+    "Day [dayWin]: [daysLeft] days left until a culprit is decided on. Who do you want to spend the day with?"
     menu:
         "Razzle Dazzle":
             $ spendRazz = True
@@ -451,9 +446,15 @@ label dayLoop:
             $ spendWin = True
         "Ica":
             $ spendIca = True
+
     jump routeDispatch
+
+label endOfDay:
+    scene black with fade
     $ dayWin += 1
-    return
+    if dayWin >= 7:
+        jump day7
+    jump dayLoop
 
 label routeDispatch:
     if spendRazz:
@@ -483,7 +484,7 @@ label Razzle:
         jump RazzleDayFive
     if dayRazz == 6:
         jump RazzleDaySix
-    return
+    jump endOfDay
 
 label Dhampir:
     if dayDham == 1:
@@ -498,7 +499,7 @@ label Dhampir:
         jump DhampirDayFive
     if dayDham == 6:
         jump DhampirDaySix
-    return
+    jump endOfDay
 
 label Madeline:
     if dayMads == 1:
@@ -513,7 +514,7 @@ label Madeline:
         jump MadelineDayFive
     if dayMads == 6:
         jump MadelineDaySix
-    return
+    jump endOfDay
 
 label Nicky:
     if dayNick == 1:
@@ -528,22 +529,22 @@ label Nicky:
         jump NickyDayFive
     if dayNick == 6:
         jump NickyDaySix
-    return
+    jump endOfDay
 
 label Winston:
-    if dayWin == 1:
+    if dayWinn == 1:
         jump WinstonDayOne
-    if dayWin == 2:
+    if dayWinn == 2:
         jump WinstonDayTwo
-    if dayWin == 3:
+    if dayWinn == 3:
         jump WinstonDayThree
-    if dayWin == 4:
+    if dayWinn == 4:
         jump WinstonDayFour
-    if dayWin == 5:
+    if dayWinn == 5:
         jump WinstonDayFive
-    if dayWin == 6:
+    if dayWinn == 6:
         jump WinstonDaySix
-    return
+    jump endOfDay
 
 label Ica:
     if dayIca == 1:
@@ -558,7 +559,7 @@ label Ica:
         jump IcaDayFive
     if dayIca == 6:
         jump IcaDaySix
-    return
+    jump endOfDay
 
 label Ulysses:
     if dayUly == 1:
@@ -573,7 +574,7 @@ label Ulysses:
         jump UlyssesDayFive
     if dayUly == 6:
         jump UlyssesDaySix
-    return
+    jump endOfDay
 
 label RazzleDayOne:
     scene black
@@ -695,7 +696,7 @@ label RazzleDayOne:
         r "Keep thinking of ways to get me hot and bothered newbie, I think you're close to a good line soon!"
     scene black with fade
     $ dayRazz += 1
-    jump dayLoop
+    jump endOfDay
         
 
 label RazzleDayTwo:
@@ -895,7 +896,8 @@ label RazzleDayTwo:
     
     "Razzle leaves, leaving you alone on the rooftop before heading down to report to Ulysses"
 
-    return
+    $ dayRazz += 1
+    jump endOfDay
     
 label RazzleDayThree:
     "You make your way back to Razzle Dazzle's cubicle and see her already standing, getting ready to leave"
@@ -926,86 +928,254 @@ label RazzleDayThree:
     "It seems that Brandon is struggling to organize his thoughts, see what you can do to help!"
 
     # Minigame
+    while not height_memory_completion_recorded:
+        $ start_height_memory_minigame()
+        while height_memory_active:
+            $ renpy.pause(0.1, hard=True)
+
+    r "There we go! The important memories are still on the board, and the rest can take a little vacation."
+    "Brandon" "Wait... yeah. I remember the silhouette now. The useful part was right there the whole time."
+
+    # The selected killer decides which witness observation Brandon gives.
+    if killer == 1 || killer == 4 || killer == 7:
+        $ razzleDayThreeClueText = "Yeah, they had a brawny build if I remember correctly."
+        "Brandon" "Yeah, they had a brawny build if I remember correctly."
+    elif killer == 2 || killer == 5 || killer == 8:
+        $ razzleDayThreeClueText = "Yeah, they had a skinny build if I remember correctly."
+        "Brandon" "Yeah, they had a skinny build if I remember correctly."
+    elif killer == 3 || killer == 6 || killer == 9:
+        $ razzleDayThreeClueText = "Yeah, they had an average build if I remember correctly."
+        "Brandon" "Yeah, they had an average build if I remember correctly."
+
+    r "That's exactly what we needed. Thanks, Brandon! We'll handle the detective work from here."
+    scene black
+    "You and Razzle leave Brandon with a much tidier thought board and a useful eyewitness lead."
+    "Eventually, the two of you make your way back to the office."
+    scene cubical outline
+    show razzle at slot  (0, total=1), bright zorder 10
+    r "Oh my god that was amazing!! I don't know how you were able to keep him on track so well! Usually my mind is just all over the place!"
+
+    menu:
+        "Most people know more than they think, they just need the guide":
+            $ razz += 1
+            r "Well look at you oh wise one, seems like you have a lot of wisdom to impart!"
+        "I'm pretty good at clearing minds, but mine is stuck on you":
+            show razzle flirty at slot  (0, total=1), bright zorder 10
+            r "Heyy you're getting pretty good at these!"
+            r "The more you say these the more I wanna hear more after this is all over..."
+        "It was nothing":
+            r "Don't be so modest, that was great!"
+    r "Anyways, we've made some really great progress! Hopefully we can do some more, but I'm still getting a good feeling about this!"
+
+    r "But for now I know you gotta talk to Uly, so I'll leave you be. Catcha later newbie!!"
     
+    "With that, Razzle takes her leave, leaving you with your report for the day"
+
+    scene black with fade
+    $ dayRazz += 1
+    jump endOfDay
 
 label RazzleDayFour:
+    "You spend the day working with Razzle Dazzle. (Visit 4 content in development)"
+    $ dayRazz += 1
+    jump endOfDay
 
 label RazzleDayFive:
+    "You spend the day working with Razzle Dazzle. (Visit 5 content in development)"
+    $ dayRazz += 1
+    jump endOfDay
 
 label RazzleDaySix:
+    "You spend the day working with Razzle Dazzle. (Visit 6 content in development)"
+    $ dayRazz += 1
+    jump endOfDay
 
 label DhampirDayOne:
+    "You spend the day working with Dhampir. (Visit 1 content in development)"
+    $ dayDham += 1
+    jump endOfDay
 
 label DhampirDayTwo:
+    "You spend the day working with Dhampir. (Visit 2 content in development)"
+    $ dayDham += 1
+    jump endOfDay
 
 label DhampirDayThree:
+    "You spend the day working with Dhampir. (Visit 3 content in development)"
+    $ dayDham += 1
+    jump endOfDay
 
 label DhampirDayFour:
+    "You spend the day working with Dhampir. (Visit 4 content in development)"
+    $ dayDham += 1
+    jump endOfDay
 
 label DhampirDayFive:
+    "You spend the day working with Dhampir. (Visit 5 content in development)"
+    $ dayDham += 1
+    jump endOfDay
 
 label DhampirDaySix:
+    "You spend the day working with Dhampir. (Visit 6 content in development)"
+    $ dayDham += 1
+    jump endOfDay
 
 label MadelineDayOne:
+    "You spend the day working with Madeline. (Visit 1 content in development)"
+    $ dayMads += 1
+    jump endOfDay
 
 label MadelineDayTwo:
+    "You spend the day working with Madeline. (Visit 2 content in development)"
+    $ dayMads += 1
+    jump endOfDay
 
 label MadelineDayThree:
+    "You spend the day working with Madeline. (Visit 3 content in development)"
+    $ dayMads += 1
+    jump endOfDay
 
 label MadelineDayFour:
+    "You spend the day working with Madeline. (Visit 4 content in development)"
+    $ dayMads += 1
+    jump endOfDay
 
 label MadelineDayFive:
+    "You spend the day working with Madeline. (Visit 5 content in development)"
+    $ dayMads += 1
+    jump endOfDay
 
 label MadelineDaySix:
+    "You spend the day working with Madeline. (Visit 6 content in development)"
+    $ dayMads += 1
+    jump endOfDay
 
 label NickyDayOne:
+    "You spend the day working with Nicky. (Visit 1 content in development)"
+    $ dayNick += 1
+    jump endOfDay
 
 label NickyDayTwo:
+    "You spend the day working with Nicky. (Visit 2 content in development)"
+    $ dayNick += 1
+    jump endOfDay
 
 label NickyDayThree:
+    "You spend the day working with Nicky. (Visit 3 content in development)"
+    $ dayNick += 1
+    jump endOfDay
 
 label NickyDayFour:
+    "You spend the day working with Nicky. (Visit 4 content in development)"
+    $ dayNick += 1
+    jump endOfDay
 
 label NickyDayFive:
+    "You spend the day working with Nicky. (Visit 5 content in development)"
+    $ dayNick += 1
+    jump endOfDay
 
 label NickyDaySix:
+    "You spend the day working with Nicky. (Visit 6 content in development)"
+    $ dayNick += 1
+    jump endOfDay
 
 label WinstonDayOne:
+    "You spend the day working with Winston. (Visit 1 content in development)"
+    $ dayWinn += 1
+    jump endOfDay
 
 label WinstonDayTwo:
+    "You spend the day working with Winston. (Visit 2 content in development)"
+    $ dayWinn += 1
+    jump endOfDay
 
 label WinstonDayThree:
+    "You spend the day working with Winston. (Visit 3 content in development)"
+    $ dayWinn += 1
+    jump endOfDay
 
 label WinstonDayFour:
+    "You spend the day working with Winston. (Visit 4 content in development)"
+    $ dayWinn += 1
+    jump endOfDay
 
 label WinstonDayFive:
+    "You spend the day working with Winston. (Visit 5 content in development)"
+    $ dayWinn += 1
+    jump endOfDay
 
 label WinstonDaySix:
+    "You spend the day working with Winston. (Visit 6 content in development)"
+    $ dayWinn += 1
+    jump endOfDay
 
 label IcaDayOne:
+    "You spend the day hanging out with Ica. (Visit 1 content in development)"
+    $ dayIca += 1
+    jump endOfDay
 
 label IcaDayTwo:
+    "You spend the day hanging out with Ica. (Visit 2 content in development)"
+    $ dayIca += 1
+    jump endOfDay
 
 label IcaDayThree:
+    "You spend the day hanging out with Ica. (Visit 3 content in development)"
+    $ dayIca += 1
+    jump endOfDay
 
 label IcaDayFour:
+    "You spend the day hanging out with Ica. (Visit 4 content in development)"
+    $ dayIca += 1
+    jump endOfDay
 
 label IcaDayFive:
+    "You spend the day hanging out with Ica. (Visit 5 content in development)"
+    $ dayIca += 1
+    jump endOfDay
 
 label IcaDaySix:
+    "You spend the day hanging out with Ica. (Visit 6 content in development)"
+    $ dayIca += 1
+    jump endOfDay
 
 label UlyssesDayOne:
+    "You spend the day consulting with Ulysses. (Visit 1 content in development)"
+    $ dayUly += 1
+    jump endOfDay
 
 label UlyssesDayTwo:
+    "You spend the day consulting with Ulysses. (Visit 2 content in development)"
+    $ dayUly += 1
+    jump endOfDay
 
 label UlyssesDayThree:
+    "You spend the day consulting with Ulysses. (Visit 3 content in development)"
+    $ dayUly += 1
+    jump endOfDay
 
 label UlyssesDayFour:
+    "You spend the day consulting with Ulysses. (Visit 4 content in development)"
+    $ dayUly += 1
+    jump endOfDay
 
 label UlyssesDayFive:
+    "You spend the day consulting with Ulysses. (Visit 5 content in development)"
+    $ dayUly += 1
+    jump endOfDay
 
 label UlyssesDaySix:
+    "You spend the day consulting with Ulysses. (Visit 6 content in development)"
+    $ dayUly += 1
+    jump endOfDay
 
 label day7:
+    scene black with fade
+    "Day Seven: The deadline has arrived."
+    "The week of investigation is over. It is time to decide on the culprit."
+    jump endingRouter
 
 label endingRouter:
+    "Investigation phase complete! Thank you for playing."
+    return
