@@ -1524,7 +1524,227 @@ label RazzleDayFive:
     jump endOfDay
 
 label RazzleDaySix:
-    "You spend the day working with Razzle Dazzle. (Visit 6 content in development)"
+    scene cubicleOutline
+
+    "You arrive at Razzle's cubicle to find three mannequin heads lined up across her desk."
+
+    "One wears a blonde wig, one wears a brown wig, and one wears a black wig."
+
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+
+    r "There you are! Welcome to the weirdest hair salon in Los Angeles!"
+
+    menu:
+        "You got everything for the reconstruction?":
+            $ razz += 1
+
+            r "Sure did! Wigs, stands, measurements, and one very confused cab driver!"
+
+        "Which one are you wearing?":
+            $ razz += 2
+
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "Whichever one you think makes me look hottest."
+
+            r "After we solve the murder, obviously."
+
+        "This looks ridiculous.":
+            $ razz -= 1
+
+            show razzle question at slot(0, total=1), bright zorder 10
+
+            r "Yeah. It's also gonna help us catch a killer."
+
+            r "Things can be two things, newbie."
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    r "Elena agreed to help us one more time."
+
+    r "We're putting each wig where the killer stood, recreating the headlights, and seeing which one matches what she remembers."
+
+    r "No guessing from a list. No telling her which color we expect. She just gets numbered samples."
+
+    menu:
+        "We should change the order between tests.":
+            $ razz += 2
+
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+
+            r "Already planned on it! Look at us doing real science!"
+
+        "We should remind Elena about the security tape.":
+            $ razz -= 1
+
+            show razzle question at slot(0, total=1), bright zorder 10
+
+            r "Better not. We don't want the tape putting an answer in her head."
+
+        "Let's see what she remembers.":
+            $ razz += 1
+
+            r "Exactly. We set it up, shut up, and let her tell us."
+
+    scene black with fade
+
+    "You and Razzle return to Elena's house and arrange the three covered mannequin heads outside."
+
+    "Razzle parks a borrowed car where the vehicle appeared on the security tape."
+
+    "Tape marks show where the figure stood and where the headlights crossed the lawn."
+
+    "Razzle checks every measurement twice before joining you at the window."
+
+    scene cubicleOutline
+    show razzle at slot(0, total=1), bright zorder 10
+
+    "Elena" "This is certainly more elaborate than I expected."
+
+    r "We really appreciate you doing this."
+
+    r "We're going to show you three different samples. If none of them look right, say so. Don't force yourself to pick one."
+
+    "Elena" "I understand, dear."
+
+    scene black
+
+    "You take your position by the car while Razzle remains inside with Elena."
+
+    "One at a time, you uncover the numbered samples and move them through the same patch of light."
+
+    "The first passes the window. Elena says nothing."
+
+    "The second passes. She leans forward, but eventually shakes her head."
+
+    "When the final sample crosses the lawn, Elena grips the arm of her chair."
+
+    "Elena" "Wait. Please show me that one again."
+
+    "You reset the sample and repeat the movement."
+
+    "Elena watches without speaking until the headlights fade."
+
+    scene cubicleOutline
+    show razzle question at slot(0, total=1), bright zorder 10
+
+    r "Are you sure?"
+
+    "Elena" "I would like to see them in a different order first."
+
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+
+    r "Elena, you are officially my favorite witness."
+
+    scene black
+
+    "You rearrange the samples and run the reconstruction again."
+
+    "This time, Elena identifies the same sample immediately."
+
+    $ razzleDaySixReveal = get_planned_route_reveal("razzle", 6)
+    $ razzleDaySixHair = razzleDaySixReveal["value"]
+
+    scene cubicleOutline
+    show razzle question at slot(0, total=1), bright zorder 10
+
+    "Elena" "That is the color I saw. The person outside Enrico's house had [razzleDaySixHair] hair."
+
+    r "Not just that they didn't have one of the other colors?"
+
+    "Elena" "No. I recognize this color. I am certain."
+
+    $ razzleDaySixClueText = "Elena positively identifies the killer as having {} hair.".format(razzleDaySixHair)
+    $ record_planned_route_reveal(
+        "razzle", 6, clue_text=razzleDaySixClueText)
+
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+
+    r "Holy shit! We actually got it!"
+
+    r "That means anyone without [razzleDaySixHair] hair comes off the suspect list."
+
+    r "That's huge, Elena!"
+
+    "Elena" "Then I am glad my memory was useful after all."
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    r "It wasn't just useful. You may have helped us catch the killer!"
+
+    "Elena smiles as Razzle begins carefully gathering the equipment."
+
+    scene black with fade
+
+    "After returning the borrowed car and the deeply unfortunate wigs, you and Razzle walk back toward ATLAS."
+
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+
+    r "Six visits, three witnesses, one terrible videotape, and absolutely no houses burned down!"
+
+    r "I think that makes us a pretty damn good team."
+
+    menu:
+        "You did some great detective work.":
+            $ razz += 2
+
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "Careful. Keep saying things like that and I might start believing I'm smart."
+
+            r "Then you'll never get rid of me."
+
+        "We make a good team.":
+            $ razz += 1
+
+            r "Hell yeah we do!"
+
+            r "You handle the thinking, I handle the fire, and we split everything else fifty-fifty."
+
+        "Elena did most of the work.":
+            $ razz -= 1
+
+            show razzle sad at slot(0, total=1), bright zorder 10
+
+            r "She gave us the answer, yeah."
+
+            r "But we still had to help her find it."
+
+    if razz > 14:
+        show razzle flirty at slot(0, total=1), bright zorder 10
+
+        r "So... once we finish accusing people of murder, you still owe me that night out."
+
+        r "Drinks, dancing, and somewhere fireproof."
+
+        r "Think you can handle that, partner?"
+
+        menu:
+            "I can handle the heat.":
+                $ razz += 2
+
+                show razzle hoorah at slot(0, total=1), bright zorder 10
+
+                r "Fuck yeah! That's the answer I wanted!"
+
+            "I'm looking forward to it.":
+                $ razz += 1
+
+                show razzle flirty at slot(0, total=1), bright zorder 10
+
+                r "Good. So am I."
+
+    else:
+        show razzle at slot(0, total=1), bright zorder 10
+
+        r "Seriously, though. Thanks for sticking with me through all of this."
+
+        r "It would've been way less fun without you."
+
+    "Razzle gives you one final grin before heading inside to file the evidence."
+
+    scene black with fade
+
     $ dayRazz += 1
     jump endOfDay
 

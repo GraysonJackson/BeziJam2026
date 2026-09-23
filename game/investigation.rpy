@@ -43,15 +43,15 @@ define singleEliminationByKiller = {
 }
 
 define razzleFocusedRoutePlan = {
-    1: {"height": "Average", "hair": "Blonde", "final": [1, 5, 7]},
-    2: {"height": "Tall", "hair": "Brown", "final": [2, 6, 8]},
-    3: {"height": "Short", "hair": "Black", "final": [3, 4, 9]},
-    4: {"height": "Short", "hair": "Black", "final": [3, 4, 9]},
-    5: {"height": "Average", "hair": "Blonde", "final": [1, 5, 7]},
-    6: {"height": "Tall", "hair": "Brown", "final": [2, 6, 8]},
-    7: {"height": "Average", "hair": "Blonde", "final": [1, 5, 7]},
-    8: {"height": "Tall", "hair": "Brown", "final": [2, 6, 8]},
-    9: {"height": "Short", "hair": "Black", "final": [3, 4, 9]},
+    1: {"height": "Average"},
+    2: {"height": "Tall"},
+    3: {"height": "Short"},
+    4: {"height": "Short"},
+    5: {"height": "Average"},
+    6: {"height": "Tall"},
+    7: {"height": "Average"},
+    8: {"height": "Tall"},
+    9: {"height": "Short"},
 }
 
 ## All five evidence characters live here. For unwritten visits, the cycle
@@ -64,7 +64,7 @@ define investigationRoutes = {
         "visits": {
             1: {"kind": "single", "eliminations": singleEliminationByKiller, "template": "Eyewitness evidence clears {suspect}."},
             3: {"kind": "razzle_attribute", "attribute": "height", "template": "Eyewitness evidence rules out {value} height."},
-            6: {"kind": "razzle_attribute", "attribute": "hair", "template": "Eyewitness evidence rules out {value} hair."},
+            6: {"kind": "retain_killer_attribute", "attribute": "hair", "template": "Eyewitness evidence identifies {value} hair."},
         },
     },
     "madeline": {
@@ -132,9 +132,20 @@ init python:
                     active.difference_update(reveal["eliminated"])
                     counts.append(len(active))
 
-                if route_id == "razzle" and counts != [8, 6, 3]:
-                    raise Exception("Razzle killer {} produced counts {}, not 8/6/3.".format(
-                        killer_id, counts))
+                if route_id == "razzle":
+                    if counts[:2] != [8, 6]:
+                        raise Exception("Razzle killer {} produced early counts {}, not 8/6.".format(
+                            killer_id, counts[:2]))
+
+                    killer_hair = store.suspectAttributes[killer_id]["hair"]
+                    wrong_hair = [
+                        suspect_id for suspect_id in active
+                        if store.suspectAttributes[suspect_id]["hair"] != killer_hair
+                    ]
+                    if wrong_hair:
+                        raise Exception(
+                            "Razzle killer {} left non-matching hair suspects {}.".format(
+                                killer_id, wrong_hair))
 
     def get_planned_route_reveal(route_id, visit, killer_id=None):
         """Resolve one route/visit into a killer-safe clue and suspect list."""
@@ -156,16 +167,25 @@ init python:
                 suspect=store.suspectNames[suspect_id], value=value)
         else:
             attribute = reveal["attribute"]
-            if kind == "razzle_attribute":
+            if kind == "retain_killer_attribute":
+                value = store.suspectAttributes[killer_id][attribute]
+                eliminated_ids = sorted([
+                    suspect_id for suspect_id, attributes in store.suspectAttributes.items()
+                    if attributes[attribute] != value
+                ])
+            elif kind == "razzle_attribute":
                 value = store.razzleFocusedRoutePlan[killer_id][attribute]
+                eliminated_ids = sorted([
+                    suspect_id for suspect_id, attributes in store.suspectAttributes.items()
+                    if attributes[attribute] == value
+                ])
             else:
                 killer_value = store.suspectAttributes[killer_id][attribute]
                 value = reveal["cycle"][killer_value]
-
-            eliminated_ids = sorted([
-                suspect_id for suspect_id, attributes in store.suspectAttributes.items()
-                if attributes[attribute] == value
-            ])
+                eliminated_ids = sorted([
+                    suspect_id for suspect_id, attributes in store.suspectAttributes.items()
+                    if attributes[attribute] == value
+                ])
             clue_text = reveal["template"].format(value=value)
 
         if killer_id in eliminated_ids:

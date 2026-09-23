@@ -24,17 +24,20 @@ Use this sheet when writing the major evidence visits. A seed is the saved kille
 
 ## Razzle — appearance
 
-| Seed / killer | Day 1: clear unique ID | Day 3: remove height | Day 6: remove hair |
+| Seed / killer | Day 1: clear unique ID | Day 3: remove height | Day 6: keep matching hair |
 | --- | --- | --- | --- |
-| 1 — Victor | Jermiah — Glasses | Average | Blonde |
-| 2 — Jermiah | Tucker — Birthmark | Tall | Brown |
-| 3 — Barry | Victor — Mole | Short | Black |
-| 4 — Carl | Simon — Piercings | Short | Black |
-| 5 — Tucker | Carl — Scar | Average | Blonde |
-| 6 — Edgar | Alan — Vitiligo | Tall | Brown |
-| 7 — Simon | Kyle — Eye Patch | Average | Blonde |
-| 8 — Kyle | Barry — Missing Arm | Tall | Brown |
-| 9 — Alan | Edgar — Tattoos | Short | Black |
+| 1 — Victor | Jermiah — Glasses | Average | Brown |
+| 2 — Jermiah | Tucker — Birthmark | Tall | Black |
+| 3 — Barry | Victor — Mole | Short | Blonde |
+| 4 — Carl | Simon — Piercings | Short | Brown |
+| 5 — Tucker | Carl — Scar | Average | Black |
+| 6 — Edgar | Alan — Vitiligo | Tall | Blonde |
+| 7 — Simon | Kyle — Eye Patch | Average | Brown |
+| 8 — Kyle | Barry — Missing Arm | Tall | Black |
+| 9 — Alan | Edgar — Tattoos | Short | Blonde |
+
+Day 6 is a positive identification. Once the witness confirms the killer's
+hair color, remove every still-active suspect whose hair does **not** match it.
 
 ## Madeline — laboratory evidence
 
@@ -96,7 +99,7 @@ Use this sheet when writing the major evidence visits. A seed is the saved kille
 
 - Shared single-person clearing: `singleEliminationByKiller`
 - All route definitions: `investigationRoutes`
-- Razzle-only height/hair lookup: `razzleFocusedRoutePlan`
+- Razzle-only height lookup: `razzleFocusedRoutePlan`
 - Automatic application and notebook logging: `record_planned_route_reveal(route_id, visit)`
 
 The player-facing reference is the in-game **Suspects** notebook. It crosses out eliminated suspects and lists the exact clue and names removed. The separate **Notes** page is free-form player writing and is saved with the game.
