@@ -110,29 +110,26 @@ label start:
     #     "Choice 2":
     #         pass
 
-    '''
-    Los Angeles, 1996. 
-    
-    You have been hired to assist the ATLAS superhero team in their investigation into a recent murder case, but you only have one week to solve it. 
-    
-    While you need to solve the crime, it's also a great time to get to know the ATLAS team. 
-    
-    Who knows? Maybe as you spend time with them throughout the week, you may even fall in love...
+    "Los Angeles, 1996."
 
-    To introduce you to the team, here's Freddy!
-    '''
+    "You have been hired to assist the ATLAS superhero team in their investigation into a recent murder case, but you only have one week to solve it."
 
-    f '''
-    Hey there! I'm Freddy, one of the members of ATLAS! 
-    
-    I wanted to help you meet the team and get an idea of them before you have to get right into the thick of it. 
-    
-    Each member of the team has their own personality and cool power! 
-    
-    For example, as you may be able to tell, I have super hearing, but I can also release sonic screams. 
-    
-    Here, let's meet the others.
-    '''
+    "While you need to solve the crime, it's also a great time to get to know the ATLAS team."
+
+    "Who knows? Maybe as you spend time with them throughout the week, you may even fall in love..."
+
+    "To introduce you to the team, here's Freddy!"
+
+    f "Hey there! I'm Freddy, one of the members of ATLAS!"
+
+    f "I wanted to help you meet the team and get an idea of them before you have to get right into the thick of it."
+
+    f "Each member of the team has their own personality and cool power!"
+
+    f "For example, as you may be able to tell, I have super hearing, but I can also release sonic screams."
+
+    f "Here, let's meet the others."
+
     scene bg sky
     # show ulysses at slot(0, total=7)
     show razzle at slot(1, total=7), dim
@@ -141,46 +138,65 @@ label start:
     # show dhampir at slot(4, total=7)
     show nicky at slot(5, total=7), dim
     show ica at slot(6, total=7), dim
-    # Ulysses
-    f '''
-    Ulysses Umbral, Co-leader of the team. 
 
-    He's a bit of a stern-faced guy who comes off a bit serious (and maybe a hardass), but he just wants what's best for the team. 
-    
-    His power is he can see the future, but he isn't able to tell others, otherwise he may die. 
-    
-    The good news though is that he's still a great guide for the team, and is our team's strategist!
-    '''
+    # Ulysses
+    f "Ulysses Umbral, Co-leader of the team."
+
+    f "He's a bit of a stern-faced guy who comes off a bit serious (and maybe a hardass), but he just wants what's best for the team."
+
+    f "His power is that he can see the future, but he isn't able to tell others, otherwise he may die."
+
+    f "The good news though is that he's still a great guide for the team, and is our team's strategist!"
 
     # Razzle Dazzle
     show razzle at slot(1, total=7), bright zorder 10
-    f "Razzle Dazzle. She's one of the original members of the team, and is a bright spirit for ATLAS. While she may not be the smartest, she brings a lot of energy and fun to the team! As you can likely tell, her power is flame cloaking and flame projectiles."
+    f "Razzle Dazzle. She's one of the original members of the team, and is a bright spirit for ATLAS."
+    f "While she may not be the smartest, she brings a lot of energy and fun to the team!"
+    f "As you can likely tell, her power is flame cloaking and flame projectiles."
     show razzle at slot(1, total=7), dim zorder 0
 
     # Madeline
     show madeline at slot(2, total=7), bright zorder 10
-    f "Madeline Taylors. Another one of the great minds on the team. She's a bit quiet and rude at first, but the moment you get her talking you'll see how... uh... passionate she can be about what she thinks. Her power is superintelligence, which she uses to help her create powerful suits of armor that can do all kinds of things!"
+    f "Madeline Taylors. Another one of the great minds on the team."
+    f "She's a bit quiet and rude at first, but the moment you get her talking you'll see how... uh... passionate she can be about what she thinks."
+    f "Her power is superintelligence, which she uses to help her create powerful suits of armor that can do all kinds of things!"
     show madeline at slot(2, total=7), dim zorder 0
 
     # Winston
-    f "Winston Navarro. The other Co-leader of ATLAS. He's an idiot. Most of the time he's slacking off or ordering pizza for the team, but he's smarter than he lets on. His power is power negation, meaning he can cancel your power out and turn a fight into a straight up brawl!"
+    f "Winston Navarro. The other Co-leader of ATLAS. He's an idiot."
+    f "Most of the time he's slacking off or ordering pizza for the team, but he's smarter than he lets on."
+    f "His power is power negation, meaning he can cancel your power out and turn a fight into a straight up brawl!"
 
     # Dhampir
-    f "Dhampir, longtime hero, but only a recent addition to the team. Dhampir has had... questionable methods to his heroism but he truly does mean well.  He's a super chill, laid-back dude, but when on the job, he has a 100 percent mortality rate. His power is complicated, but the general lowdown is he messes with ghosts and souls. He can turn into a ghost but also can trap people's souls into trinkets he keeps as a necklace. He's... not loved by law enforcement, so he's really only protected by the ATLAS team covering him."
+    f "Dhampir, longtime hero, but only a recent addition to the team."
+    f "Dhampir has had... questionable methods to his heroism, but he truly does mean well."
+    f "He's a super chill, laid-back dude, but when on the job, he has a 100 percent mortality rate."
+    f "His power is complicated, but the general lowdown is he messes with ghosts and souls."
+    f "He can turn into a ghost, but also can trap people's souls into trinkets he keeps as a necklace."
+    f "He's... not loved by law enforcement, so he's really only protected by the ATLAS team covering him."
 
     # Nicky
     show nicky at slot(5, total=7), bright zorder 10
-    f "Nicky Nelson. Technically not a member of the team, but we treat her like one regardless. She's pretty serious about her job, but otherwise super fun to be around, normally likes to kick back and watch a show and drink a beer when off the clock. Nicky is an LAPD officer who we team up with in regards to criminals and making sure that our hero agency does things by the book (Looking at you, Dhampir...). Her power is that she has many of the physical powers of an ant, meaning she's super strong and very in tune with pheromones in the environment! She's a great detective and helps the team out a lot."
+    f "Nicky Nelson. Technically not a member of the team, but we treat her like one regardless."
+    f "She's pretty serious about her job, but otherwise super fun to be around."
+    f "She normally likes to kick back, watch a show, and drink a beer when off the clock."
+    f "Nicky is an LAPD officer who we team up with in regards to criminals."
+    f "She makes sure our hero agency does things by the book. (Looking at you, Dhampir...)"
+    f "Her power gives her the physical abilities of an ant—super strength, and acute sensitivity to pheromones!"
+    f "She's a great detective and helps the team out a lot."
     show nicky at slot(5, total=7), dim zorder 0
-
 
     # Ica
     show ica at slot(6, total=7), bright zorder 10
-    f "Ica, world's biggest bum. I can't really remember the last time Ica has done pretty much anything for the team, but she's here! She likes to have fun and spends most of her time here playing games. Her power is gravity manipulation, either increasing or decreasing depending on the situation."
+    f "Ica, world's biggest bum."
+    f "I can't really remember the last time Ica has done pretty much anything for the team, but she's here!"
+    f "She likes to have fun and spends most of her time here playing games."
+    f "Her power is gravity manipulation, either increasing or decreasing depending on the situation."
     show ica at slot(6, total=7), dim zorder 0
 
     # End intros and start moving scenes
-    f "Well that's the team! Hopefully you can spend some quality time with them as you sort this whole mess out. I'll see you at work tomorrow newbie! I'm with you the entire time, so you may see me pop up whenever something important needs to be said!"
+    f "Well that's the team! Hopefully you can spend some quality time with them as you sort this whole mess out."
+    f "I'll see you at work tomorrow newbie! I'm with you the entire time, so you may see me pop up whenever something important needs to be said!"
 
     jump dayOneBrief
 
@@ -189,17 +205,27 @@ label dayOneBrief:
     scene black
     "Day One: 6 days left until a culprit is decided on."
 
-    "As you walk your way to work, you wonder how everyone will be in person beyond Freddy's introduction. After all, they all seem pretty cool. And maybe a little cute..."
+    "As you walk your way to work, you wonder what everyone will be like in person beyond Freddy's introduction."
+    "After all, they all seem pretty cool. And maybe a little cute..."
 
     "No! You need to focus, there's a murder to solve here. But maybe as long as you solve this, you can make time for both... right?"
 
     scene debriefRoomOutlineInverted
 
-    "You enter into the building and quickly sit in the briefing room. You seem to be the first one there, but shortly after you sit, you see Ulysses walk into the room."
+    "You enter into the building and quickly take a seat in the briefing room."
+    "You seem to be the first one there, but shortly after you sit, Ulysses walks into the room."
 
-    u "Hello there. You must be the new hire. I know we've exchanged formalities over the phone a few times, but it's nice to put a face to the voice and name. I'm Ulysses, and I speak for the whole team when I say I'm happy to have you on the team."
+    u "Hello there. You must be the new hire."
+    u "I know we've exchanged formalities over the phone a few times, but it's nice to put a face to the voice and name."
+    u "I'm Ulysses, and I speak for the whole team when I say I'm happy to have you on the team."
 
-    u "While we wait for the others, I'll go ahead and give you a rundown of where we've gotten so far. As of now, we have it down to nine possible suspects that could have killed Enrico Edge, but due to the speed this case has gone, we only have the week to gather any more evidence we can before having to make a call. That's why we called you in, with your reasoning skills, I'm confident we can find the killer. We'll distribute evidence roles to each person once they all get here, but you'll be an overseer like me. That means you can choose who to work with each day in order to gather evidence. After a day's worth of work, you'll report back to me and we'll review everything. That all make sense?"
+    u "While we wait for the others, I'll go ahead and give you a rundown of where we've gotten so far."
+    u "As of now, we have it down to nine possible suspects that could have killed Enrico Edge."
+    u "Due to how fast this case has moved, we only have a single week to gather any more evidence we can before making our call."
+    u "That's why we called you in. With your reasoning skills, I'm confident we can find the killer."
+    u "We'll distribute evidence roles to each person once they all get here, but you'll be an overseer like me."
+    u "That means you can choose who to work with each day in order to gather evidence."
+    u "After a day's worth of work, you'll report back to me and we'll review everything. That all make sense?"
 
     menu:
         "That all make sense?"
@@ -209,12 +235,14 @@ label dayOneBrief:
             pass
         "Uhhh repeat all that again for me please":
             $ uly -= 1
-            u "Sure... I was saying that you'll be helping with the investigation and work with a different person each day. You can work with the same person as well if you want."
-            u "You read the briefing right? You should already know this all..."
+            u "Sure... I was saying that you'll be helping with the investigation and work with a different person each day."
+            u "You can work with the same person as well if you want."
+            u "You read the briefing, right? You should already know this all..."
             pass
         "Yeah yeah, I know how to do my job, don't worry about it man":
             $ uly -= 1
-            u "Try to take this seriously, please. A man died. And for the record, just because you've done well before doesn't mean I'm trusting that you can do your job."
+            u "Try to take this seriously, please. A man died."
+            u "And for the record, just because you've done well before doesn't mean I'm trusting that you can do your job."
             pass
     u "Now then, let's wait for the others."
     "30 minutes later..."
@@ -229,46 +257,58 @@ label dayOneBrief:
 
     u "You're kidding."
 
-    m "No? Why would I be? It's fascinating to see how someone who can see the future's temper is."
+    show madeline flirty curious at slot(1, total=2), bright zorder 10
+    m "No? Why would I be?"
+    m "It's fascinating to see what someone who can see the future's temper is like."
 
     "Madeline turns to you."
 
+    show madeline at slot(1, total=2), bright zorder 10
     m "Oh, you must be the newbie. I'm Madeline, nice to meetcha."
 
     "Madeline then stares at you for an uncomfortable amount of time without saying a word."
 
     u "So, Madeline, will you ask the others to show up now?"
 
-    m "Huh? I don't know where they are, I just figured they would be late which is why I did the test."
+    show madeline flirty curious at slot(1, total=2), bright zorder 10
+    m "Huh? I don't know where they are."
+    m "I just figured they would be late, which is why I did the test."
 
     "As she says this, you see Nicky rush in with a folder, sweat beading on her forehead."
+    show madeline at slot(1, total=2), dim zorder 0
     show nicky at slot(0, total=2), bright zorder 10
 
-    n "Oh my god guys I'm SO sorry! The station is absolutely wild today. We ended up bringing in a guy whose power is to make everyone in a 30ft radius throw up, so you can imagine the mess we had to deal with."
+    n "Oh my god guys, I'm SO sorry! The station is absolutely wild today."
+    n "We ended up bringing in a guy whose power is to make everyone in a thirty-foot radius throw up..."
+    n "...So you can imagine the mess we had to deal with."
 
+    show nicky quesition at slot(0, total=2), bright zorder 10
     n "Oh! Are we the only ones here so far?"
 
     u "It would appear so. Nicky, this is the new recruit."
 
-    n "Hey there! Glad to see you in person! I read your file when Ulysses sent it over, but it's much better to actually meet people instead of just read their life story on paper."
+    show nicky content happy at slot(0, total=2), bright zorder 10
+    n "Hey there! Glad to see you in person!"
+    n "I read your file when Ulysses sent it over, but it's much better to actually meet people instead of just reading their life story on paper."
 
     "Nicky sticks a hand out for you to shake."
 
     menu:
         "Shake firmly":
-            $ nick+=1
-            hide nicky
+            $ nick += 1
             show nicky content happy at slot(0, total=2), bright zorder 10
             n "Nice handshake! Very profesh."
         "Stare at her hand":
             $ nick -= 1
+            show nicky quesition at slot(0, total=2), bright zorder 10
             n "Okayyyyy, well anyways good to see ya!"
         "Give a super flimsy handshake":
             $ nick += 2
-            hide nicky
             show nicky content happy at slot(0, total=2), bright zorder 10
             n "Good handshake! We gotta work on your grip a bit more though."
-    
+
+    show nicky at slot(0, total=2), dim zorder 0
+    show madeline at slot(1, total=2), dim zorder 0
     "As you talk with Nicky, you see two more members walk into the room."
 
     d "Sup."
@@ -277,15 +317,20 @@ label dayOneBrief:
 
     u "Not at all. Where were you two??"
 
-    d "Ulysses, relaaaaax man. We were just playing some darts in Winston's office. Besides, seems like we're still missing some people anyway."
+    d "Ulysses, relaaaaax man. We were just playing some darts in Winston's office."
+    d "Besides, seems like we're still missing some people anyway."
 
-    w "Yeah, Ulysses! We're not the last people here, so TECHNICALLY we're not even late at all! And it was a tough game of darts! Still annoyed about those triple 20s you were throwing, though, Dhampir!"
+    w "Yeah, Ulysses! We're not the last people here, so TECHNICALLY we're not even late at all!"
+    w "And it was a tough game of darts! Still annoyed about those triple 20s you were throwing, though, Dhampir!"
 
-    d "Look man, practice makes perfect. You just gotta keep throwing darts and maybe one day you'll be on my level."
+    d "Look man, practice makes perfect."
+    d "You just gotta keep throwing darts and maybe one day you'll be on my level."
 
     "Dhampir turns to you."
 
-    d "Sup, I'm Dhampir, but you can also call me by my legal name, Dhampir. You must be that new person Ulysses has been in such a tizzy about. If you're anything like Ulysses, this may be a rough job, but if you're like me and Winnie, you'll love it here."
+    d "Sup, I'm Dhampir, but you can also call me by my legal name, Dhampir."
+    d "You must be that new person Ulysses has been in such a tizzy about."
+    d "If you're anything like Ulysses, this may be a rough job, but if you're like me and Winnie, you'll love it here."
 
     u "For the love of God, PLEASE don't be like them."
 
@@ -296,7 +341,8 @@ label dayOneBrief:
     w "ULY WAIT-"
 
     scene black with fade
-    "A scene out of a cartoon happens right in front of you as Ulysses begins to chase Winston around the room, with the two of them constantly circling the table before Winston eventually starts breathing heavily."
+    "A scene straight out of a cartoon unfolds right in front of you as Ulysses begins chasing Winston around the room."
+    "The two of them circle the table again and again until Winston finally starts wheezing for breath."
 
     "A sign of weakness. Ulysses springs over the table and begins to throttle Winston."
 
@@ -310,56 +356,69 @@ label dayOneBrief:
     hide madeline
 
     show razzle hoorah at slot(0, total=1), bright zorder 10
-    r "OMG ARE WE WRESTLING? COUNT ME IN"
+    r "OMG ARE WE WRESTLING? COUNT ME IN!"
 
     "Razzle Dazzle runs into the room and jumps into the fray right as Ulysses and Winston quickly separate so as not to be burned."
     show razzle at slot(0, total=1), bright zorder 10
     u "No, Razzle, sorry. Winston and I just had a disagreement."
 
+    show razzle at slot(0, total=1), dim zorder 0
     n "Winston called him a wet blanket."
 
     show razzle sad at slot(0, total=1), bright zorder 10
-    r "Awwwww man! I was really looking forward to it! That's fine I guess, there's always time later, right newbie?"
-    show razzle at slot(0, total=1), bright zorder 10
+    r "Awwwww man! I was really looking forward to it!"
+    r "That's fine I guess, there's always time later, right newbie?"
 
     menu:
         "Uhhh I don't think I should speak on this":
             $ razz -= 1
             show razzle sad at slot(0, total=1), bright zorder 10
-            r "Oh man is it another serious one? That's a shame."
+            r "Oh man, is it another serious one? That's a shame."
         "FUCK YEAH I LOVE WRESTLING":
             $ razz += 1
             show razzle hoorah at slot(0, total=1), bright zorder 10
-            r "YES NEWBIE THAT'S WHAT I'M TALKING ABOUT! LET'S THROW DOWN"
+            r "YES NEWBIE THAT'S WHAT I'M TALKING ABOUT! LET'S THROW DOWN!"
         "I'd love to wrestle with you later, I'm a fan of 1v1 matches though":
             $ razz += 2
             show razzle flirty at slot(0, total=1), bright zorder 10
             r "Oh? I hope you can handle some heat then..."
+
+    show razzle at slot(0, total=1), dim zorder 0
     u "Alright you two, that's enough of that. Looks like we're only missing one more now. Where is she?"
+    hide razzle
 
     "As if on cue, the final member of your team strolls through the door, carrying a weight of carelessness about her."
 
+    show ica at slot(0, total=1), bright zorder 10
     i "Oh, hey guys. We doing something in here?"
 
+    show ica at slot(0, total=1), dim zorder 0
     u "Yes, we are. We're having a meeting that you're LATE to by over thirty minutes!"
 
     "Ica shrugs."
 
-    i "Whoopsie daisy! I was playing blackjack against myself, pretty fun if you know what you're doing."
+    show ica happy at slot(0, total=1), bright zorder 10
+    i "Whoopsie daisy! I was playing blackjack against myself."
+    i "Pretty fun if you know what you're doing."
 
+    show ica at slot(0, total=1), bright zorder 10
     i "Hey, newbie. You like playing games?"
 
     menu:
         "Of course I do! Games are the best part of the day!":
             $ ica -= 1
-            i "Pff what a suckup. You don't gotta impress me, man."
+            show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
+            i "Pff, what a suckup. You don't gotta impress me, man."
         "Games are cool I guess.":
             $ ica += 1
+            show ica happy at slot(0, total=1), bright zorder 10
             i "Hell yeah."
         "Can we talk about this later? I want to get the meeting started.":
             $ ica -= 2
+            show ica sad at slot(0, total=1), bright zorder 10
             i "Oh fun, another one of these nerds. Never mind then."
-    
+
+    hide ica
     u "Okay, great, now that everyone's here can we please begin?"
 
     "The team nods their heads and begins to take seats around the table while Ulysses sets up a projection."
@@ -368,9 +427,13 @@ label dayOneBrief:
 
     "Nicky and Dhampir's hands go up, while everyone else's hands stay right where they are."
 
-    u "Dammit. Okay, fine. To catch the rest of you up to speed, a man named Enrico Edge was recently murdered in cold blood. We have been charged with doing what we can to investigate the case and find the culprit. We have narrowed it down to nine suspects, but we only have a week to gather evidence before we have to make a decision on who the culprit is. As such, we'll be splitting up to cover more evidence types. The assignments are as follows."
+    u "Dammit. Okay, fine."
+    u "To catch the rest of you up to speed, a man named Enrico Edge was recently murdered in cold blood."
+    u "We have been charged with doing what we can to investigate the case and find the culprit."
+    u "We have narrowed it down to nine suspects, but we only have a week to gather evidence before we have to make a decision."
+    u "As such, we'll be splitting up to cover more evidence types. The assignments are as follows."
 
-    u "Razzle Dazzle, you're going to be interviewing any eye witnesses so we can learn more about the suspects and their appearance."
+    u "Razzle Dazzle, you're going to be interviewing any eyewitnesses so we can learn more about the suspects and their appearance."
 
     u "Dhampir, you're going to be analyzing the crime scene and any physical evidence we can find there."
 
@@ -380,15 +443,20 @@ label dayOneBrief:
 
     u "Winston, you're going to interrogate the suspects and see if we can get any more information out of them."
 
+    show ica at slot(0, total=1), bright zorder 10
     i "What do I have to do?"
 
+    show ica at slot(0, total=1), dim zorder 0
     u "Well, Ica, I'm glad you asked. You're going to be-"
 
+    show ica happy at slot(0, total=1), bright zorder 10
     i "Nah, I'm good. I'll just watch the others do their thing."
+    hide ica
 
     u "... Whatever."
 
-    u "And as for our new recruit, they'll be checking in with each of you as they see fit, and report back to me at the end of the day. That all make sense?"
+    u "And as for our new recruit, you'll be checking in with each of you as you see fit, and report back to me at the end of the day."
+    u "That all make sense?"
 
     "Everyone" "Yes sir!"
 
@@ -588,28 +656,33 @@ label RazzleDayOne:
         "Hell yeah I am!":
             $ razz += 1
             show razzle hoorah at slot(0, total=1), bright zorder 10
-            r "Fuck yeah that's what I like to hear!! Let's go interview the hell out of some witnesses and get this case solved!"
+            r "Fuck yeah, that's what I like to hear!!"
+            r "Let's go interview the hell out of some witnesses and get this case solved!"
         "Yeah, let's get this done. I don't have time to waste":
             $ razz -= 1
             show razzle sad at slot(0, total=1), bright zorder 10
-            r "Awwww man, I was hoping for a bit more enthusiasm from you. But I guess we can get this done anyway."
+            r "Awwww man, I was hoping for a bit more enthusiasm from you."
+            r "But I guess we can get this done anyway."
     show razzle at slot(0, total=1), bright zorder 10
     r "Let's get going! We have a bit of a walk to get to the first witness, so we better start walking!"
 
     menu:
         "Walk? Why not drive?":
             show razzle mouth open at slot(0, total=1), bright zorder 10
-            r "Walking is a great way to get exercise though!! And also, it's a little hard for me to be in cars since I'm literally on fire... but yeah exercise stuff!"
+            r "Walking is a great way to get exercise though!!"
+            r "And also, it's a little hard for me to be in cars since I'm literally on fire... but yeah, exercise stuff!"
         "Let's roll!":
             show razzle hoorah at slot(0, total=1), bright zorder 10
             r "Hell yeah! Let's get this done!"
     scene black
-    "You and Razzle Dazzle begin to walk through Los Angeles, heading to the house of the first witness. As you walk, you notice Razzle Dazzle making conversation, mainly just talking aloud, but occasionally asking you questions."
+    "You and Razzle Dazzle begin to walk through Los Angeles, heading to the house of the first witness."
+    "As you walk, you notice Razzle Dazzle making conversation, mainly just talking aloud, but occasionally asking you questions."
 
     # Witness scene or something
 
     show razzle at slot(0, total=1), bright zorder 10
-    r "-And then I was like, 'You better pack a fire extinguisher next time!' Wait, sorry, I was yapping the entire way here. I wanted to also get to know you, newbie!"
+    r "-And then I was like, 'You better pack a fire extinguisher next time!'"
+    r "Wait, sorry, I was yapping the entire way here. I wanted to get to know you too, newbie!"
 
     show razzle question at slot(0, total=1), bright zorder 10
     r "Like, what do you do for fun? Any special people in your life?"
@@ -624,29 +697,39 @@ label RazzleDayOne:
             show razzle mouth open at slot(0, total=1), bright zorder 10
             r "If not, you need to! Just work and sleep doesn't let you enjoy life at all!"
             show razzle hoorah at slot(0, total=1), bright zorder 10
-            r "For example, me and Winston go clubbing like ALL the time and it's awesome! We get to drink a shit load, meet new people, drink a shit load, then spend the next day talking about how much we shouldn't do that again. It's a blast! Maybe next time you should come with us!"
+            r "For example, me and Winston go clubbing like ALL the time and it's awesome!"
+            r "We get to drink a shit load, meet new people, drink a shit load, then spend the next day talking about how much we shouldn't do that again."
+            r "It's a blast! Maybe next time you should come with us!"
             show razzle at slot(0, total=1), bright zorder 10
         "I usually am out all day and night doing whatever the night says!":
             $ razz += 1
             show razzle hoorah at slot(0, total=1), bright zorder 10
             r "Hell yeah! That's what I'm talking about, I'm the same way!"
-            r "Me and Winston go clubbing like ALL the time and it's awesome! We get to drink a shit load, meet new people, drink a shit load, then spend the next day talking about how much we shouldn't do that again. It's a blast! Maybe next time you should come with us!"
+            r "Me and Winston go clubbing like ALL the time and it's awesome!"
+            r "We get to drink a shit load, meet new people, drink a shit load, then spend the next day talking about how much we shouldn't do that again."
+            r "It's a blast! Maybe next time you should come with us!"
             show razzle at slot(0, total=1), bright zorder 10
         "Are you an option?":
             $ razz += 2
             show razzle flirty at slot(0, total=1), bright zorder 10
             r "Is that so, newbie? I admire the courage, but you're gonna need to have some better lines if you want to get me hot and bothered."
-            r "For now though, maybe you can go clubbing with me sometime! We can go drink, get shit faced, dance, get more shit faced, then see if you can handle a night out with me before a more 'personal' evening."
+            r "For now though, maybe you can go clubbing with me sometime!"
+            r "We can go drink, get shit faced, dance, get more shit faced..."
+            r "...Then see if you can handle a night out with me before a more 'personal' evening."
             show razzle at slot(0, total=1), bright zorder 10
-    r "For now though, it looks like we made it here! Better put on my professional face and talk to them about what they saw. Let's go!"
-    show razzle at slot(0, total=1), dim zorder 10
+    r "For now though, it looks like we made it here!"
+    r "Better put on my professional face and talk to them about what they saw. Let's go!"
+    show razzle at slot(0, total=1), dim zorder 0
 
     "You and Razzle Dazzle talk to the witness, introducing yourselves and getting some more basic statements out of the way."
 
     show razzle question at slot(0, total=1), bright zorder 10
 
-    r "So, Landon. Can you tell me more about what you saw that night? Were there any aspects about the suspect that you can remember? Anything at all? Like if they had a scar, tattoo, hell, were they missing an arm??"
+    r "So, Landon. Can you tell me more about what you saw that night?"
+    r "Were there any aspects about the suspect that you can remember? Anything at all?"
+    r "Like if they had a scar, tattoo, hell, were they missing an arm??"
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Landon" "Well, I don't remember too much about the suspect since it was so late, but I can for sure say one thing..."
 
     # The selected killer decides which existing witness observation is used.
@@ -683,13 +766,17 @@ label RazzleDayOne:
 
     "Landon" "Is that any help to you guys at all?"
 
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+    r "Actually, yes it is! Thanks, dude!"
+    r "We'll be able to use this information to help narrow down the suspects. If you think of anything else, please let us know!"
+
+    show razzle mouth open at slot(0, total=1), bright zorder 10
+    r "You see that, newbie?? We actually got something!! Fuck yeah!!"
+    r "Hopefully we can talk to some more peeps tomorrow and learn a bit more about what the killer looks like!"
+
     show razzle at slot(0, total=1), bright zorder 10
-    r "Actually, yes it is! Thanks, dude! We'll be able to use this information to help narrow down the suspects. If you think of anything else, please let us know!"
-
-    show razzle mouth open at slot(0, total=1), dim zorder 10
-    r "You see that, newbie?? We actually got something!! Fuck yeah!! Hopefully we can talk to some more peeps tomorrow and learn a bit more about what the killer looks like!"
-
-    r "Well, I know you gotta get back to report to boss man, but I'm probably gonna head home. See you later, newbie!"
+    r "Well, I know you gotta get back to report to boss man, but I'm probably gonna head home."
+    r "See you later, newbie!"
 
     if razz > 4:
         show razzle flirty at slot(0, total=1), bright zorder 10
@@ -708,18 +795,23 @@ label RazzleDayTwo:
         "Yeah, let's get started!":
             $ razz += 1
             show razzle mouth open at slot(0, total=1), bright zorder 10
-            r "I like the enthusiasm, but I'm taking today to chill for a moment. The rest of this week is going to be a lot, so I wanna chill today!"
+            r "I like the enthusiasm, but I'm taking today to chill for a bit."
+            r "The rest of this week is going to be a lot, so I wanna take it easy today!"
         "Nah, I just wanted to see you again":
             $ razz += 2
             show razzle flirty at slot(0, total=1), bright zorder 10
-            r "Oh? I like the sound of that! I was hoping you would come back to see me again!"
+            r "Oh? I like the sound of that!"
+            r "I was hoping you would come back to see me again!"
         "I don't have time for this, let's get to work":
             $ razz -= 2
             show razzle enraged at slot(0, total=1), bright zorder 10
-            r "Hey man, no need to be a dick. If we're gonna solve the mystery together, we need to at least be nice!"
+            r "Hey man, no need to be a dick."
+            r "If we're gonna solve this together, we need to at least be nice!"
 
     # Lunch: takes you somewhere nearby, but either gets rejected because she is on fire. She casually heats/cooks something with her hands or gets outside food.
-    r "So, how about we go get some food or something? After that we can just walk around and do absolutely nothing!"
+    show razzle at slot(0, total=1), bright zorder 10
+    r "So, how about we go get some food or something?"
+    r "After that we can just walk around and do absolutely nothing!"
 
     menu:
         "That sounds irresponsible.":
@@ -736,6 +828,7 @@ label RazzleDayTwo:
             r "Second of all, I only accidentally set things on fire like... thirty percent of the time."
             show razzle at slot(0, total=1), bright zorder 10
 
+    show razzle hoorah at slot(0, total=1), bright zorder 10
     r "Come on already, I'm hungry!"
 
     scene black with fade
@@ -754,7 +847,9 @@ label RazzleDayTwo:
 
     menu:
         "Pizza sounds good.":
-            r "Correct answer, newbie!! One of my favorites! C'mon, let's go get some!"
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+            r "Correct answer, newbie!! One of my favorites!"
+            r "C'mon, let's go get some!"
 
         "Whatever you want.":
             $ razz += 1
@@ -771,18 +866,22 @@ label RazzleDayTwo:
 
     "The two of you make it to a nearby pizza place before issues begin to arise."
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Employee" "I'm sorry, ma'am, but you'll set off every fire alarm in our building just by being there."
 
     menu:
         "What? That's bullshit! Just let her be on fire!":
             $ razz += 1
             show razzle mouth open at slot(0, total=1), bright zorder 10
-            r "It's fine, newbie, it happens all the time. Look, can we at least get a box to go or something?"
+            r "It's fine, newbie, it happens all the time."
+            r "Look, can we at least get a box to go or something?"
         "Razzle, can you turn off your flames?":
             $ razz -= 1
             show razzle sad at slot(0, total=1), bright zorder 10
             r "I uhh... I can't. I'm pretty much always on fire unless Winston cancels my power out purposely."
             r "Look, can we at least get a box to go or something?"
+
+    show razzle at slot(0, total=1), dim zorder 0
     "Employee" "Certainly. Here, I'll send an order back if you can wait outside."
 
     "After placing your order and waiting what felt like forever, the two of you find yourselves sitting outside with a pizza box."
@@ -795,8 +894,10 @@ label RazzleDayTwo:
 
     "...It's cold."
 
+    show razzle sad at slot(0, total=1), bright zorder 10
     r "Damn..."
 
+    show razzle at slot(0, total=1), bright zorder 10
     r "Want yours reheated?"
 
     menu:
@@ -804,25 +905,31 @@ label RazzleDayTwo:
             $ razz += 1
             "She holds your slice between two fingers for a second."
 
+            show razzle hoorah at slot(0, total=1), bright zorder 10
             r "There, perfectly heated!!"
 
             "The cheese is bubbling."
 
             "The crust is smoking."
 
+            show razzle at slot(0, total=1), bright zorder 10
             r "...Maybe give it a minute."
 
         "It's fine, I like it cold anyway.":
-            r "Suit yourself, but also cold pizza already?? Usually that's a 'raiding the fridge at midnight' thing and less of a 'right outside the shop' thing."
+            show razzle question at slot(0, total=1), bright zorder 10
+            r "Suit yourself, but also cold pizza already??"
+            r "Usually that's a 'raiding the fridge at midnight' thing, not a 'right outside the shop' thing."
 
         "Only if you feed it to me too.":
             $ razz += 2
             show razzle flirty at slot(0, total=1), bright zorder 10
 
-            r "Oh, we're getting brave now, huh? Don't wanna burn you though, so you're on your own."
+            r "Oh, we're getting brave now, huh?"
+            r "Don't wanna burn you though, so you're on your own."
     
     scene black
-    "You and Razzle finish your food and walk around the city a bit more. Eventually, you return to the ATLAS team building and go to the rooftop to enjoy the scenery."
+    "You and Razzle finish your food and walk around the city a bit more."
+    "Eventually, you return to the ATLAS team building and go to the rooftop to enjoy the scenery."
 
     scene black
     with dissolve
@@ -846,20 +953,24 @@ label RazzleDayTwo:
 
         "It was definitely different.":
             $ razz += 1
+            show razzle at slot(0, total=1), bright zorder 10
             r "Different is basically the ATLAS motto."
 
         "We really didn't accomplish anything.":
             $ razz -= 1
+            show razzle annoyed at slot(0, total=1), bright zorder 10
             r "That was literally the point!"
 
     "For a moment, she's quieter than usual."
 
+    show razzle sad at slot(0, total=1), bright zorder 10
     r "People get kinda weird around me sometimes."
 
     r "Which, y'know, fair. I'm constantly on fire."
 
     r "But sometimes it feels like that's all they see."
 
+    show razzle at slot(0, total=1), bright zorder 10
     r "ATLAS is nice because nobody here really cares. I'm not 'the fire girl.' I'm just Razzle."
 
     "She glances over at you."
@@ -872,11 +983,13 @@ label RazzleDayTwo:
 
             show razzle flirty at slot(0, total=1), bright zorder 10
 
-            r "Careful, newbie. Keep saying stuff like that and I might actually start liking you."
+            r "Careful, newbie."
+            r "Keep saying stuff like that and I might actually start liking you."
 
         "I dunno. The fire is pretty cool.":
             $ razz += 1
 
+            show razzle mouth open at slot(0, total=1), bright zorder 10
             r "Okay, yeah. It is pretty cool."
 
         "I mostly see a walking fire hazard.":
@@ -892,6 +1005,7 @@ label RazzleDayTwo:
     r "Well, guess it's about time to head home. I'll see you around!"
 
     if razz > 10:
+        show razzle flirty at slot(0, total=1), bright zorder 10
         r "Maybe I'll see you tomorrow too?"
     
     "Razzle leaves, leaving you alone on the rooftop before you head down to report to Ulysses."
@@ -903,26 +1017,37 @@ label RazzleDayThree:
     "You make your way back to Razzle Dazzle's cubicle and see her already standing, getting ready to leave."
     scene cubicleOutline
     show razzle at slot(0, total=1), bright zorder 10
-    r "Oh hey newbie! I was actually just about to head out to interview another witness. Wanna come with?"
+    r "Oh hey newbie!"
+    r "I was actually just about to head out to interview another witness. Wanna come with?"
 
     menu:
         "Duh, of course I do!":
             $ razz += 1
             show razzle hoorah at slot(0, total=1), bright zorder 10
-            r "Fuck yeah!! That's what I like to hear! Let's roll!"
+            r "Fuck yeah!! That's what I like to hear!"
+            r "Let's roll!"
         "Yeah. That's why I'm here.":
             $ razz -= 1
-            r "Well damn, you can at least pretend to want to be here. Fine. Let's go."
+            show razzle annoyed at slot(0, total=1), bright zorder 10
+            r "Well damn, you can at least pretend to want to be here."
+            r "Fine. Let's go."
     scene black with fade
     "You and Razzle Dazzle make your way to the next witness's home, arriving to question them."
 
     show razzle at slot(0, total=1), bright zorder 10
-    r "Hi there, Brandon, right? Is it okay if we ask you some questions about what you saw?"
+    r "Hi there, Brandon, right?"
+    r "Is it okay if we ask you some questions about what you saw?"
 
-    "Brandon" "Hi there. Yes, that's fine, can we just make this quick, please? I really don't want to keep thinking about this all."
+    show razzle at slot(0, total=1), dim zorder 0
+    "Brandon" "Hi there. Yes, that's fine, can we just make this quick, please?"
+    "Brandon" "I really don't want to keep thinking about this all."
 
-    r "Perfectly understandable. We just wanted to hear anything at all about what the killer looked like. Is there anything you can remember about them?"
+    show razzle question at slot(0, total=1), bright zorder 10
+    r "Perfectly understandable."
+    r "We just wanted to hear anything at all about what the killer looked like."
+    r "Is there anything you can remember about them?"
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Brandon" "I think so, everything is just so fuzzy..."
 
     "It seems that Brandon is struggling to organize his thoughts, see what you can do to help!"
@@ -933,34 +1058,48 @@ label RazzleDayThree:
         while height_memory_active:
             $ renpy.pause(0.1, hard=True)
 
+    show razzle hoorah at slot(0, total=1), bright zorder 10
     r "There we go! The important memories are still on the board, and the rest can take a little vacation."
     # The selected killer decides which witness observation Brandon gives.
     $ razzleDayThreeReveal = get_planned_route_reveal("razzle", 3)
     $ razzleDayThreeHeight = razzleDayThreeReveal["value"].lower()
 
-    "Brandon" "Wait... yeah. I remember the doorway now. The silhouette against the frame—they definitely weren't [razzleDayThreeHeight] height. That much I'm sure of."
+    show razzle at slot(0, total=1), dim zorder 0
+    "Brandon" "Wait... yeah. I remember the doorway now."
+    "Brandon" "The silhouette against the frame—they definitely weren't [razzleDayThreeHeight] height. That much I'm sure of."
 
-    r "That's exactly what we needed! Ruling out [razzleDayThreeHeight] height narrows down the suspects big time. Thanks, Brandon! We'll handle the detective work from here."
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+    r "That's exactly what we needed!"
+    r "Ruling out [razzleDayThreeHeight] height narrows down the suspects big time."
+    r "Thanks, Brandon! We'll handle the detective work from here."
     scene black
     "You and Razzle leave Brandon with a much tidier thought board and a useful eyewitness lead."
     "Eventually, the two of you make your way back to the office."
     scene cubicleOutline
-    show razzle at slot(0, total=1), bright zorder 10
-    r "Oh my God that was amazing!! I don't know how you were able to keep him on track so well! Usually my mind is just all over the place!"
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+    r "Oh my God that was amazing!!"
+    r "I don't know how you were able to keep him on track so well! Usually my mind is just all over the place!"
 
     menu:
         "Most people know more than they think, they just need the guide":
             $ razz += 1
-            r "Well look at you oh wise one, seems like you have a lot of wisdom to impart!"
+            show razzle at slot(0, total=1), bright zorder 10
+            r "Well look at you, oh wise one! Seems like you have a lot of wisdom to impart!"
         "I'm pretty good at clearing minds, but mine is stuck on you":
             show razzle flirty at slot(0, total=1), bright zorder 10
             r "Heyy, you're getting pretty good at these!"
-            r "The more you say these, the more I wanna hear more after this is all over..."
+            r "The more you say these, the more I wanna hear after this is all over..."
         "It was nothing":
+            show razzle at slot(0, total=1), bright zorder 10
             r "Don't be so modest, that was great!"
-    r "Anyways, we've made some really great progress! Hopefully we can do some more, but I'm still getting a good feeling about this!"
 
-    r "But for now I know you gotta talk to Uly, so I'll leave you be. Catch ya later, newbie!!"
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+    r "Anyways, we've made some really great progress!"
+    r "Hopefully we can do some more, but I'm still getting a good feeling about this!"
+
+    show razzle at slot(0, total=1), bright zorder 10
+    r "But for now I know you gotta talk to Uly, so I'll leave you be."
+    r "Catch ya later, newbie!!"
 
     "With that, Razzle takes her leave, leaving you with your report for the day."
 
@@ -972,7 +1111,8 @@ label RazzleDayFour:
     "You make your way to Razzle Dazzle's cubicle and find her already standing, getting ready to leave."
     scene cubicleOutline
     show razzle at slot(0, total=1), bright zorder 10
-    r "Hey hey! About to go check out another witness. You coming with me?"
+    r "Hey hey!"
+    r "About to go check out another witness. You coming with me?"
     menu:
         "Of course!":
             $ razz += 1
@@ -980,27 +1120,42 @@ label RazzleDayFour:
             r "Fuck yeah!! That's what I like to hear! Let's roll!"
         "Yeah. That's why I'm here.":
             $ razz -= 1
+            show razzle annoyed at slot(0, total=1), bright zorder 10
             r "Well damn, you can at least pretend to want to be here. Fine. Let's go."
     scene black with fade
     "You and Razzle Dazzle make your way to the next witness's home, arriving to question them."
     scene cubicleOutline
     show razzle question at slot(0, total=1), bright zorder 10
-    r "This is the last witness of the crime, so here's hoping we can get enough info out of them that we can use it to narrow down the suspects and find the killer."
+    r "This is the last witness of the crime, so here's hoping we can get enough info out of them."
+    r "If we're lucky, we can use it to narrow down the suspects and find the killer."
     show razzle at slot(0, total=1), bright zorder 10
     "Razzle Dazzle knocks on the door, and you see an elderly woman answer. She looks at you and Razzle Dazzle with a confused expression."
+
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "He-hello? Can I help you?"
-    r "Hi there! I'm Razzle Dazzle, and this is my partner. We're investigating a crime that happened recently, and we were hoping to ask you a few questions about what you saw that night."
+
+    show razzle at slot(0, total=1), bright zorder 10
+    r "Hi there! I'm Razzle Dazzle, and this is my partner."
+    r "We're investigating a crime that happened recently, and we were hoping to ask you a few questions about what you saw that night."
+
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "Oh, I see. Well, I suppose I can help you out. Please, come in."
-    "You step into the house, as you notice how plain it is. The furniture is old and worn, and the walls are bare. It seems like Elena doesn't have much in the way of material possessions."
+    "You step into the house and notice how plain it is."
+    "The furniture is old and worn, the walls are bare, and Elena clearly lives with very few possessions."
 
     "Elena" "Please, have a seat. Can I offer you some tea or coffee?"
     menu:
         "Tea would be great, thank you.":
+            show razzle at slot(0, total=1), bright zorder 10
             r "Tea sounds perfect. Thank you for offering."
         "Coffee would be great, thank you.":
+            show razzle at slot(0, total=1), bright zorder 10
             r "Coffee sounds perfect. Thank you for offering."
         "No thanks, we're fine.":
+            show razzle at slot(0, total=1), bright zorder 10
             r "No thanks, we're fine. We just want to ask you a few questions."
+
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "Of course, dears. Please, make yourselves comfortable."
     
     "Razzle sort of shuffles awkwardly, unable to sit down on any of the cloth chairs or couches in the room."
@@ -1008,30 +1163,44 @@ label RazzleDayFour:
     $ razzleDayThreeReveal = get_planned_route_reveal("razzle", 3)
     $ razzleDayThreeHeight = razzleDayThreeReveal["value"].lower()
 
-    r "So, Elena, can you tell us what you saw that night? Any details you can remember would be very helpful."
-    "Elena" "Well, I remember seeing a figure outside Enrico's house through my window. It was so very dark that I couldn't see much. Maybe they were tall? Short? Big? Small? I don't know. I just remember that they were there, and then they were gone."
+    r "So, Elena, can you tell us what you saw that night?"
+    r "Any details you can remember would be very helpful."
+
+    show razzle at slot(0, total=1), dim zorder 0
+    "Elena" "Well, I remember seeing a figure outside Enrico's house through my window."
+    "Elena" "It was so very dark that I couldn't see much. Maybe they were tall? Short? Big? Small? I don't know."
+    "Elena" "I just remember that they were there, and then they were gone."
+
+    show razzle question at slot(0, total=1), bright zorder 10
     r "Our last witness helped us rule out [razzleDayThreeHeight] height, but you're not sure if they looked noticeably tall or short?"
     r "Did you notice anything about their clothing or any distinguishing features? Even just something like a hair color?"
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "Hair color? Oh, goodness... I couldn't say."
 
     "Elena glances toward the front window, narrowing her eyes as if the figure might still be standing outside."
 
-    "Elena" "For a moment I thought their hair looked very light. Then a car passed, and it looked dark instead. It may have been a hat for all I know."
+    "Elena" "For a moment I thought their hair looked very light."
+    "Elena" "Then a car passed, and it looked dark instead. It may have been a hat for all I know."
 
     show razzle question at slot(0, total=1), bright zorder 10
 
     r "Okay, so the lighting was weird. That's still something I guess."
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "I'm sorry, dear. I know that isn't very helpful."
 
     menu:
         "What made the person seem tall or short?":
             $ razz += 1
 
-            r "Yeah! Don't worry about guessing their exact height. What made them look that way from where you were sitting?"
+            show razzle question at slot(0, total=1), bright zorder 10
+            r "Yeah! Don't worry about guessing their exact height."
+            r "What made them look that way from where you were sitting?"
 
-            "Elena" "I suppose it was where their head appeared against the window. They seemed terribly tall at first, but the yard is uneven."
+            show razzle at slot(0, total=1), dim zorder 0
+            "Elena" "I suppose it was where their head appeared against the window."
+            "Elena" "They seemed terribly tall at first, but the yard is uneven."
 
         "Do you think the killer was tall?":
             $ razz -= 1
@@ -1040,6 +1209,7 @@ label RazzleDayFour:
 
             r "Careful, newbie. We don't wanna put an answer in her head."
 
+            show razzle at slot(0, total=1), dim zorder 0
             "Elena" "I really couldn't say. Perhaps they were, but perhaps not."
 
         "Could we recreate what you saw?":
@@ -1049,6 +1219,7 @@ label RazzleDayFour:
 
             r "Oh, that's a great idea! We can make our own little murder reenactment!"
 
+            show razzle at slot(0, total=1), dim zorder 0
             "Elena" "Perhaps without the murder part, dear."
 
             show razzle at slot(0, total=1), bright zorder 10
@@ -1057,10 +1228,12 @@ label RazzleDayFour:
 
     r "Would it help if we tried standing where you saw them?"
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "It might. I was sitting right here when they passed the window."
 
     "Razzle looks between Elena's chair and the front window."
 
+    show razzle at slot(0, total=1), bright zorder 10
     r "Okay! Newbie, you go outside and be our mysterious shadowy criminal."
 
     menu:
@@ -1093,7 +1266,8 @@ label RazzleDayFour:
 
     "You step outside while Razzle remains with Elena."
 
-    "Following Razzle's instructions through the window, you walk along the path several times—standing straight, hunching over, and pretending to carry something against your chest."
+    "Following Razzle's instructions through the window, you walk along the path several times."
+    "You try standing straight, hunching over, and pretending to carry something against your chest."
 
     "On the third pass, Elena suddenly raises her hand."
 
@@ -1104,21 +1278,31 @@ label RazzleDayFour:
 
     "You return inside as Elena studies the window."
 
-    "Elena" "That was much closer. The figure wasn't necessarily large or heavy. They were holding something bulky against their coat and leaning forward."
+    show razzle at slot(0, total=1), dim zorder 0
+    "Elena" "That was much closer. The figure wasn't necessarily large or heavy."
+    "Elena" "They were holding something bulky against their coat and leaning forward."
 
-    r "Aha! So that hunch and whatever they were lugging made their build look wide, and that slope messed with the height! Brandon had that doorway frame to measure against yesterday, but out here, posture completely warps the silhouette."
+    show razzle question at slot(0, total=1), bright zorder 10
+    r "Aha! So that hunch and whatever they were lugging made their build look wide, and that slope messed with the height!"
+    r "Brandon had that doorway frame to measure against yesterday, but out here, posture completely warps the silhouette."
 
-    "Elena" "Yes, I believe so. And the lawn slopes upward near the window. That may be why I first thought they were tall. I suppose you can't rely on the build either."
+    show razzle at slot(0, total=1), dim zorder 0
+    "Elena" "Yes, I believe so. And the lawn slopes upward near the window."
+    "Elena" "That may be why I first thought they were tall. I suppose you can't rely on the build either."
 
     show razzle hoorah at slot(0, total=1), bright zorder 10
 
     r "Holy shit, newbie! We actually cracked the case! Well, not really, but you know what I mean!"
+
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "Have I helped identify them?"
 
     show razzle at slot(0, total=1), bright zorder 10
 
-    r "Not exactly, lady. But you helped us figure out that we can't trust that wide build or the uneven ground for height. It was all distorted."
+    r "Not exactly, lady."
+    r "But you helped us figure out that we can't trust that wide build or the uneven ground for height. It was all distorted."
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "I'm afraid that doesn't sound nearly as impressive."
 
     show razzle sad at slot(0, total=1), bright zorder 10
@@ -1129,26 +1313,33 @@ label RazzleDayFour:
 
     "Elena looks toward the window once more."
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "There was one other thing."
 
     show razzle question at slot(0, total=1), bright zorder 10
 
     r "Anything you remember could help."
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "When the car passed, the person raised a hand to shield their face. For just a moment, I could see the top of their head."
 
+    show razzle question at slot(0, total=1), bright zorder 10
     r "Their hair?"
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "Perhaps. But the light passed too quickly. I don't trust myself to name the color."
 
-    "Elena" "The little grocery across the street had a security camera pointed toward the road, though. If they kept the recording, it may have seen the same car pass."
+    "Elena" "The little grocery across the street had a security camera pointed toward the road, though."
+    "Elena" "If they kept the recording, it may have seen the same car pass."
 
     show razzle hoorah at slot(0, total=1), bright zorder 10
 
     r "Now that sounds like a lead!"
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "I'm glad I could help, dears."
 
+    show razzle at slot(0, total=1), bright zorder 10
     r "You helped plenty. Thanks for talking to us, Elena."
 
     scene black with fade
@@ -1174,6 +1365,7 @@ label RazzleDayFour:
         "Stopping a bad clue is still progress.":
             $ razz += 1
 
+            show razzle hoorah at slot(0, total=1), bright zorder 10
             r "Exactly! We didn't get an answer, but at least we won't chase the wrong one."
 
         "You were asking a lot of leading questions.":
@@ -1235,7 +1427,8 @@ label RazzleDayFour:
 
     r "Maybe Elena couldn't tell us what color she saw, but a camera won't second-guess itself."
 
-    r "Assuming the footage isn't terrible. Which, knowing our luck, it absolutely will be."
+    r "Assuming the footage isn't terrible."
+    r "Which, knowing our luck, it absolutely will be."
 
     "Razzle grins and gives you a playful shove with her shoulder, stopping just short of letting her flames touch you."
 
@@ -1257,13 +1450,16 @@ label RazzleDayFive:
 
     show razzle hoorah at slot(0, total=1), bright zorder 10
 
-    r "Newbie! Great news! The grocery store still had the tape!"
+    r "Newbie! Great news!"
+    r "The grocery store still had the tape!"
 
     menu:
         "You actually found it?":
             $ razz += 1
 
-            r "Sure did! And it only took three phone calls, two flameproof cab rides, and one extremely suspicious store manager!"
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+            r "Sure did!"
+            r "And it only took three phone calls, two flameproof cab rides, and one extremely suspicious store manager!"
 
         "Please tell me you didn't threaten anybody.":
             $ razz -= 1
@@ -1272,7 +1468,8 @@ label RazzleDayFive:
 
             r "What? No!"
 
-            r "I just stood uncomfortably close to the manager until he remembered where the tapes were. The heat seemed to jog his memory."
+            r "I just stood uncomfortably close to the manager until he remembered where the tapes were."
+            r "The heat seemed to jog his memory."
 
         "I knew you could do it.":
             $ razz += 2
@@ -1347,7 +1544,8 @@ label RazzleDayFive:
     scene cubicleOutline
     show razzle hoorah at slot(0, total=1), bright zorder 10
 
-    r "Holy shit, that's them! That's gotta be them!"
+    r "Holy shit, that's them!"
+    r "That's gotta be them!"
 
     "Razzle reaches over and rewinds the recording, playing the moment again."
 
@@ -1361,11 +1559,14 @@ label RazzleDayFive:
 
     "The figure steps onto the sloped curb and briefly leans against the grocery store's outer wall."
 
-    "One hand reaches out to steady themselves against the rough brick. The instant their knuckles brush the surface, they flinch hard and snatch their hand back, tucking it gingerly against their ribs."
+    "One hand reaches out to steady themselves against the rough brick."
+    "The instant their knuckles brush the surface, they flinch hard and snatch their hand back, tucking it gingerly against their ribs."
 
-    r "Yeesh. Look at that jerk-back. You only pull away like that if your hand is already bruised or scraped raw."
+    r "Yeesh. Look at that jerk-back."
+    r "You only pull away like that if your hand is already bruised or scraped raw."
 
-    r "Maybe our killer got banged up during the struggle? Or maybe they just hate rough masonry. Wish this tape had enough resolution to see their skin."
+    r "Maybe our killer got banged up during the struggle? Or maybe they just hate rough masonry."
+    r "Wish this tape had enough resolution to see their skin."
 
     "The figure flexes the injured fingers once under their sleeve, but the image skips before you can see anything more."
 
@@ -1381,11 +1582,15 @@ label RazzleDayFive:
 
     "Whatever they are carrying against their chest blends directly into their torso, making their build seem hulking and wide whenever they turn toward the lens."
 
-    r "Look at that silhouette! When they hunch forward over that bundle, they look wide as a truck, but when they step upright, it completely changes."
+    r "Look at that silhouette!"
+    r "When they hunch forward over that bundle, they look wide as a truck..."
+    r "...But when they step upright, it completely changes."
 
-    r "That proves our reenactment with Elena yesterday was spot-on. The 'wide build' was just an optical illusion from lugging that bulky package."
+    r "That proves our reenactment with Elena yesterday was spot-on!"
+    r "The 'wide build' was just an optical illusion from lugging that bulky package."
 
-    r "And man, out on this uneven street, they look tall in one frame and short in the next! Thank God Brandon had that doorway frame on Day 3 to rule out [razzleDayThreeHeight] height, because this tape's perspective is a total mess."
+    r "And man, out on this uneven street, they look tall in one frame and short in the next!"
+    r "Thank God Brandon had that doorway frame to rule out [razzleDayThreeHeight] height, because this tape's perspective is a total mess."
 
     "Razzle watches the footage again."
 
@@ -1398,8 +1603,10 @@ label RazzleDayFive:
     scene cubicleOutline
     show razzle question at slot(0, total=1), bright zorder 10
 
-    r "So Elena really did see their hair! It definitely wasn't a hat or a hood."
+    r "So Elena really did see their hair!"
+    r "It definitely wasn't a hat or a hood."
 
+    show razzle annoyed at slot(0, total=1), bright zorder 10
     r "Too bad the tape's black and white."
 
     r "We finally get a camera pointed at the killer and the thing can't even tell us what damn color we're looking at."
@@ -1408,6 +1615,7 @@ label RazzleDayFive:
         "The tape still confirmed Elena's memory.":
             $ razz += 1
 
+            show razzle at slot(0, total=1), bright zorder 10
             r "True. At least we know she wasn't imagining that part."
 
         "You noticed more than I did.":
@@ -1426,7 +1634,8 @@ label RazzleDayFive:
 
             r "It wasn't nothing."
 
-            r "We know which parts of Elena's memory matched the recording. That's gotta count for something."
+            r "We know which parts of Elena's memory matched the recording."
+            r "That's gotta count for something."
 
     show razzle question at slot(0, total=1), bright zorder 10
 
@@ -1446,11 +1655,12 @@ label RazzleDayFive:
 
             show razzle hoorah at slot(0, total=1), bright zorder 10
 
-            r "Exactly! We put them in the same light and see which colors Elena could've confused."
+            r "Exactly!"
+            r "We put them in the same light and see which colors Elena could've confused."
 
         "Would Elena agree to another reconstruction?":
-            r "I think so. Especially if we bring her something nice for helping."
             show razzle question at slot(0, total=1), bright zorder 10
+            r "I think so. Especially if we bring her something nice for helping."
             r "Should you bring grandma's cookies? Or is that their thing?"
 
         "That sounds surprisingly scientific.":
@@ -1480,7 +1690,8 @@ label RazzleDayFive:
 
             r "That's actually really sweet."
 
-            r "Don't tell anybody. I've got a reputation for being an idiot to maintain."
+            r "Don't tell anybody."
+            r "I've got a reputation for being an idiot to maintain."
 
         "You kept looking when the tape seemed useless.":
             $ razz += 1
@@ -1512,7 +1723,9 @@ label RazzleDayFive:
         r "And fewer cameras."
 
     else:
-        r "You better come with me tomorrow, newbie. I need my favorite suspicious silhouette."
+        show razzle hoorah at slot(0, total=1), bright zorder 10
+        r "You better come with me tomorrow, newbie."
+        r "I need my favorite suspicious silhouette!"
 
     "Razzle gives you a grin before turning back toward the television."
 
@@ -1532,13 +1745,16 @@ label RazzleDaySix:
 
     show razzle hoorah at slot(0, total=1), bright zorder 10
 
-    r "There you are! Welcome to the weirdest hair salon in Los Angeles!"
+    r "There you are!"
+    r "Welcome to the weirdest hair salon in Los Angeles!"
 
     menu:
         "You got everything for the reconstruction?":
             $ razz += 1
 
-            r "Sure did! Wigs, stands, measurements, and one very confused cab driver!"
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+            r "Sure did!"
+            r "Wigs, stands, measurements, and one very confused cab driver!"
 
         "Which one are you wearing?":
             $ razz += 2
@@ -1562,9 +1778,11 @@ label RazzleDaySix:
 
     r "Elena agreed to help us one more time."
 
-    r "We're putting each wig where the killer stood, recreating the headlights, and seeing which one matches what she remembers."
+    r "We're putting each wig where the killer stood and recreating the headlights."
+    r "Then we see which one matches what she remembers."
 
-    r "No guessing from a list. No telling her which color we expect. She just gets numbered samples."
+    r "No guessing from a list. No telling her which color we expect."
+    r "She just gets numbered samples."
 
     menu:
         "We should change the order between tests.":
@@ -1572,7 +1790,8 @@ label RazzleDaySix:
 
             show razzle hoorah at slot(0, total=1), bright zorder 10
 
-            r "Already planned on it! Look at us doing real science!"
+            r "Already planned on it!"
+            r "Look at us doing real science!"
 
         "We should remind Elena about the security tape.":
             $ razz -= 1
@@ -1597,14 +1816,17 @@ label RazzleDaySix:
     "Razzle checks every measurement twice before joining you at the window."
 
     scene cubicleOutline
-    show razzle at slot(0, total=1), bright zorder 10
+    show razzle at slot(0, total=1), dim zorder 0
 
     "Elena" "This is certainly more elaborate than I expected."
 
+    show razzle at slot(0, total=1), bright zorder 10
     r "We really appreciate you doing this."
 
-    r "We're going to show you three different samples. If none of them look right, say so. Don't force yourself to pick one."
+    r "We're going to show you three different samples."
+    r "If none of them look right, say so. Don't force yourself to pick one."
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "I understand, dear."
 
     scene black
@@ -1630,6 +1852,7 @@ label RazzleDaySix:
 
     r "Are you sure?"
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "I would like to see them in a different order first."
 
     show razzle hoorah at slot(0, total=1), bright zorder 10
@@ -1646,12 +1869,14 @@ label RazzleDaySix:
     $ razzleDaySixHair = razzleDaySixReveal["value"]
 
     scene cubicleOutline
-    show razzle question at slot(0, total=1), bright zorder 10
+    show razzle at slot(0, total=1), dim zorder 0
 
     "Elena" "That is the color I saw. The person outside Enrico's house had [razzleDaySixHair] hair."
 
+    show razzle question at slot(0, total=1), bright zorder 10
     r "Not just that they didn't have one of the other colors?"
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "No. I recognize this color. I am certain."
 
     $ razzleDaySixClueText = "Elena positively identifies the killer as having {} hair.".format(razzleDaySixHair)
@@ -1666,11 +1891,13 @@ label RazzleDaySix:
 
     r "That's huge, Elena!"
 
+    show razzle at slot(0, total=1), dim zorder 0
     "Elena" "Then I am glad my memory was useful after all."
 
     show razzle at slot(0, total=1), bright zorder 10
 
-    r "It wasn't just useful. You may have helped us catch the killer!"
+    r "It wasn't just useful."
+    r "You may have helped us catch the killer!"
 
     "Elena smiles as Razzle begins carefully gathering the equipment."
 
@@ -1690,13 +1917,15 @@ label RazzleDaySix:
 
             show razzle flirty at slot(0, total=1), bright zorder 10
 
-            r "Careful. Keep saying things like that and I might start believing I'm smart."
+            r "Careful."
+            r "Keep saying things like that and I might start believing I'm smart."
 
             r "Then you'll never get rid of me."
 
         "We make a good team.":
             $ razz += 1
 
+            show razzle hoorah at slot(0, total=1), bright zorder 10
             r "Hell yeah we do!"
 
             r "You handle the thinking, I handle the fire, and we split everything else fifty-fifty."
@@ -1737,7 +1966,8 @@ label RazzleDaySix:
     else:
         show razzle at slot(0, total=1), bright zorder 10
 
-        r "Seriously, though. Thanks for sticking with me through all of this."
+        r "Seriously, though."
+        r "Thanks for sticking with me through all of this."
 
         r "It would've been way less fun without you."
 
@@ -1869,9 +2099,40 @@ label WinstonDaySix:
     jump endOfDay
 
 label IcaDayOne:
-    "You spend the day hanging out with Ica. (Visit 1 content in development)"
+    scene cubicleOutline
+    "You make your way to Ica's cubicle, where you see her already sitting with her feet kicked up, chewing gum."
+    show ica at slot(0, total=1), bright zorder 10
+    i "Sup freshie. Come to slack off a bit?"
+    i "I've been playing cards against myself all morning. I keep winning, which is either impressive or a little sad."
+    i "You wanna be a real opponent?"
+    "Ica lays out a small deck and gives you one last chance to choose your approach."
+
+    $ start_ica_cards_minigame()
+    $ ica_cards_result = ica_minigame_results.get("cards", {})
+
+    if not ica_cards_result.get("completed", False):
+        i "Calling it early? Fair. I can respect a strategic retreat."
+    elif ica_cards_result.get("won", False):
+        if ica_cards_result.get("approach") == "flirt":
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "Okay, okay, the banter was unfairly effective. You win this one, smooth talker."
+        elif ica_cards_result.get("approach") == "cheat":
+            show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
+            i "Hold up. You absolutely peeked at something. I am furious, impressed, and taking notes."
+        else:
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "A clean win? Rude. I was expecting to carry this hangout."
+    else:
+        show ica at slot(0, total=1), bright zorder 10
+        if ica_cards_result.get("approach") == "flirt":
+            i "You distracted me just enough to make that close. I still take the win, though."
+        elif ica_cards_result.get("approach") == "cheat":
+            i "Your cheating was adorable, but my cards were better. Run it back later."
+        else:
+            i "You played fair and still lost. That is tragic. I will try not to brag about it."
+
     $ dayIca += 1
-    jump endOfDay
+    jump dayLoop
 
 label IcaDayTwo:
     "You spend the day hanging out with Ica. (Visit 2 content in development)"
