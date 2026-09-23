@@ -1,6 +1,7 @@
 ## Ica's first-visit card minigame.
 
-define ICA_CARDS_BASE_ROUNDS = 3
+# Every approach plays a full match; flirt and cheat only soften card checks.
+define ICA_CARDS_BASE_ROUNDS = 7
 define ICA_CARDS_MIN_CARD = 1
 define ICA_CARDS_MAX_CARD = 13
 define ICA_CARDS_WIN_RELATIONSHIP = 2
@@ -29,6 +30,8 @@ default ica_cards_ica_score = 0
 default ica_cards_current_ica_card = 0
 default ica_cards_current_player_card = 0
 default ica_cards_current_action = ""
+default ica_cards_current_wager = 1
+default ica_cards_double_available = True
 default ica_cards_round_result = ""
 default ica_cards_deck = []
 default ica_cards_player_cards = []
@@ -55,6 +58,8 @@ init python:
         store.ica_cards_current_ica_card = 0
         store.ica_cards_current_player_card = 0
         store.ica_cards_current_action = ""
+        store.ica_cards_current_wager = 1
+        store.ica_cards_double_available = True
         store.ica_cards_round_result = ""
         store.ica_cards_deck = []
         store.ica_cards_player_cards = []
@@ -91,9 +96,7 @@ init python:
 
         store.ica_cards_approach = approach_id
         store.ica_cards_difficulty_reduction = store.ICA_DIFFICULTY_REDUCTION[approach_id]
-        store.ica_cards_round_count = max(
-            1,
-            store.ICA_CARDS_BASE_ROUNDS - store.ica_cards_difficulty_reduction)
+        store.ica_cards_round_count = store.ICA_CARDS_BASE_ROUNDS
         store.ica_cards_round = 1
         store.ica_cards_deck = _ica_cards_build_deck()
         store.ica_cards_player_cards = []
@@ -121,35 +124,42 @@ init python:
         store.ica_cards_current_ica_card = store.ica_cards_deck.pop()
         store.ica_cards_current_player_card = 0
         store.ica_cards_current_action = ""
+        store.ica_cards_current_wager = 1
         store.ica_cards_round_result = ""
         store.ica_cards_phase = "play"
 
     def _ica_cards_resolve_round(action_id, player_card, ica_card):
         reduction = store.ica_cards_difficulty_reduction
+        prediction = action_id.replace("double_", "")
 
         if player_card == ica_card:
-            return reduction > 0 or action_id == "hold"
-        if action_id == "higher":
+            return reduction > 0
+        if prediction == "higher":
             return player_card + reduction > ica_card
-        if action_id == "lower":
+        if prediction == "lower":
             return player_card - reduction < ica_card
-        return player_card + reduction >= ica_card
+        return False
 
     def ica_cards_choose(action):
-        """Resolve a higher, lower, or hold call exactly once per round."""
+        """Resolve a normal or doubled higher/lower call once per round."""
         if not store.ica_cards_session_active:
             return
-        if action not in ("higher", "lower", "hold"):
+        if action not in ("higher", "lower", "double_higher", "double_lower"):
             raise Exception("Unknown Ica cards action: {}".format(action))
         if store.ica_cards_phase != "play":
             return
         if store.ica_cards_current_ica_card == 0:
+            return
+        if action.startswith("double_") and not store.ica_cards_double_available:
             return
 
         if not _ica_cards_deck_is_valid(store.ica_cards_deck):
             store.ica_cards_deck = _ica_cards_build_deck()
 
         store.ica_cards_current_action = action
+        store.ica_cards_current_wager = 2 if action.startswith("double_") else 1
+        if store.ica_cards_current_wager == 2:
+            store.ica_cards_double_available = False
         store.ica_cards_current_player_card = store.ica_cards_deck.pop()
         store.ica_cards_player_cards = store.ica_cards_player_cards + [
             store.ica_cards_current_player_card]
@@ -162,15 +172,17 @@ init python:
             store.ica_cards_current_ica_card)
 
         if player_won_round:
-            store.ica_cards_player_score = min(
-                store.ica_cards_round_count,
-                store.ica_cards_player_score + 1)
-            store.ica_cards_round_result = "You take the round. Ica looks personally offended."
+            store.ica_cards_player_score += store.ica_cards_current_wager
+            if store.ica_cards_current_wager == 2:
+                store.ica_cards_round_result = "Your double call lands. Two points, and Ica looks genuinely worried."
+            else:
+                store.ica_cards_round_result = "You take the round. Ica looks personally offended."
         else:
-            store.ica_cards_ica_score = min(
-                store.ica_cards_round_count,
-                store.ica_cards_ica_score + 1)
-            store.ica_cards_round_result = "Ica takes the round and celebrates like it was a championship."
+            store.ica_cards_ica_score += store.ica_cards_current_wager
+            if store.ica_cards_current_wager == 2:
+                store.ica_cards_round_result = "The double call misses. Ica steals two points and will never let you forget it."
+            else:
+                store.ica_cards_round_result = "Ica takes the round and celebrates like it was a championship."
 
         store.ica_cards_phase = "feedback"
 
@@ -244,9 +256,9 @@ init python:
 
     def ica_cards_result_text():
         if store.ica_cards_player_score > store.ica_cards_ica_score:
-            return "You are ahead on points."
+            return "You win the match on points."
         if store.ica_cards_player_score < store.ica_cards_ica_score:
-            return "Ica is ahead on points."
+            return "Ica wins the match on points."
         return "The points are tied, so the high-card tiebreaker decides it."
 
     def ica_cards_card_name(card_value):

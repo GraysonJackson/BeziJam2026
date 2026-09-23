@@ -20,16 +20,16 @@ screen ica_cards_minigame():
             text _("Ica's High-Card Hangout") style "ica_cards_title"
 
             if ica_cards_phase == "approach":
-                text _("Pick an approach before the deal. The reduction changes the challenge, not the stakes.") style "ica_cards_body"
+                text _("Pick an approach before the deal. Every match lasts seven rounds; your approach changes your edge.") style "ica_cards_body"
 
                 vbox:
                     spacing 12
                     textbutton _("Flirt") action Function(ica_cards_choose_approach, "flirt")
-                    text _("Distract her with banter. Difficulty reduction: 1.") style "ica_cards_hint"
+                    text _("Distract her with banter. Your calls get a small edge.") style "ica_cards_hint"
                     textbutton _("Cheat") action Function(ica_cards_choose_approach, "cheat")
-                    text _("Count cards or peek at the deal. Difficulty reduction: 2.") style "ica_cards_hint"
+                    text _("Count cards or peek at the deal. Your calls get a stronger edge.") style "ica_cards_hint"
                     textbutton _("Play Fair") action Function(ica_cards_choose_approach, "play_fair")
-                    text _("Keep it honest. Difficulty reduction: 0.") style "ica_cards_hint"
+                    text _("Keep it honest. No edge, just your read of the deck.") style "ica_cards_hint"
 
                 textbutton _("Maybe another time") action Function(abort_ica_cards_minigame)
 
@@ -38,7 +38,7 @@ screen ica_cards_minigame():
                     xfill True
                     spacing 38
                     text _("Approach: [ica_cards_approach_label(ica_cards_approach)]") style "ica_cards_status"
-                    text _("Difficulty reduction: [ica_cards_difficulty_reduction]") style "ica_cards_status"
+                    text _("Call edge: +[ica_cards_difficulty_reduction]") style "ica_cards_status"
                     text _("Round [ica_cards_round] / [ica_cards_round_count]") style "ica_cards_status"
                     text _("You [ica_cards_player_score] - Ica [ica_cards_ica_score]") style "ica_cards_status"
 
@@ -70,13 +70,20 @@ screen ica_cards_minigame():
                                 text _("?") style "ica_cards_card"
 
                 if ica_cards_phase == "play":
-                    text _("Call it: will your card be higher, lower, or do you want to hold and let the cards speak?") style "ica_cards_body"
+                    text _("Call whether your hidden card will be higher or lower. Your one double call awards two points—to whoever wins it.") style "ica_cards_body"
                     hbox:
                         xalign 0.5
                         spacing 18
                         textbutton _("Higher") action Function(ica_cards_choose, "higher")
                         textbutton _("Lower") action Function(ica_cards_choose, "lower")
-                        textbutton _("Hold") action Function(ica_cards_choose, "hold")
+                        textbutton _("Double: Higher"):
+                            sensitive ica_cards_double_available
+                            action Function(ica_cards_choose, "double_higher")
+                        textbutton _("Double: Lower"):
+                            sensitive ica_cards_double_available
+                            action Function(ica_cards_choose, "double_lower")
+
+                    text _("DOUBLE READY" if ica_cards_double_available else "Double call spent") style "ica_cards_hint"
 
                 elif ica_cards_phase == "feedback":
                     text _("[ica_cards_round_result]") style "ica_cards_body"

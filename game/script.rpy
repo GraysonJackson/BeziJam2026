@@ -2107,6 +2107,7 @@ label IcaDayOne:
     i "You wanna be a real opponent?"
     "Ica lays out a small deck and gives you one last chance to choose your approach."
 
+    # Need to change how minigame works to have flirt dialogue and such happen before the game.
     $ start_ica_cards_minigame()
     $ ica_cards_result = ica_minigame_results.get("cards", {})
 
@@ -2114,11 +2115,15 @@ label IcaDayOne:
         i "Calling it early? Fair. I can respect a strategic retreat."
     elif ica_cards_result.get("won", False):
         if ica_cards_result.get("approach") == "flirt":
-            show ica happy at slot(0, total=1), bright zorder 10
-            i "Okay, okay, the banter was unfairly effective. You win this one, smooth talker."
+            show ica shock at slot(0, total=1), bright zorder 10
+            i "Heyyy no fair!! You kept distracting me with all those things you were saying!"
+            $ ica += 2
+            show ica flirty at slot(0, total=1), dim zorder 0
+            i "Fine, I guess you win this one freshie... but no distracting me with sweet talk next time!"
         elif ica_cards_result.get("approach") == "cheat":
             show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
-            i "Hold up. You absolutely peeked at something. I am furious, impressed, and taking notes."
+            i "Hold up. Were you cheating and STILL lost?? What a loser..."
+            $ ica -= 2
         else:
             show ica happy at slot(0, total=1), bright zorder 10
             i "A clean win? Rude. I was expecting to carry this hangout."
@@ -2130,14 +2135,75 @@ label IcaDayOne:
             i "Your cheating was adorable, but my cards were better. Run it back later."
         else:
             i "You played fair and still lost. That is tragic. I will try not to brag about it."
+    show ica at slot(0, total=1), bright zorder 10
+    i "Oh damn, look at the time already, we've burned through the full day"
+    i "Guess you better go tell Ulysses you did nothing all day :p catcha later!"
+    "Ica makes her way out the front door, leaving you to report to Ulysses"
+
+    $ dayIca += 1
+    jump endOfDay
+
+label IcaDayTwo:
+    "You make your way back to Ica's cubicle, where she's still doing nothing"
+    scene cubicleOutline
+    show ica at slot(0, total=1), bright zorder 10
+    i "Oh, look who's back? Enjoy slacking off last time?"
+
+    menu:
+        "It was pretty cool":
+            $ ica +=1
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "Duh, of course it was. I'm awesome"
+        "Of course, I enjoyed spending time with you":
+            $ ica -=1
+            show ica shock at slot(0, total=1), bright zorder 10
+            i "..."
+            show ica at slot(0, total =1), bright zorder 10
+            i "Cringeeeeeeeee."
+            i "What a cheesy line dude. You gotta be more smooth with stuff"
+        "We wasted so much time":
+            show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
+            i "Yeah. Not like I'm doing anything for the job."
+            i "Also you CHOSE to be here dude. No one made you slack off."
+    show ica at slot(0, total=1)
+    i "Anyway, I was gonna play some more cards or something, but I forgot to bring some."
+    i "Wanna do something stupid to pass the time like a staring contest?"
+    i "First person to blink loses. Keep your eyes on the target and try to outlast my absolutely terrifying stare."
+
+    $ start_ica_staring_minigame()
+    $ ica_staring_result = ica_minigame_results.get("staring", {})
+
+    if ica_staring_result.get("completed", False):
+        $ ica_staring_apply_relationship_result()
+        if ica_staring_result.get("won", False):
+            if ica_staring_result.get("approach") == "flirt":
+                show ica shock at slot(0, total=1), bright zorder 10
+                i "You kept eye contact and talked trash at the same time? That's deeply unfair. I respect it."
+            elif ica_staring_result.get("approach") == "cheat":
+                show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
+                i "Was that a mirror blink cue? I saw it. Fine, you win—but I'm confiscating the tiny mirror."
+            else:
+                show ica happy at slot(0, total=1), bright zorder 10
+                i "A clean win. You didn't blink once. That's impressive and a little unsettling."
+        else:
+            show ica at slot(0, total=1), bright zorder 10
+            if ica_staring_result.get("approach") == "flirt":
+                i "The banter almost got me, but you blinked first. Nice try, freshie."
+            elif ica_staring_result.get("approach") == "cheat":
+                i "You had a mirror and a blink cue and still blinked first? That's honestly kind of impressive."
+            else:
+                i "You played fair and blinked first. I will try not to brag about this for the rest of the day."
+    else:
+        show ica at slot(0, total=1), bright zorder 10
+        i "Calling it early? Fair. The staring contest will still be here when you're ready to lose properly."
+
+    show ica at slot(0, total=1), bright zorder 10
+    i "Oh damn, that contest took longer than I thought."
+    i "Go pick another way to look busy, freshie. Catcha later!"
+    "Ica heads toward the front desk, still accusing you of blinking first."
 
     $ dayIca += 1
     jump dayLoop
-
-label IcaDayTwo:
-    "You spend the day hanging out with Ica. (Visit 2 content in development)"
-    $ dayIca += 1
-    jump endOfDay
 
 label IcaDayThree:
     "You spend the day hanging out with Ica. (Visit 3 content in development)"

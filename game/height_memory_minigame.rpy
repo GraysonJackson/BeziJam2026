@@ -1,8 +1,9 @@
 ## Razzle Visit 3: forgiving witness-memory cleanup minigame.
 
-define height_memory_time_limit = 6.0
+# Give players time to read the thought cards before each board scramble.
+define height_memory_time_limit = 12.0
 define height_memory_max_visible_distractors = 6
-define height_memory_required_cleanups = 6
+define height_memory_required_cleanups = 10
 define height_memory_catalog = (
     {"id": "height_shadow", "text": "A long shadow crossed the porch.", "category": "important", "protected": True},
     {"id": "height_doorway", "text": "The doorway swallowed most of the silhouette.", "category": "important", "protected": True},
@@ -14,6 +15,10 @@ define height_memory_catalog = (
     {"id": "distractor_mail", "text": "The neighbor's overdue mail pile.", "category": "distractor", "protected": False},
     {"id": "distractor_bird", "text": "A bird with a very loud opinion.", "category": "distractor", "protected": False},
     {"id": "distractor_socks", "text": "One glove, two socks, zero answers.", "category": "distractor", "protected": False},
+    {"id": "distractor_coat", "text": "The figure may have worn a bulky coat.", "category": "distractor", "protected": False},
+    {"id": "distractor_footsteps", "text": "Footsteps hurried across the gravel.", "category": "distractor", "protected": False},
+    {"id": "distractor_portrait", "text": "A crooked family portrait hung inside.", "category": "distractor", "protected": False},
+    {"id": "distractor_bush", "text": "The hedge shook after the figure passed.", "category": "distractor", "protected": False},
 )
 
 default height_memory_active = False
@@ -67,6 +72,7 @@ init python:
             dict(card) for card in store.height_memory_catalog
             if not card["protected"] and card["id"] not in store.height_memory_cleared
         ]
+        renpy.random.shuffle(distractors)
         visible_distractors = distractors[:store.height_memory_max_visible_distractors]
         board = visible_distractors + [
             dict(card) for card in store.height_memory_catalog if card["protected"]
@@ -77,6 +83,15 @@ init python:
             card["position"] = position
 
         return board
+
+    def _height_memory_undo_cleanup():
+        """Undo one earlier cleanup while leaving the puzzle fully recoverable."""
+        if not store.height_memory_cleared:
+            return False
+
+        store.height_memory_cleared = store.height_memory_cleared[:-1]
+        store.height_memory_progress = max(0, store.height_memory_progress - 1)
+        return True
 
     def _height_memory_refresh_feedback():
         """Repair malformed board state without changing cleanup progress."""
@@ -121,9 +136,15 @@ init python:
         try:
             if card["protected"]:
                 store.height_memory_setbacks += 1
-                store.height_memory_feedback = (
-                    "Razzle: Not that one! That memory is doing actual detective work."
-                )
+                lost_progress = _height_memory_undo_cleanup()
+                if lost_progress:
+                    store.height_memory_feedback = (
+                        "Razzle: That was a height anchor! One cleared thought just came back."
+                    )
+                else:
+                    store.height_memory_feedback = (
+                        "Razzle: That was a height anchor! At least there was no progress to lose."
+                    )
                 reshuffle_height_memory_board()
             elif card_id not in store.height_memory_cleared:
                 store.height_memory_cleared = store.height_memory_cleared + [card_id]
@@ -152,9 +173,16 @@ init python:
 
         store.height_memory_timer += 0.5
         if store.height_memory_timer >= store.height_memory_time_limit:
-            store.height_memory_feedback = (
-                "The thought board timed out and shuffled itself. Progress preserved!"
-            )
+            store.height_memory_setbacks += 1
+            lost_progress = _height_memory_undo_cleanup()
+            if lost_progress:
+                store.height_memory_feedback = (
+                    "Too slow—the thoughts scrambled and one distraction returned."
+                )
+            else:
+                store.height_memory_feedback = (
+                    "Too slow—the thoughts scrambled, but you had no progress to lose."
+                )
             reshuffle_height_memory_board()
 
         renpy.restart_interaction()
