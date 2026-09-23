@@ -993,6 +993,7 @@ label RazzleDayFour:
     scene cubicleOutline
     show razzle question at slot(0, total=1), bright zorder 10
     r "This is the last witness of the crime, so here's hoping we can get enough info out of them that we can use it to narrow down the suspects and find the killer."
+    show razzle at slot(0, total=1), bright zorder 10
     "Razzle Dazzle knocks on the door, and you see an elderly woman answer. She looks at you and Razzle Dazzle with a confused expression."
     "Elena" "He-hello? Can I help you?"
     r "Hi there! I'm Razzle Dazzle, and this is my partner. We're investigating a crime that happened recently, and we were hoping to ask you a few questions about what you saw that night."
@@ -1008,11 +1009,242 @@ label RazzleDayFour:
         "No thanks, we're fine.":
             r "No thanks, we're fine. We just want to ask you a few questions."
     "Elena" "Of course dears. Please, make yourselves comfortable."
+    
     "Razzle sort of shuffles awkwardly, unable to sit down on any of the cloth chais or couches in the room"
+    show razzle question at slot(0, total=1), bright zorder 10
+    r "So, Elena, can you tell us what you saw that night? Any details you can remember would be very helpful."
+    "Elena" "Well, I remember seeing a figure outside Enrico's house through my window. It was so very dark that I couldn't seem much. Maybe they were tall? Short? Big? small? I don't know. I just remember that they were there, and then they were gone."
+    r "I see. Did you notice anything about their clothing or any distinguishing features? Even just something like a hair color?"
 
+    "Elena" "Hair color? Oh, goodness... I couldn't say."
 
+    "Elena glances toward the front window, narrowing her eyes as if the figure might still be standing outside."
 
+    "Elena" "For a moment I thought their hair looked very light. Then a car passed, and it looked dark instead. It may have been a hat for all I know."
 
+    show razzle question at slot(0, total=1), bright zorder 10
+
+    r "Okay, so the lighting was weird. That's still something I guess."
+
+    "Elena" "I'm sorry, dear. I know that isn't very helpful."
+
+    menu:
+        "What made the person seem tall or short?":
+            $ razz += 1
+
+            r "Yeah! Don't worry about guessing how tall they were. What made them look that way?"
+
+            "Elena" "I suppose it was where their head appeared against the window. They seemed terribly tall at first."
+
+        "Do you think the killer was tall?":
+            $ razz -= 1
+
+            show razzle question at slot(0, total=1), bright zorder 10
+
+            r "Careful, newbie. We don't wanna put an answer in her head."
+
+            "Elena" "I really couldn't say. Perhaps they were, but perhaps not."
+
+        "Could we recreate what you saw?":
+            $ razz += 2
+
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+
+            r "Oh, that's a great idea! We can make our own little murder reenactment!"
+
+            "Elena" "Perhaps without the murder part, dear."
+
+            show razzle at slot(0, total=1), bright zorder 10
+
+            r "Right. Yeah. Probably should've phrased that better."
+
+    r "Would it help if we tried standing where you saw them?"
+
+    "Elena" "It might. I was sitting right here when they passed the window."
+
+    "Razzle looks between Elena's chair and the front window."
+
+    r "Okay! Newbie, you go outside and be our mysterious shadowy criminal."
+
+    menu:
+        "Why do I have to be the criminal?":
+            r "Because I'm on fire dummy!"
+
+            r "I feel like that would be a pretty memorable detail if the actual killer was doing it."
+
+        "I was born for this role.":
+            $ razz += 1
+
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+
+            r "That's the spirit! Try to look suspicious newbie!"
+
+        "Only if you promise to arrest me afterward.":
+            $ razz += 2
+
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "Oh, I can think of a few ways to restrain you."
+
+            "Elena clears her throat."
+
+            show razzle at slot(0, total=1), bright zorder 10
+
+            r "For official investigative purposes, obviously. No other reason..."
+
+    scene black with fade
+
+    "You step outside while Razzle remains with Elena."
+
+    "Following Razzle's instructions through the window, you walk along the path several times—standing straight, hunching over, and pretending to carry something against your chest."
+
+    "On the third pass, Elena suddenly raises her hand."
+
+    "Elena" "Wait! Stop there!"
+
+    scene cubicleOutline
+    show razzle question at slot(0, total=1), bright zorder 10
+
+    "You return inside as Elena studies the window."
+
+    "Elena" "That was much closer. The figure wasn't necessarily large. They were holding something bulky and leaning forward."
+
+    r "So that could've made them look shorter and wider than they really were?"
+
+    "Elena" "Yes, I believe so. And the lawn slopes upward near the window. That may be why I first thought they were tall."
+
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+
+    r "Holy shit, newbie! We actually cracked the case! Well not really but you know what I mean!"
+    "Elena" "Have I helped identify them?"
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    r "Not exactly lady. But you helped us figure out which parts of the description we shouldn't trust yet."
+
+    "Elena" "I'm afraid that doesn't sound nearly as impressive."
+
+    show razzle sad at slot(0, total=1), bright zorder 10
+
+    r "Well when you say it like that..."
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    "Elena looks toward the window once more."
+
+    "Elena" "There was one other thing."
+
+    show razzle question at slot(0, total=1), bright zorder 10
+
+    r "Anything you remember could help."
+
+    "Elena" "When the car passed, the person raised a hand to shield their face. For just a moment, I could see the top of their head."
+
+    r "Their hair?"
+
+    "Elena" "Perhaps. But the light passed too quickly. I don't trust myself to name the color."
+
+    "Elena" "The little grocery across the street had a security camera pointed toward the road, though. If they kept the recording, it may have seen the same car pass."
+
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+
+    r "Now that sounds like a lead!"
+
+    "Elena" "I'm glad I could help, dears."
+
+    r "You helped plenty. Thanks for talking to us, Elena."
+
+    scene black with fade
+
+    "After saying goodbye, you and Razzle begin walking back toward ATLAS."
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    r "I really wanted her to remember something huge."
+
+    r "Like the killer's exact height, or their face, or maybe a shirt with their name printed across it."
+
+    menu:
+        "You handled it well anyway.":
+            $ razz += 2
+
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "Yeah?"
+
+            r "Careful, newbie. Compliment me like that and I'm gonna start making you come to every interview."
+
+        "Stopping a bad clue is still progress.":
+            $ razz += 1
+
+            r "Exactly! We didn't get an answer, but at least we won't chase the wrong one."
+
+        "You were asking a lot of leading questions.":
+            $ razz -= 1
+
+            show razzle sad at slot(0, total=1), bright zorder 10
+
+            r "Yeah... I got a little excited."
+
+            r "I'll try to slow down next time."
+
+    show razzle question at slot(0, total=1), bright zorder 10
+
+    r "You know, I hate houses like that."
+
+    menu:
+        "Because they're boring?":
+            r "No! Well, a little."
+
+            r "Mostly because I'm always worried I'll destroy something just by standing too close."
+
+        "Because you couldn't sit down?":
+            $ razz += 1
+
+            r "Exactly! Do you know how awkward it is being offered a seat when every chair is flammable?"
+
+        "You seemed uncomfortable in there.":
+            $ razz += 2
+
+            show razzle sad at slot(0, total=1), bright zorder 10
+
+            r "Yeah. Places like that make me feel less like a person and more like an accident waiting to happen."
+
+    menu:
+        "You were careful. Elena was safe with you.":
+            $ razz += 2
+
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "Thanks, newbie. That actually means a lot."
+
+        "I'd make sure my place had somewhere you could sit.":
+            $ razz += 2
+
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "Oh? Planning on inviting me over already?"
+
+        "Being on fire does make you a pretty serious hazard.":
+            $ razz -= 2
+
+            show razzle sad at slot(0, total=1), bright zorder 10
+
+            r "Yeah. Thanks for the reminder."
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    r "Anyway, I'm gonna call that grocery store and see if they still have the tape."
+
+    r "Maybe Elena couldn't tell us what color she saw, but a camera won't second-guess itself."
+
+    r "Assuming the footage isn't terrible. Which, knowing our luck, it absolutely will be."
+
+    "Razzle grins and gives you a playful shove with her shoulder, stopping just short of letting her flames touch you."
+
+    r "Not a bad day, partner. I'll let you know what I find."
+
+    scene black with fade
      
     $ dayRazz += 1
     jump endOfDay
