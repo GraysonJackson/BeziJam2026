@@ -201,7 +201,7 @@ init python:
             "eliminated": eliminated_ids,
         }
 
-    def record_investigation_clue(clue_key, route, visit, clue_text,eliminated_ids, expected_count=None):
+    def record_investigation_clue(clue_key, route, visit, clue_text, eliminated_ids, expected_count=None):
         """Record one clue and remove its suspects exactly once."""
         if clue_key in store.recordedClueKeys:
             return 0

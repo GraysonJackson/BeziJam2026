@@ -70,9 +70,9 @@ End beat:
 
 - The witness remembers a second person or object that could verify how the light altered the killer's hair. Razzle schedules the final follow-up for Day 6.
 
-Continuity note:
+Continuity note (Resolved):
 
-- The current Day 3 implementation mixes **height** and **build**: the minigame and route data say height, while the witness dialogue says build. Decide which is canon before writing Day 4. The cleanest fit with the murder plan is to make Day 3's hard clue height and use Day 4's reconstruction to discuss build only as an unreliable soft lead.
+- Day 3's hard clue is canonically **height** (Brandon's doorway observation eliminates Short, Average, or Tall). Day 4's window reenactment and Day 5's tape analysis explicitly establish that "build" was an unreliable optical illusion caused by the killer hunching forward while clutching a bulky package, while the sloped lawn distorted perceived height. Day 5 also embeds a subtle soft clue for hand injuries (the killer flinching when touching brick) and confirms loose hair strands under the headlights for Day 6's reconstruction.
 
 ## Madeline
 

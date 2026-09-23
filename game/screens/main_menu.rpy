@@ -7,7 +7,7 @@
 
 
 image main_menu_background = "images/bg sky.png"
-## Replace this with y"our background image, if you like
+## Replace this with your background image, if you like
 
 
 screen main_menu():

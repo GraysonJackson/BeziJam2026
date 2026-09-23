@@ -29,6 +29,7 @@ image razzle flirty = Crop((250, 0, 1670, 2481), "images/razzelFlirtyEmotion.png
 image razzle hoorah = Crop((250, 0, 1670, 2481), "images/razzelHoorahEmotion.png")
 image razzle question = Crop((250, 0, 1670, 2481), "images/razzelQuestionEmotion.png")
 image razzle sad = Crop((250, 0, 1670, 2481), "images/razzelSadEmotion.png")
+image razzle annoyed = Crop((250, 0, 1670, 2481), "images/razzelEngragedEmotion.png")
 
 image cubicleOutline = "images/cubicleOutline.JPG"
 image cubicleOutlineInverted = "images/cubicleOutlineInverted.jpg"
