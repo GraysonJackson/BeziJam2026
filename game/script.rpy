@@ -968,7 +968,7 @@ label RazzleDayThree:
     r "Anyways, we've made some really great progress! Hopefully we can do some more, but I'm still getting a good feeling about this!"
 
     r "But for now I know you gotta talk to Uly, so I'll leave you be. Catcha later newbie!!"
-    
+
     "With that, Razzle takes her leave, leaving you with your report for the day"
 
     scene black with fade
@@ -976,7 +976,44 @@ label RazzleDayThree:
     jump endOfDay
 
 label RazzleDayFour:
-    "You spend the day working with Razzle Dazzle. (Visit 4 content in development)"
+    "You make your way to Razzle Dazzle's cubicle and find her already standing, getting ready to leave"
+    scene cubicleOutline
+    show razzle at slot(0, total=1), bright zorder 10
+    r "Hey hey! About to go check out another witness. You coming with me?"
+    menu:
+        "Of course!":
+            $ razz += 1
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+            r "Fuck yeah!! That's what I like to hear! Let's roll!"
+        "Yeah. That's why I'm here.":
+            $ razz -= 1
+            r "Well damn you can at least pretend to want to be here. Fine. Let's go."
+    scene black with fade
+    "You and Razzle Dazzle make your way to the next witness's home, arriving to question them"
+    scene cubicleOutline
+    show razzle question at slot(0, total=1), bright zorder 10
+    r "This is the last witness of the crime, so here's hoping we can get enough info out of them that we can use it to narrow down the suspects and find the killer."
+    "Razzle Dazzle knocks on the door, and you see an elderly woman answer. She looks at you and Razzle Dazzle with a confused expression."
+    "Elena" "He-hello? Can I help you?"
+    r "Hi there! I'm Razzle Dazzle, and this is my partner. We're investigating a crime that happened recently, and we were hoping to ask you a few questions about what you saw that night."
+    "Elena" "Oh, I see. Well, I suppose I can help you out. Please, come in."
+    "You step into the house, as you notice how plain it is. The furniture is old and worn, and the walls are bare. It seems like Elena doesn't have much in the way of material possessions."
+
+    "Elena" "Please, have a seat. Can I offer you some tea or coffee?"
+    menu:
+        "Tea would be great, thank you.":
+            r "Tea sounds perfect. Thank you for offering."
+        "Coffee would be great, thank you.":
+            r "Coffee sounds perfect. Thank you for offering."
+        "No thanks, we're fine.":
+            r "No thanks, we're fine. We just want to ask you a few questions."
+    "Elena" "Of course dears. Please, make yourselves comfortable."
+    "Razzle sort of shuffles awkwardly, unable to sit down on any of the cloth chais or couches in the room"
+
+
+
+
+     
     $ dayRazz += 1
     jump endOfDay
 
