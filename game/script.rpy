@@ -1250,7 +1250,276 @@ label RazzleDayFour:
     jump endOfDay
 
 label RazzleDayFive:
-    "You spend the day working with Razzle Dazzle. (Visit 5 content in development)"
+    "You spend the day working with Razzle Dazzle. (Visit 5 content in development)"label RazzleDayFive:
+    scene cubicleOutline
+
+    "You make your way to Razzle's cubicle and find her crouched in front of an old television and VCR."
+
+    "Several videotapes are scattered across the floor. One of them has a grocery-store receipt taped to its side."
+
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+
+    r "Newbie! Great news! The grocery store still had the tape!"
+
+    menu:
+        "You actually found it?":
+            $ razz += 1
+
+            r "Sure did! And it only took three phone calls, two flame proof cab rides, and one extremely suspicious store manager!"
+
+        "Please tell me you didn't threaten anybody.":
+            $ razz -= 1
+
+            show razzle question at slot(0, total=1), bright zorder 10
+
+            r "What? No!"
+
+            r "I just stood uncomfortably close to the manager until he remembered where the tapes were. The heat seemed to jog his memory"
+
+        "I knew you could do it.":
+            $ razz += 2
+
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "Oh? Starting the day with compliments?"
+
+            r "Keep that up and we're never gonna get any work done."
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    r "There's one problem, though."
+
+    "Razzle presses play."
+
+    scene black
+
+    "A grainy black-and-white image appears on the television."
+
+    "The camera is pointed toward the road, but the picture flickers constantly and most of the street is swallowed by darkness."
+
+    r "Behold! Cutting-edge surveillance technology!"
+
+    r "We've got six hours of blurry cars, shopping carts, and one cat that keeps attacking a plastic bag."
+
+    r "Somewhere in there should be the car old lady Elena remembered."
+
+    scene cubicleOutline
+    show razzle at slot(0, total=1), bright zorder 10
+
+    menu:
+        "Let's watch it frame by frame.":
+            $ razz += 1
+
+            r "That's gonna take forever."
+
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+
+            r "But surely it'll work right?? Let's go for it!"
+
+        "Can't we fast-forward to the right time?":
+            r "We can try, but the clock on the tape keeps blinking twelve."
+
+            r "Apparently grocery-store security wasn't prepared for us to solve a murder."
+
+        "Maybe hitting the VCR will help.":
+            $ razz += 1
+
+            show razzle question at slot(0, total=1), bright zorder 10
+
+            r "hmmm I like it! Tech always works better when you hit it"
+            "Razzle punches the VCR"
+            "Nothing happens."
+            show razzle at slot(0, total=1), bright zorder 10
+            r "Well that was a bust. Guess we'll just start watching!"
+
+    scene black
+
+    "You and Razzle begin working through the recording."
+
+    "You handle the remote while she compares the passing cars to Elena's description."
+
+    "After what feels like hours, a pair of headlights sweeps across the road."
+
+    r "Wait!"
+
+    "The tape stops."
+
+    "A faint figure is visible near the edge of the picture."
+
+    scene cubicleOutline
+    show razzle hoorah at slot(0, total=1), bright zorder 10
+
+    r "Holy shit, that's them! That's gotta be them!"
+
+    "Razzle reaches over and rewinds the recording, playing the moment again."
+
+    scene black
+
+    "The figure enters at the bottom of the frame."
+
+    "For a moment, they appear almost as tall as the nearby street sign. As they move toward the center of the image, their outline seems to shrink."
+
+    r "Okay. Either the killer changed size halfway across the street, or this camera angle is complete garbage."
+
+    "The figure steps onto the sloped curb and briefly leans against the grocery store's outer wall."
+
+    "One hand touches the bricks. It jerks away almost immediately before disappearing into the figure's coat."
+
+    r "Ow."
+
+    r "Maybe they scraped it? Or maybe this tape just swallowed a few frames."
+
+    "The figure flexes the hand once, but the image skips before you can see anything more."
+
+    "A second later, the headlights pass over them."
+
+    "The figure raises an arm to cover their face."
+
+    r "That's exactly what Elena described!!"
+
+    "Razzle advances the tape one frame at a time."
+
+    "The person's height changes slightly in every frame as they cross the sloping pavement."
+
+    "Whatever they are carrying also blends into their outline, making their body appear wider whenever they turn toward the camera."
+
+    r "No wonder Elena couldn't get a read on them."
+
+    r "The ground, the camera, that thing they're carrying, everything is screwing with the shape!"
+
+    "Razzle watches the footage again."
+
+    "She advances the tape to the moment the figure shields their face."
+
+    r "Hold on..."
+
+    "For three grainy frames, several loose strands are visible around the figure's uncovered head."
+
+    scene cubicleOutline
+    show razzle question at slot(0, total=1), bright zorder 10
+
+    r "So Elena really did see their hair. It wasn't a hat."
+
+    r "Too bad the tape's black and white."
+
+    r "We finally get a camera pointed at the killer and the thing can't even tell us what damn color we're looking at."
+
+    menu:
+        "The tape still confirmed Elena's memory.":
+            $ razz += 1
+
+            r "True. At least we know she wasn't imagining that part."
+
+        "You noticed more than I did.":
+            $ razz += 2
+
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "Yeah?"
+
+            r "Maybe you should keep me around, then."
+
+        "So we watched all of that for nothing?":
+            $ razz -= 2
+
+            show razzle sad at slot(0, total=1), bright zorder 10
+
+            r "It wasn't nothing."
+
+            r "We know which parts of Elena's memory matched the recording. That's gotta count for something."
+
+    show razzle question at slot(0, total=1), bright zorder 10
+
+    "Razzle rewinds the footage again, stopping when the headlights first enter the frame."
+
+    r "Wait a second."
+
+    r "The tape shows exactly where the car was when its lights hit the killer."
+
+    r "We know where Elena was sitting too."
+
+    r "What if we recreate the lighting?"
+
+    menu:
+        "Using different hair samples?":
+            $ razz += 1
+
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+
+            r "Exactly! We put them in the same light and see which colors Elena could've confused."
+
+        "Would Elena agree to another reconstruction?":
+            r "I think so. Especially if we bring her something nice for helping."
+            show razzle question at slot(0, total=1), bright zorder 10
+            r "Should you bring grandmas cookies? Or is that their thing?"
+
+        "That sounds surprisingly scientific.":
+            $ razz -= 1
+
+            show razzle question at slot(0, total=1), bright zorder 10
+
+            r "Surprisingly?"
+
+            r "Damn, newbie. I'm smarter than you think!!"
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    r "We'll need the same angle, the same distance, and something close to those headlights."
+
+    r "Then maybe Elena can finally tell us what she saw!"
+
+    "Razzle ejects the tape and sets it carefully on her desk."
+
+    r "Not bad, right?"
+
+    menu:
+        "Not bad at all! You're super smart with this stuff!.":
+            $ razz += 2
+
+            show razzle flirty at slot(0, total=1), bright zorder 10
+
+            r "That's actually really sweet."
+
+            r "Don't tell anybody. I've got a reputation for being an idiot to maintain."
+
+        "You kept looking when the tape seemed useless.":
+            $ razz += 1
+            show razzle hoorah at slot(0, total=1), bright zorder 10
+            r "Yeah! I guess being stubborn is useful every once in a while!"
+
+        "Madeline probably would've finished faster.":
+            $ razz -= 2
+
+            show razzle sad at slot(0, total=1), bright zorder 10
+
+            r "Probably."
+
+            r "But she wasn't the one Elena trusted with her story."
+
+    show razzle at slot(0, total=1), bright zorder 10
+
+    r "Anyway, I'll get everything ready for the reconstruction."
+
+    r "Tomorrow we figure out what Elena saw."
+
+    if razz > 12:
+        show razzle flirty at slot(0, total=1), bright zorder 10
+
+        r "And after that, maybe you and I can spend some time investigating something that isn't murder."
+
+        r "Preferably somewhere with drinks."
+
+        r "And fewer cameras."
+
+    else:
+        r "You better come with me tomorrow, newbie. I need my favorite suspicious silhouette."
+
+    "Razzle gives you a grin before turning back toward the television."
+
+    "The tape continues playing as you leave, the shadowy figure disappearing once again into the darkness."
+
+    scene black with fade
+
     $ dayRazz += 1
     jump endOfDay
 
