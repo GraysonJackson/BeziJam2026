@@ -2113,10 +2113,10 @@ label IcaDayOne:
             $ ica_cards_selected_approach = "play_fair"
             show ica happy at slot(0, total=1), bright zorder 10
             i "Perfect. Grab a chair."
-            $ ica+=2
+            $ ica += 2
         "Only if we make the stakes interesting.":
             $ ica_cards_selected_approach = "flirt"
-            $ ica +=1
+            $ ica += 1
             show ica flirty at slot(0, total=1), bright zorder 10
             i "Easy, freshie. Win a few hands before you start negotiating date night."
         "Try to peek at the top card while she deals.":
@@ -2135,10 +2135,10 @@ label IcaDayOne:
     elif ica_cards_result.get("won", False):
         if ica_cards_result.get("approach") == "flirt":
             show ica flirty at slot(0, total=1), bright zorder 10
-            i "Okay, the banter almost worked. The cards did the rest, so don't get too smug loser."
+            i "Okay, the banter almost worked. The cards did the rest, so don't get too smug, loser."
         elif ica_cards_result.get("approach") == "cheat":
             show ica happy at slot(0, total=1), bright zorder 10
-            i "You know I saw you peek, right? Still counts I guess. I don't really feel like stopping you. Too much work."
+            i "You know I saw you peek, right? Still counts, I guess. I don't really feel like stopping you. Too much work."
         else:
             show ica happy at slot(0, total=1), bright zorder 10
             i "Huh. You won and you're not even making a thing out of it. Kinda annoying. Kinda cool."
@@ -2191,12 +2191,12 @@ label IcaDayTwo:
             $ ica_staring_selected_approach = "play_fair"
             show ica happy at slot(0, total=1), bright zorder 10
             $ ica += 2
-            i "Look at cha, soon you'll be a bigger bum then me."
+            i "Look at cha, soon you'll be a bigger bum than me."
         "You just wanted an excuse to stare at me.":
             $ ica_staring_selected_approach = "flirt"
             show ica flirty at slot(0, total=1), bright zorder 10
             $ ica += 1
-            i "Maybe. Or maybe I forgot every other game. Don't make it weird dude."
+            i "Maybe. Or maybe I forgot every other game. Don't make it weird, dude."
         "Use her reflection in the dark monitor.":
             $ ica_staring_selected_approach = "cheat"
             show ica at slot(0, total=1), bright zorder 10
@@ -2220,7 +2220,7 @@ label IcaDayTwo:
         else:
             show ica at slot(0, total=1), bright zorder 10
             if ica_staring_result.get("approach") == "flirt":
-                i "You almost had me. Then you got too pleased with yourself. Take the L bozo"
+                i "You almost had me. Then you got too pleased with yourself. Take the L, bozo."
             elif ica_staring_result.get("approach") == "cheat":
                 i "You cheated at staring and still blinked first. How are you so bad at winning?"
             else:
@@ -2238,22 +2238,460 @@ label IcaDayTwo:
     jump endOfDay
 
 label IcaDayThree:
-    "You spend the day hanging out with Ica. (Visit 3 content in development)"
+    scene winstonOfficeOutline
+    "You find Ica and Winston sitting on the floor of his office with a short pawn-race board between them."
+    "Winston is arranging the pieces with more energy than you have seen him put into anything resembling work."
+    show ica at slot(0, total=1), bright zorder 10
+
+    i "Yo, freshie. Perfect timing. We need a third."
+    w "YES! Thank god, a third player! Pick a color, recruit."
+    i "Told you he'd be into it."
+    w "Ulysses had me doing paperwork all morning. You two just saved my life."
+
+    menu:
+        "Sit down and pick a color.":
+            $ ica_board_selected_approach = "play_fair"
+            $ ica += 2
+            show ica happy at slot(0, total=1), bright zorder 10
+            w "Red, blue, or green? Actually, I'm green. Pick one of the other two."
+        "Sit beside Ica. \"Try not to get distracted.\"":
+            $ ica_board_selected_approach = "flirt"
+            $ ica += 1
+            if ica >= ICA_EARLY_FLIRT_THRESHOLD:
+                show ica flirty at slot(0, total=1), bright zorder 10
+                i "That's a lot of confidence for somebody in bumping distance."
+            else:
+                show ica at slot(0, total=1), bright zorder 10
+                i "Dude. At least wait until I send your pawn home before you get weird."
+        "Tell them you all have actual work to do.":
+            $ ica_board_selected_approach = "play_fair"
+            $ ica -= 2
+            show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
+            i "Then go do it. We'll tell you who wins."
+            w "Don't bring the W-word into my office. Sit down and pick a pawn. Boss's orders"
+
+    "Winston clears a space for you and shoves a red pawn into your hand."
+    w "Okay! Short race. Pick one of two movement cards on your turn."
+    i "Land on one of the other pawns and it goes back to start. Simple."
+    w "Reach or pass the finish to win! If you overshoot, you stop at the finish."
+    i "And no moving pieces with gravity. Apparently that's cheating."
+    w "It is cheating, and I will absolutely call you out unless it happens to somebody else."
+    i "Isn't this just that one game?"
+    w "Yeah but we can't name it. Laws and all that jazz."
+    i "Cool."
+
+    "Ica takes a blue pawn. Winston grabs green, then starts shuffling the movement cards far more dramatically than necessary."
+    "The race begins."
+
+    $ start_ica_board_game_minigame(ica_board_selected_approach)
+    $ board_result = ica_minigame_results.get("board", {})
+
+    if board_result.get("completed", False):
+        $ ica += ica_relationship_change_for_result(board_result)
+        if ica_board_winner == "player":
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "You got there first. Don't get smug about it, freshie."
+            w "REMATCH! I'm not ending the workday on a loss!"
+        elif ica_board_winner == "ica":
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "Race is over. I win. Try to keep up next time."
+            w "No! I was one turn away!"
+        else:
+            show ica at slot(0, total=1), bright zorder 10
+            w "YES! THAT'S HOW IT'S DONE!"
+            i "Congrats, Winnie. You won the game in your own office. Huge day for you."
+            w "Thank you! Finally, some respect!!"
+    else:
+        "The race ends before anybody can call a winner. Winston immediately starts resetting the pieces."
+        w "That one didn't count. Again."
+
+
+    if ica >= ICA_WARM_FLIRT_THRESHOLD:
+        show ica flirty at slot(0, total=1), bright zorder 10
+        i "Freshie's the only one making this interesting anyway."
+        w "Ooooooh."
+        i "We're not flirting."
+        w "I didn't say which one of you was flirting."
+        i "..."
+        i "Shut up, Winnie."
+    else:
+        show ica happy at slot(0, total=1), bright zorder 10
+        i "Freshie's not bad at this. For a freshie."
+
+    "By the time the three of you finally look up, the entire workday is gone."
+
+    w "Same time tomorrow? I have darts too."
+    i "See, freshie? Winnie gets it."
+    w "We can move the desk and make room for both."
+
     $ dayIca += 1
     jump endOfDay
 
 label IcaDayFour:
-    "You spend the day hanging out with Ica. (Visit 4 content in development)"
+    scene cubicleOutline
+    "You arrive at Ica's cubicle to find dozens of hot dogs spread across two trays."
+    show ica happy at slot(0, total=1), bright zorder 10
+
+    i "Freshie. I made an important discovery that's gonna change your fucking life."
+    i "The hot dog place down the street gives you a discount if you order an irresponsible amount of food."
+
+    "She points at the trays."
+
+    i "So now we're having an eating competition. First empty tray wins."
+    i "Loser has to throw everything away because I don't wanna get up."
+
+    menu:
+        "Move over. You're going down.":
+            $ ica_eating_approach = "play_fair"
+            $ ica += 2
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "Hell yeah. No speeches, just hot dogs."
+        "Loser owes the winner a date.":
+            $ ica_eating_approach = "flirt"
+            $ ica += 1
+            if ica >= ICA_WARM_FLIRT_THRESHOLD:
+                show ica flirty at slot(0, total=1), bright zorder 10
+                i "Dude, this is already lunch. You're just trying to upgrade it."
+                i "Fine. Win first."
+            else:
+                show ica at slot(0, total=1), bright zorder 10
+                i "Cringe. Deal, though. Free food is free food."
+        "Ask Ica to make your hot dogs lighter.":
+            $ ica_eating_approach = "cheat"
+            $ ica -= 2
+            show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
+            i "You know lighter doesn't mean smaller, right?"
+            i "You'd still have to eat the whole thing. That plan sucks."
+
+    "The competition begins."
+
+    "Within a minute, your strategy gives way to the horrible reality of eating far too many hot dogs before noon."
+
+    i "Don't slow down now. I've already decided you're taking the trash out."
+
+    "One of Ica's untouched hot dogs quietly floats off her tray, slips under the desk, and drops into the trash can behind her."
+
+    menu:
+        "Do the same thing while maintaining eye contact.":
+            $ ica_eating_reaction = "match_cheat"
+            $ ica += 2
+            "One of your hot dogs rises from the tray. Ica catches it in midair with her power and redirects it back onto your plate."
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "Nice try. Get your own superpower."
+        "Distract her by wiping ketchup from her face.":
+            $ ica_eating_reaction = "flirt_back"
+            $ ica += 1
+            if ica >= ICA_HIGH_FLIRT_THRESHOLD:
+                show ica flirty at slot(0, total=1), bright zorder 10
+                i "Cheap move, freshie."
+                "Two more of her hot dogs disappear under the desk while she says it."
+            else:
+                show ica shock at slot(0, total=1), bright zorder 10
+                i "Dude, what are you doing?"
+                "While you recover, three of her hot dogs disappear under the desk."
+        "Call her out for cheating.":
+            $ ica_eating_reaction = "call_out"
+            $ ica -= 1
+            show ica at slot(0, total=1), bright zorder 10
+            i "Prove it."
+            "The trash can becomes too heavy to pull out from beneath the desk."
+            i "Wow. Weird. Guess we'll never know."
+
+    "With the rules thoroughly ruined, the two of you get back to the contest."
+
+    $ start_ica_eating_minigame(ica_eating_approach, ica_eating_reaction)
+    $ eating_result = ica_minigame_results.get("eating", {})
+    $ ica_eating_apply_relationship_result()
+
+    if eating_result.get("completed", False):
+        if eating_result.get("won", False):
+            if ica_eating_approach == "play_fair":
+                show ica happy at slot(0, total=1), bright zorder 10
+                i "Okay, damn. You actually ate all that."
+                i "I'm almost impressed. Mostly I'm glad you're still conscious enough to take out the trash."
+            elif ica_eating_approach == "flirt":
+                show ica flirty at slot(0, total=1), bright zorder 10
+                i "You won. The flirting was cheap, but so were the hot dogs."
+                i "I'll allow it."
+            else:
+                show ica happy at slot(0, total=1), bright zorder 10
+                i "You tried the world's worst gravity plan, cheated anyway, and still won."
+                i "That's a pretty solid commitment to doing less work."
+        else:
+            if ica_eating_approach == "play_fair":
+                show ica happy at slot(0, total=1), bright zorder 10
+                i "You made an honest effort. Disgusting. I win."
+            elif ica_eating_approach == "flirt":
+                show ica flirty at slot(0, total=1), bright zorder 10
+                i "You got distracted by your own flirting. That's rough, freshie."
+            else:
+                show ica happy at slot(0, total=1), bright zorder 10
+                i "You cheated and still lost."
+                i "Honestly, that's funnier than me winning."
+    else:
+        show ica at slot(0, total=1), bright zorder 10
+        i "Backing out means I win by default. Convenient rule I just made up."
+
+    if ica >= ICA_HIGH_FLIRT_THRESHOLD:
+        show ica flirty at slot(0, total=1), bright zorder 10
+        i "If anybody asks, that wasn't a date."
+        i "It was way cheaper than a date."
+    else:
+        show ica happy at slot(0, total=1), bright zorder 10
+        i "I can't move. Great game."
+
+    "Ica looks toward the hallway leading to Ulysses's office."
+
+    i "You know what would be funny?"
+    i "His office would look way better pink."
+    i "Tomorrow, bring clothes you don't care about. Or don't. Getting paint on the nice ones might be funnier."
+
     $ dayIca += 1
     jump endOfDay
 
 label IcaDayFive:
-    "You spend the day hanging out with Ica. (Visit 5 content in development)"
+    scene cubicleOutline
+    "When you arrive, Ica is waiting beside several cans of bright pink paint, two rollers, and one tiny brush."
+    show ica happy at slot(0, total=1), bright zorder 10
+
+    i "Good, you're here."
+    i "I need somebody to carry the paint."
+
+    menu:
+        "Hand me a roller.":
+            $ ica_prank_approach = "play_fair"
+            $ ica += 2
+            i "Knew I kept you around for something."
+        "Pink? Cute. Kinda like you.":
+            $ ica_prank_approach = "flirt"
+            $ ica += 1
+            if ica >= ICA_HIGH_FLIRT_THRESHOLD:
+                show ica flirty at slot(0, total=1), bright zorder 10
+                i "Keep talking like that and you're painting the ceiling by yourself."
+            else:
+                show ica at slot(0, total=1), bright zorder 10
+                i "That was terrible. You can carry both cans now."
+        "Tell her this is childish.":
+            $ ica_prank_approach = "cheat"
+            $ ica -= 2
+            show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
+            i "Yeah. That's why it's gonna be funny."
+            i "You can either help or stand there and be boring."
+
+    "Ulysses is away from his office for the morning. Ica opens the door and surveys the room without stepping inside."
+
+    i "This is gonna take forever."
+
+    "With a lazy wave of her hand, the desk, chairs, filing cabinets, and every loose sheet of paper rise from the floor."
+    "Nothing tilts. Nothing spills. Even the papers remain in perfect stacks."
+
+    i "There. Now we don't have to move anything."
+
+    "The two of you get to work."
+
+    "A familiar set of footsteps passes through the hallway much earlier than either of you expected."
+
+    show ica at slot(0, total=1), bright zorder 10
+    i "Huh. Ulysses is back."
+    i "Whatever. Grab the paint when he's looking the other way. We'll finish before he checks in here."
+
+    $ start_ica_prank_minigame(ica_prank_approach)
+    $ prank_result = ica_minigame_results.get("prank", {})
+    $ ica_prank_apply_relationship_result()
+
+    if prank_result.get("completed", False):
+        if ica_prank_caught_count == 0:
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "See? Perfect crime. Barely even had to stand up."
+        elif ica_prank_caught_count == 1:
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "One almost-disaster's still pretty good. He probably thinks the hallway's haunted now."
+        else:
+            show ica at slot(0, total=1), bright zorder 10
+            i "That was subtle as hell."
+            i "Doesn't matter. Paint's on the walls."
+    else:
+        show ica at slot(0, total=1), bright zorder 10
+        i "Fine. I'll watch the hallway. You keep painting."
+
+    "Whenever a roller needs more paint, the tray floats across the room on its own. Ica barely moves from the doorway."
+
+    i "Higher. You missed a spot."
+    "The roller in your hand suddenly becomes light enough to glide up the wall."
+    i "See? Teamwork. You work, I make it easier."
+
+    "Less than an hour later, every wall in Ulysses's office is aggressively pink. Ica lowers the furniture back into its exact original position."
+
+    i "Damn. I'm good."
+
+    "The door opens behind you."
+
+    u "Why is my office pink??"
+    i "Team building."
+    u "Whose team??"
+    i "Ours. You weren't invited."
+
+    "Ulysses closes his eyes and pinches the bridge of his nose."
+
+    u "I knew this was going to happen, and it still hurts."
+
+    u "You didn't get paint on the case files, did you?"
+    i "Nah. Opening the cabinets would've been extra work."
+    u "Of course."
+    u "Keep the windows open until the paint dries. I have a murder to solve."
+
+    "Ulysses collects one folder from the floating edge of his desk and leaves."
+
+    i "Honestly, that went better than expected."
+
+    if ica >= ICA_HIGH_FLIRT_THRESHOLD:
+        show ica flirty at slot(0, total=1), bright zorder 10
+        i "You're pretty fun to waste a day with, freshie."
+        i "Don't make a big deal out of that. I'll deny it."
+    elif ica >= ICA_WARM_FLIRT_THRESHOLD:
+        show ica happy at slot(0, total=1), bright zorder 10
+        i "Not bad, freshie. You can come to the next felony too."
+    else:
+        show ica at slot(0, total=1), bright zorder 10
+        i "You complain a lot, but the office is pink. I'll call that a win."
+
+    i "Tomorrow, we're doing absolutely nothing. I need a break."
+
     $ dayIca += 1
     jump endOfDay
 
 label IcaDaySix:
-    "You spend the day hanging out with Ica. (Visit 6 content in development)"
+    scene cubicleOutline
+    "You find Ica exactly where she promised she would be: slumped in her chair, doing absolutely nothing."
+    show ica at slot(0, total=1), bright zorder 10
+
+    i "Freshie. Today, I've planned our most ambitious game yet."
+    i "We sit here and see how long it takes somebody to ask us to work."
+
+    "You take the chair beside her. Nearly an hour passes without either of you moving."
+
+    i "We're really good at this."
+
+    "The front door opens. A person slips into the otherwise empty office and heads straight toward the evidence cabinets."
+
+    $ ica_day_six_killer_name = suspectNames[killer]
+    $ ica_day_six_killer_power = suspectAttributes[killer]["power"]
+    $ ica_day_six_killer_unique = suspectAttributes[killer]["unique_id"]
+
+    "You recognize [ica_day_six_killer_name] from the suspect files. The [ica_day_six_killer_unique] noted in the file makes the identification immediate."
+
+    "[ica_day_six_killer_name] pulls a bloodstained wallet marked with Enrico Edge's initials from inside their coat."
+
+    show ica shock at slot(0, total=1), bright zorder 10
+    i "Dude."
+
+    if ica_day_six_killer_power == "Fire":
+        "Fire gathers around the wallet. Before it can catch, the wallet tears free and flies across the room."
+    elif ica_day_six_killer_power == "Ice":
+        "Ice crawls across the wallet. Before it can shatter, the wallet tears free and flies across the room."
+    else:
+        "Light builds in [ica_day_six_killer_name]'s hand. Before it can burn through the wallet, it tears free and flies across the room."
+
+    "The wallet lands gently in Ica's palm. She has not left her chair."
+
+    show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
+    i "We're sitting ten feet away. Did you seriously not see us?"
+
+    "[ica_day_six_killer_name] freezes, looks at you, looks at Ica, and bolts through the front door."
+
+    menu:
+        "Go after them.":
+            "You start to rise, but Ica makes your chair too heavy to move."
+            i "Why? We know who it is and we have the evidence. Running sounds awful."
+            $ ica += 1
+        "Stay seated. \"Well, that was convenient.\"":
+            $ ica += 2
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "Right? We should've tried doing nothing sooner."
+        "Ask how she let the killer escape.":
+            $ ica -= 2
+            show ica at slot(0, total=1), bright zorder 10
+            i "I didn't let them destroy the evidence. Catching people is Nicky's job."
+
+    $ ica_day_six_clue = "{} was caught attempting to destroy Enrico Edge's bloodstained wallet.".format(ica_day_six_killer_name)
+    $ ica_day_six_eliminations = sorted([suspect_id for suspect_id in suspectNames if suspect_id != killer])
+    $ record_investigation_clue("ica_visit_6", "Ica", 6, ica_day_six_clue, ica_day_six_eliminations)
+
+    show ica happy at slot(0, total=1), bright zorder 10
+    i "Well. Case solved."
+    i "Everybody's out chasing actual leads, so we'll ruin Ulysses's morning with that tomorrow."
+    i "Now we still have a whole day to kill."
+
+    "Ica drops the wallet into the evidence safe without getting up. The door swings shut behind it."
+
+    i "Wanna play chicken?"
+
+    menu:
+        "Ask what kind.":
+            i "Flirting. We keep making it worse until somebody gets weird and backs down."
+            i "You seem easy to embarrass, so I like my odds."
+        "Tell her she has no chance.":
+            $ ica += 1
+            show ica flirty at slot(0, total=1), bright zorder 10
+            i "Oh, you're already losing. Nice."
+        "Tell her the game sounds stupid.":
+            $ ica -= 1
+            i "Scared already. Got it."
+
+    "Ica uses her power to roll your chair closer without touching it."
+
+    show ica flirty at slot(0, total=1), bright zorder 10
+    i "You know, freshie, you're kinda cute when you're accidentally solving murders."
+
+    $ ica_chicken_backed_down = False
+
+    menu:
+        "Lean closer. \"You're cute when you pretend not to care.\"":
+            $ ica += 2
+            i "Pretend? Nah. I really don't care."
+            i "The cute part's true, though."
+        "Tell her she has pretty eyes.":
+            $ ica += 1
+            i "Pretty basic move. I'll allow it."
+        "Look away.":
+            $ ica -= 1
+            $ ica_chicken_backed_down = True
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "There it is. I win."
+
+    if not ica_chicken_backed_down and ica >= ICA_WARM_FLIRT_THRESHOLD:
+        "Ica hooks one foot around the base of your chair and pulls you the last few inches closer."
+        show ica flirty at slot(0, total=1), bright zorder 10
+        i "Still good, freshie?"
+
+        menu:
+            "Rest an arm across the back of her chair.":
+                $ ica += 2
+                "You settle in like the two of you sit this close every day."
+                i "Okay. Not bad."
+            "Tell her she can move closer if she wants.":
+                $ ica += 1
+                i "I'm already doing all the work here. You move."
+            "Admit that she wins.":
+                $ ica_chicken_backed_down = True
+                i "Damn right. Took you long enough."
+
+        if not ica_chicken_backed_down and ica >= ICA_DATE_ACCEPT_THRESHOLD:
+            "Neither of you moves away."
+            "After several quiet seconds, Ica glances toward the clock."
+            i "Time's up. Draw."
+            "There are still three hours left in the workday."
+            i "Don't be a nerd about it."
+        elif not ica_chicken_backed_down:
+            "Ica holds your gaze until you finally glance toward the clock."
+            i "Clock check. You got distracted. I win."
+    elif not ica_chicken_backed_down:
+        "Ica holds your gaze for a few seconds, then flicks the arm of your chair and sends you rolling back across the cubicle."
+        show ica happy at slot(0, total=1), bright zorder 10
+        i "Yeah, that's enough of that. I win."
+
+    i "Not a bad week, freshie. We should do this again when there isn't a murder or whatever."
+
     $ dayIca += 1
     jump endOfDay
 
@@ -2291,6 +2729,49 @@ label day7:
     scene black with fade
     "Day Seven: The deadline has arrived."
     "The week of investigation is over. It is time to decide on the culprit."
+    if dayIca >= 7:
+        jump IcaDaySeven
+    jump endingRouter
+
+label IcaDaySeven:
+    scene debriefRoomOutlineInverted
+    $ ica_day_seven_killer_name = suspectNames[killer]
+
+    "You and Ica place Enrico Edge's bloodstained wallet on the table in front of Ulysses."
+
+    u "And you personally saw [ica_day_seven_killer_name] trying to destroy this?"
+    i "Yep. They also said the whole 'nobody can prove I killed him' thing out loud."
+    u "Of course they did."
+
+    "With the recovered evidence and your identification, [ica_day_seven_killer_name] is named as the culprit."
+    "For the first time all week, there is nothing left that you are supposed to be doing."
+
+    show ica at slot(0, total=1), bright zorder 10
+    i "Well, freshie. Guess we accidentally did our jobs."
+
+    menu:
+        "Ask Ica out.":
+            if ica >= ICA_DATE_ACCEPT_THRESHOLD:
+                show ica flirty at slot(0, total=1), bright zorder 10
+                i "Like, on purpose? Somewhere we'd have to walk to?"
+                i "Damn. You're asking a lot."
+                "Ica lets the silence hang just long enough to make you wonder if you finally lost the game of chicken."
+                i "Yeah, alright. You're planning it, though."
+                i "And you're paying if the place doesn't have a bulk discount."
+
+                "You start to answer, but Ica hooks two fingers into your collar and pulls you into a quick kiss."
+                "She releases you before you can decide whether to lean in farther."
+
+                show ica happy at slot(0, total=1), bright zorder 10
+                i "There. Now you can't say I made you do all the work."
+            else:
+                show ica at slot(0, total=1), bright zorder 10
+                i "Nah, freshie. You're fun to slack off with, but don't make it weird."
+                i "We can still waste time together. Just without the date part."
+        "Leave it at that.":
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "Cool. Wanna see if Winston actually moved his desk?"
+
     jump endingRouter
 
 label endingRouter:

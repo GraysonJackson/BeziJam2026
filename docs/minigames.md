@@ -20,20 +20,35 @@ These minigames represent the hangout activities spent with Ica throughout the w
 * **Notes in Plan**: `staring contest` (annotated underneath with `clicking bar`, `stardew fishing`)
 * **General Idea**: A staring contest against Ica. The gameplay uses a vertical bar mechanic directly inspired by *Stardew Valley* fishing: the player clicks/holds to keep a moving bar balanced over an indicator without blinking.
 
-### Day 3: Board Game / Bard Game
-* **Notes in Plan**: `board game` (or `bard game`)
-* **General Idea**: A tabletop board game session with Ica fitting the superhero / D&D spinoff theme. Involves a casual competitive tabletop board setup or light dice-and-tile mechanics.
+### Day 3: Three-Player Pawn Race
+* **Notes in Plan**: The handwritten `board game` note is implemented as an original, compact pawn race rather than a full recreation of a commercial game.
+* **Scene**: Ica and an extremely enthusiastic Winston recruit the player for a three-person game in Winston's office. The dialogue choice happens before the game and establishes whether the player joins nonchalantly, flirts with Ica, or complains about doing actual work.
+* **Gameplay**: The player, Ica, and Winston each control one pawn on a short linear track. Each participant holds two small movement cards, chooses or automatically plays one, and bumps any opponent they land on back to the start. Ica and Winston prefer a bump when one is available, then use their largest card.
+* **Relationship handling**: The scene dialogue owns Ica's approach points. Completing the minigame only adds the shared small win bonus, preventing the same attitude from being scored twice.
+* **Presentation**: All three pawn positions, the full turn order, bump feedback, and the eventual winner must remain visible. Winston is a real competitor who can win, not a commentator standing outside the game.
 
 ### Day 4: Eating Competition
 * **Notes in Plan**: `eating comp` (annotated underneath with `cheat`, `flirt`, `play fair`)
-* **General Idea**: A competitive eating contest between the player and Ica. The player selects from three distinct approaches to victory:
-  * **Cheat**: Sneakily dispose of food or bend the rules.
-  * **Flirt**: Distract Ica to make her lose her pace.
-  * **Play Fair**: Power through honestly via rapid-clicking or rhythm endurance.
+* **Scene**: Ica has exploited a bulk discount to cover two trays with hot dogs. The player's approach and response to Ica's first gravity-assisted cheat both happen in the normal scene dialogue before the playable contest. The minigame does not ask the player to make either choice a second time.
+* **Gameplay**: The contest is a short, finite race with visible trays, stamina, and time. Taking bites is fastest but drains stamina; pacing restores it and still makes a little progress. Both contestants advance on their own, so the scene always reaches a result even if the player stops clicking.
+  * **Play Fair / Power Through**: No special trick. The player balances bites and recovery and receives Ica's best dialogue score for matching her casual competitive energy.
+  * **Flirt / Make It Weird**: A one-use interruption distracts Ica and slows her pace. Existing affection makes the distraction last longer, but the dialogue remains noncommittal rather than turning into a confession.
+  * **Cheat / Get Sneaky**: Ica refuses the player's bad plan to make the food lighter, but the player can later palm one hot dog for a one-use progress boost.
+* **Ica's Cheating**: Ica automatically floats hot dogs into the trash during the contest. This is a character beat, not a separate moral system, and her progress visibly reflects every cheat.
+* **Relationship handling**: Both dialogue menus own their attitude points. Completing the minigame adds only the shared small win bonus, preventing the selected approach from being scored twice.
+* **Outcome**: Win, loss, and withdrawal return to distinct dialogue in the existing Day 4 scene, which continues into the setup for painting Ulysses's office pink on Day 5.
 
 ### Day 5: Prank Ulysses
 * **Notes in Plan**: `prank Uly`
-* **General Idea**: Scheming with Ica to execute a prank against Ulysses, ATLAS's serious co-leader. Involves comedic timing, stealth, and picking the right prank strategy without getting caught by Ulysses.
+* **Scene**: The existing dialogue remains the frame: Ica floats Ulysses's furniture out of the way while the player paints his entire office pink. Ulysses returns earlier than expected, creating the stealth section, and opens the office door after the last wall is finished so his written reaction remains intact.
+* **Gameplay**: A compact top-down grid shows Ica's desk area, the hall, the paint, the office entrance, three wall sections, Ulysses, and his visible line of sight. The player collects the paint, crosses the hall, enters the office, and paints all three marked sections. Walls block sight, and Ulysses follows the same readable patrol every time.
+* **Checkpoints**: Getting caught triggers a short gag and returns the player to the beginning of the current objective. Collected paint and completed wall sections are preserved, there is no retry limit, and Ulysses restarts the same patrol so the route cannot become unwinnable.
+* **Approaches**:
+  * **Just Paint**: The helpful, nonchalant dialogue option. It receives Ica's best relationship score but no stealth assistance.
+  * **Make It Weird**: The flirt dialogue option gives one player-triggered distraction during each objective.
+  * **Get It Over With**: The complaining dialogue option maps to the shared `cheat` gameplay ID and gives one brief gravity-assisted cover during each objective. The dialogue remains unchanged and still loses relationship points.
+* **Relationship handling**: The opening dialogue owns the approach points. Completing the prank adds only the shared small win bonus, and withdrawal adds nothing.
+* **Presentation**: The map uses the project's existing paper, choice-frame, and color styling instead of introducing mismatched art. Keyboard and visible button controls are both provided.
 
 ### Day 6: Killer Encounter / Game of Chicken
 * **Notes in Plan**: `sees the killer` (annotated underneath with `chicken`)
