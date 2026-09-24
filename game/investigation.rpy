@@ -16,15 +16,15 @@ define suspectNames = {
 ## normalized "Scuffed Hands" value intentionally groups Tucker with the
 ## matching workbook category without changing the source workbook typo.
 define suspectAttributes = {
-    1: {"blood_type": "A", "power": "Fire", "height": "Short", "unique_drop": "Missing Hair", "unique_id": "Mole", "organization": "Clean", "build": "Brawny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Panicked"},
-    2: {"blood_type": "B", "power": "Ice", "height": "Average", "unique_drop": "Missing Tooth", "unique_id": "Glasses", "organization": "Messy", "build": "Skinny", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "Calculated"},
+    1: {"blood_type": "A", "power": "Fire", "height": "Short", "unique_drop": "Missing Hair", "unique_id": "Mole", "organization": "Clean", "build": "Brawny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Calculated"},
+    2: {"blood_type": "B", "power": "Ice", "height": "Average", "unique_drop": "Missing Tooth", "unique_id": "Glasses", "organization": "Messy", "build": "Skinny", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "Panicked"},
     3: {"blood_type": "A", "power": "Ice", "height": "Tall", "unique_drop": "Ear Chunk", "unique_id": "Missing Arm", "organization": "Clean", "build": "Average", "injuries": "None", "hair": "Blonde", "temperament": "Calm", "kill_reaction": "None"},
-    4: {"blood_type": "O", "power": "Ice", "height": "Average", "unique_drop": "Missing Hair", "unique_id": "Scar", "organization": "Clean", "build": "Brawny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Panicked"},
-    5: {"blood_type": "O", "power": "Fire", "height": "Tall", "unique_drop": "Missing Tooth", "unique_id": "Birthmark", "organization": "Messy", "build": "Skinny", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "Calculated"},
-    6: {"blood_type": "B", "power": "Fire", "height": "Short", "unique_drop": "Ear Chunk", "unique_id": "Tattoos", "organization": "Messy", "build": "Average", "injuries": "None", "hair": "Blonde", "temperament": "Passionate", "kill_reaction": "None"},
-    7: {"blood_type": "A", "power": "Light", "height": "Short", "unique_drop": "Missing Hair", "unique_id": "Piercings", "organization": "Clean", "build": "Brawny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Panicked"},
-    8: {"blood_type": "O", "power": "Light", "height": "Average", "unique_drop": "Missing Tooth", "unique_id": "Eye Patch", "organization": "Messy", "build": "Skinny", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "Calculated"},
-    9: {"blood_type": "B", "power": "Light", "height": "Tall", "unique_drop": "Ear Chunk", "unique_id": "Vitiligo", "organization": "Clean", "build": "Average", "injuries": "None", "hair": "Blonde", "temperament": "Nervous", "kill_reaction": "None"},
+    4: {"blood_type": "O", "power": "Ice", "height": "Average", "unique_drop": "Missing Hair", "unique_id": "Scar", "organization": "Clean", "build": "Skinny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "None"},
+    5: {"blood_type": "O", "power": "Fire", "height": "Tall", "unique_drop": "Missing Tooth", "unique_id": "Birthmark", "organization": "Messy", "build": "Average", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "Calculated"},
+    6: {"blood_type": "B", "power": "Fire", "height": "Short", "unique_drop": "Ear Chunk", "unique_id": "Tattoos", "organization": "Messy", "build": "Brawny", "injuries": "None", "hair": "Blonde", "temperament": "Passionate", "kill_reaction": "Panicked"},
+    7: {"blood_type": "A", "power": "Light", "height": "Short", "unique_drop": "Missing Hair", "unique_id": "Piercings", "organization": "Clean", "build": "Average", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Panicked"},
+    8: {"blood_type": "O", "power": "Light", "height": "Average", "unique_drop": "Missing Tooth", "unique_id": "Eye Patch", "organization": "Messy", "build": "Brawny", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "None"},
+    9: {"blood_type": "B", "power": "Light", "height": "Tall", "unique_drop": "Ear Chunk", "unique_id": "Vitiligo", "organization": "Clean", "build": "Skinny", "injuries": "None", "hair": "Blonde", "temperament": "Nervous", "kill_reaction": "Calculated"},
 }
 
 ## Shared one-person clearing used by routes whose first evidence visit clears
@@ -52,6 +52,21 @@ define razzleFocusedRoutePlan = {
     7: {"height": "Average"},
     8: {"height": "Tall"},
     9: {"height": "Short"},
+}
+
+## Dhampir's first scene result is selected so that his third visit removes
+## exactly two additional suspects from the planned injury group. This keeps
+## his focused route at 9 -> 8 -> 6 before the positive visit-six evidence.
+define dhampirDayOneEliminationByKiller = {
+    1: 2,
+    2: 3,
+    3: 1,
+    4: 5,
+    5: 6,
+    6: 4,
+    7: 8,
+    8: 9,
+    9: 7,
 }
 
 ## All five evidence characters live here. For unwritten visits, the cycle
@@ -86,9 +101,9 @@ define investigationRoutes = {
     "dhampir": {
         "name": "Dhampir",
         "visits": {
-            1: {"kind": "attribute", "attribute": "power", "cycle": {"Fire": "Ice", "Ice": "Light", "Light": "Fire"}, "template": "Crime-scene evidence rules out the {value} power type."},
+            1: {"kind": "single", "eliminations": dhampirDayOneEliminationByKiller, "template": "Crime-scene evidence clears {suspect}."},
             3: {"kind": "attribute", "attribute": "injuries", "cycle": {"Bruised Knuckles": "Scuffed Hands", "Scuffed Hands": "None", "None": "Bruised Knuckles"}, "template": "The wound comparison rules out suspects with {value}."},
-            6: {"kind": "attribute", "attribute": "unique_drop", "cycle": {"Missing Hair": "Missing Tooth", "Missing Tooth": "Ear Chunk", "Ear Chunk": "Missing Hair"}, "template": "The missing evidence rules out the {value} group."},
+            6: {"kind": "retain_killer_attribute", "attribute": "unique_drop", "template": "Recovered physical evidence identifies the {value} group."},
         },
     },
     "nicky": {
@@ -146,6 +161,10 @@ init python:
                         raise Exception(
                             "Razzle killer {} left non-matching hair suspects {}.".format(
                                 killer_id, wrong_hair))
+
+                if route_id == "dhampir" and counts != [8, 6, 3]:
+                    raise Exception("Dhampir killer {} produced counts {}, not 8/6/3.".format(
+                        killer_id, counts))
 
     def get_planned_route_reveal(route_id, visit, killer_id=None):
         """Resolve one route/visit into a killer-safe clue and suspect list."""

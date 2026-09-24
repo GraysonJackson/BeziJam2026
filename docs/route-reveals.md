@@ -57,29 +57,35 @@ hair color, remove every still-active suspect whose hair does **not** match it.
 
 | Seed / killer | Day 1: interrogation clears | Day 3: remove temperament | Day 6: remove killing reaction |
 | --- | --- | --- | --- |
-| 1 — Victor | Jermiah | Passionate | Calculated |
-| 2 — Jermiah | Tucker | Calm | None |
+| 1 — Victor | Jermiah | Passionate | None |
+| 2 — Jermiah | Tucker | Calm | Calculated |
 | 3 — Barry | Victor | Passionate | Panicked |
-| 4 — Carl | Simon | Passionate | Calculated |
+| 4 — Carl | Simon | Passionate | Panicked |
 | 5 — Tucker | Carl | Calm | None |
-| 6 — Edgar | Alan | Calm | Panicked |
+| 6 — Edgar | Alan | Calm | Calculated |
 | 7 — Simon | Kyle | Passionate | Calculated |
-| 8 — Kyle | Barry | Calm | None |
-| 9 — Alan | Edgar | Passionate | Panicked |
+| 8 — Kyle | Barry | Calm | Panicked |
+| 9 — Alan | Edgar | Passionate | None |
 
 ## Dhampir — crime-scene evidence
 
-| Seed / killer | Day 1: remove power | Day 3: remove injuries | Day 6: remove unique drop |
+| Seed / killer | Day 1: clear suspect | Day 3: remove injuries | Day 6: keep matching drop |
 | --- | --- | --- | --- |
-| 1 — Victor | Ice | Scuffed Hands | Missing Tooth |
-| 2 — Jermiah | Light | None | Ear Chunk |
-| 3 — Barry | Light | Bruised Knuckles | Missing Hair |
-| 4 — Carl | Light | Scuffed Hands | Missing Tooth |
-| 5 — Tucker | Ice | None | Ear Chunk |
-| 6 — Edgar | Ice | Bruised Knuckles | Missing Hair |
-| 7 — Simon | Fire | Scuffed Hands | Missing Tooth |
-| 8 — Kyle | Fire | None | Ear Chunk |
-| 9 — Alan | Fire | Bruised Knuckles | Missing Hair |
+| 1 — Victor | Jermiah | Scuffed Hands | Missing Hair |
+| 2 — Jermiah | Barry | None | Missing Tooth |
+| 3 — Barry | Victor | Bruised Knuckles | Ear Chunk |
+| 4 — Carl | Tucker | Scuffed Hands | Missing Hair |
+| 5 — Tucker | Edgar | None | Missing Tooth |
+| 6 — Edgar | Carl | Bruised Knuckles | Ear Chunk |
+| 7 — Simon | Kyle | Scuffed Hands | Missing Hair |
+| 8 — Kyle | Alan | None | Missing Tooth |
+| 9 — Alan | Simon | Bruised Knuckles | Ear Chunk |
+
+Dhampir's focused route always progresses from nine suspects to eight, then
+six, then three. Day 6 is a positive identification: retain suspects whose
+missing hair, missing tooth, or damaged ear matches the recovered evidence.
+The Day 4 reaction and Day 5 build observations are intentionally not added to
+the notebook; they are player-facing hints for choosing between the final trio.
 
 ## Nicky — records and alibis
 
@@ -88,12 +94,12 @@ hair color, remove every still-active suspect whose hair does **not** match it.
 | 1 — Victor | Jermiah | Skinny | Messy |
 | 2 — Jermiah | Tucker | Average | Clean |
 | 3 — Barry | Victor | Brawny | Messy |
-| 4 — Carl | Simon | Skinny | Messy |
-| 5 — Tucker | Carl | Average | Clean |
-| 6 — Edgar | Alan | Brawny | Clean |
-| 7 — Simon | Kyle | Skinny | Messy |
-| 8 — Kyle | Barry | Average | Clean |
-| 9 — Alan | Edgar | Brawny | Messy |
+| 4 — Carl | Simon | Average | Messy |
+| 5 — Tucker | Carl | Brawny | Clean |
+| 6 — Edgar | Alan | Skinny | Clean |
+| 7 — Simon | Kyle | Brawny | Messy |
+| 8 — Kyle | Barry | Skinny | Clean |
+| 9 — Alan | Edgar | Average | Messy |
 
 ## Implementation names
 

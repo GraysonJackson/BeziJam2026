@@ -1979,32 +1979,648 @@ label RazzleDaySix:
     jump endOfDay
 
 label DhampirDayOne:
-    "You spend the day working with Dhampir. (Visit 1 content in development)"
+    scene cubicleOutline
+    "You find Dhampir leaning back in his chair with Enrico Edge's case file open across his lap."
+
+    d "Sup, new blood."
+    d "I was reading the whole thing again. Pretty fucked up way to die man."
+
+    "He folds the file shut and gets to his feet."
+
+    d "We're probably gonna be heading to Enrico's house in a minute. Body's gone, scene isn't."
+    d "Cops have one shoeprint they think belongs to a suspect, plus, like, nine theories about everything else."
+
+    menu:
+        "Let's start with what the room can actually prove.":
+            $ dhamp += 2
+            d "Hell yeah. Facts first, dramatic accusations after lunch, preferably some pizza."
+        "Lead the way. I'll keep up.":
+            $ dhamp += 1
+            d "Good attitude. Try not to trip over any evidence new blood."
+        "Try not to contaminate anything when you phase through it.":
+            $ dhamp -= 1
+            d "Ghost walk doesn't leave prints, fibers, or skin cells."
+            d "Your shoes do, though. So maybe worry about those."
+
+    d "Gimme a second. Work clothes."
+
+    "Dhampir steps behind the cubicle divider."
+    "When he emerges, the Hawaiian shirt and pastel cargo shorts are gone. In their place is a Victorian suit of black and red, complete with a long coat and scarlet jewelry."
+    "Beyond the outfit, Dhampir seems different in every way."
+    "Even his posture has changed. His shoulders square, his expression empties, and when he speaks again, the lazy drawl is gone, replaced by a gravelly voice."
+
+    d "Stay close. Touch nothing unless I tell you to new blood."
+
+    menu:
+        "You clean up terrifyingly well.":
+            $ dhamp += 2
+            "One corner of his mouth almost moves."
+            d "Focus, new blood."
+        "The voice is a little much.":
+            $ dhamp -= 1
+            d "It's just how I talk. Plus, it scares criminals a bit more."
+        "This is an improvement.":
+            $ dhamp += 1
+            d "The shirt was custom, but the suit is also nice."
+    d "Come on. We need to go."
+    scene black with fade
+    "The two of you arrive at the crime scene."
+    "Enrico Edge's house remains sealed behind police tape. The body has been removed, but dark stains, numbered evidence markers, and the outline of a violent struggle remain."
+    "Two officers recognize Dhampir and exchange the exhausted look of people who have already completed (and are anticipating more) paperwork about him."
+
+    "Officer" "Please don't kill anyone if you see them in there. We've had enough paperwork as it is."
+    d "Wasn't planning on it."
+
+    "Officer" "That is NOT as reassuring as you think it is."
+
+    "Dhampir waits until the officers step outside before looking around the room."
+
+    d "They really seem to like me."
+
+    $ dhampir_day_one_cause = DHAMPIR_MURDER_CAUSES[killer]
+
+    "He studies the blood pattern, the damaged furniture, and a series of photographs left with the scene report."
+    "Piece by piece, the room gives up a consistent sequence. Enrico died from [dhampir_day_one_cause]."
+
+    d "Whatever power the killer had, that isn't what tells us who did it."
+    d "People lean on the flashy part and miss the boring stuff. Boring stuff solves murders."
+
+    "He points toward a partial bloody shoeprint beside the hall."
+
+    d "That's the print the police tied to one of our suspects."
+
+    menu:
+        "Check when the blood reached that part of the floor.":
+            $ dhamp += 2
+            d "Exactly. Print means nothing until we know when it got there."
+        "Compare it to every suspect's shoes immediately.":
+            $ dhamp += 1
+            d "We'll do that eventually. First we make sure it even belongs to the attack."
+        "Step beside it to compare sizes.":
+            $ dhamp -= 2
+            d "Yeah, new blood? Wanting to see if the shoe fits?"
+            d "Serious scene. Use your head."
+
+    "The blood beneath the print looks like it had already begun drying when the tread pressed into it. A timestamped hallway photograph shows the mark was absent immediately after the murder."
+    "Dhampir checks the responding personnel list, then taps one name with a gloved finger."
+
+    d "Paramedic. Same tread. Somebody built a suspect theory on a first responder walking through old blood."
+
+    $ dhampir_day_one_reveal = get_planned_route_reveal("dhampir", 1)
+    $ dhampir_day_one_cleared_id = dhampir_day_one_reveal["eliminated"][0]
+    $ dhampir_day_one_cleared_name = suspectNames[dhampir_day_one_cleared_id]
+    $ dhampir_day_one_clue = "The bloody shoeprint linked to {} was made by a paramedic after the murder.".format(dhampir_day_one_cleared_name)
+    $ record_planned_route_reveal(
+        "dhampir", 1, clue_text=dhampir_day_one_clue, expected_count=1)
+
+    d "That clears [dhampir_day_one_cleared_name]. Eight left."
+    d "Not bad, right?"
+
+    menu:
+        "You look like a haunted tablecloth.":
+            $ dhamp += 2
+            d "See, that's why I bring you. Constructive criticism."
+        "You really know what you're doing.":
+            $ dhamp += 1
+            d "I read the briefing. Apparently that's a rare superpower around here."
+        "The police would probably like you more without the jokes.":
+            $ dhamp -= 1
+            d "They'd like me more if I stopped killing criminals."
+
+    d "We're done here. I'll write the report before Nicky gets onto me about it."
+    d "I know you gotta report to Ulysses, so I'll see you around, new blood."
+
     $ dayDham += 1
     jump endOfDay
 
 label DhampirDayTwo:
-    "You spend the day working with Dhampir. (Visit 2 content in development)"
+    scene cubicleOutline
+    "Dhampir is waiting at his desk with the entertainment section of the newspaper folded into a sharp little square."
+
+    d "Cancel your plans. Cancel everything you can think of."
+
+    "You stare at him."
+
+    d "They're showing Blood Moon IV tonight."
+    d "I have been waiting three whole years to see how badly they fuck this up."
+
+    menu:
+        "Sounds important. I'm in.":
+            $ dhamp += 2
+            d "Knew you had your priorities straight, new blood."
+        "Is this how you ask people out?":
+            $ dhamp += 1
+            d "Could be, haven't thought of it like that before."
+            d "Wasn't really this time though, sorry to burst a bubble."
+        "I thought we were supposed to investigate today.":
+            $ dhamp -= 1
+            d "We did yesterday. Murder'll still be there tomorrow. Besides, we need paperwork to go through apparently before doing more."
+
+    d "Showing's pretty late tonight, but we need to prep. Snacks first."
+    d "Wait, guess I gotta catch you up on the other movies first that way you get this one."
+    d "So, basically-"
+    "Dhampir spends a large chunk of the day explaining the plot of the movies to you, happily answering any questions you ask."
+
+    scene black with fade
+    "The day is coming to an end."
+    "The two of you stop at a convenience store as the sun begins to set. Dhampir buys popcorn, some candy, and a small plastic cup with a lid."
+    "On the walk to the theater, he pauses beside a park hedge. You see him turn and squat near the hedge. There is a rustle, one very brief motion, and then silence."
+    "He turns back with a small vial of blood and drops it into the shopping bag."
+
+    d "Popcorn seasoning."
+
+    menu:
+        "Locally sourced.":
+            $ dhamp += 2
+            d "Organic, too."
+        "Was that a squirrel?":
+            $ dhamp += 1
+            d "It was a donor. Its sacrifice will be treasured."
+        "That's disgusting.":
+            $ dhamp -= 1
+            d "Everything I eat needs blood in it. Maybe be more curious before being judgmental, dude."
+
+    "The two of you enter the theatre and find your seats and get ready for the movie."
+
+    "Blood Moon IV is exactly the kind of movie its title promises. Fog covers every exterior shot. The vampire lives in a castle, sleeps upside down, and hisses at a plate of garlic bread."
+    "Dhampir pours a little blood over his popcorn and begins providing corrections under his breath."
+
+    d "Can't do that."
+    d "Definitely can't do that."
+    d "Okay, that one would actually work."
+
+    "On-screen, the vampire transforms into twelve bats and flies through a stained-glass window."
+
+    d "Why twelve? One bat is already suuuuuper inconvenient. That's so much to coordinate at once."
+
+    "The vampire returns to his enormous castle and broods in front of a mirror that refuses to show his reflection."
+
+    d "Mirrors work fine. Garlic's fine. Sunlight's fine."
+    d "Castle's pretty sick, though."
+    "Dhampir pauses"
+    d "I want a castle."
+
+    menu:
+        "Please keep explaining what's wrong, this is interesting.":
+            $ dhamp += 2
+            d "Finally. Someone who respects accuracy."
+            "His commentary becomes just loud enough for the row in front of you to hear every word."
+        "I think that vampire is cooler than you.":
+            $ dhamp += 1
+            d "You take that back new blood."
+            "He steals a handful of your popcorn in retaliation."
+        "Please stop talking during the movie.":
+            $ dhamp -= 1
+            d "No. My culture ain't your costume dude."
+
+    "A man two seats ahead finally turns around."
+
+    "Moviegoer" "Hey man, could you keep it down?"
+
+    d "Yeah, man. Sorry about that."
+
+    "Dhampir waits until the man turns around again."
+
+    d "Still want a castle."
+
+    scene black with fade
+    "After the credits, Dhampir leads you around the side of the theater and looks up toward the roof."
+
+    d "Roof's got a better view than the parking lot."
+    d "You cool with flying, or are we using the stairs?"
+
+    menu:
+        "Fly me up.":
+            $ dhamp += 1
+            "Dhampir asks you to hold on, then lifts both of you onto the theater roof as easily as stepping onto a curb."
+        "I'm afraid of heights.":
+            d "Fair. Stairs it is."
+            "He walks with you to the roof access door."
+        "Only if you promise not to drop me.":
+            $ dhamp += 1
+            d "Winston's the one who can make me drop out of the sky. He's not here."
+            "He waits for you to take hold before carrying you up."
+
+    "The city glows beneath you. Dhampir sits on the ledge with his feet hanging over the street."
+
+    "A couple leaving the theater spot his fangs beneath the rooftop lights. Their conversation dies until they reach the far end of the block."
+    "Dhampir watches them go, more amused than offended."
+
+    d "There it is. The look."
+    d "People usually decide what I am before I say anything just because of my record."
+    d "Red eyes, fangs, ghost walk, gun. Makes sense."
+    d "Then I start talking and they realize I'm different from whatever they made up."
+    d "They always seem... disappointed."
+
+    menu:
+        "I wasn't disappointed.":
+            $ dhamp += 2
+            d "Damn. Careful with lines like that."
+            d "I might start thinking you enjoy this haunted-tablecloth thing."
+        "You're definitely weird.":
+            $ dhamp += 1
+            d "See? You get me."
+        "Maybe people are right to avoid you.":
+            $ dhamp -= 2
+            d "Maybe. Still rude to decide before I get a chance to annoy them personally."
+
+    d "My family was big on beauty and nature. Elegant elf shit and all that."
+    d "They got me instead."
+    d "I spent a while playing music in little underground places after that. Loud rooms care less about what you look like."
+
+    "He looks over the city for a moment, perfectly at ease with the admission."
+
+    d "Anyway, Blood Moon II had a better soundtrack."
+
+    if dhamp >= DHAMPIR_WARM_THRESHOLD:
+        d "Tonight didn't suck, new blood."
+        d "Don't make it a whole thing. There's another terrible movie next month."
+    else:
+        d "Ready to head back? I wanna complain about the ending while it's fresh."
+
+    d "Try not to look down. I'll fly you over to Ulysses for your report."
+    d "He knows my methods, just say you're with me and he'll probably cut you some slack."
+
     $ dayDham += 1
     jump endOfDay
 
 label DhampirDayThree:
-    "You spend the day working with Dhampir. (Visit 3 content in development)"
+    scene cubicleOutline
+    "Dhampir is already in his Victorian hero suit when you arrive. Madeline stands beside him with a hard metal case full of scanning equipment."
+
+    show madeline at slot(0, total=1), bright zorder 10
+
+    m "The police photographed the scene thoroughly, but they measured it like an ordinary assault."
+    m "Their model does not account for phasing, flight, supernatural strength, or a victim being attacked from a physically inconvenient angle."
+
+    d "She means they did it wrong."
+
+    m "I mean they did it incompletely."
+
+    d "That's the polite science version of wrong."
+
+    "Madeline lifts the scanner case."
+
+    m "This will project the original photographs over the room and isolate contact marks the first team dismissed."
+
+    m "Dhampir will recreate the possible movement paths. You will identify inconsistencies."
+
+    menu:
+        "Tell me what counts as an inconsistency.":
+            $ dhamp += 2
+            d "Good. Ask before guessing."
+            m "Anything that could not have resulted from the movement currently being projected. You get it now?"
+        "Does the suit always make your voice do that?":
+            $ dhamp += 1
+            d "Yes."
+            m "His vocal register drops approximately eleven percent. I measured it."
+            d "You measured my voice?"
+            m "I measure everything Dhampir."
+        "I'll just start touching things until something happens.":
+            $ dhamp -= 2
+            d "No."
+            m "Absolutely not."
+
+    scene black with fade
+
+    "Back inside Enrico's house, Madeline's scanner washes the room in pale geometric light. Old blood patterns, displaced furniture, and the victim's documented wounds appear as translucent overlays."
+
+    show madeline at slot(0, total=1), bright zorder 10
+
+    m "Projection stable. Begin with the first proposed path."
+
+    "Dhampir rises several inches from the floor. His entire demeanor goes still."
+
+    d "Attacker enters from the hall. Enrico turns. First contact happens here."
+
+    "He phases through the edge of a table, stops beside the projected outline, and traces the attack without disturbing a single object."
+
+    m "Second path."
+
+    "Dhampir repeats the sequence from the window, then from behind the victim. Each version causes different marks on Madeline's display to brighten or disappear."
+
+    $ dhampir_day_three_reveal = get_planned_route_reveal("dhampir", 3)
+    $ dhampir_day_three_excluded_injuries = dhampir_day_three_reveal["value"]
+    $ dhampir_day_three_explanation = DHAMPIR_INJURY_EXCLUSION_TEXT[dhampir_day_three_excluded_injuries]
+
+    $ start_dhampir_ispy_minigame(dhampir_day_three_excluded_injuries)
+
+    if dhampir_ispy_result["completed"]:
+        if dhampir_ispy_result["quality"] == "perfect":
+            m "All three discrepancies. No false positives and no calibration assistance."
+            d "Nice eye, new blood."
+        elif dhampir_ispy_result["quality"] == "careful":
+            m "A few false positives, but you isolated all three useful discrepancies."
+            d "Found what mattered. That's the job."
+        else:
+            m "Your search pattern was chaotic, but technically successful."
+            d "Got there eventually."
+    else:
+        "Madeline takes over the scanner and methodically checks the remaining contact points."
+        m "Observe what I am isolating. You will be expected to recognize it next time."
+        d "Watch what she checks, new blood."
+
+    "Madeline combines the isolated points. [dhampir_day_three_explanation]"
+
+    m "The result is internally consistent across all usable photographs."
+
+    d "Meaning we can cross off everyone in that group."
+
+    $ dhampir_day_three_clue = "Madeline's scan and the scene reconstruction rule out suspects with {}.".format(dhampir_day_three_excluded_injuries.lower())
+    $ record_planned_route_reveal(
+        "dhampir", 3, clue_text=dhampir_day_three_clue, expected_count=2)
+
+    menu:
+        "Nice work, both of you.":
+            $ dhamp += 1
+            d "Team effort. Madeline brought the expensive flashlight."
+            m "It is a multiarrayed overlaying forensic scanner."
+            d "Very expensive flashlight."
+        "Dhampir makes reconstruction look good.":
+            $ dhamp += 2
+            m "Flirting already? God, this makes you look desperate."
+            d "They're just being friendly, Madeline. No need to kick them after it."
+        "That took longer than it should have.":
+            $ dhamp -= 1
+            m "You are welcome to process several hundred spatial measurements manually next time."
+            d "She's rocking with us, new blood. Don't ruin it."
+
+    "Madeline begins packing the scanner with the precision of someone who knows exactly where every cable belongs."
+
+    m "The remaining wound evidence still supports more than one possible attacker. Do not overstate this result."
+    d "Wasn't planning to. We know what didn't happen. That's enough for today."
+
+    "Madeline glances between you and Dhampir."
+
+    m "Your heart rate increased during precisely one of his reconstructions."
+
+    d "Science says I'm hot."
+
+    m "Science said no such thing."
+
+    d "Agree to disagree."
+
+    hide madeline
+
+    if dhamp >= DHAMPIR_WARM_THRESHOLD:
+        d "You did good in there, new blood. Didn't rush, didn't disrespect the scene."
+        d "Come back tomorrow. There's something about the room after the killing that I wanna check."
+    else:
+        d "We still have six names. Come back tomorrow ready to crack this thing. Hopefully."
+
     $ dayDham += 1
     jump endOfDay
 
 label DhampirDayFour:
-    "You spend the day working with Dhampir. (Visit 4 content in development)"
+    scene cubicleOutline
+    "Dhampir has traded the hero suit for his Hawaiian shirt again. He has arranged photographs of Enrico's house across an otherwise empty desk."
+
+    d "Yesterday told us how the fight worked. Today I wanna know what happened after."
+    d "People get weird after they kill somebody."
+
+    menu:
+        "You say that like you're reviewing restaurant habits.":
+            $ dhamp += 2
+            d "Restaurants have more health-code violations for the most part."
+            d "Except that place off Anderson, they're actually pretty rad."
+        "Does killing someone really not bother you?":
+            $ dhamp += 1
+            d "Not if they needed killing. Enrico didn't. That's the part that matters here."
+        "You could show the victim a little respect.":
+            $ dhamp -= 2
+            d "I am. I'm doing the work right and I'm not turning his death into a performance."
+
+    scene black with fade
+    "At Enrico's house, Dhampir reconstructs only the minute after the fatal injury. He follows the numbered photographs in silence, moving from one contact point to the next."
+
+    $ dhampir_day_four_reaction = suspectAttributes[killer]["kill_reaction"]
+    $ dhampir_day_four_hint = DHAMPIR_REACTION_SCENE_HINTS[dhampir_day_four_reaction]
+
+    "[dhampir_day_four_hint]"
+
+    "Dhampir repeats the sequence twice. The second time, he moves at the pace suggested by the spacing of the prints rather than the pace the police report assumed."
+
+    d "There. That's the person we're looking for after it was over."
+
+    "He crouches beside a blood-marked cabinet and studies the photographs again."
+
+    "As you see him walk through the scene with relative comfort, you wonder what a man like him has seen to regard it so casually."
+    d "Death doesn't make me uncomfortable, if that's what you're wanting to ask."
+
+    menu:
+        "You care. You just don't perform it.":
+            $ dhamp += 2
+            d "Pretty much. Enrico doesn't need me to look sad. He needs me to get this right."
+        "I can respect it without sharing it.":
+            $ dhamp += 1
+            d "That's all I ask."
+        "So Enrico is just another body to you?":
+            $ dhamp -= 2
+            d "No. Doing serious work is how I respect him. Making a show of being upset wouldn't help anybody."
+
+    d "First people who really got me were the Monster Hunters. Bunch of vigilantes who trained together."
+    d "They were good at the work. Good to me, too."
+
+    "His tone stays casual, but one hand briefly touches the scarlet trinkets at his neck."
+
+    d "Most of them died. I killed the people responsible. Efficiently."
+
+    menu:
+        "Efficiently. That's the important part.":
+            $ dhamp += 1
+            d "See? You understand me."
+        "I'm sorry you lost them.":
+            $ dhamp += 2
+            d "Thanks. It was a long time ago. Still counts, I guess."
+        "That is a horrifying response to grief.":
+            $ dhamp -= 2
+            d "Wasn't grief. It was a solution."
+
+    "Dhampir lifts the original evidence inventory and compares it to the room one last time."
+
+    d "Huh."
+
+    "One numbered marker in an early photograph has no matching item in the evidence log. Whatever had been there was small enough to miss and violent enough to be torn loose."
+
+    d "Something from the attacker got left in this room."
+    d "Police never found it. Tomorrow we figure out where it landed."
+    d "For now though, you gotta get back to Ulysses and report what you've done for the day."
+    d "See ya tomorrow, new blood."
+
     $ dayDham += 1
     jump endOfDay
 
 label DhampirDayFive:
-    "You spend the day working with Dhampir. (Visit 5 content in development)"
+    scene cubicleOutline
+    "You make your way to Dhampir's desk to see he is not there. You begin to look around the building for him."
+    "Dhampir has cleared a section of the ATLAS training area and dragged in a padded practice dummy, three replica weapons, and a stack of crime-scene photographs."
+
+    d "We're testing force, angle, and reach."
+    d "You get to hit me. Educationally of course."
+
+    menu:
+        "Show me the technique first.":
+            $ dhamp += 2
+            d "Good. Learn before you start swinging."
+        "You just wanted an excuse to get close.":
+            $ dhamp += 1
+            d "Maybe. But I don't think a fight is the best way to get close."
+        "We know how Enrico died. Why reenact it?":
+            $ dhamp -= 1
+            d "Knowing the weapon isn't the same as knowing the body or the technique."
+            d "This is how we find the part the weapon can't tell us."
+
+    "He positions your feet, adjusts your shoulders, and demonstrates how the same injury can come from very different bodies."
+    "A heavy strike dents the dummy. A narrow weapon reaches the same depth with leverage. A phased approach creates an angle that should be impossible from the floor."
+
+    d "Ordinary forensics assumes ordinary movement. We don't get that luxury."
+
+    "Dhampir gestures for you to try the sequence. Each time you commit to an attack, he phases just enough for it to pass harmlessly through him."
+
+    menu:
+        "Wait for him to become solid before moving.":
+            $ dhamp += 2
+            "You hold position until his outline sharpens, then stop your hand just before contact."
+            d "There you go. Patient and mean. Great combination."
+        "Use the close position to lean against him.":
+            $ dhamp += 2
+            "Dhampir becomes solid just long enough to support your weight."
+            d "Creative technique. Not sure Madeline's scanner accounted for this one."
+        "Keep swinging as fast as possible.":
+            $ dhamp -= 1
+            "Every strike passes through him."
+            d "Speed isn't a substitute for paying attention, dude. Try again."
+
+    $ dhampir_day_five_build = suspectAttributes[killer]["build"]
+    $ dhampir_day_five_hint = DHAMPIR_BUILD_SCENE_HINTS[dhampir_day_five_build]
+
+    "He returns to the dummy and recreates the decisive movement from Enrico's house. [dhampir_day_five_hint]"
+
+    d "That's the body that made those marks."
+
+    "Dhampir has you repeat the movement. He corrects your balance before you can feel yourself losing it, then resets the dummy with the ease of a routine performed thousands of times."
+    "You ask where he learned to do all of this."
+
+    d "Didn't start at ATLAS. Manison trained me first."
+    d "After that, the Monster Hunters ran drills like this every night. Stealth, weapons, getting hit until we learned not to."
+
+    "He picks up the photographs showing the missing evidence marker and aligns them beside the dummy."
+
+    d "Then my whole crew died, and I spent three years getting better at killing the people who did it."
+
+    "He says it with the same tone someone else might use to describe taking an evening class."
+
+    d "Really improved my work ethic. Terrible networking opportunity."
+
+    menu:
+        "At least the training paid off.":
+            $ dhamp += 2
+            d "Exactly. Trauma's expensive. Might as well get something out of it."
+        "You don't have to joke about that.":
+            $ dhamp += 1
+            d "I know."
+            d "The real answer is dragging a fight out gets innocent people killed. I finish things fast because I learned what happens when you don't."
+        "You make murder sound easy.":
+            $ dhamp -= 1
+            d "It is easy. Knowing for sure who deserves it is the serious part."
+
+    "Dhampir places one photograph over another and traces a line from the struggle to the far side of the room."
+
+    d "Whatever came loose didn't vanish. It traveled."
+    d "Tomorrow I go through the wall, the floor, and anything else the first search couldn't reach."
+
+    if dhamp >= DHAMPIR_HIGH_THRESHOLD:
+        d "You can come watch."
+        d "Partly because you're useful. Mostly because you look good trying to hit on me."
+    else:
+        d "Come ready to work, new blood. Last search is the one that matters."
+
     $ dayDham += 1
     jump endOfDay
 
 label DhampirDaySix:
-    "You spend the day working with Dhampir. (Visit 6 content in development)"
+    scene cubicleOutline
+    "Dhampir waits near the exit in his full hero suit, coat fastened and scarlet trinkets resting against his chest."
+
+    d "Last search."
+
+    d "We recover what was torn from the attacker, preserve it properly, and reduce the list."
+
+    menu:
+        "Let's finish this properly.":
+            $ dhamp += 2
+            d "Good."
+        "Try not to get stuck in the floor. The paperwork would be awful.":
+            $ dhamp += 1
+            d "If I'm still stuck by lunch, tell Nicky I'm taking a personal day."
+        "Six suspects is probably close enough.":
+            $ dhamp -= 2
+            d "No."
+            d "Enrico deserves an answer, and six people don't deserve to stay suspects because we got lazy."
+
+    scene black with fade
+    "You arrive back at the house."
+    "The final search begins at the point Dhampir identified during the reconstruction. He measures the angle once, then lets his body turn pale and insubstantial."
+    "He passes an arm through the wall, then sinks through the floor up to his shoulders, searching spaces no ordinary investigator could reach."
+
+    d "Nothing in the wall. Moving lower."
+
+    "He vanishes beneath the floorboards. A few seconds later his voice rises faintly through the wood."
+
+    d "Found something."
+
+    "Dhampir rises back through the floor with one gloved hand closed. He becomes solid before opening it over an evidence bag."
+
+    $ dhampir_day_six_drop = suspectAttributes[killer]["unique_drop"]
+    $ dhampir_day_six_evidence = DHAMPIR_DROP_EVIDENCE_TEXT[dhampir_day_six_drop]
+
+    "Inside his palm is [dhampir_day_six_evidence]."
+
+    if dhampir_day_six_drop == "Missing Hair":
+        $ dhampir_day_six_clue = "Recovered tissue confirms that the attacker left the scene with a patch of hair torn out."
+    elif dhampir_day_six_drop == "Missing Tooth":
+        $ dhampir_day_six_clue = "A recovered tooth confirms that the attacker lost a tooth during the struggle."
+    else:
+        $ dhampir_day_six_clue = "Recovered tissue confirms that part of the attacker's ear was torn away during the struggle."
+
+    $ record_planned_route_reveal(
+        "dhampir", 6, clue_text=dhampir_day_six_clue, expected_count=3)
+    $ dhampir_day_six_remaining_names = ", ".join(
+        [suspectNames[suspect_id] for suspect_id in remainingSuspects])
+
+    d "Seal's clean. Chain of custody starts now."
+
+    "The physical evidence reduces the investigation to three names: [dhampir_day_six_remaining_names]."
+
+    d "Three left. Official evidence gets us that far."
+    d "The rest is up to you, new blood."
+
+    menu:
+        "Not bad for a haunted rat.":
+            $ dhamp += 2
+            "Dhampir's severe expression breaks into a grin as his work voice disappears."
+            d "Careful. That's professional haunted rat to you."
+        "You did incredible work this week.":
+            $ dhamp += 1
+            d "We did. You spotted the room; I crawled through the floor like a haunted rat."
+        "Can't you just ask one of the souls in your necklace?":
+            $ dhamp -= 1
+            d "They only know what they knew alive. None of them were here."
+            d "Also, most of them are assholes. Or squirrels"
+
+    "Dhampir seals the evidence bag and removes one glove with his teeth."
+
+    if dhamp >= DHAMPIR_HIGH_THRESHOLD:
+        d "You work hard when it matters, you don't get stupid around a body, and your jokes are mostly decent."
+        d "That's rare around here."
+        d "After this case, remind me to find Blood Moon V for us."
+    elif dhamp >= DHAMPIR_WARM_THRESHOLD:
+        d "Not bad for your first week, new blood."
+        d "You can come to the next terrible movie too."
+    else:
+        d "We got the evidence. That's what matters."
+        d "Think through the three names before the final meeting."
+
     $ dayDham += 1
     jump endOfDay
 

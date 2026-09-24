@@ -166,25 +166,25 @@ End beat:
 
 Dhampir should remain extremely chill, confident, strange, and casual even when discussing violence. The tension in his route comes from the fact that his methods can be frightening while his intentions are sincere.
 
-### Day 4 — The second reconstruction
+### Day 4 — What happened afterward
 
-**Core idea:** Dhampir revisits the crime scene after dark and phases through the victim's likely path, testing whether the physical marks came from a fight, a power, or the environment.
+**Core idea:** Dhampir revisits the crime scene in casual clothes and reconstructs only the minute after Enrico died. The killer's movement, cleanup, and departure provide a subtle indication of their reaction without adding a formal notebook clue.
 
 What to do:
 
-- Make his supernatural movement useful for testing geometry and access, not for speaking to a ghost who simply gives the answer.
-- Let the first reconstruction produce two equally possible explanations. The player chooses which one to test next.
-- Include one moment where his casual attitude toward death genuinely unsettles the player or a witness. Give the player room to question him without the route treating that concern as prudish.
-- Show his competence when a genuine threat appears. His demeanor can shift from relaxed to intimidating in a single beat.
+- Describe the room differently for the saved killer: hurried disorder, deliberate cleanup, or an unchanged walk out. Never name the `Panicked`, `Calculated`, or `None` label in dialogue or record it in the notebook.
+- Let the player question Dhampir's casual attitude toward death. He explains that it is sincerely his worldview rather than a coping mechanism.
+- Hint at the Monster Hunters as the first family that accepted him and at the efficient revenge he took after their deaths, without recounting his entire history.
+- Keep the visit focused on observation and dialogue; there is no threat or minigame.
 
 Investigation purpose:
 
-- Revisit the Day 3 injury clue from a new angle: **scuffed hands, bruised knuckles, or no injury** may indicate contact, but not necessarily motive or body type.
-- Establish that the attack and the killer's reaction are separate questions. This prevents the player from overreading one physical clue.
+- Provide the first unlogged hint that distinguishes the final three suspects: how the killer behaved immediately after Enrico died.
+- Establish that the attack and the killer's reaction are separate questions.
 
 Relationship beat:
 
-- Dhampir explains that being casual is how he stays functional around death, not proof that he does not care.
+- Dhampir explains that being casual is simply how he views death, not proof that he disrespects the victim.
 - The player can ask for more care, accept the coping mechanism, or meet him with dark humor.
 
 End beat:
@@ -198,18 +198,18 @@ End beat:
 What to do:
 
 - Let Dhampir demonstrate how the same wound can come from different builds, weapons, powers, or fighting styles.
-- Give the player a deduction choice based on force, angle, and reach. The correct answer should be "we need another kind of evidence," not a premature suspect elimination.
+- Describe force, angle, and reach subtly enough for the player to infer the killer's build without adding it to the notebook.
 - Use his phasing or flight to show how supernatural movement breaks ordinary forensic assumptions.
 - Avoid introducing a new hard injury clue; Day 3 already owns that category.
 
 Relationship beat:
 
-- A sparring setup allows playful tension, but it should also expose the issue underneath: Dhampir is comfortable being treated as a weapon and less comfortable being asked what violence costs him.
-- He can explain the line he believes separates necessary force from cruelty. The player does not have to agree, but should understand it before Day 6.
+- A sparring setup allows playful tension while demonstrating his patience, precision, phasing, and intolerance for reckless action.
+- He jokes about the Monster Hunters' deaths before sincerely explaining that he kills efficiently because prolonging a fight gets innocent people killed.
 
 End beat:
 
-- The reconstruction isolates where a tiny torn item would have landed. Dhampir arranges a focused Day 6 search for the missing hair, tooth, or ear fragment category.
+- The reconstruction isolates where a tiny torn item would have landed. Dhampir arranges a focused Day 6 search for the missing hair, tooth, or ear fragment category. Day 6 positively retains the matching three-person category.
 
 ## Nicky
 
@@ -308,4 +308,3 @@ End beat:
 - Keep each day to one main location change, one interactive problem, one personal reveal, and one end hook. That will keep six routes feasible for the jam.
 - Reuse supporting characters to make the ensemble feel connected: Ulysses for rules and future-sight tension, Freddy for practical observations, Winston for power-safety backup, and Madeline/Nicky for lab or evidence handoffs.
 - Day 5 should feel emotionally close even on a low-affection route. Low affection can mean professional respect, guarded honesty, or comic friction rather than a scene with no development.
-

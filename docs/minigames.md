@@ -77,3 +77,11 @@ These minigames appear next to specific character days on the right-hand investi
 * **Evidence Block**: `Build`
 * **Notes in Plan**: `card down matching` written directly below the block
 * **General Idea**: A classic concentration / memory card-matching game where face-down suspect cards, alibi statements, and physical descriptions are flipped two at a time to match details and confirm the suspect's build (Skinny, Average, Brawny).
+
+### Day 3 — Dhampir: Scanner I-Spy Reconstruction (`i spy`)
+* **Route**: Dhampir (Crime-Scene Evidence)
+* **Evidence Block**: `Victim wounds vs. suspects`
+* **Cameo**: Madeline brings and operates a forensic scanner. She is a competent, friendly collaborator rather than a source of complications.
+* **General Idea**: Madeline projects the original crime-scene photographs and documented wounds over Enrico's house while Dhampir recreates several possible attack paths. The player searches the projected room for marks that do not belong: contact at the wrong height, residue beneath an undisturbed object, or an injury-producing surface missed by the original investigators.
+* **Outcome**: The discovered pattern rules out exactly two additional suspects through the planned `Bruised Knuckles`, `Scuffed Hands`, or `None` injury category. Performance changes follow-up dialogue only; the required evidence is always recovered.
+* **Implementation status**: Implemented. The scanner presents nine inspectable room details, with three useful contradictions selected by the seeded injury category. False leads and optional hints only change Dhampir and Madeline's follow-up dialogue; the route evidence is still recovered if the player asks Madeline to finish.
