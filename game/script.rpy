@@ -1,4 +1,4 @@
-# The script of the game goes in this file.
+﻿# The script of the game goes in this file.
 
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
@@ -2112,14 +2112,17 @@ label IcaDayOne:
         "Sure. Deal me in.":
             $ ica_cards_selected_approach = "play_fair"
             show ica happy at slot(0, total=1), bright zorder 10
-            i "Perfect. No pep talk, no big speech. Grab a chair."
+            i "Perfect. Grab a chair."
+            $ ica+=2
         "Only if we make the stakes interesting.":
             $ ica_cards_selected_approach = "flirt"
+            $ ica +=1
             show ica flirty at slot(0, total=1), bright zorder 10
             i "Easy, freshie. Win a few hands before you start negotiating date night."
         "Try to peek at the top card while she deals.":
             $ ica_cards_selected_approach = "cheat"
             "The top card suddenly becomes too heavy to lift. Ica has not moved her feet from the desk."
+            $ ica -= 2
             show ica happy at slot(0, total=1), bright zorder 10
             i "Gravity. Great for catching cheaters without sitting up."
             i "I'm gonna pretend I missed that. This should be funny."
@@ -2132,10 +2135,10 @@ label IcaDayOne:
     elif ica_cards_result.get("won", False):
         if ica_cards_result.get("approach") == "flirt":
             show ica flirty at slot(0, total=1), bright zorder 10
-            i "Okay, the banter almost worked. The cards did the rest, so don't get smug."
+            i "Okay, the banter almost worked. The cards did the rest, so don't get too smug loser."
         elif ica_cards_result.get("approach") == "cheat":
             show ica happy at slot(0, total=1), bright zorder 10
-            i "You know I saw you peek, right? Still counts. I didn't feel like stopping you."
+            i "You know I saw you peek, right? Still counts I guess. I don't really feel like stopping you. Too much work."
         else:
             show ica happy at slot(0, total=1), bright zorder 10
             i "Huh. You won and you're not even making a thing out of it. Kinda annoying. Kinda cool."
@@ -2149,7 +2152,7 @@ label IcaDayOne:
             i "You lose. No excuses, no speech. I like your style, freshie."
     show ica at slot(0, total=1), bright zorder 10
     i "Oh, wow. We somehow burned the whole day."
-    i "Go tell Ulysses we investigated cards. I'll back you up if he doesn't ask me to stand."
+    i "Go tell Ulysses we investigated cards. I'll back you up if he doesn't ask me to walk over."
     "Ica rolls her chair away from the desk, leaving you to report to Ulysses."
 
     $ dayIca += 1
@@ -2162,7 +2165,7 @@ label IcaDayTwo:
     i "Oh, look who's back? Enjoy slacking off last time?"
 
     menu:
-        "Yeah. It killed a day.":
+        "Yeah! It killed a day.":
             $ ica += 1
             show ica happy at slot(0, total=1), bright zorder 10
             i "See? You get it. Bare minimum, maximum results."
@@ -2171,7 +2174,7 @@ label IcaDayTwo:
             show ica shock at slot(0, total=1), bright zorder 10
             i "..."
             show ica at slot(0, total=1), bright zorder 10
-            i "Cringe. You gotta bury that under at least two layers of pretending not to care."
+            i "Cringe."
         "We wasted so much time.":
             $ ica -= 2
             show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
@@ -2187,11 +2190,13 @@ label IcaDayTwo:
         "Sure. Beats working.":
             $ ica_staring_selected_approach = "play_fair"
             show ica happy at slot(0, total=1), bright zorder 10
-            i "There it is. The correct amount of commitment."
+            $ ica += 2
+            i "Look at cha, soon you'll be a bigger bum then me."
         "You just wanted an excuse to stare at me.":
             $ ica_staring_selected_approach = "flirt"
             show ica flirty at slot(0, total=1), bright zorder 10
-            i "Maybe. Or maybe I forgot every other game. Don't make it weird."
+            $ ica += 1
+            i "Maybe. Or maybe I forgot every other game. Don't make it weird dude."
         "Use her reflection in the dark monitor.":
             $ ica_staring_selected_approach = "cheat"
             show ica at slot(0, total=1), bright zorder 10
@@ -2205,19 +2210,19 @@ label IcaDayTwo:
         if ica_staring_result.get("won", False):
             if ica_staring_result.get("approach") == "flirt":
                 show ica flirty at slot(0, total=1), bright zorder 10
-                i "Okay, staring at me while saying that was annoyingly effective."
+                i "Okay, staring at me while saying that was annoyingly effective. Take your win I guess."
             elif ica_staring_result.get("approach") == "cheat":
                 show ica happy at slot(0, total=1), bright zorder 10
-                i "You were watching my reflection, weren't you? Clever. Lazy. Technically terrible. I approve a little."
+                i "You were watching my reflection, weren't you? What a bore, I respect it though."
             else:
                 show ica happy at slot(0, total=1), bright zorder 10
-                i "Huh. Guess I blinked. Thanks for not turning your victory into a whole thing."
+                i "Huh. Guess I blinked. Damn. Good game."
         else:
             show ica at slot(0, total=1), bright zorder 10
             if ica_staring_result.get("approach") == "flirt":
-                i "You almost had me. Then you got too pleased with yourself."
+                i "You almost had me. Then you got too pleased with yourself. Take the L bozo"
             elif ica_staring_result.get("approach") == "cheat":
-                i "You cheated at staring and still blinked first. That's art."
+                i "You cheated at staring and still blinked first. How are you so bad at winning?"
             else:
                 i "You blinked. No excuses? Nice. Makes gloating way easier."
     else:
@@ -2225,12 +2230,12 @@ label IcaDayTwo:
         i "Calling it early? Fair. The staring contest will still be here when you're ready to lose properly."
 
     show ica at slot(0, total=1), bright zorder 10
-    i "Oh damn, that contest took longer than I thought."
+    i "Oh damn, that contest took longer than I thought, day's already over."
     i "Go pick another way to look busy, freshie. Catch you later."
-    "Ica heads toward the front desk, still accusing you of blinking first."
+    "Ica heads toward the front desk, leaving you in the office."
 
     $ dayIca += 1
-    jump dayLoop
+    jump endOfDay
 
 label IcaDayThree:
     "You spend the day hanging out with Ica. (Visit 3 content in development)"
