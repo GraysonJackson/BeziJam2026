@@ -2103,103 +2103,130 @@ label IcaDayOne:
     "You make your way to Ica's cubicle, where you see her already sitting with her feet kicked up, chewing gum."
     show ica at slot(0, total=1), bright zorder 10
     i "Sup freshie. Come to slack off a bit?"
-    i "I've been playing cards against myself all morning. I keep winning, which is either impressive or a little sad."
-    i "You wanna be a real opponent?"
-    "Ica lays out a small deck and gives you one last chance to choose your approach."
+    i "I was gonna play solitaire, but dealing all those cards sounds exhausting."
+    i "You wanna save me the effort and be a real opponent?"
+    "Ica flicks a deck into the air. The cards hang there while she lazily plucks them into two neat piles."
+    i "Shuffling is work. Gravity isn't."
 
-    # Need to change how minigame works to have flirt dialogue and such happen before the game.
-    $ start_ica_cards_minigame()
+    menu:
+        "Sure. Deal me in.":
+            $ ica_cards_selected_approach = "play_fair"
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "Perfect. No pep talk, no big speech. Grab a chair."
+        "Only if we make the stakes interesting.":
+            $ ica_cards_selected_approach = "flirt"
+            show ica flirty at slot(0, total=1), bright zorder 10
+            i "Easy, freshie. Win a few hands before you start negotiating date night."
+        "Try to peek at the top card while she deals.":
+            $ ica_cards_selected_approach = "cheat"
+            "The top card suddenly becomes too heavy to lift. Ica has not moved her feet from the desk."
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "Gravity. Great for catching cheaters without sitting up."
+            i "I'm gonna pretend I missed that. This should be funny."
+
+    $ start_ica_cards_minigame(ica_cards_selected_approach)
     $ ica_cards_result = ica_minigame_results.get("cards", {})
 
     if not ica_cards_result.get("completed", False):
         i "Calling it early? Fair. I can respect a strategic retreat."
     elif ica_cards_result.get("won", False):
         if ica_cards_result.get("approach") == "flirt":
-            show ica shock at slot(0, total=1), bright zorder 10
-            i "Heyyy no fair!! You kept distracting me with all those things you were saying!"
-            $ ica += 2
-            show ica flirty at slot(0, total=1), dim zorder 0
-            i "Fine, I guess you win this one freshie... but no distracting me with sweet talk next time!"
+            show ica flirty at slot(0, total=1), bright zorder 10
+            i "Okay, the banter almost worked. The cards did the rest, so don't get smug."
         elif ica_cards_result.get("approach") == "cheat":
-            show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
-            i "Hold up. Were you cheating and STILL lost?? What a loser..."
-            $ ica -= 2
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "You know I saw you peek, right? Still counts. I didn't feel like stopping you."
         else:
             show ica happy at slot(0, total=1), bright zorder 10
-            i "A clean win? Rude. I was expecting to carry this hangout."
+            i "Huh. You won and you're not even making a thing out of it. Kinda annoying. Kinda cool."
     else:
         show ica at slot(0, total=1), bright zorder 10
         if ica_cards_result.get("approach") == "flirt":
-            i "You distracted me just enough to make that close. I still take the win, though."
+            i "Cute distraction. Shame you forgot to win."
         elif ica_cards_result.get("approach") == "cheat":
-            i "Your cheating was adorable, but my cards were better. Run it back later."
+            i "You put in all that effort to avoid putting in effort and still lost. Beautiful."
         else:
-            i "You played fair and still lost. That is tragic. I will try not to brag about it."
+            i "You lose. No excuses, no speech. I like your style, freshie."
     show ica at slot(0, total=1), bright zorder 10
-    i "Oh damn, look at the time already, we've burned through the full day"
-    i "Guess you better go tell Ulysses you did nothing all day :p catcha later!"
-    "Ica makes her way out the front door, leaving you to report to Ulysses"
+    i "Oh, wow. We somehow burned the whole day."
+    i "Go tell Ulysses we investigated cards. I'll back you up if he doesn't ask me to stand."
+    "Ica rolls her chair away from the desk, leaving you to report to Ulysses."
 
     $ dayIca += 1
     jump endOfDay
 
 label IcaDayTwo:
-    "You make your way back to Ica's cubicle, where she's still doing nothing"
     scene cubicleOutline
+    "You make your way back to Ica's cubicle, where she is reclined so far in her chair that only her shoes are visible over the desk."
     show ica at slot(0, total=1), bright zorder 10
     i "Oh, look who's back? Enjoy slacking off last time?"
 
     menu:
-        "It was pretty cool":
-            $ ica +=1
+        "Yeah. It killed a day.":
+            $ ica += 1
             show ica happy at slot(0, total=1), bright zorder 10
-            i "Duh, of course it was. I'm awesome"
-        "Of course, I enjoyed spending time with you":
-            $ ica -=1
+            i "See? You get it. Bare minimum, maximum results."
+        "Of course. I really enjoyed spending time with you.":
+            $ ica -= 1
             show ica shock at slot(0, total=1), bright zorder 10
             i "..."
-            show ica at slot(0, total =1), bright zorder 10
-            i "Cringeeeeeeeee."
-            i "What a cheesy line dude. You gotta be more smooth with stuff"
-        "We wasted so much time":
+            show ica at slot(0, total=1), bright zorder 10
+            i "Cringe. You gotta bury that under at least two layers of pretending not to care."
+        "We wasted so much time.":
+            $ ica -= 2
             show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
-            i "Yeah. Not like I'm doing anything for the job."
-            i "Also you CHOSE to be here dude. No one made you slack off."
+            i "Yeah. That was the point."
+            i "Also, you chose to be here, dude. No one made you slack off."
     show ica at slot(0, total=1)
-    i "Anyway, I was gonna play some more cards or something, but I forgot to bring some."
+    i "Anyway, I was gonna play cards again, but the deck is all the way over there."
+    "She gestures toward a shelf within easy walking distance."
     i "Wanna do something stupid to pass the time like a staring contest?"
-    i "First person to blink loses. Keep your eyes on the target and try to outlast my absolutely terrifying stare."
+    i "First person to blink loses. Minimal setup, zero cleanup. Basically the perfect sport."
 
-    $ start_ica_staring_minigame()
+    menu:
+        "Sure. Beats working.":
+            $ ica_staring_selected_approach = "play_fair"
+            show ica happy at slot(0, total=1), bright zorder 10
+            i "There it is. The correct amount of commitment."
+        "You just wanted an excuse to stare at me.":
+            $ ica_staring_selected_approach = "flirt"
+            show ica flirty at slot(0, total=1), bright zorder 10
+            i "Maybe. Or maybe I forgot every other game. Don't make it weird."
+        "Use her reflection in the dark monitor.":
+            $ ica_staring_selected_approach = "cheat"
+            show ica at slot(0, total=1), bright zorder 10
+            i "You keep looking at that monitor, freshie. I'm sure it's nothing suspicious."
+
+    $ start_ica_staring_minigame(ica_staring_selected_approach)
     $ ica_staring_result = ica_minigame_results.get("staring", {})
 
     if ica_staring_result.get("completed", False):
         $ ica_staring_apply_relationship_result()
         if ica_staring_result.get("won", False):
             if ica_staring_result.get("approach") == "flirt":
-                show ica shock at slot(0, total=1), bright zorder 10
-                i "You kept eye contact and talked trash at the same time? That's deeply unfair. I respect it."
+                show ica flirty at slot(0, total=1), bright zorder 10
+                i "Okay, staring at me while saying that was annoyingly effective."
             elif ica_staring_result.get("approach") == "cheat":
-                show ica whatTheFuckDidYouJustDoMC at slot(0, total=1), bright zorder 10
-                i "Was that a mirror blink cue? I saw it. Fine, you win—but I'm confiscating the tiny mirror."
+                show ica happy at slot(0, total=1), bright zorder 10
+                i "You were watching my reflection, weren't you? Clever. Lazy. Technically terrible. I approve a little."
             else:
                 show ica happy at slot(0, total=1), bright zorder 10
-                i "A clean win. You didn't blink once. That's impressive and a little unsettling."
+                i "Huh. Guess I blinked. Thanks for not turning your victory into a whole thing."
         else:
             show ica at slot(0, total=1), bright zorder 10
             if ica_staring_result.get("approach") == "flirt":
-                i "The banter almost got me, but you blinked first. Nice try, freshie."
+                i "You almost had me. Then you got too pleased with yourself."
             elif ica_staring_result.get("approach") == "cheat":
-                i "You had a mirror and a blink cue and still blinked first? That's honestly kind of impressive."
+                i "You cheated at staring and still blinked first. That's art."
             else:
-                i "You played fair and blinked first. I will try not to brag about this for the rest of the day."
+                i "You blinked. No excuses? Nice. Makes gloating way easier."
     else:
         show ica at slot(0, total=1), bright zorder 10
         i "Calling it early? Fair. The staring contest will still be here when you're ready to lose properly."
 
     show ica at slot(0, total=1), bright zorder 10
     i "Oh damn, that contest took longer than I thought."
-    i "Go pick another way to look busy, freshie. Catcha later!"
+    i "Go pick another way to look busy, freshie. Catch you later."
     "Ica heads toward the front desk, still accusing you of blinking first."
 
     $ dayIca += 1

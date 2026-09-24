@@ -23,21 +23,19 @@ define ICA_STARING_REQUIRED_HOLD_REDUCTION = 0.75
 define ICA_STARING_MIN_REQUIRED_HOLD = 6.5
 define ICA_STARING_FORWARD_DIRECTION = 1.0
 define ICA_STARING_REVERSE_DIRECTION = -1.0
-define ICA_STARING_WIN_RELATIONSHIP = 2
-define ICA_STARING_LOSS_RELATIONSHIP = 1
 define ICA_STARING_TRACK_TOP = 260
 define ICA_STARING_TRACK_HEIGHT = 420
 
 define ICA_STARING_APPROACH_LABELS = {
     "flirt": "Flirt",
-    "cheat": "Cheat",
-    "play_fair": "Play Fair",
+    "cheat": "Get Cheeky",
+    "play_fair": "Play It Cool",
 }
 
 define ICA_STARING_APPROACH_DESCRIPTIONS = {
     "flirt": "Keep eye contact and tease Ica with distracting banter. The target slows and your focus holds longer.",
-    "cheat": "Use a prepared mirror and a blink cue. The target slows further and the eye-contact zone widens.",
-    "play_fair": "No tricks or distractions. Keep your eyes open and match Ica's stare.",
+    "cheat": "Watch Ica in the dark monitor so you can steal blinks. The target slows further and the eye-contact zone widens.",
+    "play_fair": "No tricks and no big performance. Just settle in and meet Ica's stare.",
 }
 
 default ica_staring_session_active = False
@@ -98,13 +96,15 @@ init python:
         store.ica_staring_result_applied = False
         store.ica_staring_result = {}
 
-    def start_ica_staring_minigame():
-        """Reset the contest, remove stale results, and wait for the modal game."""
+    def start_ica_staring_minigame(approach_id=None):
+        """Reset the contest, optionally using a choice made in dialogue."""
         store.ica_clear_minigame_result("staring")
         _ica_staring_reset_state()
+        if approach_id is not None:
+            ica_staring_choose_approach(approach_id, restart=False)
         renpy.call_screen("ica_staring_minigame")
 
-    def ica_staring_choose_approach(approach_id):
+    def ica_staring_choose_approach(approach_id, restart=True):
         """Apply the canonical approach modifier and begin the timed contest."""
         if not store.ica_staring_session_active or store.ica_staring_phase != "approach":
             return
@@ -139,7 +139,8 @@ init python:
             else store.ICA_STARING_REVERSE_DIRECTION)
         store.ica_staring_feedback = "Keep your eyes on the target."
         store.ica_staring_phase = "active"
-        renpy.restart_interaction()
+        if restart:
+            renpy.restart_interaction()
 
     def ica_staring_click():
         """Pulse the player marker toward Ica's moving eye-contact target."""
@@ -249,9 +250,7 @@ init python:
         if not result.get("completed", False) or store.ica_staring_result_applied:
             return False
 
-        relationship_change = (store.ICA_STARING_WIN_RELATIONSHIP
-                               if result.get("won", False)
-                               else store.ICA_STARING_LOSS_RELATIONSHIP)
+        relationship_change = store.ica_relationship_change_for_result(result)
         store.ica += relationship_change
         store.ica_staring_result_applied = True
         return True

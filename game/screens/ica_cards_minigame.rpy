@@ -20,16 +20,16 @@ screen ica_cards_minigame():
             text _("Ica's High-Card Hangout") style "ica_cards_title"
 
             if ica_cards_phase == "approach":
-                text _("Pick an approach before the deal. Every match lasts seven rounds; your approach changes your edge.") style "ica_cards_body"
+                text _("Pick an approach before the deal. Easier tactics help with the cards, but Ica pays attention to how hard you try.") style "ica_cards_body"
 
                 vbox:
                     spacing 12
+                    textbutton _("Play It Cool") action Function(ica_cards_choose_approach, "play_fair")
+                    text _("No tricks and no performance. No gameplay edge.") style "ica_cards_hint"
                     textbutton _("Flirt") action Function(ica_cards_choose_approach, "flirt")
                     text _("Distract her with banter. Your calls get a small edge.") style "ica_cards_hint"
-                    textbutton _("Cheat") action Function(ica_cards_choose_approach, "cheat")
-                    text _("Count cards or peek at the deal. Your calls get a stronger edge.") style "ica_cards_hint"
-                    textbutton _("Play Fair") action Function(ica_cards_choose_approach, "play_fair")
-                    text _("Keep it honest. No edge, just your read of the deck.") style "ica_cards_hint"
+                    textbutton _("Get Cheeky") action Function(ica_cards_choose_approach, "cheat")
+                    text _("Peek when Ica looks away. Your calls get a stronger edge.") style "ica_cards_hint"
 
                 textbutton _("Maybe another time") action Function(abort_ica_cards_minigame)
 

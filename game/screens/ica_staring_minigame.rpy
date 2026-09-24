@@ -30,11 +30,21 @@ screen ica_staring_minigame():
                 spacing 18
 
                 text _("Ica's Staring Contest") style "ica_staring_title"
-                text _("First person to blink loses. Choose how you want to keep your eyes on the target.") style "ica_staring_body"
+                text _("First person to blink loses. Easier tactics help with the contest, but Ica likes people who can relax.") style "ica_staring_body"
 
                 hbox:
                     xalign 0.5
                     spacing 35
+
+                    frame:
+                        xsize 375
+                        ysize 250
+                        background Frame("gui/button/choice_hover_background.png", 24, 27, 13, 27)
+                        padding (24, 22, 24, 20)
+                        vbox:
+                            spacing 12
+                            textbutton _("Play It Cool") action Function(ica_staring_choose_approach, "play_fair")
+                            text _("No tricks or performance. Face Ica straight on with no difficulty reduction.") style "ica_staring_hint"
 
                     frame:
                         xsize 375
@@ -53,18 +63,8 @@ screen ica_staring_minigame():
                         padding (24, 22, 24, 20)
                         vbox:
                             spacing 12
-                            textbutton _("Cheat") action Function(ica_staring_choose_approach, "cheat")
-                            text _("Use a prepared mirror and blink cue. Large difficulty reduction.") style "ica_staring_hint"
-
-                    frame:
-                        xsize 375
-                        ysize 250
-                        background Frame("gui/button/choice_hover_background.png", 24, 27, 13, 27)
-                        padding (24, 22, 24, 20)
-                        vbox:
-                            spacing 12
-                            textbutton _("Play Fair") action Function(ica_staring_choose_approach, "play_fair")
-                            text _("No tricks or distractions. Keep your eyes open and match Ica's stare.") style "ica_staring_hint"
+                            textbutton _("Get Cheeky") action Function(ica_staring_choose_approach, "cheat")
+                            text _("Use Ica's reflection to steal blinks. Large difficulty reduction.") style "ica_staring_hint"
 
                 textbutton _("Back out") action Function(ica_staring_abort):
                     xalign 0.5

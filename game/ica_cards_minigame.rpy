@@ -1,22 +1,21 @@
 ## Ica's first-visit card minigame.
 
-# Every approach plays a full match; flirt and cheat only soften card checks.
+# Every approach plays a full match. Easier tactics help with the cards, while
+# matching Ica's nonchalant attitude is better for the relationship.
 define ICA_CARDS_BASE_ROUNDS = 7
 define ICA_CARDS_MIN_CARD = 1
 define ICA_CARDS_MAX_CARD = 13
-define ICA_CARDS_WIN_RELATIONSHIP = 2
-define ICA_CARDS_LOSS_RELATIONSHIP = 1
 
 define ICA_CARDS_APPROACH_LABELS = {
     "flirt": "Flirt",
-    "cheat": "Cheat",
-    "play_fair": "Play Fair",
+    "cheat": "Get Cheeky",
+    "play_fair": "Play It Cool",
 }
 
 define ICA_CARDS_APPROACH_DESCRIPTIONS = {
-    "flirt": "Keep Ica talking. Her attention wanders, making the game a little easier.",
-    "cheat": "Count cards and peek at the deal. Ica will never know what hit her.",
-    "play_fair": "No tricks, no distractions. Just you, Ica, and the next card.",
+    "flirt": "Keep the banter going. Ica's attention wanders, making the game a little easier.",
+    "cheat": "Steal a look whenever Ica is too comfortable to guard the deck.",
+    "play_fair": "No tricks, no speech, no pressure. Just play like neither of you has somewhere better to be.",
 }
 
 default ica_cards_session_active = False
@@ -67,10 +66,12 @@ init python:
         store.ica_cards_result_applied = False
         store.ica_cards_result = {}
 
-    def start_ica_cards_minigame():
-        """Start a fresh session and wait for its modal screen to close."""
+    def start_ica_cards_minigame(approach_id=None):
+        """Start a fresh session, optionally using a choice made in dialogue."""
         store.ica_clear_minigame_result("cards")
         _ica_cards_reset_state()
+        if approach_id is not None:
+            ica_cards_choose_approach(approach_id)
         renpy.call_screen("ica_cards_minigame")
 
     def _ica_cards_build_deck():
@@ -174,15 +175,23 @@ init python:
         if player_won_round:
             store.ica_cards_player_score += store.ica_cards_current_wager
             if store.ica_cards_current_wager == 2:
-                store.ica_cards_round_result = "Your double call lands. Two points, and Ica looks genuinely worried."
+                store.ica_cards_round_result = "Your double call lands. Ica barely sits up, which is as close as she gets to panic."
+            elif store.ica_cards_approach == "flirt":
+                store.ica_cards_round_result = "You take the round. Ica critiques your flirting instead of admitting it distracted her."
+            elif store.ica_cards_approach == "cheat":
+                store.ica_cards_round_result = "You take the round. Ica glances at your hand like she knows exactly what you did."
             else:
-                store.ica_cards_round_result = "You take the round. Ica looks personally offended."
+                store.ica_cards_round_result = "You take the round. Neither of you puts in the effort to celebrate."
         else:
             store.ica_cards_ica_score += store.ica_cards_current_wager
             if store.ica_cards_current_wager == 2:
                 store.ica_cards_round_result = "The double call misses. Ica steals two points and will never let you forget it."
+            elif store.ica_cards_approach == "flirt":
+                store.ica_cards_round_result = "Ica takes the round and calls your banter a respectable consolation prize."
+            elif store.ica_cards_approach == "cheat":
+                store.ica_cards_round_result = "Ica takes the round. Apparently cheating still requires effort."
             else:
-                store.ica_cards_round_result = "Ica takes the round and celebrates like it was a championship."
+                store.ica_cards_round_result = "Ica takes the round and gives you the smallest possible victory nod."
 
         store.ica_cards_phase = "feedback"
 
@@ -237,7 +246,8 @@ init python:
             won,
             result_tier)
 
-        relationship_change = (store.ICA_CARDS_WIN_RELATIONSHIP if won else store.ICA_CARDS_LOSS_RELATIONSHIP)
+        completed_result = store.ica_minigame_results.get("cards", {})
+        relationship_change = store.ica_relationship_change_for_result(completed_result)
         store.ica = store.ica + relationship_change
         store.ica_cards_result_applied = True
         store.ica_cards_phase = "complete"
