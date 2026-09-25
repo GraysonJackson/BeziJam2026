@@ -14,13 +14,13 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("BeziJam2026")
+define config.name = _("Date and Deduce: A D&D Spinoff!")
 
 ## A short name for the game used for executables and directories in the built
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "BeziJam2026"
+define build.name = "DateAndDeduce"
 
 ## Save directory ##############################################################
 ##
@@ -37,7 +37,7 @@ define build.name = "BeziJam2026"
 ## literal string, not an expression.
 
 ## Note: a typical save_directory value looks like "FreshProject-1671818013"
-define config.save_directory = "BeziJam2026-1769231162"
+define config.save_directory = "DateAndDeduce-1769231162"
 
 
 ## The version of the game.
@@ -53,7 +53,10 @@ define config.version = "1.0"
 
 define config.has_sound = True
 define config.has_music = True
-define config.has_voice = True
+define config.has_voice = False
+
+## Choices and consequences are permanent within a playthrough.
+define config.rollback_enabled = False
 
 
 ## To allow the user to play a test sound on the sound or voice channel,

@@ -9,16 +9,23 @@
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
 
-define gui.about = _p("""A visual novel GUI kit created by Madi Wander {a=https://timepatches.info}@timepatches{/a}.\n
-All assets (including UI assets, Kibby catgirl sprite, and sky background) made by the creator by hand, and made available for use under license.
+define gui.about = _p("""{b}Date and Deduce: A D&D Spinoff!{/b}
 
-Created using Fenik's {a=https://github.com/shawna-p/EasyRenPyGui}EasyRen'pyGUI{/a}. You must retain the credit for EasyRenPyGUI in anything you create using the code in this kit.
-                      
-Fonts:
+Grayson (\"TriUnity\") Jackson — Code and Writing
+Haven (\"Rabbit\") Herring — Background Art
+AB (\"PoeBeau\") Manness — Character Art
 
-{a=https://beaumaher.gumroad.com/l/rando-sans}Rando Sans (variable){/a} by Beau Maher - an indie creator, so I recommend throwing them a few dollars if you're able!
+{b}Special Thanks{/b}
+Adyn, Avagail, Braden, Christian, Evan, Geoff, Harlowe, Jace, Rose, Rowan
 
-{a=https://monaspace.githubnext.com/}Monaspace (Neon){/a}
+{b}Assets and Tools{/b}
+Visual novel GUI kit by {a=https://timepatches.info}Madi Wander{/a}.
+Created using {a=https://github.com/shawna-p/EasyRenPyGui}Fenik's EasyRen'Py GUI{/a}.
+{a=https://beaumaher.gumroad.com/l/rando-sans}Rando Sans{/a} by Beau Maher.
+{a=https://monaspace.githubnext.com/}Monaspace{/a}.
+Built with {a=https://www.renpy.org/}Ren'Py{/a}.
+
+Music — To Be Added
 """)
 
 
@@ -123,14 +130,6 @@ screen keyboard_help():
         text _("Toggles dialogue skipping.")
 
     hbox:
-        label _("Page Up")
-        text _("Rolls back to earlier dialogue.")
-
-    hbox:
-        label _("Page Down")
-        text _("Rolls forward to later dialogue.")
-
-    hbox:
         label "H"
         text _("Hides the user interface.")
 
@@ -161,28 +160,12 @@ screen mouse_help():
         label _("Right Click")
         text _("Accesses the game menu.")
 
-    hbox:
-        label _("Mouse Wheel Up")
-        text _("Rolls back to earlier dialogue.")
-
-    hbox:
-        label _("Mouse Wheel Down")
-        text _("Rolls forward to later dialogue.")
-
 
 screen gamepad_help():
 
     hbox:
         label _("Right Trigger\nA/Bottom Button")
         text _("Advances dialogue and activates the interface.")
-
-    hbox:
-        label _("Left Trigger\nLeft Shoulder")
-        text _("Rolls back to earlier dialogue.")
-
-    hbox:
-        label _("Right Shoulder")
-        text _("Rolls forward to later dialogue.")
 
 
     hbox:

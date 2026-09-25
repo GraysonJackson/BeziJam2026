@@ -45,7 +45,6 @@ screen say(who, what):
                 at rotated
                 style_prefix "quick"
                 hbox:
-                    textbutton _("<<") action Rollback() hover_background "gui/hlsmall.png"
                     textbutton _(">>") action Skip() alternate Skip(fast=True, confirm=True) hover_background "gui/hlsmall.png"
                     textbutton _("Auto") action Preference("auto-forward", "toggle")
                     

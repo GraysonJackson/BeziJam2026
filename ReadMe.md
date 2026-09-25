@@ -4,7 +4,7 @@
 
 * Grayson ("TriUnity") Jackson
 * Haven ("Rabbit") Herring
-* AB Maness
+* AB ("PoeBeau") Manness
 
 ## Coding Conventions
 

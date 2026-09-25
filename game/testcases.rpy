@@ -10,6 +10,9 @@ testsuite investigation_validation:
     testcase ulysses_evening_model:
         $ validate_ulysses_evening_model()
 
+    testcase day_seven_model:
+        $ validate_day_seven_model()
+
 testcase ulysses_first_evening_flow:
     $ killer = 1
     $ remainingSuspects = list(suspectNames.keys())
