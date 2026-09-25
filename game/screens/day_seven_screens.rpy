@@ -95,17 +95,17 @@ screen day_seven_accusation():
                 spacing 30
 
                 frame:
-                    xysize ((1080 if not show_comparison else 840), 690)
+                    xysize ((1650 if not show_comparison else 1000), 650)
                     background Solid("#fbf5e5")
                     padding (28, 22)
 
                     vbox:
                         spacing 18
                         hbox:
-                            spacing 26
-                            use day_seven_suspect_portrait(current_id, (250, 250))
+                            spacing 22
+                            use day_seven_suspect_portrait(current_id, (220, 220))
                             vbox:
-                                xsize 500
+                                xsize (900 if not show_comparison else 680)
                                 spacing 8
                                 text suspectNames[current_id]:
                                     size 50
@@ -117,13 +117,13 @@ screen day_seven_accusation():
                                 text "Compare this profile against the evidence notebook and your personal notes. No single dramatic trait is enough.":
                                     size 22
                                     color "#654c3c"
-                                    xmaximum 500
+                                    xmaximum (900 if not show_comparison else 680)
 
                         use day_seven_profile_columns(current_id, compact=False)
 
                 if show_comparison:
                     frame:
-                        xysize (470, 690)
+                        xysize (620, 650)
                         background Solid("#e4d8bc")
                         padding (22, 22)
 
@@ -136,7 +136,7 @@ screen day_seven_accusation():
                                 size 36
                                 color "#251d18"
                                 font "fonts/RandoWB.ttf"
-                            use day_seven_suspect_portrait(pinned_id, (170, 170))
+                            use day_seven_suspect_portrait(pinned_id, (145, 145))
                             use day_seven_profile_columns(pinned_id, compact=True)
                             textbutton "Clear Pin":
                                 action Function(day_seven_toggle_pin, pinned_id)
@@ -148,16 +148,53 @@ screen day_seven_accusation():
 
                 textbutton "Previous File":
                     action Function(day_seven_change_page, -1)
+                    style "day_seven_action_button"
+                    xsize 190
                 textbutton "Next File":
                     action Function(day_seven_change_page, 1)
+                    style "day_seven_action_button"
+                    xsize 170
                 textbutton ("Clear Comparison" if pinned_id == current_id else "Pin for Comparison"):
                     action Function(day_seven_toggle_pin, current_id)
+                    style "day_seven_action_button"
+                    xsize 275
                 textbutton "Evidence Notebook":
                     action Show("suspect_notebook")
+                    style "day_seven_action_button"
+                    xsize 260
                 textbutton "Personal Notes":
                     action Show("suspect_notepad")
+                    style "day_seven_action_button"
+                    xsize 230
                 textbutton "Accuse [suspectNames[current_id]]":
                     action Show("day_seven_confirm_accusation", suspect_id=current_id)
+                    style "day_seven_accuse_button"
+                    xsize 390
+
+
+style day_seven_action_button:
+    ysize 58
+    background Solid("#e4d8bc")
+    hover_background Solid("#f6d7c7")
+    selected_background Solid("#d9c8a7")
+    padding (14, 8)
+
+style day_seven_action_button_text:
+    xalign 0.5
+    yalign 0.5
+    text_align 0.5
+    size 21
+    color "#00719a"
+    hover_color "#d26143"
+    font "fonts/MonaspaceNeon-Regular.otf"
+
+style day_seven_accuse_button is day_seven_action_button:
+    background Solid("#8d3027")
+    hover_background Solid("#d26143")
+
+style day_seven_accuse_button_text is day_seven_action_button_text:
+    color "#fff4df"
+    hover_color "#ffffff"
 
 
 screen day_seven_confirm_accusation(suspect_id):
@@ -315,7 +352,7 @@ screen ending_gallery():
     viewport:
         xpos 90
         ypos 145
-        xsize 1180
+        xsize 1080
         ysize 820
         mousewheel True
         draggable True
@@ -323,7 +360,7 @@ screen ending_gallery():
         scrollbars "vertical"
 
         vbox:
-            xsize 1110
+            xsize 1010
             spacing 15
 
             text "ENDING GALLERY — [len(unlocked)] / [len(catalog)]":
@@ -339,7 +376,7 @@ screen ending_gallery():
             for entry in catalog:
                 if entry["key"] in unlocked:
                     textbutton entry["title"]:
-                        xsize 1020
+                        xsize 920
                         text_size 24
                         action Replay(
                             "DaySevenGalleryReplay",
@@ -347,7 +384,7 @@ screen ending_gallery():
                             locked=False)
                 else:
                     frame:
-                        xsize 1020
+                        xsize 920
                         background Solid("#2a2323aa")
                         padding (18, 13)
                         text "??? — LOCKED":

@@ -35,12 +35,10 @@ screen ica_prank_minigame():
             padding (42, 32, 42, 32)
 
         text _("Operation: Extremely Pink Office") style "ica_prank_title":
-            xpos 0
             ypos 0
             xsize 1416
 
         text _("Approach: [ica_prank_approach_label(ica_prank_approach)]") style "ica_prank_status":
-            xpos 0
             ypos 58
             xsize 1416
 
@@ -76,8 +74,7 @@ screen ica_prank_minigame():
                 text _("Walls painted: [len(ica_prank_painted_targets)] / [len(ICA_PRANK_WALL_TARGETS)]") style "ica_prank_hud_body"
                 text _("Times spotted: [ica_prank_caught_count]") style "ica_prank_hud_body"
                 null height 5
-                text _("Orange tiles are Ulysses' current line of sight. Walls stop it.") style "ica_prank_hint"
-                text _("Move: arrows or WASD\nInteract: E or Space\nIca assist: Q") style "ica_prank_hint"
+                text _("Orange: Ulysses' line of sight") style "ica_prank_hint"
 
                 if ica_prank_approach == "play_fair":
                     text _("No assist: you agreed to help, so Ica is making you do the walking.") style "ica_prank_assist_text"
@@ -90,7 +87,6 @@ screen ica_prank_minigame():
                     text _("Ica's assist is spent for this objective.") style "ica_prank_assist_text"
 
         text _("[ica_prank_feedback]") style "ica_prank_feedback":
-            xpos 70
             ypos 670
             xsize 1360
 
@@ -143,7 +139,7 @@ style ica_prank_cell_text:
     xalign 0.5
     text_align 0.5
     color "#17394B"
-    size 15
+    size 18
     bold True
 
 style ica_prank_hud_heading:
@@ -155,7 +151,7 @@ style ica_prank_hud_heading:
 style ica_prank_hud_body:
     is gui_text
     color "#00719A"
-    size 22
+    size 25
 
 style ica_prank_hint:
     is gui_text

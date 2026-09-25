@@ -24,13 +24,11 @@ screen winston_pressure_minigame():
             padding (36, 28, 36, 28)
 
         text _("WINSTON'S CONTROLLED PRESSURE TEST") style "winston_pressure_title":
-            xpos 0
             ypos 0
             xsize 1428
 
         if winston_pressure_phase != "result":
             text _("Interview [pressure_number] of [len(winston_pressure_targets)] — [pressure_target]") style "winston_pressure_subtitle":
-                xpos 0
                 ypos 56
                 xsize 1428
 
@@ -38,12 +36,12 @@ screen winston_pressure_minigame():
                 xpos 30
                 ypos 116
                 xsize 980
-                ysize 610
+                ysize 635
                 background Solid("#18333FEF")
                 padding (34, 28, 34, 28)
 
                 vbox:
-                    spacing 18
+                    spacing 12
 
                     text _("SUSPECT'S DEFENSE") style "winston_pressure_heading"
                     hbox:
@@ -54,7 +52,7 @@ screen winston_pressure_minigame():
                             $ dealer_card_suit = card["suit"]
                             frame:
                                 xsize 180
-                                ysize 205
+                                ysize 190
                                 background Solid("#283E52" if dealer_hidden else "#EFE2C8")
                                 padding (12, 12, 12, 12)
                                 if dealer_hidden:
@@ -75,7 +73,7 @@ screen winston_pressure_minigame():
                     text _("YOUR PRESSURE") style "winston_pressure_heading"
                     viewport:
                         xsize 900
-                        ysize 175
+                        ysize 150
                         draggable True
                         mousewheel "horizontal"
 
@@ -86,7 +84,7 @@ screen winston_pressure_minigame():
                                 $ player_card_suit = card["suit"]
                                 frame:
                                     xsize 150
-                                    ysize 175
+                                    ysize 150
                                     background Solid("#F4E7CC")
                                     padding (10, 10, 10, 10)
                                     vbox:
@@ -101,15 +99,13 @@ screen winston_pressure_minigame():
                 xpos 1040
                 ypos 116
                 xsize 425
-                ysize 610
+                ysize 635
                 background Frame("gui/button/choice_hover_background.png", 24, 27, 13, 27)
                 padding (26, 24, 26, 24)
 
                 vbox:
                     spacing 16
                     text _("INTERVIEW CONTROL") style "winston_pressure_heading"
-                    text _("Raise pressure carefully. The suspect follows dealer rules and must hold at 17 or higher.") style "winston_pressure_help"
-
                     if winston_pressure_phase == "playing":
                         textbutton _("PRESSURE — DRAW") action Function(winston_pressure_press)
                         textbutton _("QUESTION — STAND") action Function(winston_pressure_question)
@@ -159,7 +155,6 @@ screen winston_pressure_minigame():
                         action Function(finish_winston_pressure_minigame)
 
             text _("[winston_pressure_feedback]") style "winston_pressure_feedback":
-                xpos 140
                 ypos 805
                 xsize 1220
 
@@ -198,7 +193,7 @@ style winston_pressure_help:
 style winston_pressure_stat:
     is gui_text
     color "#00719A"
-    size 19
+    size 22
 
 style winston_pressure_card_hidden:
     is gui_text

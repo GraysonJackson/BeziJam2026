@@ -24,12 +24,10 @@ screen ica_eating_minigame():
             padding (50, 38, 50, 38)
 
         text _("Ica's Extremely Necessary Hot Dog Contest") style "ica_eating_title":
-            xpos 0
             ypos 0
             xsize 1400
 
         text _("Approach: [ica_eating_approach_label(ica_eating_approach)]") style "ica_eating_status":
-            xpos 0
             ypos 64
             xsize 1400
 
@@ -77,12 +75,10 @@ screen ica_eating_minigame():
                     text _("Cheating incidents witnessed: [ica_eating_ica_cheat_stage + 1]") style "ica_eating_meter_label"
 
         text _("[ica_eating_feedback]") style "ica_eating_feedback":
-            xpos 120
             ypos 455
             xsize 1260
 
         text _("Time: [max(0, int(ICA_EATING_DURATION - ica_eating_elapsed))]s   |   Choking incidents: [ica_eating_mistakes]") style "ica_eating_status":
-            xpos 100
             ypos 535
             xsize 1300
 
@@ -129,11 +125,6 @@ screen ica_eating_minigame():
                         xalign 0.5
                         yalign 0.5
 
-        text _("Space: bite   |   R: catch your breath   |   The contest ends on time even if you do nothing.") style "ica_eating_hint":
-            xpos 110
-            ypos 780
-            xsize 1280
-
         textbutton _("Withdraw"):
             xpos 1280
             ypos 35
@@ -166,7 +157,7 @@ style ica_eating_meter_label:
     xalign 0.5
     text_align 0.5
     color "#00719A"
-    size 23
+    size 26
 
 style ica_eating_flirt_status:
     is ica_eating_meter_label

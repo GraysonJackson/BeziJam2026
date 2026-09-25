@@ -73,4 +73,225 @@ testcase ulysses_first_evening_relaxed_flow:
     click "Take another slice and ask about the photographs on his desk."
     advance until screen "choice"
     click "Ask for permission to leave."
-    advance until screen "choice"
+
+
+testsuite ui_layout_smoke:
+    testcase rules_card_layout:
+        run Jump("UITestRulesCard")
+        advance until screen "minigame_rules"
+        pause 0.2
+        screenshot "ui_rules_card.png"
+
+    testcase dialogue_layout:
+        run Jump("UITestDialogue")
+        advance until screen "say"
+        pause 0.2
+        screenshot "ui_dialogue.png"
+
+    testcase long_choice_layout:
+        run Jump("UITestLongChoice")
+        advance until screen "choice"
+        pause 0.2
+        screenshot "ui_long_choice.png"
+
+    testcase accusation_layout:
+        $ killer = 1
+        $ remainingSuspects = [1, 2, 3]
+        $ daySevenAccusationPage = 0
+        $ daySevenPinnedSuspect = 2
+        run Jump("UITestAccusation")
+        advance until screen "day_seven_accusation"
+        pause 0.2
+        screenshot "ui_accusation.png"
+
+
+testsuite minigame_ui_smoke:
+    testcase height_memory_layout:
+        run Jump("UITestHeightMemory")
+        advance until screen "height_memory_minigame"
+        pause 0.2
+        screenshot "ui_height_memory.png"
+
+    testcase dhampir_ispy_layout:
+        run Jump("UITestDhampirISpy")
+        advance until screen "dhampir_ispy_minigame"
+        pause 0.2
+        screenshot "ui_dhampir_ispy.png"
+
+    testcase madeline_centrifuge_layout:
+        run Jump("UITestMadelineCentrifuge")
+        advance until screen "madeline_centrifuge_minigame"
+        pause 0.2
+        screenshot "ui_madeline_centrifuge.png"
+
+    testcase nicky_memory_layout:
+        run Jump("UITestNickyMemory")
+        advance until screen "nicky_memory_minigame"
+        pause 0.2
+        screenshot "ui_nicky_memory.png"
+
+    testcase winston_pressure_layout:
+        run Jump("UITestWinstonPressure")
+        advance until screen "winston_pressure_minigame"
+        pause 0.2
+        screenshot "ui_winston_pressure.png"
+
+    testcase ica_cards_layout:
+        run Jump("UITestIcaCards")
+        advance until screen "ica_cards_minigame"
+        pause 0.2
+        screenshot "ui_ica_cards.png"
+
+    testcase ica_staring_layout:
+        run Jump("UITestIcaStaring")
+        advance until screen "ica_staring_minigame"
+        pause 0.2
+        screenshot "ui_ica_staring.png"
+
+    testcase ica_board_layout:
+        run Jump("UITestIcaBoard")
+        advance until screen "ica_board_game_minigame"
+        pause 0.2
+        screenshot "ui_ica_board.png"
+
+    testcase ica_eating_layout:
+        run Jump("UITestIcaEating")
+        advance until screen "ica_eating_minigame"
+        pause 0.2
+        screenshot "ui_ica_eating.png"
+
+    testcase ica_prank_layout:
+        run Jump("UITestIcaPrank")
+        advance until screen "ica_prank_minigame"
+        pause 0.2
+        screenshot "ui_ica_prank.png"
+
+
+label UITestRulesCard:
+    window hide
+    call RulesWinstonPressure
+    return
+
+
+label UITestDialogue:
+    window hide
+    $ _preferences.text_cps = 0
+    u "This is a deliberately long line used to verify that dialogue remains inside the readable textbox area, wraps cleanly, and never disappears beyond the right edge of a sixteen-by-nine display."
+    return
+
+
+label UITestLongChoice:
+    window hide
+    menu:
+        "Review the witness statement and compare it against the physical timeline.":
+            return
+        "Check the laboratory findings before drawing a conclusion.":
+            return
+        "Compare the suspect profiles against your personal notes.":
+            return
+        "Ask whether the behavioral clue agrees with the formal evidence.":
+            return
+        "Re-read the scene report for details that were not formally logged.":
+            return
+        "Verify the chain of custody one final time.":
+            return
+        "Look for contradictions between two surviving profiles.":
+            return
+        "Use intuition only as a direction, not as proof.":
+            return
+        "Return to the complete evidence chain.":
+            return
+
+
+label UITestAccusation:
+    window hide
+    call screen day_seven_accusation
+    return
+
+
+label UITestHeightMemory:
+    window hide
+    $ renpy.random.seed(20260925)
+    $ start_height_memory_minigame()
+    pause
+    return
+
+
+label UITestDhampirISpy:
+    window hide
+    $ renpy.hide_screen("height_memory_minigame")
+    $ start_dhampir_ispy_minigame("Bruised Knuckles")
+    return
+
+
+label UITestMadelineCentrifuge:
+    window hide
+    $ renpy.hide_screen("height_memory_minigame")
+    $ renpy.random.seed(20260925)
+    $ killer = 1
+    $ remainingSuspects = list(suspectNames.keys())
+    $ recordedRouteReveals = {}
+    $ start_madeline_centrifuge_minigame()
+    return
+
+
+label UITestNickyMemory:
+    window hide
+    $ renpy.hide_screen("height_memory_minigame")
+    $ renpy.random.seed(20260925)
+    $ killer = 1
+    $ remainingSuspects = list(suspectNames.keys())
+    $ recordedRouteReveals = {}
+    $ start_nicky_memory_minigame()
+    return
+
+
+label UITestWinstonPressure:
+    window hide
+    $ renpy.hide_screen("height_memory_minigame")
+    $ renpy.random.seed(20260925)
+    $ killer = 1
+    $ remainingSuspects = list(suspectNames.keys())
+    $ recordedRouteReveals = {}
+    $ start_winston_pressure_minigame()
+    return
+
+
+label UITestIcaCards:
+    window hide
+    $ renpy.hide_screen("height_memory_minigame")
+    $ renpy.random.seed(20260925)
+    $ start_ica_cards_minigame("play_fair")
+    return
+
+
+label UITestIcaStaring:
+    window hide
+    $ renpy.hide_screen("height_memory_minigame")
+    $ renpy.random.seed(20260925)
+    $ start_ica_staring_minigame("play_fair")
+    return
+
+
+label UITestIcaBoard:
+    window hide
+    $ renpy.hide_screen("height_memory_minigame")
+    $ renpy.random.seed(20260925)
+    $ start_ica_board_game_minigame("play_fair")
+    return
+
+
+label UITestIcaEating:
+    window hide
+    $ renpy.hide_screen("height_memory_minigame")
+    $ renpy.random.seed(20260925)
+    $ start_ica_eating_minigame("play_fair", "call_out")
+    return
+
+
+label UITestIcaPrank:
+    window hide
+    $ renpy.hide_screen("height_memory_minigame")
+    $ renpy.random.seed(20260925)
+    $ start_ica_prank_minigame("play_fair")
+    return

@@ -1117,6 +1117,7 @@ label RazzleDayThree:
     "It seems that Brandon is struggling to organize his thoughts, see what you can do to help!"
 
     # Minigame
+    call RulesHeightMemory
     while not height_memory_completion_recorded:
         $ start_height_memory_minigame()
         while height_memory_active:
@@ -2540,6 +2541,7 @@ label DhampirDayThree:
     $ dhampir_day_three_excluded_injuries = dhampir_day_three_reveal["value"]
     $ dhampir_day_three_explanation = DHAMPIR_INJURY_EXCLUSION_TEXT[dhampir_day_three_excluded_injuries]
 
+    call RulesDhampirISpy
     $ start_dhampir_ispy_minigame(dhampir_day_three_excluded_injuries)
 
     if dhampir_ispy_result["completed"]:
@@ -3393,6 +3395,7 @@ label MadelineDayThree:
     m "I am not crediting her in the report."
     m "We can reproduce the useful part with calibrated counterweights and fine trim. You balance. I monitor the sample."
 
+    call RulesMadelineCentrifuge
     $ start_madeline_centrifuge_minigame()
 
     $ madeline_day_three_blood_type = madeline_centrifuge_result["blood_type"]
@@ -4184,6 +4187,7 @@ label NickyDayThree:
 
     "Nicky demonstrates one sample pair, breaks it apart again, and shuffles it back into the grid. Only when you can explain why the cards belong together does she start the clock."
 
+    call RulesNickyMemory
     $ start_nicky_memory_minigame()
 
     $ nicky_day_three_build = nicky_memory_result["build"]
@@ -4860,6 +4864,7 @@ label WinstonDayThree:
             $ winn -= 1
             w "We're collecting statements, not creating eight lifelong phobias."
 
+    call RulesWinstonPressure
     $ start_winston_pressure_minigame()
 
     if winston_pressure_phase == "dhampir_pause":
@@ -5284,6 +5289,7 @@ label IcaDayOne:
 
     "Ica deals one slow practice hand, mostly to establish which rules she plans to ignore. Once both of you have cards arranged, she uses gravity to dim the desk lamp without getting up."
 
+    call RulesIcaCards
     $ start_ica_cards_minigame(ica_cards_selected_approach)
     $ ica_cards_result = ica_minigame_results.get("cards", {})
 
@@ -5392,6 +5398,7 @@ label IcaDayTwo:
             show ica at slot(0, total=1), bright zorder 10
             i "You keep looking at that monitor, freshie. I'm sure it's nothing suspicious."
 
+    call RulesIcaStaring
     $ start_ica_staring_minigame(ica_staring_selected_approach)
     $ ica_staring_result = ica_minigame_results.get("staring", {})
 
@@ -5497,6 +5504,7 @@ label IcaDayThree:
     "Ica takes a blue pawn. Winston grabs green, then starts shuffling the movement cards far more dramatically than necessary."
     "The race begins."
 
+    call RulesIcaBoard
     $ start_ica_board_game_minigame(ica_board_selected_approach)
     $ board_result = ica_minigame_results.get("board", {})
 
@@ -5637,6 +5645,7 @@ label IcaDayFour:
 
     "With the rules thoroughly ruined, the two of you get back to the contest."
 
+    call RulesIcaEating
     $ start_ica_eating_minigame(ica_eating_approach, ica_eating_reaction)
     $ eating_result = ica_minigame_results.get("eating", {})
     $ ica_eating_apply_relationship_result()
@@ -5775,6 +5784,7 @@ label IcaDayFive:
     i "Huh. Ulysses is back."
     i "Whatever. Grab the paint when he's looking the other way. We'll finish before he checks in here."
 
+    call RulesIcaPrank
     $ start_ica_prank_minigame(ica_prank_approach)
     $ prank_result = ica_minigame_results.get("prank", {})
     $ ica_prank_apply_relationship_result()

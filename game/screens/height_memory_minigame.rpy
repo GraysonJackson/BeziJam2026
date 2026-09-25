@@ -28,19 +28,12 @@ screen height_memory_minigame():
                 font "fonts/RandoWB.ttf"
                 color "#D26143"
 
-            text "Brandon's thoughts are scattering. Clear anything that does not help judge the figure's height. Preserve the two memories that anchor the silhouette.":
+            text "Clear the distractions. Preserve the two height memories.":
                 xalign 0.5
                 text_align 0.5
                 xmaximum 540
                 size 23
                 color "#251D18"
-
-            text "Mistakes and timeouts return one cleared thought, but you can always recover.":
-                xalign 0.5
-                text_align 0.5
-                xmaximum 540
-                size 20
-                color "#8D3027"
 
         vbox:
             xpos 885
@@ -93,7 +86,7 @@ screen height_memory_minigame():
                         yalign 0.5
                         xsize 245
                         ysize 155
-                        text_size 22
+                        text_size 25
                         text_align 0.5
                         text_color "#251D18"
                         text_hover_color "#D26143"
@@ -120,11 +113,6 @@ screen height_memory_minigame():
             xpos 925
             ypos 840
             spacing 25
-
-            text "No failure screen—just refocus and keep sorting.":
-                yalign 0.5
-                size 20
-                color "#654C3C"
 
             textbutton "Leave board":
                 action Function(abort_height_memory_minigame)

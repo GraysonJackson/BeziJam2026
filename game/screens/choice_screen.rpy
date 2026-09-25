@@ -10,23 +10,41 @@
 screen choice(items):
     style_prefix "choice"
 
-    vbox:
-        for i in items:
-            textbutton i.caption action i.action
+    frame:
+        xalign 0.5
+        ypos 25
+        xsize 1240
+        ysize 900
+        background None
+        padding (20, 20)
+
+        viewport:
+            mousewheel True
+            draggable True
+            pagekeys True
+            scrollbars "vertical"
+
+            vbox:
+                xalign 0.5
+                spacing (10 if len(items) >= 7 else 18)
+                for i in items:
+                    textbutton i.caption:
+                        action i.action
+                        xsize 1140
+                        padding (38, (10 if len(items) >= 7 else 18), 38, (10 if len(items) >= 7 else 18))
+                        text_size (28 if len(items) >= 7 else 34)
 
 
 style choice_vbox:
     xalign 0.5
-    ypos 405
-    yanchor 0.5
-    spacing 33
+    spacing 18
 
 style choice_button:
     is default # This means it doesn't use the usual button styling
-    xysize (926, None)
+    xsize 1140
     background Frame("gui/button/choice_[prefix_]background.png",
         24, 27, 13, 27)
-    padding (38, 15, 13, 15)
+    padding (38, 18, 38, 18)
 
 style choice_button_text:
     is default # This means it doesn't use the usual button text styling
@@ -35,6 +53,8 @@ style choice_button_text:
     idle_color "#008DBF"
     insensitive_color "#778288"
     hover_color "#E99067"
+    text_align 0.5
+    xmaximum 1050
 
 
 

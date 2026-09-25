@@ -78,7 +78,6 @@ screen ica_board_game_minigame():
                                     text " " style "ica_board_marker"
                                 text "[tile_index]" style "ica_board_tile_number"
 
-                text _("Race to space 12. Reach or pass it to finish. Landing on Ica or Winston bumps that pawn back to start—and they can do the same to you.") style "ica_board_hint"
                 text "[ica_board_feedback]" style "ica_board_body"
 
                 if ica_board_phase == "player_turn":
@@ -137,40 +136,40 @@ style ica_board_hint:
 style ica_board_status:
     is gui_text
     color "#00719A"
-    size 23
+    size 26
 
 style ica_board_tile_label:
     is gui_text
     xalign 0.5
     color "#00719A"
-    size 14
+    size 17
 
 style ica_board_tile_number:
     is gui_text
     xalign 0.5
     color "#D26143"
-    size 17
+    size 20
 
 style ica_board_marker:
     is gui_text
     xalign 0.5
     color "#00719A"
-    size 15
+    size 18
 
 style ica_board_player_marker:
     is gui_text
     xalign 0.5
     color "#D26143"
-    size 15
+    size 18
 
 style ica_board_ica_marker:
     is gui_text
     xalign 0.5
     color "#00719A"
-    size 15
+    size 18
 
 style ica_board_winston_marker:
     is gui_text
     xalign 0.5
     color "#4F8A45"
-    size 15
+    size 18

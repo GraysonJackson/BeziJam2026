@@ -41,35 +41,69 @@ label UlyssesFocusComment:
     $ ulysses_favorite_value = ulysses_favorite_route()
     $ ulysses_favorite_name = ULYSSES_ROUTE_DATA[ulysses_favorite_value][0] if ulysses_favorite_value else ""
 
+    $ ulysses_today_route = ulyssesCurrentRoute
+    $ ulysses_today_count = ulysses_completed_visits(ulysses_today_route)
+
     if dayWin == 1:
         u "One day is not a pattern. For now, I assume you're learning how each of them works."
         u "That is sensible. Their reports tell you what they found; spending the day beside them tells you what they might miss."
     elif ulysses_one_each_strategy():
         u "Razzle, Dhampir, Madeline, Nicky, Winston, and Ica. One day with each."
         u "You sampled every category instead of trusting one method to answer every question. That was disciplined."
-    elif ulysses_favorite_value == "ica" and ulysses_route_counts_value["ica"] >= 2:
-        u "You have returned to Ica [ulysses_route_counts_value['ica']] times."
-        u "The first visit looked like an attempt to understand everyone. At this point, I am forced to conclude you simply enjoy not working."
-        menu:
-            "She notices things when it matters.":
-                $ uly += 1
-                u "She does. The difficulty is arranging for 'when it matters' to overlap with office hours."
-            "I like spending time with her.":
-                u "That is at least an honest explanation. It remains a terrible investigative strategy."
-            "I thought the games might become evidence.":
-                $ uly -= 1
-                u "Then tomorrow I recommend investigating the dartboard. Winston has been hiding it in plain sight for years."
-    elif ulysses_favorite_value and ulysses_route_counts_value[ulysses_favorite_value] >= 3:
-        u "You are concentrating heavily on [ulysses_favorite_name]. Repetition gives you depth, provided familiarity does not become assumption."
-        u "Keep asking why their method works. Do not merely become comfortable with the method."
+    elif ulysses_today_count >= 2:
+        $ ulysses_repeat_comment = ULYSSES_REPEAT_COMMENTS[ulysses_today_route][ulysses_today_count]
+        u "[ulysses_repeat_comment]"
+
+        if dayWin == 2:
+            u "Two choices are a preference, not a failure to investigate. I only need you to know what that preference is giving you—and what it is not."
+        elif dayWin == 3:
+            u "A pattern is beginning to form. That can create useful depth if you continue testing the method instead of merely becoming comfortable inside it."
+        elif dayWin == 4:
+            u "Four days is enough time for trust to improve the work and familiarity to distort it. Pay attention to which one is happening."
+        elif dayWin == 5:
+            u "You have invested most of the week here. I am not asking you to abandon that choice; I am asking you to make its limits visible before tomorrow."
+        else:
+            u "The depth is real. So is the responsibility to translate it into an accusation the rest of us can independently review."
+
+        if ulysses_today_route == "ica" and ulysses_today_count == 2:
+            u "I am curious which part brought you back. Not suspicious—curious."
+            menu:
+                "She notices things when it matters.":
+                    $ uly += 1
+                    u "She does. You have also learned not to manufacture urgency merely to hold her attention. That is more perceptive than scolding her."
+                "I like spending time with her.":
+                    $ uly += 1
+                    u "Reasonable. Enjoying a colleague's company is not an investigative flaw by itself. Just keep the case present while you are there."
+                "Her way of thinking is different from mine.":
+                    $ uly += 1
+                    u "Very. Difference is useful when you can explain what it reveals instead of treating it as novelty."
     elif ulysses_distinct_value == dayWin:
-        u "You continue moving through the team rather than settling on one investigator."
-        u "Breadth has value. It also means you will have to connect several incomplete lines yourself."
+        if dayWin == 2:
+            u "You chose a second method today. Comparing two people this early is sensible; neither report has had time to become your default explanation."
+        elif dayWin == 3:
+            u "Three days, three methods. You are building breadth deliberately. Begin noting where the reports overlap before the pile becomes difficult to hold at once."
+        elif dayWin == 4:
+            u "A fourth perspective gives you range, but each line remains shallow. Your notes need to preserve the connections the individual reports do not state."
+        elif dayWin == 5:
+            u "You are one method away from seeing the investigation from every angle. The breadth is useful because you have continued doing the synthesis yourself."
+        else:
+            u "You spent one day with everyone. None of those reports is deep alone, but together they give us a complete cross-check. That was difficult and disciplined."
     elif ulysses_favorite_value:
-        u "You have begun returning to [ulysses_favorite_name], though not exclusively."
-        u "A useful balance, if the return is based on evidence instead of habit."
+        if dayWin <= 3:
+            u "You have begun returning to [ulysses_favorite_name], while still testing another method. That is a healthy balance at this stage."
+        elif dayWin == 4:
+            u "Your time now has a center without becoming exclusive. Use the outside reports to challenge what feels obvious beside [ulysses_favorite_name]."
+        elif dayWin == 5:
+            u "The shape of your investigation is clear: depth with [ulysses_favorite_name], then selected checks elsewhere. Make those checks do real work."
+        else:
+            u "You did not spread your time evenly, but you did not isolate yourself inside one method either. Tomorrow, show me why that balance was enough."
     else:
-        u "Your attention is divided almost evenly. That makes your final synthesis more important than any single report."
+        if dayWin <= 3:
+            u "Your attention is still divided almost evenly. That leaves several possibilities open, which is appropriate this early."
+        elif dayWin <= 5:
+            u "No single method dominates your week. Your synthesis matters more with each report because nobody else's route is doing it for you."
+        else:
+            u "You end the week without a dominant method. The final conclusion will depend on how honestly you connect incomplete evidence."
 
     return
 
@@ -113,7 +147,7 @@ label UlyssesEveningOne:
             else:
                 "You reclaim your half of the call sheets before the grease can reach them."
             "Ulysses gives the slice an approving glance and turns the call sheets so both of you can read them."
-            u "Competent and unafraid of controversial fruit. Promising."
+            u "Pineapple. Winston will be delighted to have an ally and unbearable about it."
         "Take another slice and ask about the photographs on his desk.":
             $ uly += 1
             "You leave the paperwork on his side of the desk and angle your chair toward the photographs instead."
@@ -270,15 +304,42 @@ label UlyssesEveningThree:
 
 label UlyssesEveningFour:
     $ ulysses_day_four_release = "quiet"
-    "The formal report ends, but Ulysses does not immediately open the next folder. He turns his coffee cup between both hands while the jazz record turns behind him."
-    u "Last year, when I was nineteen, I attempted to tell Winston something I had seen. I believed I had phrased it indirectly enough to be safe."
-    u "I was wrong. I suffered a seizure and remained comatose for four months."
-    "The statement is delivered with professional precision. His grip on the cup is the only part of him that does not match it."
+    "Ulysses reaches the final paragraph of your report and taps one changed word with the end of his pen. You wrote that a witness may return tomorrow instead of promising that they will."
+    u "You revised the wording."
+
+    menu:
+        "Say certainty should be earned.":
+            $ uly += 1
+            u "Yes. Especially when certainty is easy to imitate."
+        "Say his warning about future statements stayed with you.":
+            $ uly += 2
+            "The pen goes still beneath his fingers."
+            u "Then you listened more carefully than most people do."
+        "Joke that you feared his red pen.":
+            u "A rational fear, but not the reason I hoped for."
+            "The dry answer eases into a small smile before he closes the report."
+
+    "Instead of opening the next folder, Ulysses refreshes both coffees and lowers the jazz until the office feels private rather than merely quiet. He takes his time returning to the desk."
+    if ulysses_day_three_tension:
+        u "Yesterday ended poorly. Even so, leaving you with only the warning would make the boundary sound arbitrary. It is not."
+    else:
+        u "Yesterday, you asked how I learned the boundary without asking me to demonstrate it. I said I would explain when I could do so honestly."
+
+    "He opens a shallow drawer and removes an old staff photograph. His younger face is easy to find. Beside him stands a coworker whose badge reads DAKOTA."
+    u "Last year, when I was nineteen, Dakota and I were working late. I had seen something that affected our assignment, and I believed I had found language indirect enough to warn them."
+    u "Dakota was a coworker I trusted. That trust made me careless about the difference between wanting to protect someone and being able to tell them why."
+    "His thumb rests against the edge of the photograph. The next sentence takes longer than the rest."
+    u "I tried to tell Dakota. The power stopped me. I suffered a seizure before I finished and remained comatose for four months."
+    "The statement is precise, but it no longer arrives without context. His grip on the photograph is the only part of him that looks rehearsed."
 
     menu:
         "Say he does not owe you any information that risks him.":
             $ uly += 3
             u "I know. Hearing someone else say it is still useful."
+        "Ask about Dakota, not the forbidden warning.":
+            $ uly += 2
+            u "A capable coworker. Patient with me when I was younger and considerably less patient with my habit of treating concern like a logistical problem."
+            u "They did not blame me for what happened. I managed that adequately on my own."
         "Ask what Winston did during those four months.":
             $ uly += 1
             u "Stayed. Handled ATLAS poorly, kept it alive successfully, and insulted every physician who used the phrase 'wait and see.'"
@@ -1175,22 +1236,22 @@ label UlyssesReportWinston6:
 ## Ica reports
 
 label UlyssesReportIca1:
-    u "I have an empty evidence column and a message from Ica saying you investigated cards. I would appreciate clarification."
+    u "I have an empty evidence column and a message from Ica saying you investigated cards. I assume there is context."
     "You describe the floating deck, stale candy, and several increasingly flexible interpretations of the rules."
     if ica_minigame_results.get("cards", {}).get("won"):
-        u "You also won. I am certain that will comfort the victim's family."
+        u "You also won. Not evidence, but apparently important to both of you."
     else:
-        u "You did not return with a win. That detail is irrelevant and somehow makes the report worse."
-    u "It is your first day. Meeting one member of the team before deciding where to focus is reasonable. Once."
+        u "Ica made certain the loss appeared in her message. It has no bearing on the case, so naturally it received the largest handwriting."
+    u "The day did not advance the evidence. It did give you time to understand a colleague whose useful moments are easy to miss if you only watch for conventional effort. On a first day, that has some value."
     menu:
         "Say understanding Ica may matter when she finally acts.":
             $ uly += 2
             $ ulysses_note_reporting_style("thoughtful")
-            u "It may. She is exceptionally capable at precisely the moments that make her prior inactivity most infuriating."
+            u "It may. She is exceptionally capable when something truly catches her attention. Learning what does that is more useful than trying to shame her into performing busyness."
         "Admit you chose to spend the day playing cards.":
             $ uly += 1
             $ ulysses_note_reporting_style("honest")
-            u "Thank you. A useless report becomes worse when dressed as strategy."
+            u "Thank you. An unproductive day reported honestly is easier to account for than one disguised as a strategy."
         "Claim the cards tested suspect psychology.":
             $ uly -= 2
             $ ulysses_note_reporting_style("deflecting")
@@ -1200,26 +1261,26 @@ label UlyssesReportIca1:
 
 
 label UlyssesReportIca2:
-    u "A staring contest. You returned to the murder investigation and conducted a staring contest."
+    u "Ica's report says 'staring contest' and nothing else. I take it that omission was accurate rather than economical."
     "You explain the rules, the stolen sodas, and how an afternoon vanished while neither of you admitted that looking at the clock counted as losing."
     if ica_minigame_results.get("staring", {}).get("won"):
         u "Congratulations on prevailing in the only contest where sustained eye irritation is a strategy."
     else:
         u "Ica's message included the phrase 'easy win.' She appears to consider that the day's official result."
-    u "I believed yesterday was social reconnaissance. Today has weakened that interpretation."
+    u "So this was not merely first-day social reconnaissance. You chose her company again. That is allowed; I need the choice named honestly so we can account for the evidence you did not pursue elsewhere."
     menu:
         "Admit you went back because you enjoyed it.":
             $ uly += 1
             $ ulysses_note_reporting_style("honest")
-            u "Honest, at least. Enjoyment is permitted. It does not extend the deadline."
+            u "That is honest. Enjoyment is permitted, recruit. The deadline remains, but I am not asking you to apologize for liking someone."
         "Say Ica was testing your focus.":
             $ uly -= 2
             $ ulysses_note_reporting_style("deflecting")
-            u "Then she has confirmed you can focus on avoiding work for an entire day."
+            u "That explanation is doing more work than either participant did. Give me the simpler truth next time."
         "Promise to weigh the lost evidence against what you learned about her.":
             $ uly += 2
             $ ulysses_note_reporting_style("thoughtful")
-            u "Do that. Choosing a person is still choosing against five other methods."
+            u "Do that. Choosing one person also means leaving five methods unused today; understanding the trade is more useful than pretending it did not exist."
     return
 
 
@@ -1230,18 +1291,20 @@ label UlyssesReportIca3:
         u "You won the race. Winston has requested a rematch during hours I have explicitly labeled operational."
     else:
         u "Winston's supplementary report consists of a hand-drawn victory diagram. I will not preserve it."
-    u "Two cofounders run this organization. Apparently one spent the day being bumped back to start."
+    u "Two cofounders run this organization. Today, one of them chose to spend several hours being bumped back to start with you."
+    u "Winston rarely gives his full attention to recreation unless he thinks the room needs it. I am willing to count that as information about the team, if not the case."
     menu:
-        "Admit the game was fun and entirely unproductive.":
+        "Admit the game was fun and produced no evidence.":
             $ uly += 1
             $ ulysses_note_reporting_style("honest")
-            u "A precise report. Deeply disappointing content."
+            u "A precise report. The case gained nothing, but you learned something real about how they work together. Keep those categories separate and I have no objection."
         "Point out that Winston joined voluntarily.":
-            u "Winston would voluntarily join a competition to see who could ignore a fire alarm longest. That does not improve your defense."
+            $ uly += 1
+            u "He did. That tells me the day was not merely Ica avoiding work; Winston decided the pause had value too."
         "Say you saw how naturally Winston and Ica coordinate.":
             $ uly += 2
             $ ulysses_note_reporting_style("thoughtful")
-            u "They understand each other's selective effort. Useful knowledge, provided you eventually apply it to work."
+            u "They understand each other's selective effort. That is useful knowledge of the team, even if it belongs outside the evidence file."
     return
 
 

@@ -4,6 +4,51 @@ define ULYSSES_WARM_THRESHOLD = 18
 define ULYSSES_HIGH_THRESHOLD = 36
 define ULYSSES_DATE_ACCEPT_THRESHOLD = 46
 
+define ULYSSES_REPEAT_COMMENTS = {
+    "razzle": {
+        2: "Razzle's energy can make her process look less disciplined than it is. You returned and saw how carefully she listens beneath the noise.",
+        3: "Three days with Razzle have given you a strong witness record. Remember that enthusiasm can fill silence before a witness has finished thinking.",
+        4: "You and Razzle have developed an efficient rhythm. Preserve the moments where one of you challenges the other's first impression.",
+        5: "At this point, Razzle trusts you enough to show uncertainty instead of covering it with momentum. That is valuable evidence and valuable trust.",
+        6: "You chose Razzle for the full investigation. You know the strengths and blind spots of her method well enough that tomorrow's judgment must account for both.",
+    },
+    "dhampir": {
+        2: "Dhampir makes difficult work look casual because he does not need an audience for competence. Returning gave you time to see the work beneath the jokes.",
+        3: "Three scenes with Dhampir have taught you how he reconstructs violence without sensationalizing the victim. Keep that distinction in your report.",
+        4: "You are learning when Dhampir's humor releases pressure and when the suit means he needs the room to become serious. Both versions are him.",
+        5: "Dhampir trusts technique more than appearances. Your reports are strongest when you do the same instead of treating his confidence as proof.",
+        6: "You stayed with Dhampir through the entire field investigation. Tomorrow, use what his method established without borrowing his certainty as your own.",
+    },
+    "madeline": {
+        2: "Madeline responds to demonstrated competence more readily than reassurance. You returned prepared, and she gave you more responsibility because of it.",
+        3: "Three days in the lab have taught you to separate Madeline's tone from the precision of what she is saying. That has improved both the work and your reports.",
+        4: "Madeline challenges assumptions aggressively, including her own when the data requires it. Make sure your growing ease with her does not exempt either of you from that standard.",
+        5: "She has started explaining the thought behind her conclusions instead of only giving you the result. That is a significant form of trust from Madeline.",
+        6: "You built the case through Madeline's laboratory method from the first print to the final category. The chain is deep; tomorrow you still have to interpret it.",
+    },
+    "nicky": {
+        2: "Nicky's procedure is not a lack of instinct. It is how she makes instinct answerable to someone besides herself. Your second day made that clearer.",
+        3: "Three days with Nicky have given you records that can survive scrutiny. Do not lose the human context she gathered while building them.",
+        4: "You and Nicky work quickly together now. Speed is useful so long as neither of you mistakes familiarity for corroboration.",
+        5: "Nicky has begun letting you see the strain behind the badge without asking you to carry it for her. Treat that confidence carefully.",
+        6: "You followed Nicky's process for the entire case. Tomorrow's accusation should be as direct as she is and as supported as the law requires.",
+    },
+    "winston": {
+        2: "Winston's foolishness is usually deliberate. Returning gave you a better view of how quickly he notices when a room actually needs him to become serious.",
+        3: "Three days with Winston have shown you that improvisation is still a method, even if documenting it gives me a headache. Record the decisions beneath the performance.",
+        4: "You are beginning to anticipate Winston's feints without dismissing them. That matters; people often tell him more while assuming he is not paying attention.",
+        5: "Winston trusts you enough to stop filling every quiet moment. I recommend recognizing that as confidence, not an invitation to become careless.",
+        6: "You spent the full investigation beside Winston. His instincts gave you depth, but tomorrow the conclusion must be explainable without relying on charm or luck.",
+    },
+    "ica": {
+        2: "You chose Ica again. Her pace is not mine, but she notices more than people assume when they mistake disinterest in work for disinterest in everything.",
+        3: "Three days with Ica have shown you the difference between laziness and incapacity. She is entirely comfortable with the first and has given you no reason to suspect the second.",
+        4: "You seem to understand that Ica dislikes performances of urgency. She responds better when someone leaves room for her to care without demanding that she display it.",
+        5: "By now, returning to Ica is plainly a choice rather than an accident. I may not share her approach to labor, but I understand why her company appeals to you.",
+        6: "You trusted Ica's attention for the entire week. The route produced less conventional paperwork, but you learned exactly when she decides something matters.",
+    },
+}
+
 default ulyssesEveningsCompleted = 0
 default ulyssesReportHistory = []
 default ulyssesReportingStyle = {"honest": 0, "thoughtful": 0, "deflecting": 0}

@@ -30,7 +30,7 @@ screen ica_staring_minigame():
                 spacing 18
 
                 text _("Ica's Staring Contest") style "ica_staring_title"
-                text _("First person to blink loses. Easier tactics help with the contest, but Ica likes people who can relax.") style "ica_staring_body"
+                text _("Choose how you want to play.") style "ica_staring_body"
 
                 hbox:
                     xalign 0.5
@@ -71,19 +71,12 @@ screen ica_staring_minigame():
 
         elif ica_staring_phase == "active":
             text _("Ica's Staring Contest") style "ica_staring_title":
-                xpos 0
                 ypos 2
                 xsize 1400
 
             text _("Approach: [ica_staring_approach_label(ica_staring_approach)]   |   Difficulty reduction: [ica_staring_difficulty_reduction]") style "ica_staring_status":
-                xpos 0
                 ypos 70
                 xsize 1400
-
-            text _("[ica_staring_approach_description(ica_staring_approach)]") style "ica_staring_hint":
-                xpos 120
-                ypos 112
-                xsize 1160
 
             frame:
                 xpos 625
@@ -146,12 +139,10 @@ screen ica_staring_minigame():
                 text_align 1.0
 
             text _("[ica_staring_feedback]") style "ica_staring_feedback":
-                xpos 100
                 ypos 760
                 xsize 1300
 
             text _("Eye contact: [int(ica_staring_success_time)] / [ica_staring_required_hold]s   |   Contest: [int(ica_staring_elapsed)] / [int(ICA_STARING_DURATION)]s") style "ica_staring_status":
-                xpos 100
                 ypos 690
                 xsize 1300
 
@@ -168,11 +159,6 @@ screen ica_staring_minigame():
                 xsize 490
                 ysize 65
                 action Function(ica_staring_click)
-
-            text _("Space also pulses toward the target. Repeated clicks keep your focus from decaying.") style "ica_staring_hint":
-                xpos 120
-                ypos 865
-                xsize 1160
 
             textbutton _("Withdraw"):
                 xpos 1280

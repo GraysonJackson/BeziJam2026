@@ -31,12 +31,10 @@ screen nicky_memory_minigame():
             padding (36, 28, 36, 28)
 
         text _("NICKY'S CASE-FILE MATCH") style "nicky_memory_title":
-            xpos 0
             ypos 0
             xsize 1428
 
         text _("Round [nicky_phase_number] of 2 — [nicky_phase_name]") style "nicky_memory_subtitle":
-            xpos 0
             ypos 56
             xsize 1428
 
@@ -95,9 +93,6 @@ screen nicky_memory_minigame():
                     else:
                         text _("Time: REVIEW MODE") style "nicky_memory_timer_expired"
 
-                    null height 4
-                    text _("Match each file to the independent record that supports or corrects it.") style "nicky_memory_hint"
-
                     textbutton _("REVEAL ALL BRIEFLY"):
                         action Function(nicky_memory_reveal_all)
                         sensitive nicky_memory_phase == "matching" and not nicky_memory_selected_ids and not nicky_memory_peek_active
@@ -149,7 +144,6 @@ screen nicky_memory_minigame():
                         action Function(finish_nicky_memory_minigame)
 
             text _("[nicky_memory_feedback]") style "nicky_memory_feedback":
-                xpos 140
                 ypos 800
                 xsize 1220
 
@@ -177,7 +171,7 @@ style nicky_memory_heading:
 style nicky_memory_body:
     is gui_text
     color "#00719A"
-    size 21
+    size 24
 
 style nicky_memory_timer:
     is gui_text
@@ -201,7 +195,7 @@ style nicky_memory_card_text:
     xalign 0.5
     yalign 0.5
     text_align 0.5
-    size 17
+    size 20
     bold True
 
 style nicky_memory_feedback:

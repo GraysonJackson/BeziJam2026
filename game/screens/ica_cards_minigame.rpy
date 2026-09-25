@@ -42,8 +42,6 @@ screen ica_cards_minigame():
                     text _("Round [ica_cards_round] / [ica_cards_round_count]") style "ica_cards_status"
                     text _("You [ica_cards_player_score] - Ica [ica_cards_ica_score]") style "ica_cards_status"
 
-                text _("[ica_cards_approach_description(ica_cards_approach)]") style "ica_cards_hint"
-
                 hbox:
                     xalign 0.5
                     spacing 80
@@ -70,7 +68,7 @@ screen ica_cards_minigame():
                                 text _("?") style "ica_cards_card"
 
                 if ica_cards_phase == "play":
-                    text _("Call whether your hidden card will be higher or lower. Your one double call awards two points—to whoever wins it.") style "ica_cards_body"
+                    text _("Make your call.") style "ica_cards_body"
                     hbox:
                         xalign 0.5
                         spacing 18
@@ -91,7 +89,6 @@ screen ica_cards_minigame():
 
                 elif ica_cards_phase == "complete_pending":
                     text _("[ica_cards_result_text()]") style "ica_cards_body"
-                    text _("The final result is settled by score, then by the deterministic high-card tiebreaker if needed.") style "ica_cards_hint"
                     textbutton _("Finish Game") action Function(finish_ica_cards_minigame)
 
                 if ica_cards_phase in ("play", "feedback"):
@@ -120,7 +117,7 @@ style ica_cards_hint:
 style ica_cards_status:
     is gui_text
     color "#00719A"
-    size 24
+    size 27
 
 style ica_cards_card_label:
     is gui_text

@@ -28,12 +28,10 @@ screen madeline_centrifuge_minigame():
             padding (38, 30, 38, 30)
 
         text "MADELINE'S CENTRIFUGE TEST" style "madeline_centrifuge_title":
-            xpos 0
             ypos 0
             xsize 1464
 
-        text "Balance the opposing tube masses, run the rotor, then read the separated bands." style "madeline_centrifuge_subtitle":
-            xpos 0
+        text "LIVE SAMPLE SEPARATION" style "madeline_centrifuge_subtitle":
             ypos 56
             xsize 1464
 
@@ -48,8 +46,6 @@ screen madeline_centrifuge_minigame():
             vbox:
                 spacing 14
                 text "TUBE BANK" style "madeline_centrifuge_heading"
-                text "Select a tube, then select a rotor slot." style "madeline_centrifuge_body"
-
                 for tube_id, tube_data in MADELINE_CENTRIFUGE_TUBES.items():
                     $ tube_is_placed = tube_id in madeline_centrifuge_slots.values()
                     textbutton "[tube_data['label']]  •  [tube_data['mass']]g":
@@ -74,7 +70,6 @@ screen madeline_centrifuge_minigame():
             padding (25, 22, 25, 22)
 
             text "ROTOR" style "madeline_centrifuge_heading_light":
-                xpos 0
                 ypos 0
                 xsize 560
 
@@ -176,9 +171,10 @@ screen madeline_centrifuge_minigame():
             text "[madeline_centrifuge_feedback]" style "madeline_centrifuge_feedback"
 
         textbutton "Let Madeline finish":
-            xpos 1270
+            xpos 1250
             ypos 810
-            xsize 220
+            xsize 240
+            text_size 22
             action Function(madeline_centrifuge_assist)
 
 style madeline_centrifuge_title:
@@ -213,12 +209,12 @@ style madeline_centrifuge_heading_light:
 style madeline_centrifuge_body:
     is gui_text
     color "#251D18"
-    size 20
+    size 23
 
 style madeline_centrifuge_rotor_text:
     is gui_text
     color "#FFFFFF"
-    size 21
+    size 24
     bold True
 
 style madeline_centrifuge_warning:

@@ -19,12 +19,10 @@ screen dhampir_ispy_minigame():
             padding (38, 30, 38, 30)
 
         text _("Madeline's Forensic Scanner") style "dhampir_ispy_title":
-            xpos 0
             ypos 0
             xsize 1424
 
-        text _("Find three details that contradict Dhampir's projected attack path.") style "dhampir_ispy_subtitle":
-            xpos 0
+        text _("FORENSIC RECONSTRUCTION") style "dhampir_ispy_subtitle":
             ypos 58
             xsize 1424
 
@@ -90,9 +88,6 @@ screen dhampir_ispy_minigame():
                 text _("False leads: [dhampir_ispy_mistakes]") style "dhampir_ispy_hud_body"
                 text _("Scanner hints: [dhampir_ispy_hints_used]") style "dhampir_ispy_hud_body"
 
-                null height 8
-                text _("Inspect objects in the projected room. A useful contradiction turns green; an explained detail becomes gray.") style "dhampir_ispy_hint"
-
                 if dhampir_ispy_phase == "active":
                     textbutton _("CALIBRATE HINT") action Function(dhampir_ispy_hint)
                 elif dhampir_ispy_phase == "complete_pending":
@@ -100,7 +95,6 @@ screen dhampir_ispy_minigame():
                     textbutton _("FINISH SCAN") action Function(finish_dhampir_ispy_minigame)
 
         text _("[dhampir_ispy_feedback]") style "dhampir_ispy_feedback":
-            xpos 90
             ypos 770
             xsize 1320
 
@@ -137,7 +131,7 @@ style dhampir_ispy_target_text:
     text_align 0.5
     color "#FFFFFF"
     insensitive_color "#DDE8E8"
-    size 16
+    size 19
     bold True
 
 style dhampir_ispy_hud_heading:
@@ -149,7 +143,7 @@ style dhampir_ispy_hud_heading:
 style dhampir_ispy_hud_body:
     is gui_text
     color "#00719A"
-    size 22
+    size 25
 
 style dhampir_ispy_hint:
     is gui_text

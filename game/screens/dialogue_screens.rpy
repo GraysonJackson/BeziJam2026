@@ -67,7 +67,7 @@ init python:
 style window:
     xalign 0.0
     yalign 1.0
-    xysize (999, 277)
+    xysize (1920, 277)
     
     padding (40, 10, 40, 40)
 
@@ -76,6 +76,7 @@ style say_dialogue:
     adjust_spacing False
     ypos 50
     xpos 650
+    xsize 1190
     color "#D26143"
     outlines [ (absolute(2), "#ffffffff", 0, 0) ]
     font "MonaspaceNeon-Regular.otf"
@@ -91,7 +92,7 @@ style say_thought:
 style namebox:
     xpos 600
     yoffset -20
-    xysize (None, None)
+    xsize 500
     background Frame("gui/namebox.png", 5, 5, 5, 5, tile=False, xalign=0.0)
     padding (25, 5, 50, 10)
 
