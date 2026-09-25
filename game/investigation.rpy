@@ -31,27 +31,27 @@ define suspectAttributes = {
 ## a single suspect. This is keyed by the selected killer and is not owned by
 ## any one character route.
 define singleEliminationByKiller = {
-    1: 2,
-    2: 5,
-    3: 1,
-    4: 7,
-    5: 4,
-    6: 9,
-    7: 8,
-    8: 3,
-    9: 6,
+    1: 3,
+    2: 1,
+    3: 2,
+    4: 5,
+    5: 6,
+    6: 4,
+    7: 9,
+    8: 7,
+    9: 8,
 }
 
 define razzleFocusedRoutePlan = {
-    1: {"height": "Average"},
-    2: {"height": "Tall"},
-    3: {"height": "Short"},
-    4: {"height": "Short"},
-    5: {"height": "Average"},
-    6: {"height": "Tall"},
-    7: {"height": "Average"},
-    8: {"height": "Tall"},
-    9: {"height": "Short"},
+    1: {"height": "Tall"},
+    2: {"height": "Short"},
+    3: {"height": "Average"},
+    4: {"height": "Tall"},
+    5: {"height": "Short"},
+    6: {"height": "Average"},
+    7: {"height": "Tall"},
+    8: {"height": "Short"},
+    9: {"height": "Average"},
 }
 
 ## Dhampir's first scene result is selected so that his third visit removes
@@ -124,6 +124,45 @@ define nickyFocusedRoutePlan = {
     9: {"build": "Average"},
 }
 
+## Winston's interrogation route clears one person through a concrete lie on
+## Visit 1, then clears two individually tested people through the pressure
+## exercise on Visit 3.  All three early clears sit outside the killer's
+## reaction trio so Visit 6 can positively retain exactly three suspects.
+define winstonDayOneEliminationByKiller = {
+    1: 2,
+    2: 5,
+    3: 1,
+    4: 7,
+    5: 4,
+    6: 9,
+    7: 8,
+    8: 5,
+    9: 6,
+}
+
+define winstonDayThreeEliminationsByKiller = {
+    1: [3, 6],
+    2: [1, 8],
+    3: [2, 7],
+    4: [1, 2],
+    5: [2, 7],
+    6: [1, 8],
+    7: [1, 5],
+    8: [1, 2],
+    9: [3, 8],
+}
+
+## Stable route salts make mixed-route fallback selections deterministic.
+## Authored results always remain first in the priority order; these values
+## matter only when an earlier investigator has already cleared that person.
+define investigationRouteSalts = {
+    "razzle": 1,
+    "madeline": 3,
+    "winston": 5,
+    "dhampir": 7,
+    "nicky": 9,
+}
+
 ## All five evidence characters live here. Generic cycle visits select a
 ## ruled-out attribute value that never contains the saved killer. Razzle,
 ## Madeline, and Dhampir use focused mappings where their route structure
@@ -148,9 +187,9 @@ define investigationRoutes = {
     "winston": {
         "name": "Winston",
         "visits": {
-            1: {"kind": "single", "eliminations": singleEliminationByKiller, "template": "The interrogation clears {suspect}."},
-            3: {"kind": "attribute", "attribute": "temperament", "cycle": {"Calm": "Passionate", "Passionate": "Calm", "Nervous": "Passionate"}, "template": "Behavioral evidence rules out the {value} temperament group."},
-            6: {"kind": "attribute", "attribute": "kill_reaction", "cycle": {"Panicked": "Calculated", "Calculated": "None", "None": "Panicked"}, "template": "The interrogation rules out the {value} killing-reaction group."},
+            1: {"kind": "single", "eliminations": winstonDayOneEliminationByKiller, "template": "The interrogation clears {suspect}."},
+            3: {"kind": "focused_pair", "attribute": "temperament", "eliminations": winstonDayThreeEliminationsByKiller, "template": "Controlled stress interviews clear {suspects}."},
+            6: {"kind": "retain_killer_attribute", "attribute": "kill_reaction", "template": "Corroborated testimony identifies the killer's reaction as {value}."},
         },
     },
     "dhampir": {
@@ -175,6 +214,7 @@ default killer = 0
 default remainingSuspects = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 default investigationClues = []
 default recordedClueKeys = []
+default recordedRouteReveals = {}
 default playerInvestigationNotes = ""
 
 init python:
@@ -187,14 +227,15 @@ init python:
             validate_investigation_routes()
 
     def validate_investigation_routes():
-        """Fail early if a planned route can eliminate its generated killer."""
+        """Validate pure routes and every legal six-day mixed-route state."""
         for route_id in store.investigationRoutes:
             for killer_id in store.suspectNames:
                 active = set(store.suspectNames.keys())
                 counts = []
 
                 for visit in sorted(store.investigationRoutes[route_id]["visits"]):
-                    reveal = get_planned_route_reveal(route_id, visit, killer_id)
+                    reveal = get_planned_route_reveal(
+                        route_id, visit, killer_id, active_suspects=active)
                     if killer_id in reveal["eliminated"]:
                         raise Exception("{} visit {} eliminates killer {}.".format(
                             route_id, visit, killer_id))
@@ -217,7 +258,7 @@ init python:
                             "Razzle killer {} left non-matching hair suspects {}.".format(
                                 killer_id, wrong_hair))
 
-                if route_id in ("madeline", "dhampir", "nicky") and counts != [8, 6, 3]:
+                if route_id in ("madeline", "winston", "dhampir", "nicky") and counts != [8, 6, 3]:
                     raise Exception("{} killer {} produced counts {}, not 8/6/3.".format(
                         store.investigationRoutes[route_id]["name"], killer_id, counts))
 
@@ -268,10 +309,161 @@ init python:
                             "Nicky killer {} has duplicate wound/blood hints {}."
                             .format(killer_id, soft_profiles))
 
-    def get_planned_route_reveal(route_id, visit, killer_id=None):
+                if route_id == "winston":
+                    killer_reaction = store.suspectAttributes[killer_id]["kill_reaction"]
+                    wrong_reaction = [
+                        suspect_id for suspect_id in active
+                        if store.suspectAttributes[suspect_id]["kill_reaction"] != killer_reaction
+                    ]
+                    if wrong_reaction:
+                        raise Exception(
+                            "Winston killer {} left wrong-reaction suspects {}."
+                            .format(killer_id, wrong_reaction))
+
+        validate_mixed_investigation_routes()
+
+    def validate_mixed_investigation_routes():
+        """Explore every reachable six-day evidence state without brute-force duplication."""
+        route_ids = tuple(sorted(store.investigationRoutes.keys()))
+        choice_ids = route_ids + ("ica",)
+        expected_by_visit = {1: 1, 3: 2, 6: 3}
+
+        for killer_id in store.suspectNames:
+            initial_visits = tuple([0 for route_id in route_ids])
+            states = {(initial_visits, tuple(sorted(store.suspectNames.keys())))}
+
+            for day_index in range(6):
+                next_states = set()
+                for visit_tuple, active_tuple in states:
+                    active = set(active_tuple)
+                    for choice_id in choice_ids:
+                        visits = dict(zip(route_ids, visit_tuple))
+                        next_active = set(active)
+
+                        if choice_id != "ica":
+                            visits[choice_id] += 1
+                            visit = visits[choice_id]
+                            if visit in expected_by_visit:
+                                reveal = get_planned_route_reveal(
+                                    choice_id,
+                                    visit,
+                                    killer_id,
+                                    active_suspects=next_active,
+                                )
+                                removed = [
+                                    suspect_id for suspect_id in reveal["eliminated"]
+                                    if suspect_id in next_active
+                                ]
+                                expected = expected_by_visit[visit]
+                                if len(removed) != expected:
+                                    raise Exception(
+                                        "Mixed route day {} killer {} {} visit {} removed {}; expected {}."
+                                        .format(day_index + 1, killer_id, choice_id,
+                                                visit, removed, expected))
+                                if killer_id in removed:
+                                    raise Exception(
+                                        "Mixed route {} visit {} eliminated killer {}."
+                                        .format(choice_id, visit, killer_id))
+                                next_active.difference_update(removed)
+
+                        next_states.add((
+                            tuple(visits[route_id] for route_id in route_ids),
+                            tuple(sorted(next_active)),
+                        ))
+                states = next_states
+
+            for visit_tuple, active_tuple in states:
+                if all(visit == 1 for visit in visit_tuple):
+                    if len(active_tuple) != 4 or killer_id not in active_tuple:
+                        raise Exception(
+                            "One-each strategy for killer {} left {}, not four including the killer."
+                            .format(killer_id, active_tuple))
+
+    def _investigation_priority(route_id, killer_id, preferred_ids):
+        """Return a stable killer-safe priority list led by authored targets."""
+        priority = []
+        for suspect_id in preferred_ids:
+            if suspect_id != killer_id and suspect_id not in priority:
+                priority.append(suspect_id)
+
+        salt = store.investigationRouteSalts.get(route_id, 0)
+        rotated = list(sorted(store.suspectNames.keys()))
+        offset = (killer_id + salt) % len(rotated)
+        rotated = rotated[offset:] + rotated[:offset]
+        for suspect_id in rotated:
+            if suspect_id != killer_id and suspect_id not in priority:
+                priority.append(suspect_id)
+        return priority
+
+    def _adapt_early_reveal(route_id, visit, killer_id, active_suspects,
+                            preferred_ids, attribute=None, preferred_value=None):
+        """Choose unused innocents while preserving authored pure-route results."""
+        expected = 1 if visit == 1 else 2
+        active = set(active_suspects)
+        active.discard(killer_id)
+        preferred_active = [
+            suspect_id for suspect_id in preferred_ids
+            if suspect_id in active
+        ]
+
+        if len(preferred_active) >= expected:
+            chosen = preferred_active[:expected]
+        else:
+            chosen = list(preferred_active)
+            priority = _investigation_priority(
+                route_id, killer_id, preferred_ids)
+
+            if attribute:
+                candidate_values = []
+                if preferred_value is not None:
+                    candidate_values.append(preferred_value)
+                for suspect_id in priority:
+                    value = store.suspectAttributes[suspect_id][attribute]
+                    if (value != store.suspectAttributes[killer_id][attribute]
+                            and value not in candidate_values):
+                        candidate_values.append(value)
+
+                for value in candidate_values:
+                    same_value = [
+                        suspect_id for suspect_id in priority
+                        if (suspect_id in active
+                            and suspect_id not in chosen
+                            and store.suspectAttributes[suspect_id][attribute] == value)
+                    ]
+                    for suspect_id in same_value:
+                        chosen.append(suspect_id)
+                        if len(chosen) == expected:
+                            break
+                    if len(chosen) == expected:
+                        break
+
+            if len(chosen) < expected:
+                for suspect_id in priority:
+                    if suspect_id in active and suspect_id not in chosen:
+                        chosen.append(suspect_id)
+                        if len(chosen) == expected:
+                            break
+
+        if len(chosen) != expected:
+            raise Exception(
+                "Could not adapt {} visit {} for killer {} from active {}."
+                .format(route_id, visit, killer_id, sorted(active_suspects)))
+        return sorted(chosen)
+
+    def get_planned_route_reveal(route_id, visit, killer_id=None,
+                                 active_suspects=None):
         """Resolve one route/visit into a killer-safe clue and suspect list."""
+        clue_key = "{}_visit_{}".format(route_id, visit)
+        use_saved_state = killer_id is None and active_suspects is None
+        if use_saved_state and clue_key in store.recordedRouteReveals:
+            return dict(store.recordedRouteReveals[clue_key])
+
         if killer_id is None:
             killer_id = store.killer
+        if active_suspects is None:
+            active_suspects = set(store.remainingSuspects)
+        else:
+            active_suspects = set(active_suspects)
 
         route = store.investigationRoutes.get(route_id)
         if route is None or visit not in route["visits"]:
@@ -282,10 +474,28 @@ init python:
 
         if kind == "single":
             suspect_id = reveal["eliminations"][killer_id]
-            eliminated_ids = [suspect_id]
+            eliminated_ids = _adapt_early_reveal(
+                route_id, visit, killer_id, active_suspects, [suspect_id])
+            suspect_id = eliminated_ids[0]
             value = store.suspectAttributes[suspect_id]["unique_id"]
             clue_text = reveal["template"].format(
                 suspect=store.suspectNames[suspect_id], value=value)
+        elif kind == "focused_pair":
+            attribute = reveal["attribute"]
+            preferred_ids = list(reveal["eliminations"][killer_id])
+            eliminated_ids = _adapt_early_reveal(
+                route_id,
+                visit,
+                killer_id,
+                active_suspects,
+                preferred_ids,
+                attribute=attribute,
+            )
+            value = "Individual profiles"
+            suspect_text = " and ".join(
+                store.suspectNames[suspect_id] for suspect_id in eliminated_ids)
+            clue_text = reveal["template"].format(
+                suspects=suspect_text, value=value)
         else:
             attribute = reveal["attribute"]
             if kind == "retain_killer_attribute":
@@ -296,43 +506,97 @@ init python:
                 ])
             elif kind == "razzle_attribute":
                 value = store.razzleFocusedRoutePlan[killer_id][attribute]
-                eliminated_ids = sorted([
+                preferred_ids = sorted([
                     suspect_id for suspect_id, attributes in store.suspectAttributes.items()
                     if attributes[attribute] == value
                 ])
+                eliminated_ids = _adapt_early_reveal(
+                    route_id, visit, killer_id, active_suspects,
+                    preferred_ids, attribute=attribute,
+                    preferred_value=value)
             elif kind == "madeline_attribute":
                 value = store.madelineFocusedRoutePlan[killer_id][attribute]
-                eliminated_ids = sorted([
+                preferred_ids = sorted([
                     suspect_id for suspect_id, attributes in store.suspectAttributes.items()
                     if attributes[attribute] == value
                 ])
+                eliminated_ids = _adapt_early_reveal(
+                    route_id, visit, killer_id, active_suspects,
+                    preferred_ids, attribute=attribute,
+                    preferred_value=value)
             elif kind == "nicky_attribute":
                 value = store.nickyFocusedRoutePlan[killer_id][attribute]
-                eliminated_ids = sorted([
+                preferred_ids = sorted([
                     suspect_id for suspect_id, attributes in store.suspectAttributes.items()
                     if attributes[attribute] == value
                 ])
+                eliminated_ids = _adapt_early_reveal(
+                    route_id, visit, killer_id, active_suspects,
+                    preferred_ids, attribute=attribute,
+                    preferred_value=value)
             else:
                 killer_value = store.suspectAttributes[killer_id][attribute]
                 value = reveal["cycle"][killer_value]
-                eliminated_ids = sorted([
+                preferred_ids = sorted([
                     suspect_id for suspect_id, attributes in store.suspectAttributes.items()
                     if attributes[attribute] == value
                 ])
+                eliminated_ids = _adapt_early_reveal(
+                    route_id, visit, killer_id, active_suspects,
+                    preferred_ids, attribute=attribute,
+                    preferred_value=value)
             clue_text = reveal["template"].format(value=value)
+
+        if visit in (1, 3):
+            preferred_set = set(preferred_ids if kind != "single" else [reveal["eliminations"][killer_id]])
+            adaptive = not set(eliminated_ids).issubset(preferred_set)
+        else:
+            adaptive = False
 
         if killer_id in eliminated_ids:
             raise Exception("Planned reveal {} visit {} eliminates killer {}.".format(
                 route_id, visit, killer_id))
 
-        return {
+        result = {
             "route_id": route_id,
             "route": route["name"],
             "visit": visit,
             "text": clue_text,
             "value": value,
             "eliminated": eliminated_ids,
+            "adaptive": adaptive,
+            "details": [
+                {
+                    "id": suspect_id,
+                    "name": store.suspectNames[suspect_id],
+                    "attributes": store.suspectAttributes[suspect_id],
+                }
+                for suspect_id in eliminated_ids
+            ],
         }
+
+        if visit == 3:
+            attribute = reveal.get("attribute")
+            selected_values = set(
+                store.suspectAttributes[suspect_id][attribute]
+                for suspect_id in eliminated_ids
+            ) if attribute else set()
+            if len(selected_values) == 1:
+                selected_value = list(selected_values)[0]
+                active_with_value = set(
+                    suspect_id for suspect_id in active_suspects
+                    if (suspect_id != killer_id
+                        and store.suspectAttributes[suspect_id][attribute] == selected_value)
+                )
+                category_complete = active_with_value == set(eliminated_ids)
+            else:
+                category_complete = False
+            result["scope"] = "category" if category_complete else "individual"
+            result["selected_values"] = sorted(selected_values)
+        else:
+            result["scope"] = "single" if visit == 1 else "category"
+
+        return result
 
     def record_investigation_clue(clue_key, route, visit, clue_text, eliminated_ids, expected_count=None):
         """Record one clue and remove its suspects exactly once."""
@@ -378,11 +642,17 @@ init python:
                                     expected_count=None):
         """Calculate, apply, and log a route reveal without duplicating IDs."""
         reveal = get_planned_route_reveal(route_id, visit)
-        return record_investigation_clue(
-            "{}_visit_{}".format(route_id, visit),
+        clue_key = "{}_visit_{}".format(route_id, visit)
+        removed_count = record_investigation_clue(
+            clue_key,
             reveal["route"],
             visit,
             clue_text or reveal["text"],
             reveal["eliminated"],
             expected_count=expected_count,
         )
+        if clue_key not in store.recordedRouteReveals:
+            saved_reveals = dict(store.recordedRouteReveals)
+            saved_reveals[clue_key] = dict(reveal)
+            store.recordedRouteReveals = saved_reveals
+        return removed_count

@@ -18,6 +18,7 @@ screen nicky_memory_minigame():
     $ nicky_phase_name = NICKY_MEMORY_PHASE_NAMES[nicky_memory_phase_index]
     $ nicky_matches = len(nicky_memory_matched_pairs)
     $ nicky_build_result = nicky_memory_reveal.get("value", "")
+    $ nicky_individual_result = nicky_memory_reveal.get("scope") == "individual"
 
     fixed:
         xalign 0.5
@@ -137,8 +138,12 @@ screen nicky_memory_minigame():
                     spacing 28
 
                     text _("CORROBORATED RESULT") style "nicky_memory_result_title"
-                    text _("The surviving measurements do not support a [nicky_build_result] attacker.") style "nicky_memory_result_body"
-                    text _("This evidence rules out the remaining suspects in that build group. The result comes from the saved case seed, never from speed or mistakes.") style "nicky_memory_result_explanation"
+                    if nicky_individual_result:
+                        text _("The surviving measurements clear two individually tested suspect profiles.") style "nicky_memory_result_body"
+                        text _("Earlier mixed-route evidence changed which files required review. The result still clears two active innocents and never depends on speed or mistakes.") style "nicky_memory_result_explanation"
+                    else:
+                        text _("The surviving measurements do not support a [nicky_build_result] attacker.") style "nicky_memory_result_body"
+                        text _("This evidence rules out the remaining suspects in that build group. The result comes from the saved case seed, never from speed or mistakes.") style "nicky_memory_result_explanation"
                     textbutton _("RECORD FINDING"):
                         xalign 0.5
                         action Function(finish_nicky_memory_minigame)
@@ -229,4 +234,3 @@ style nicky_memory_result_explanation:
     text_align 0.5
     color "#251D18"
     size 22
-

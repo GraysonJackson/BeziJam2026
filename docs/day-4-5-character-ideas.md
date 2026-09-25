@@ -123,45 +123,44 @@ End beat:
 
 Winston should be practical, sarcastic, blunt, protective, and smarter than his lazy presentation suggests. His power nullification makes him both the team's safety net and the person who knows how violating it feels to have a power taken away.
 
-### Day 4 — The reverse interrogation
+### Day 4 — Power tells
 
-**Core idea:** A suspect or witness refuses to answer questions and starts interrogating Winston instead, trying to provoke him into showing whether ATLAS has already chosen a culprit.
-
-What to do:
-
-- Structure the scene as a personality duel. The player decides whether Winston should joke, go silent, or answer one personal question honestly to win reciprocity.
-- Give the other person a showy or disruptive power. Winston can cancel it, but only after a clear warning unless there is immediate danger.
-- Let his joking exterior drop the moment the player or another civilian is threatened. That contrast shows the protective founder beneath the slacker persona.
-- The soft lead should distinguish a person's everyday temperament from how they behave under accusation. Do not treat "calm" or "passionate" as proof of guilt.
-
-Relationship beat:
-
-- Winston admits that everyone expects him to be the one who shuts things down—powers, fights, bad plans, and sometimes people's feelings.
-- The player can ask what he wants when he is not managing everyone else. A romantic answer can stay indirect and in character.
-
-End beat:
-
-- The interview subject mentions someone else whose reaction after the murder felt strangely wrong, but that person has stopped answering calls.
-
-### Day 5 — The missing interview
-
-**Core idea:** Winston and the player track down the avoiding interview subject. Winston frames the trip like a casual errand, but he is worried the person is frightened, being pressured, or planning to flee.
+**Core idea:** Winston conducts a deliberately casual witness follow-up in his
+cluttered office. Darts, takeout, and his fool act make the witness stop
+performing for a formal interrogation. Their description quietly reveals the
+killer's clean-versus-messy habits, with a secondary hand-condition detail when
+needed to keep the final deduction logically possible.
 
 What to do:
 
-- Use a low-key stakeout, pizza stop, or improvised "recruitment interview" as cover. That fits Winston's habit of recruiting unusual people and regretting the management work later.
-- Let the player choose the approach: honest request, friendly cover story, or pressure. Each should change the tone of the eventual conversation rather than simply gate success.
-- When they find the person, reveal that avoidance came from fear or shame, not automatic guilt.
-- The person can describe the killer's aftermath indirectly—what was cleaned, what was left untouched, or whether the figure froze, fled, or calmly checked the scene. Keep it incomplete until Day 6's killing-reaction clue.
+- Let the player join Winston's casual act, observe quietly, or request a formal approach.
+- Relate the observation to broad setting tendencies: Fire users often run passionate, Ice users often present as cold or restrained, and Light users tend toward cleanliness and order. Treat them as tendencies, never identity rules.
+- A minor uncontrolled power moment lets Winston demonstrate precise single-target dampening. He releases the witness as soon as they settle and never cancels the player's intuition.
+- Keep both observations out of the formal notebook. Winston notices the quiet physical tell but does not announce its meaning.
 
 Relationship beat:
 
-- Winston explains why he gives dangerous or strange people a chance: powers do not decide who deserves a place on the team.
-- If his nullification was used on Day 4, let him acknowledge that he hates using it casually. The player can respect the boundary, challenge his judgment, or offer to share the burden.
+- Takeout and darts lead naturally into Winston's history with Ulysses. Winston conceived ATLAS; thirteen-year-old Ulysses supplied the planning, forms, and unnervingly adult competence, while Winston's established superhero reputation made people take the organization seriously.
+- Winston is proud of the partnership and comfortable sharing credit. He never directly states that Ulysses understands him best.
 
-End beat:
+### Day 5 — The minute after
 
-- The subject agrees to a formal final interview under controlled conditions on Day 6.
+**Core idea:** A frightened witness with heightened hearing returns to ATLAS.
+Winston constructs the room from office furniture, masking tape, a coat rack,
+and a pizza box so the witness can rebuild the minute after Enrico died without
+returning to the crime scene.
+
+What to do:
+
+- The player chooses a reconstruction role and controls the witness's pace.
+- Gentle pacing and grounding humor both work. Forcing the witness onward is a serious relationship loss, and Winston immediately intervenes.
+- Winston plays the killer while the witness confirms sounds and movement. The reconstruction suggests Panicked, Calculated, or No Visible Reaction but remains unlogged because two moments are not yet securely ordered.
+- Day 6 uses a second written statement and verified telephone timeline to order those moments and formally retain the matching reaction trio.
+
+Relationship beat:
+
+- While dismantling the fake scene, Winston explains that people reveal more around an apparent fool—but also admits that he genuinely enjoys being ridiculous.
+- High affection allows suggestive hand contact without a confession. The unmistakable waist touch remains the Day 6 payoff.
 
 ## Dhampir
 

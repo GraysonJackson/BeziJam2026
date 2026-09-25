@@ -73,7 +73,12 @@ These minigames appear next to specific character days on the right-hand investi
 * **Route**: Winston (Interrogation Evidence)
 * **Evidence Block**: `temperament`
 * **Notes in Plan**: `black jack stress` written directly above the block
-* **General Idea**: Winston plays a game of blackjack against a suspect during interrogation to monitor their biometric stress responses, bluffing, and reactions under pressure, revealing whether their temperament is *Calm*, *Passionate*, or *Nervous*.
+* **General Idea**: This is an interrogation-pressure system that uses blackjack rules, not an ordinary card match. Every active suspect acts as the dealer and must stand on 17 or higher. **Pressure** draws another visible card; **Question** stands and asks while the suspect's rehearsed defense is unstable. Reaching 21 is the strongest result. Exceeding 21 makes the suspect temporarily shut down, but the player can reset the interview without losing the canonical evidence.
+* **Player power**: A limited intuition prompt gives only broad guidance—safe to continue, getting close, or stop now—rather than revealing the next card or guaranteeing a win.
+* **Dhampir cameo**: Halfway through the queue, Dhampir takes one scripted bad-cop turn. His hero demeanor frightens the suspect so efficiently that the pressure jumps directly to 21. He returns to his casual team voice immediately afterward while Winston complains that he made the suspect see God instead of following the methodology.
+* **Presentation**: The interface uses a deliberately cheap ATLAS card deck with the suits Alibi, Motive, Power, and Vibes. Suspects remain narrated until their sprites arrive.
+* **Outcome handling**: Retries and assisted completion are always available. Performance changes Winston's dialogue and relationship response only. The saved seed and mixed-route resolver determine the two individual stress profiles cleared by the investigation.
+* **Implementation status**: Implemented with a full suspect queue, shuffled per-suspect decks, blackjack ace handling, dealer behavior, intuition guidance, shutdown retries, Winston assistance, the midpoint Dhampir interruption, performance tracking, and canonical clue recording.
 
 ### Day 3 — Nicky: Face-Down Memory Matching (`card down matching`)
 * **Route**: Nicky (Records & Alibis)

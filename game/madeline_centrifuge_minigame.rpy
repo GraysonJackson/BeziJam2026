@@ -211,11 +211,21 @@ init python:
         if (not store.madeline_centrifuge_active
                 or store.madeline_centrifuge_phase != "read_pending"):
             return
-        blood_type = store.madeline_centrifuge_reveal["value"]
+        reveal = store.madeline_centrifuge_reveal
+        blood_type = reveal["value"]
         store.madeline_centrifuge_phase = "result"
-        store.madeline_centrifuge_feedback = (
-            "No type {} markers appear in the recovered trace.".format(blood_type)
-        )
+        if reveal.get("scope") == "category":
+            store.madeline_centrifuge_feedback = (
+                "No type {} markers appear in the recovered trace.".format(blood_type)
+            )
+        else:
+            names = " and ".join(
+                store.suspectNames[suspect_id]
+                for suspect_id in reveal["eliminated"])
+            store.madeline_centrifuge_feedback = (
+                "The separated trace conflicts with the preserved reference profiles for {}."
+                .format(names)
+            )
         renpy.restart_interaction()
 
     def _madeline_centrifuge_record_result(quality, completed):
@@ -223,11 +233,24 @@ init python:
             return False
         store.madeline_centrifuge_completion_recorded = True
 
-        blood_type = store.madeline_centrifuge_reveal["value"]
-        clue_text = (
-            "The recovered blood trace excludes blood type {}."
-            .format(blood_type)
-        )
+        reveal = store.madeline_centrifuge_reveal
+        blood_type = reveal["value"]
+        eliminated_names = [
+            store.suspectNames[suspect_id]
+            for suspect_id in reveal["eliminated"]
+        ]
+        if reveal.get("scope") == "category":
+            clue_text = (
+                "The recovered blood trace excludes blood type {}."
+                .format(blood_type)
+            )
+            result_label = "TYPE {} EXCLUDED".format(blood_type)
+        else:
+            clue_text = (
+                "Separated blood markers clear the individual reference profiles for {}."
+                .format(" and ".join(eliminated_names))
+            )
+            result_label = "INDIVIDUAL REFERENCES CLEARED"
         record_planned_route_reveal(
             "madeline", 3, clue_text=clue_text, expected_count=2)
         store.madeline_centrifuge_result = {
@@ -235,6 +258,9 @@ init python:
             "quality": quality,
             "attempts": store.madeline_centrifuge_attempts,
             "blood_type": blood_type,
+            "scope": reveal.get("scope", "category"),
+            "result_label": result_label,
+            "eliminated_names": eliminated_names,
         }
         return True
 
@@ -271,4 +297,3 @@ init python:
         store.madeline_centrifuge_selected_tube = ""
         renpy.hide_screen("madeline_centrifuge_minigame")
         renpy.end_interaction(False)
-

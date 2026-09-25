@@ -26,15 +26,15 @@ Use this sheet when writing the major evidence visits. A seed is the saved kille
 
 | Seed / killer | Day 1: clear unique ID | Day 3: remove height | Day 6: keep matching hair |
 | --- | --- | --- | --- |
-| 1 — Victor | Jermiah — Glasses | Average | Brown |
-| 2 — Jermiah | Tucker — Birthmark | Tall | Black |
-| 3 — Barry | Victor — Mole | Short | Blonde |
-| 4 — Carl | Simon — Piercings | Short | Brown |
-| 5 — Tucker | Carl — Scar | Average | Black |
-| 6 — Edgar | Alan — Vitiligo | Tall | Blonde |
-| 7 — Simon | Kyle — Eye Patch | Average | Brown |
-| 8 — Kyle | Barry — Missing Arm | Tall | Black |
-| 9 — Alan | Edgar — Tattoos | Short | Blonde |
+| 1 — Victor | Barry — Missing Arm | Tall | Brown |
+| 2 — Jermiah | Victor — Mole | Short | Black |
+| 3 — Barry | Jermiah — Glasses | Average | Blonde |
+| 4 — Carl | Tucker — Birthmark | Tall | Brown |
+| 5 — Tucker | Edgar — Tattoos | Short | Black |
+| 6 — Edgar | Carl — Scar | Average | Blonde |
+| 7 — Simon | Alan — Vitiligo | Tall | Brown |
+| 8 — Kyle | Simon — Piercings | Short | Black |
+| 9 — Alan | Kyle — Eye Patch | Average | Blonde |
 
 Day 6 is a positive identification. Once the witness confirms the killer's
 hair color, remove every still-active suspect whose hair does **not** match it.
@@ -62,17 +62,49 @@ subtle player-facing hints and are never added to the notebook.
 
 ## Winston — interrogation
 
-| Seed / killer | Day 1: interrogation clears | Day 3: remove temperament | Day 6: remove killing reaction |
+| Seed / killer | Visit 1: interrogation clears | Visit 3: stress profiles clear | Visit 6: retain reaction category |
 | --- | --- | --- | --- |
-| 1 — Victor | Jermiah | Passionate | None |
-| 2 — Jermiah | Tucker | Calm | Calculated |
-| 3 — Barry | Victor | Passionate | Panicked |
-| 4 — Carl | Simon | Passionate | Panicked |
-| 5 — Tucker | Carl | Calm | None |
-| 6 — Edgar | Alan | Calm | Calculated |
-| 7 — Simon | Kyle | Passionate | Calculated |
-| 8 — Kyle | Barry | Calm | Panicked |
-| 9 — Alan | Edgar | Passionate | None |
+| 1 — Victor | Jermiah | Barry and Edgar | Calculated |
+| 2 — Jermiah | Tucker | Victor and Kyle | Panicked |
+| 3 — Barry | Victor | Jermiah and Simon | No Visible Reaction |
+| 4 — Carl | Simon | Victor and Jermiah | No Visible Reaction |
+| 5 — Tucker | Carl | Jermiah and Simon | Calculated |
+| 6 — Edgar | Alan | Victor and Kyle | Panicked |
+| 7 — Simon | Kyle | Victor and Tucker | Panicked |
+| 8 — Kyle | Tucker | Victor and Jermiah | No Visible Reaction |
+| 9 — Alan | Edgar | Barry and Kyle | Calculated |
+
+Winston's pressure exercise tests every active suspect but formally clears two
+individual profiles. Visit 6 is a positive identification: retain the complete
+Panicked, Calculated, or No Visible Reaction trio. His Visit 4 clean-versus-
+messy behavior and quiet hand-condition observation, followed by the Visit 5
+reconstruction, remain player-facing hints and are not entered in the notebook.
+
+## Mixed-route adaptation
+
+The player advances each character by visits, not by the global calendar. A
+later Visit 1 or Visit 3 can therefore encounter a suspect already cleared by
+another investigator. The shared resolver keeps pure six-visit routes on the
+authored tables above. In mixed routes it deterministically selects unused,
+killer-safe candidates from the same scene's available evidence. If a complete
+attribute category no longer contains two usable suspects, the scene reports
+two individually tested profile mismatches instead of making a false category
+claim. Formal clues never cross out the killer or repeat an eliminated suspect.
+
+The automated Ren'Py test explores every reachable six-day combination for all
+nine seeds. Each triggered Visit 1, Visit 3, or Visit 6 removes exactly one, two,
+or three new innocents respectively; Ica visits do not use this notebook system.
+
+### Ulysses one-each synthesis
+
+Ulysses is encountered automatically after every investigation day and is not
+a daytime route. Ordinarily he comments on and organizes evidence without
+eliminating anyone. There is one exception: visiting each of the six daytime
+characters exactly once leaves four suspects after the five investigative
+Visit 1 clues. During the sixth evening, a dialogue-based cross-report analysis
+records `ulysses_cross_report`, clears the three remaining innocents, and leaves
+the seeded killer as the sole suspect. Other inefficient distributions do not
+receive a compensating elimination.
 
 ## Dhampir — crime-scene evidence
 
@@ -119,6 +151,8 @@ possible final trio.
 ## Implementation names
 
 - Shared single-person clearing: `singleEliminationByKiller`
+- Winston single-person clearing: `winstonDayOneEliminationByKiller`
+- Winston stress-profile pairs: `winstonDayThreeEliminationsByKiller`
 - Madeline fingerprint clearing: `madelineDayOneEliminationByKiller`
 - Madeline blood-type lookup: `madelineFocusedRoutePlan`
 - Nicky alibi clearing: `nickyDayOneEliminationByKiller`
@@ -126,5 +160,8 @@ possible final trio.
 - All route definitions: `investigationRoutes`
 - Razzle-only height lookup: `razzleFocusedRoutePlan`
 - Automatic application and notebook logging: `record_planned_route_reveal(route_id, visit)`
+- Saved reveal snapshots: `recordedRouteReveals`
+- Ulysses one-each detection: `ulysses_one_each_strategy()`
+- Ulysses cross-report application: `record_ulysses_cross_report_reveal()`
 
 The player-facing reference is the in-game **Suspects** notebook. It crosses out eliminated suspects and lists the exact clue and names removed. The separate **Notes** page is free-form player writing and is saved with the game.

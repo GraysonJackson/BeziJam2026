@@ -15,6 +15,7 @@ screen madeline_centrifuge_minigame():
     $ centrifuge_right_mass = _madeline_centrifuge_side_mass("right")
     $ centrifuge_effective_balance = madeline_centrifuge_effective_balance()
     $ centrifuge_revealed_type = madeline_centrifuge_reveal.get("value", "")
+    $ centrifuge_individual_result = madeline_centrifuge_reveal.get("scope") == "individual"
 
     fixed:
         xalign 0.5
@@ -158,7 +159,10 @@ screen madeline_centrifuge_minigame():
                 elif madeline_centrifuge_phase == "read_pending":
                     textbutton "READ BANDS" action Function(madeline_centrifuge_read_result)
                 elif madeline_centrifuge_phase == "result":
-                    text "EXCLUDED TYPE: [centrifuge_revealed_type]" style "madeline_centrifuge_result"
+                    if centrifuge_individual_result:
+                        text "INDIVIDUAL REFERENCES CLEARED" style "madeline_centrifuge_result"
+                    else:
+                        text "EXCLUDED TYPE: [centrifuge_revealed_type]" style "madeline_centrifuge_result"
                     textbutton "RECORD RESULT" action Function(finish_madeline_centrifuge_minigame)
 
         frame:

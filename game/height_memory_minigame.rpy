@@ -215,7 +215,20 @@ init python:
         store.height_memory_refreshing = False
         store.height_memory_timer = 0.0
         renpy.hide_screen("height_memory_minigame")
-        record_planned_route_reveal("razzle", 3, expected_count=2)
+        reveal = get_planned_route_reveal("razzle", 3)
+        if reveal.get("scope") == "category":
+            clue_text = "Eyewitness evidence rules out {} height.".format(
+                reveal["value"])
+        else:
+            names = " and ".join(
+                store.suspectNames[suspect_id]
+                for suspect_id in reveal["eliminated"])
+            clue_text = (
+                "Doorframe measurements clear the individual profiles for {}."
+                .format(names)
+            )
+        record_planned_route_reveal(
+            "razzle", 3, clue_text=clue_text, expected_count=2)
         renpy.restart_interaction()
 
     # Public API: safely close the screen for menu/scene interruption handling.

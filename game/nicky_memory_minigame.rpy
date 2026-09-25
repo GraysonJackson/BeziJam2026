@@ -51,16 +51,18 @@ init python:
                 "Nicky memory game expected two active build eliminations, found {}."
                 .format(active_eliminations))
 
-        build_value = reveal["value"]
-        build_description = store.NICKY_BUILD_RECORD_DESCRIPTIONS[build_value]
         first_name = store.suspectNames[active_eliminations[0]]
         second_name = store.suspectNames[active_eliminations[1]]
+        first_build = store.suspectAttributes[active_eliminations[0]]["build"]
+        second_build = store.suspectAttributes[active_eliminations[1]]["build"]
+        first_description = store.NICKY_BUILD_RECORD_DESCRIPTIONS[first_build]
+        second_description = store.NICKY_BUILD_RECORD_DESCRIPTIONS[second_build]
 
         return [
             ("suspect_a", "{}\nBOOKING FILE".format(first_name),
-             "MEASURED FRAME\n{}".format(build_description), "SUSPECT"),
+             "MEASURED FRAME\n{}".format(first_description), "SUSPECT"),
             ("suspect_b", "{}\nINTAKE FILE".format(second_name),
-             "MEASURED FRAME\n{}".format(build_description), "SUSPECT"),
+             "MEASURED FRAME\n{}".format(second_description), "SUSPECT"),
             ("scale", "CAMERA SCALE", "DOORFRAME WIDTH", "MEASUREMENT"),
             ("coat", "OVERSIZED COAT", "IGNORE SILHOUETTE", "CORRECTION"),
             ("power", "POWERED FORCE", "DOES NOT PROVE BUILD", "CORRECTION"),
@@ -315,9 +317,14 @@ init python:
             _nicky_memory_load_phase(1)
         else:
             store.nicky_memory_phase = "result"
-            store.nicky_memory_feedback = (
-                "The corroborated records exclude the {} build group."
-                .format(store.nicky_memory_reveal["value"]))
+            if store.nicky_memory_reveal.get("scope") == "category":
+                store.nicky_memory_feedback = (
+                    "The corroborated records exclude the {} build group."
+                    .format(store.nicky_memory_reveal["value"]))
+            else:
+                store.nicky_memory_feedback = (
+                    "The corrected records clear two individually measured suspect profiles."
+                )
         renpy.restart_interaction()
 
     def _nicky_memory_record_result(quality, completed):
@@ -329,11 +336,22 @@ init python:
             suspect_id for suspect_id in store.nicky_memory_reveal["eliminated"]
             if suspect_id in store.remainingSuspects
         ]
-        build_value = store.nicky_memory_reveal["value"]
-        clue_text = (
-            "Corroborated records rule out the {} build group."
-            .format(build_value)
-        )
+        reveal = store.nicky_memory_reveal
+        build_value = reveal["value"]
+        eliminated_names = [
+            store.suspectNames[suspect_id]
+            for suspect_id in active_eliminations
+        ]
+        if reveal.get("scope") == "category":
+            clue_text = (
+                "Corroborated records rule out the {} build group."
+                .format(build_value)
+            )
+        else:
+            clue_text = (
+                "Corroborated measurements clear the individual profiles for {}."
+                .format(" and ".join(eliminated_names))
+            )
         record_planned_route_reveal(
             "nicky", 3, clue_text=clue_text, expected_count=2)
         store.nicky_memory_result = {
@@ -343,10 +361,8 @@ init python:
             "hints_used": store.nicky_memory_hints_used,
             "expired_phases": store.nicky_memory_expired_phases,
             "build": build_value,
-            "eliminated_names": [
-                store.suspectNames[suspect_id]
-                for suspect_id in active_eliminations
-            ],
+            "scope": reveal.get("scope", "category"),
+            "eliminated_names": eliminated_names,
         }
         return True
 
@@ -392,4 +408,3 @@ init python:
         store.nicky_memory_peek_active = False
         renpy.hide_screen("nicky_memory_minigame")
         renpy.end_interaction(False)
-
