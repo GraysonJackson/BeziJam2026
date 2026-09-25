@@ -16,15 +16,15 @@ define suspectNames = {
 ## normalized "Scuffed Hands" value intentionally groups Tucker with the
 ## matching workbook category without changing the source workbook typo.
 define suspectAttributes = {
-    1: {"blood_type": "A", "power": "Fire", "height": "Short", "unique_drop": "Missing Hair", "unique_id": "Mole", "organization": "Clean", "build": "Brawny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Calculated"},
-    2: {"blood_type": "B", "power": "Ice", "height": "Average", "unique_drop": "Missing Tooth", "unique_id": "Glasses", "organization": "Messy", "build": "Skinny", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "Panicked"},
-    3: {"blood_type": "A", "power": "Ice", "height": "Tall", "unique_drop": "Ear Chunk", "unique_id": "Missing Arm", "organization": "Clean", "build": "Average", "injuries": "None", "hair": "Blonde", "temperament": "Calm", "kill_reaction": "None"},
-    4: {"blood_type": "B", "power": "Ice", "height": "Average", "unique_drop": "Missing Hair", "unique_id": "Scar", "organization": "Clean", "build": "Skinny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "None"},
-    5: {"blood_type": "O", "power": "Fire", "height": "Tall", "unique_drop": "Missing Tooth", "unique_id": "Birthmark", "organization": "Messy", "build": "Average", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "Calculated"},
-    6: {"blood_type": "A", "power": "Fire", "height": "Short", "unique_drop": "Ear Chunk", "unique_id": "Tattoos", "organization": "Messy", "build": "Brawny", "injuries": "None", "hair": "Blonde", "temperament": "Passionate", "kill_reaction": "Panicked"},
-    7: {"blood_type": "B", "power": "Light", "height": "Short", "unique_drop": "Missing Hair", "unique_id": "Piercings", "organization": "Clean", "build": "Average", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Panicked"},
-    8: {"blood_type": "O", "power": "Light", "height": "Average", "unique_drop": "Missing Tooth", "unique_id": "Eye Patch", "organization": "Messy", "build": "Brawny", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "None"},
-    9: {"blood_type": "O", "power": "Light", "height": "Tall", "unique_drop": "Ear Chunk", "unique_id": "Vitiligo", "organization": "Clean", "build": "Skinny", "injuries": "None", "hair": "Blonde", "temperament": "Nervous", "kill_reaction": "Calculated"},
+    1: {"blood_type": "A", "rh_factor": "+", "power": "Fire", "height": "Short", "unique_drop": "Missing Hair", "unique_id": "Mole", "organization": "Clean", "build": "Brawny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Calculated"},
+    2: {"blood_type": "B", "rh_factor": "+", "power": "Ice", "height": "Average", "unique_drop": "Missing Tooth", "unique_id": "Glasses", "organization": "Messy", "build": "Skinny", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "Panicked"},
+    3: {"blood_type": "A", "rh_factor": "-", "power": "Ice", "height": "Tall", "unique_drop": "Ear Chunk", "unique_id": "Missing Arm", "organization": "Clean", "build": "Average", "injuries": "None", "hair": "Blonde", "temperament": "Calm", "kill_reaction": "None"},
+    4: {"blood_type": "B", "rh_factor": "-", "power": "Ice", "height": "Average", "unique_drop": "Missing Hair", "unique_id": "Scar", "organization": "Clean", "build": "Skinny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "None"},
+    5: {"blood_type": "O", "rh_factor": "+", "power": "Fire", "height": "Tall", "unique_drop": "Missing Tooth", "unique_id": "Birthmark", "organization": "Messy", "build": "Average", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "Calculated"},
+    6: {"blood_type": "A", "rh_factor": "+", "power": "Fire", "height": "Short", "unique_drop": "Ear Chunk", "unique_id": "Tattoos", "organization": "Messy", "build": "Brawny", "injuries": "None", "hair": "Blonde", "temperament": "Passionate", "kill_reaction": "Panicked"},
+    7: {"blood_type": "B", "rh_factor": "-", "power": "Light", "height": "Short", "unique_drop": "Missing Hair", "unique_id": "Piercings", "organization": "Clean", "build": "Average", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Panicked"},
+    8: {"blood_type": "O", "rh_factor": "-", "power": "Light", "height": "Average", "unique_drop": "Missing Tooth", "unique_id": "Eye Patch", "organization": "Messy", "build": "Brawny", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "None"},
+    9: {"blood_type": "O", "rh_factor": "+", "power": "Light", "height": "Tall", "unique_drop": "Ear Chunk", "unique_id": "Vitiligo", "organization": "Clean", "build": "Skinny", "injuries": "None", "hair": "Blonde", "temperament": "Nervous", "kill_reaction": "Calculated"},
 }
 
 ## Shared one-person clearing used by routes whose first evidence visit clears
@@ -97,6 +97,33 @@ define madelineFocusedRoutePlan = {
     9: {"blood_type": "A"},
 }
 
+## Nicky's alibi target is drawn from the build group her third visit will
+## exclude. The focused build values also leave an even three-versus-three
+## hygiene split for her final profile, guaranteeing 9 -> 8 -> 6 -> 3.
+define nickyDayOneEliminationByKiller = {
+    1: 2,
+    2: 5,
+    3: 4,
+    4: 7,
+    5: 4,
+    6: 9,
+    7: 9,
+    8: 3,
+    9: 3,
+}
+
+define nickyFocusedRoutePlan = {
+    1: {"build": "Skinny"},
+    2: {"build": "Average"},
+    3: {"build": "Skinny"},
+    4: {"build": "Average"},
+    5: {"build": "Skinny"},
+    6: {"build": "Skinny"},
+    7: {"build": "Skinny"},
+    8: {"build": "Average"},
+    9: {"build": "Average"},
+}
+
 ## All five evidence characters live here. Generic cycle visits select a
 ## ruled-out attribute value that never contains the saved killer. Razzle,
 ## Madeline, and Dhampir use focused mappings where their route structure
@@ -137,9 +164,9 @@ define investigationRoutes = {
     "nicky": {
         "name": "Nicky",
         "visits": {
-            1: {"kind": "single", "eliminations": singleEliminationByKiller, "template": "Alibi verification clears {suspect}."},
-            3: {"kind": "attribute", "attribute": "build", "cycle": {"Brawny": "Skinny", "Skinny": "Average", "Average": "Brawny"}, "template": "The records rule out the {value} build group."},
-            6: {"kind": "attribute", "attribute": "organization", "cycle": {"Clean": "Messy", "Messy": "Clean"}, "template": "The records rule out the {value} organization group."},
+            1: {"kind": "single", "eliminations": nickyDayOneEliminationByKiller, "template": "Alibi verification clears {suspect}."},
+            3: {"kind": "nicky_attribute", "attribute": "build", "template": "Corroborated records rule out the {value} build group."},
+            6: {"kind": "retain_killer_attribute", "attribute": "organization", "template": "The behavioral profile identifies the attacker as {value}."},
         },
     },
 }
@@ -190,7 +217,7 @@ init python:
                             "Razzle killer {} left non-matching hair suspects {}.".format(
                                 killer_id, wrong_hair))
 
-                if route_id in ("madeline", "dhampir") and counts != [8, 6, 3]:
+                if route_id in ("madeline", "dhampir", "nicky") and counts != [8, 6, 3]:
                     raise Exception("{} killer {} produced counts {}, not 8/6/3.".format(
                         store.investigationRoutes[route_id]["name"], killer_id, counts))
 
@@ -216,6 +243,30 @@ init python:
                         raise Exception(
                             "Madeline killer {} has duplicate wound/organization hints {}."
                             .format(killer_id, soft_pairs))
+
+                if route_id == "nicky":
+                    killer_hygiene = store.suspectAttributes[killer_id]["organization"]
+                    wrong_hygiene = [
+                        suspect_id for suspect_id in active
+                        if store.suspectAttributes[suspect_id]["organization"] != killer_hygiene
+                    ]
+                    if wrong_hygiene:
+                        raise Exception(
+                            "Nicky killer {} left wrong-hygiene suspects {}.".format(
+                                killer_id, wrong_hygiene))
+
+                    soft_profiles = [
+                        (
+                            store.suspectAttributes[suspect_id]["injuries"],
+                            store.suspectAttributes[suspect_id]["blood_type"],
+                            store.suspectAttributes[suspect_id]["rh_factor"],
+                        )
+                        for suspect_id in active
+                    ]
+                    if len(set(soft_profiles)) != len(soft_profiles):
+                        raise Exception(
+                            "Nicky killer {} has duplicate wound/blood hints {}."
+                            .format(killer_id, soft_profiles))
 
     def get_planned_route_reveal(route_id, visit, killer_id=None):
         """Resolve one route/visit into a killer-safe clue and suspect list."""
@@ -251,6 +302,12 @@ init python:
                 ])
             elif kind == "madeline_attribute":
                 value = store.madelineFocusedRoutePlan[killer_id][attribute]
+                eliminated_ids = sorted([
+                    suspect_id for suspect_id, attributes in store.suspectAttributes.items()
+                    if attributes[attribute] == value
+                ])
+            elif kind == "nicky_attribute":
+                value = store.nickyFocusedRoutePlan[killer_id][attribute]
                 eliminated_ids = sorted([
                     suspect_id for suspect_id, attributes in store.suspectAttributes.items()
                     if attributes[attribute] == value

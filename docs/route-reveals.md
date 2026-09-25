@@ -96,23 +96,33 @@ the notebook; they are player-facing hints for choosing between the final trio.
 
 ## Nicky — records and alibis
 
-| Seed / killer | Day 1: alibi clears | Day 3: remove build | Day 6: remove organization |
+| Seed / killer | Day 1: alibi clears | Day 3: remove build | Day 6: keep matching hygiene |
 | --- | --- | --- | --- |
-| 1 — Victor | Jermiah | Skinny | Messy |
-| 2 — Jermiah | Tucker | Average | Clean |
-| 3 — Barry | Victor | Brawny | Messy |
-| 4 — Carl | Simon | Average | Messy |
-| 5 — Tucker | Carl | Brawny | Clean |
-| 6 — Edgar | Alan | Skinny | Clean |
-| 7 — Simon | Kyle | Brawny | Messy |
-| 8 — Kyle | Barry | Skinny | Clean |
-| 9 — Alan | Edgar | Average | Messy |
+| 1 — Victor | Jermiah | Skinny | Clean |
+| 2 — Jermiah | Tucker | Average | Messy |
+| 3 — Barry | Carl | Skinny | Clean |
+| 4 — Carl | Simon | Average | Clean |
+| 5 — Tucker | Carl | Skinny | Messy |
+| 6 — Edgar | Alan | Skinny | Messy |
+| 7 — Simon | Alan | Skinny | Clean |
+| 8 — Kyle | Barry | Average | Messy |
+| 9 — Alan | Barry | Average | Clean |
+
+Nicky's focused mapping always progresses from nine suspects to eight, then
+six, then three. Day 1 clears one member of the build group that Day 3 later
+excludes. Day 6 positively identifies the attacker's Clean or Messy personal-
+hygiene category. The Day 4 hand-condition observation and Day 5 A/B/O plus Rh
+reaction are subtle player-facing hints and are never added to the notebook.
+Together, those two observations uniquely distinguish the killer in every
+possible final trio.
 
 ## Implementation names
 
 - Shared single-person clearing: `singleEliminationByKiller`
 - Madeline fingerprint clearing: `madelineDayOneEliminationByKiller`
 - Madeline blood-type lookup: `madelineFocusedRoutePlan`
+- Nicky alibi clearing: `nickyDayOneEliminationByKiller`
+- Nicky build lookup: `nickyFocusedRoutePlan`
 - All route definitions: `investigationRoutes`
 - Razzle-only height lookup: `razzleFocusedRoutePlan`
 - Automatic application and notebook logging: `record_planned_route_reveal(route_id, visit)`

@@ -9,10 +9,14 @@ define ICA_DIFFICULTY_REDUCTION = {
 }
 
 define ICA_MINIGAME_WIN_BONUS = 1
-define ICA_EARLY_FLIRT_THRESHOLD = 4
-define ICA_WARM_FLIRT_THRESHOLD = 7
-define ICA_HIGH_FLIRT_THRESHOLD = 10
-define ICA_DATE_ACCEPT_THRESHOLD = 12
+define ICA_EARLY_FLIRT_THRESHOLD = 8
+define ICA_WARM_FLIRT_THRESHOLD = 13
+define ICA_HIGH_FLIRT_THRESHOLD = 18
+define ICA_DATE_ACCEPT_THRESHOLD = 32
+
+default ica_day_one_candy = ""
+default ica_hotdog_style = ""
+default ica_paint_preparation = ""
 
 init python:
     def ica_record_minigame_result(game_id, approach_id, difficulty_reduction, won, result_tier):

@@ -1,7 +1,10 @@
 ## Madeline route thresholds and seed-dependent forensic descriptions.
 
-define MADELINE_WARM_THRESHOLD = 7
-define MADELINE_HIGH_THRESHOLD = 13
+define MADELINE_WARM_THRESHOLD = 15
+define MADELINE_HIGH_THRESHOLD = 27
+
+default madeline_ice_cream_choice = ""
+default madeline_prototype_watch = ""
 
 define MADELINE_WOUND_SCENE_HINTS = {
     "Bruised Knuckles": (
@@ -35,4 +38,3 @@ define MADELINE_POWER_RESIDUE_TEXT = {
         "The sample shows patterned photochemical bleaching beneath the surface, where no ordinary lamp or flash could have reached."
     ),
 }
-

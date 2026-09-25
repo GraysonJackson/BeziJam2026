@@ -1,7 +1,10 @@
 ## Narrative data shared across Dhampir's six investigation visits.
 
-define DHAMPIR_WARM_THRESHOLD = 6
-define DHAMPIR_HIGH_THRESHOLD = 11
+define DHAMPIR_WARM_THRESHOLD = 15
+define DHAMPIR_HIGH_THRESHOLD = 28
+
+default dhampir_movie_snack = ""
+default dhampir_rooftop_question = ""
 
 ## Enrico's cause of death varies with the saved killer seed. None of these
 ## descriptions identifies the attacker's elemental power category.

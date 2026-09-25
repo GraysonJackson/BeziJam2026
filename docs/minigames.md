@@ -79,7 +79,9 @@ These minigames appear next to specific character days on the right-hand investi
 * **Route**: Nicky (Records & Alibis)
 * **Evidence Block**: `Build`
 * **Notes in Plan**: `card down matching` written directly below the block
-* **General Idea**: A classic concentration / memory card-matching game where face-down suspect cards, alibi statements, and physical descriptions are flipped two at a time to match details and confirm the suspect's build (Skinny, Average, Brawny).
+* **General Idea**: A two-round concentration game staged as Nicky's internal ATLAS briefing. The first 3×4 grid matches source records to corroborating evidence; the second matches corrected suspect files and physical descriptions while separating measurements from assumptions. Razzle briefly arrives before play to collect witness information and points out that bulky clothing distorted one description.
+* **Outcome handling**: Each round contains six pairs, a forgiving timer, mismatch feedback, optional hints, and a no-penalty accessibility preview. Time expiration never fails the route; the player may continue or let Nicky finish. Performance changes dialogue only, while the seeded build exclusion remains canonical and is recorded exactly once.
+* **Implementation status**: Implemented with stable pair IDs, shuffled positions, save-safe matched progress, malformed-state recovery, two rounds, countdown assistance, optional reveal-all support, a separate result panel, and focused 9→8→6→3 route validation.
 
 ### Day 3 — Dhampir: Scanner I-Spy Reconstruction (`i spy`)
 * **Route**: Dhampir (Crime-Scene Evidence)

@@ -244,7 +244,7 @@ What to do:
 
 - Let the player inspect the seal, log, storage time, and handwriting before choosing whether to test, quarantine, or report the problem.
 - A quick presumptive test may confirm that the material is blood or that the sample is still viable. It should not repeat Madeline's Day 3 blood-type elimination.
-- Make the real discovery procedural: somebody handled the file in a very clean, deliberate way or left it conspicuously messy. This softly prepares Nicky's Day 6 organization clue.
+- Make the real discovery procedural and scientific: the intact inner vial provides a limited A/B/O and Rh reaction, while the unsigned outer correction prevents the result from becoming a formal elimination. This becomes a subtle player-facing hint for the final trio.
 - If the player pushes for an immediate result, let Nicky explain that evidence obtained carelessly can collapse a correct case.
 
 Relationship beat:
@@ -254,7 +254,7 @@ Relationship beat:
 
 End beat:
 
-- The sample is secured for a valid comparison, and Nicky notices a repeated neat-or-sloppy pattern across the case records. She will verify it on Day 6 before using it to eliminate anyone.
+- The sample is secured and its limited blood-profile reaction is preserved as an investigative lead. Newly returned warrants, interview images, and a behavioral profile provide the concrete reason to return for the Day 6 personal-hygiene comparison.
 
 ## Ica
 
