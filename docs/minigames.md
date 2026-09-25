@@ -64,7 +64,10 @@ These minigames appear next to specific character days on the right-hand investi
 * **Route**: Madeline (Laboratory Evidence)
 * **Evidence Block**: `blood type`
 * **Notes in Plan**: `centri test` written directly above the block
-* **General Idea**: A laboratory centrifuge puzzle where the player balances test tubes and spins blood samples to separate layers, identifying the killer's blood type (A, B, or O) to eliminate suspects.
+* **General Idea**: A forgiving laboratory centrifuge puzzle where the player places four visibly weighted tubes, balances the two sides of the rotor, and runs a short spin to separate the recovered blood trace. The bands establish a blood type the attacker does **not** have, eliminating the two remaining suspects in that category.
+* **Cameo**: Ica carelessly shifts gravity while pulling over a rolling stool. The centrifuge safely stops, but the interrupted tube develops an unusually clean boundary that gives the player and Madeline the counterweight idea used by the puzzle.
+* **Outcome handling**: An unstable arrangement produces a safe retry. The player may also let Madeline finish. Performance changes follow-up dialogue only; the seeded clue remains canonical and is recorded exactly once.
+* **Implementation status**: Implemented with visible tube masses, four rotor positions, fine-balance trim, spin progress, stability feedback, separated-band reading, retry handling, and assisted completion.
 
 ### Day 3 — Winston: Interrogation Blackjack Stress Test (`blackjack stress`)
 * **Route**: Winston (Interrogation Evidence)

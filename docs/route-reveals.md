@@ -41,17 +41,24 @@ hair color, remove every still-active suspect whose hair does **not** match it.
 
 ## Madeline — laboratory evidence
 
-| Seed / killer | Day 1: fingerprint clears | Day 3: remove blood type | Day 6: remove power |
+| Seed / killer | Day 1: fingerprint clears | Day 3: remove blood type | Day 6: keep matching power |
 | --- | --- | --- | --- |
-| 1 — Victor | Jermiah | B | Ice |
-| 2 — Jermiah | Tucker | O | Light |
-| 3 — Barry | Victor | B | Light |
-| 4 — Carl | Simon | A | Light |
-| 5 — Tucker | Carl | A | Ice |
-| 6 — Edgar | Alan | O | Ice |
-| 7 — Simon | Kyle | B | Fire |
-| 8 — Kyle | Barry | A | Fire |
-| 9 — Alan | Edgar | O | Fire |
+| 1 — Victor | Jermiah | B | Fire |
+| 2 — Jermiah | Tucker | O | Ice |
+| 3 — Barry | Kyle | O | Ice |
+| 4 — Carl | Alan | O | Ice |
+| 5 — Tucker | Carl | B | Fire |
+| 6 — Edgar | Simon | B | Fire |
+| 7 — Simon | Victor | A | Light |
+| 8 — Kyle | Barry | A | Light |
+| 9 — Alan | Edgar | A | Light |
+
+Madeline's route always progresses from nine suspects to eight, then six,
+then three. The Day 1 fingerprint mismatch clears one member of the blood-type
+group that Day 3 excludes, so the centrifuge removes exactly two additional
+suspects. Day 6 positively retains the complete Fire, Ice, or Light trio. The
+Day 4 hand-condition observation and Day 5 clean-versus-messy observation are
+subtle player-facing hints and are never added to the notebook.
 
 ## Winston — interrogation
 
@@ -104,6 +111,8 @@ the notebook; they are player-facing hints for choosing between the final trio.
 ## Implementation names
 
 - Shared single-person clearing: `singleEliminationByKiller`
+- Madeline fingerprint clearing: `madelineDayOneEliminationByKiller`
+- Madeline blood-type lookup: `madelineFocusedRoutePlan`
 - All route definitions: `investigationRoutes`
 - Razzle-only height lookup: `razzleFocusedRoutePlan`
 - Automatic application and notebook logging: `record_planned_route_reveal(route_id, visit)`

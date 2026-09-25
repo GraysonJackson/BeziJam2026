@@ -785,7 +785,6 @@ label RazzleDayOne:
     $ dayRazz += 1
     jump endOfDay
         
-
 label RazzleDayTwo:
     "You make your way back to Razzle Dazzle's cubicle and find her sitting in her flameproof chair, looking at cat videos on her computer."
     show razzle at slot(0, total=1), bright zorder 10
@@ -2625,32 +2624,630 @@ label DhampirDaySix:
     jump endOfDay
 
 label MadelineDayOne:
-    "You spend the day working with Madeline. (Visit 1 content in development)"
+    scene labOutline
+    "You find Madeline leaning over a glass evidence tray. An open dish of black fingerprint powder sits beside the exposed slides, and a thick black notebook rests at her elbow."
+    "Her jacket pockets bulge with tools, loose wire, and folded scraps of calculations."
+
+    show madeline at slot(0, total=1), bright zorder 10
+
+    m "Stop."
+
+    "Your hand is still several inches from the nearest table."
+
+    m "Good response time. Better than Winston's. His hand would've been in the powder by now."
+    m "I'm testing whether you ask for procedure before you touch anything."
+
+    $ madeline_touched_slide = False
+
+    menu:
+        "Then tell me the procedure, genius.":
+            $ mads += 2
+            show madeline flirty curious at slot(0, total=1), bright zorder 10
+            m "Correct answer and correct title. We're off to a statistically promising start, newb."
+        "The evidence tray is already inside your contamination boundary.":
+            $ mads += 2
+            show madeline madScienist at slot(0, total=1), bright zorder 10
+            m "Oh, good. You actually looked before opening your mouth."
+            m "That's annoyingly rare."
+        "Touch the nearest slide anyway.":
+            $ mads -= 2
+            $ madeline_touched_slide = True
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "What the fuck did I just say?"
+            "She removes the slide and seals it in a disposal sleeve."
+
+    show madeline at slot(0, total=1), bright zorder 10
+
+    "Madeline pulls the black notebook closer and writes a quick line. She angles it away a second too late."
+    "The exposed pages are labeled with the names of ATLAS members. Each is packed with behavioral observations, predicted mistakes, and irritated corrections."
+    "She turns to a fresh page and writes NEWB across the top."
+
+    m "Don't look so concerned. Everybody gets a file."
+    if madeline_touched_slide:
+        m "Yours currently says you hear direct warnings and treat them like optional reading."
+    else:
+        m "Yours currently says you can follow a direct warning. Congratulations on clearing the floor-level standard."
+
+    m "We're going to Enrico's house. The scene team found one usable print pressed into wet blood on the inside face of a broken window shard."
+    m "Victim excluded. Responders wore gloves. Position means it was left during the struggle."
+
+    scene black with fade
+    "At Enrico's house, Madeline kneels beside the sealed shard without touching it. A portable scanner projects the partial print several feet high across the wall."
+
+    show madeline madScienist at slot(0, total=1), bright zorder 10
+
+    $ madeline_day_one_reveal = get_planned_route_reveal("madeline", 1)
+    $ madeline_day_one_cleared_id = madeline_day_one_reveal["eliminated"][0]
+    $ madeline_day_one_cleared_name = suspectNames[madeline_day_one_cleared_id]
+
+    m "One suspect has a prior conviction, which means their fingerprints are already in the police database: [madeline_day_one_cleared_name]."
+    m "Lucky us. Or unlucky them, generally speaking."
+
+    "She aligns the database print over the recovered ridge pattern. Several points appear similar until she magnifies the whorl at the center. The two patterns split apart."
+
+    menu:
+        "The ridge paths diverge before the center. It isn't their print.":
+            $ mads += 2
+            m "Exactly. Six independent mismatches. One would've been enough, but I enjoy being aggressively correct."
+        "You knew that before you enlarged it, didn't you?":
+            $ mads += 1
+            m "Obviously. The display was for you. Try to appreciate the educational effort."
+        "Then arrest whoever the print does match.":
+            $ mads -= 2
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "We don't have a match, dumbass. We have an exclusion. Those are not interchangeable concepts."
+
+    $ madeline_day_one_clue = "The bloody fingerprint from the struggle does not match {}'s police record.".format(madeline_day_one_cleared_name)
+    $ record_planned_route_reveal(
+        "madeline", 1, clue_text=madeline_day_one_clue, expected_count=1)
+
+    show madeline at slot(0, total=1), bright zorder 10
+
+    m "[madeline_day_one_cleared_name] is out. Eight suspects left."
+    m "This is why databases are useful. People keep making the same stupid mistake, and computers remember it for us. Or me."
+
+    "She adds the result to her notebook, then writes another short line beneath your name."
+
+    menu:
+        "What did you write about me?":
+            $ mads += 1
+            m "Curious. Distractible. Better eyes than expected."
+            m "Don't make that expression. The final category is positive."
+        "You should add that I kept up with you.":
+            $ mads += 2
+            show madeline flirty curious at slot(0, total=1), bright zorder 10
+            m "For one test. Confidence interval's still shit."
+            m "Come back tomorrow and improve it."
+        "Keeping files on everyone is creepy.":
+            $ mads -= 1
+            m "It's efficient. Creepy is just efficient with poor branding."
+
+    m "Go give Ulysses the result. I've been awake since yesterday and apparently food becomes mandatory if I mention that near Nicky."
+
     $ dayMads += 1
     jump endOfDay
 
 label MadelineDayTwo:
-    "You spend the day working with Madeline. (Visit 2 content in development)"
+    scene cubicleOutline
+    "Madeline is waiting beside her desk with two miniature-golf passes pinched between her fingers like contaminated evidence."
+
+    show madeline distress at slot(0, total=1), bright zorder 10
+
+    m "Winston says I need to get out more."
+    m "He gave me these and said staring at a failed prototype for fourteen consecutive hours doesn't count as recreation."
+    m "He's a moron, but I have not yet produced a successful counterargument."
+
+    "She holds out one pass."
+
+    m "You're coming. This is not a date. I need a second data set."
+
+    menu:
+        "Of course. A rigorous miniature-golf experiment.":
+            $ mads += 2
+            show madeline madScienist at slot(0, total=1), bright zorder 10
+            m "Exactly. Surface friction, incline, impact loss, obstacle timing. Finally, somebody respects the field."
+        "Want me to pretend it is a date anyway?":
+            $ mads += 2
+            show madeline flirty at slot(0, total=1), bright zorder 10
+            m "I— No. Pretending would contaminate the behavioral data."
+            m "Just take the fucking pass."
+        "Mini golf sounds pointless.":
+            $ mads -= 1
+            m "Most recreation is pointless. That's why Winston thinks I'll benefit from it."
+
+    m "He learned the 'get out more' argument from Ulysses."
+    m "Ulysses used to say the same thing when we were dating. Didn't work for him either."
+
+    "She says this as casually as a weather report and starts walking before you can ask anything else."
+
+    scene black with fade
+    "The miniature-golf course is an explosion of plastic castles, painted animals, artificial ponds, and badly maintained green turf."
+    "At the first hole, Madeline crouches until her face is nearly level with the ball."
+
+    show madeline madScienist at slot(0, total=1), bright zorder 10
+
+    m "There are seventeen holes after this one."
+    m "If I account for incline, surface friction, wind speed, ball deformation, and the windmill's rotational period, I can finish this in two strokes."
+
+    "You take your turn. The ball strikes one wall, bounces through the windmill at a terrible angle, clips a decorative mushroom, and drops directly into the hole."
+
+    show madeline distress at slot(0, total=1), bright zorder 10
+
+    m "..."
+    m "Do that again."
+
+    menu:
+        "The mushroom corrected the angle. Add it to your model.":
+            $ mads += 2
+            show madeline madScienist at slot(0, total=1), bright zorder 10
+            m "It should not have sufficient elasticity."
+            m "Move. I need to measure the mushroom."
+        "You look cute when you're concentrating.":
+            $ mads += 2
+            show madeline flirty at slot(0, total=1), bright zorder 10
+            m "..."
+            m "I was calculating."
+            "She looks back at the ball."
+            m "I have lost the calculation. Fuck you."
+        "Begin celebrating the flawless shot.":
+            $ mads += 1
+            m "That wasn't flawless. It was statistically offensive."
+            m "Do it again so I can prove why."
+
+    "By the sixth hole, Madeline has removed her jacket and tied back her hair. By the ninth, she has measured three rails with a pocket ruler and accused a fiberglass pirate of introducing an uncontrolled variable."
+    "At the windmill hole, her perfectly aimed shot catches a warped patch of turf and rolls backward between her shoes."
+
+    show madeline distress at slot(0, total=1), bright zorder 10
+
+    m "This course is built wrong."
+
+    menu:
+        "The turf rises on the left. Compensate two degrees right.":
+            $ mads += 2
+            show madeline flirty curious at slot(0, total=1), bright zorder 10
+            m "...Correct."
+            m "Good catch, newb. Don't get smug about it."
+        "Want me to let you win?":
+            $ mads -= 2
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "I will bury you under the eighteenth hole."
+        "Maybe the genius has finally met her match.":
+            $ mads += 1
+            m "My match is defective landscaping? That's insulting to both of us."
+
+    "Madeline adjusts by two degrees and sinks the shot. She looks more satisfied than anyone has a right to look beside a plastic windmill."
+
+    scene black with fade
+    "After the final hole, the two of you sit outside with ice cream. Madeline has written the score, wind conditions, and several complaints across every empty section of the scorecard."
+
+    show madeline at slot(0, total=1), bright zorder 10
+
+    m "That was statistically more enjoyable than anticipated."
+
+    menu:
+        "You can just say you had fun.":
+            $ mads += 1
+            m "I am aware."
+            "You wait."
+            m "...I had fun."
+        "Failure's easier when nobody gets hurt.":
+            $ mads += 2
+            show madeline flirty curious at slot(0, total=1), bright zorder 10
+            m "Yes."
+            m "I can be wrong here and the worst consequence is losing to a goddamn mushroom. That's... useful."
+        "Next time we should do something you're actually good at.":
+            $ mads -= 2
+            m "I am good at this. The course is wrong. We established that."
+
+    "She folds the scorecard and slips it into her jacket instead of throwing it away."
+
+    if mads >= MADELINE_WARM_THRESHOLD:
+        m "The experiment needs replication. Not soon. Eventually."
+        m "That is not an invitation. It is a statement about sample size."
+    else:
+        m "Don't tell Winston he was right about this. He'll become unbearable."
+
     $ dayMads += 1
     jump endOfDay
 
 label MadelineDayThree:
-    "You spend the day working with Madeline. (Visit 3 content in development)"
+    scene labOutline
+    "Madeline has arranged four capped tubes beside a compact centrifuge. Ica sits on a rolling stool several feet away, doing absolutely nothing useful."
+
+    show madeline at slot(1, total=2), bright zorder 10
+    show ica at slot(0, total=2), dim zorder 0
+
+    m "The trace from Enrico's window is mixed with his blood. Today we're separating the layers and testing which markers are absent."
+    m "Enrico's type is already confirmed. Once I subtract his markers, the foreign trace tells us what the attacker cannot be."
+    m "Before either of you touches anything, the rotor has to be balanced. Uneven mass at this speed turns expensive equipment into shrapnel."
+
+    menu:
+        "Show me the controls before I place a tube.":
+            $ mads += 2
+            m "Good. Competence continues to be attractive—I mean statistically uncommon."
+        "You built this centrifuge too, didn't you?":
+            $ mads += 1
+            m "Modified it. The original design had limits and I found that personally insulting."
+        "It probably balances itself.":
+            $ mads -= 2
+            show madeline distress at slot(1, total=2), bright zorder 10
+            m "It does not. That's why I just explained balance to you."
+
+    show ica at slot(0, total=2), bright zorder 10
+    show madeline at slot(1, total=2), dim zorder 0
+
+    i "Can I spin in the chair while you two do blood homework?"
+
+    show madeline distress at slot(1, total=2), bright zorder 10
+    show ica at slot(0, total=2), dim zorder 0
+
+    m "You can leave. That would be ideal."
+
+    show ica happy at slot(0, total=2), bright zorder 10
+    show madeline at slot(1, total=2), dim zorder 0
+
+    i "Nah. Stool's comfortable."
+
+    "Ica reaches toward the stool with one hand. Gravity shifts just enough to pull it across the floor without making her stand."
+    "The centrifuge gives a sharp warning tone and stops. One tube settles into a visibly cleaner boundary than the others."
+
+    show madeline distress at slot(1, total=2), bright zorder 10
+    show ica at slot(0, total=2), dim zorder 0
+
+    m "ICA! What the fuck did I say about changing local gravity near calibrated equipment?"
+
+    show ica at slot(0, total=2), bright zorder 10
+    show madeline at slot(1, total=2), dim zorder 0
+
+    i "I don't remember you saying anything about gravity specifically."
+    i "Also, your machine stopped itself. You're welcome."
+
+    "Madeline begins checking the rotor for damage. Your attention stays on the unusually clean band inside the interrupted tube."
+
+    menu:
+        "That tube separated more cleanly under the gravity shift.":
+            $ mads += 2
+            show madeline madScienist at slot(1, total=2), bright zorder 10
+            m "...It did."
+            m "The effective mass changed faster than the rotor speed. That's fucking useful."
+        "I think Ica improved your machine.":
+            $ mads += 1
+            show madeline distress at slot(1, total=2), bright zorder 10
+            m "She accidentally exposed a useful variable. That is not the same thing."
+        "Looks broken to me.":
+            $ mads -= 1
+            m "Then look harder. The shutdown worked and the separation changed."
+
+    show ica flirty at slot(0, total=2), bright zorder 10
+    show madeline at slot(1, total=2), dim zorder 0
+
+    i "Aw, look at you two doing science together. Kinda cute."
+
+    show madeline flirty at slot(1, total=2), bright zorder 10
+    show ica at slot(0, total=2), dim zorder 0
+
+    m "Get out of my lab."
+
+    show ica happy at slot(0, total=2), bright zorder 10
+    show madeline at slot(1, total=2), dim zorder 0
+
+    i "Sure thing, Shield Maiden. Try not to fall in love with the centrifuge."
+
+    hide ica
+    show madeline distress at slot(0, total=1), bright zorder 10
+
+    m "I am not crediting her in the report."
+    m "We can reproduce the useful part with calibrated counterweights and fine trim. You balance. I monitor the sample."
+
+    $ start_madeline_centrifuge_minigame()
+
+    $ madeline_day_three_blood_type = madeline_centrifuge_result["blood_type"]
+    $ madeline_day_three_removed_names = ", ".join(investigationClues[-1]["eliminated_names"])
+
+    if madeline_centrifuge_result["completed"]:
+        if madeline_centrifuge_result["quality"] == "perfect":
+            show madeline madScienist at slot(0, total=1), bright zorder 10
+            m "Balanced on the first run. No vibration, clean separation, readable bands."
+            m "You're allowed to look pleased with yourself. Briefly."
+        else:
+            m "You recovered from the unstable run without ruining the sample. Acceptable."
+            m "Next time, remember that equal numbers work better on opposite sides."
+    else:
+        m "Watch the rotor. Six and four on each side. Symmetry isn't decoration."
+        "Madeline finishes the separation and slides the result beneath the reader."
+
+    m "No type [madeline_day_three_blood_type] markers in the attacker trace."
+    m "That rules out [madeline_day_three_removed_names]. Six suspects left."
+
+    menu:
+        "The missing marker matters more than the visible bands.":
+            $ mads += 2
+            show madeline flirty curious at slot(0, total=1), bright zorder 10
+            m "Exactly. Everybody stares at what a test shows. Geniuses ask what should be there and isn't."
+        "Your centrifuge is incredible.":
+            $ mads += 1
+            m "Correct. The operator was decent too."
+        "So Ica solved the blood test.":
+            $ mads -= 2
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "Ica moved a chair. We recognized, modeled, reproduced, and interpreted the result."
+            m "Do not make me explain the difference again."
+
+    if mads >= MADELINE_HIGH_THRESHOLD:
+        "Madeline opens the notebook and writes several lines beneath NEWB. When she notices you looking, she covers the page with one hand."
+        m "Peer-review notes. Classified."
+    elif mads >= MADELINE_WARM_THRESHOLD:
+        m "You did well, newb. Better than most people who wander into my lab with functional hands and no idea how to use them."
+    else:
+        m "The evidence is valid. That's the important part."
+
+    m "Come back tomorrow. I have a new prototype to test. For now, report to Ulysses."
     $ dayMads += 1
     jump endOfDay
 
 label MadelineDayFour:
-    "You spend the day working with Madeline. (Visit 4 content in development)"
+    scene labOutline
+    "A new machine occupies most of Madeline's central workbench. Cables run from a sealed wound swab to three separate readers labeled FIRE, ICE, and LIGHT."
+
+    show madeline madScienist at slot(0, total=1), bright zorder 10
+
+    m "The victim's wounds contain power residue, but residue alone is useless if we can't tell how it entered the body."
+    m "This separates elemental damage from ordinary contact trauma. In theory."
+
+    menu:
+        "What assumption is the prototype making?":
+            $ mads += 2
+            m "That one wound has one cause. It's a reasonable starting model."
+            m "And before you say it, yes, I know reasonable assumptions are where idiots go to die."
+        "You made three readers in one night?":
+            $ mads += 1
+            m "Four. The first one caught fire. It was less informative than you'd expect."
+        "Just run every sample until one says guilty.":
+            $ mads -= 2
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "Machines don't say guilty. They produce data, which smarter people interpret."
+
+    "Madeline starts the prototype. The Fire reader illuminates. A moment later, so do Ice and Light. Every alarm begins sounding at once."
+
+    show madeline distress at slot(0, total=1), bright zorder 10
+
+    m "No."
+    m "No, that's impossible. The sample cannot be thermally altered, crystallized, and photochemically bleached in the same square millimeter."
+    m "DAMN IT!"
+
+    "She shuts the alarms off, opens her notebook, and begins writing so hard the pencil tears through the page."
+
+    menu:
+        "The machine may be separating causes that happened to the same wound.":
+            $ mads += 2
+            show madeline madScienist at slot(0, total=1), bright zorder 10
+            m "Power, impact, and environmental damage stacked together..."
+            m "Yes. The machine isn't wrong. My input model is. Fuck. Good catch."
+        "Rebuild it. I'll stay for the retest.":
+            $ mads += 2
+            show madeline flirty curious at slot(0, total=1), bright zorder 10
+            m "You know that could take all night."
+            "You nod."
+            m "...Fine. Hand me the narrow driver."
+        "A genius should have predicted this.":
+            $ mads -= 2
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "A genius notices when a model fails and fixes it. A dumbass stands nearby commenting on the obvious."
+
+    "Madeline separates the readings by sequence instead of source. The impossible result resolves into damage from Enrico's surroundings, the attacker's power, and physical contact during the struggle."
+
+    $ madeline_day_four_injuries = suspectAttributes[killer]["injuries"]
+    $ madeline_day_four_wound_hint = MADELINE_WOUND_SCENE_HINTS[madeline_day_four_injuries]
+
+    m "There. One residue pattern affected the wound, but it didn't create every mark around it."
+    m "I can isolate its sequence now. I still can't classify the source without a cleaner comparison."
+
+    "Madeline overlays the corrected sequence across Enrico's injuries. [madeline_day_four_wound_hint]"
+
+    "She begins preparing the entire test again from untouched controls."
+
+    menu:
+        "I'll help document the failed run before we repeat it.":
+            $ mads += 2
+            m "Good. Failed data is still data, and pretending otherwise is how morons publish garbage."
+        "You're hotter than the machine when you're angry.":
+            $ mads += 1
+            show madeline flirty at slot(0, total=1), bright zorder 10
+            m "That is scientifically meaningless."
+            "She turns away before answering."
+            m "The machine peaked at four hundred degrees. So you're also wrong."
+        "Maybe let somebody else rebuild it.":
+            $ mads -= 2
+            m "Maybe let somebody else form your sentences."
+
+    m "The corrected design needs time to settle before I trust it on the final residue test. Meanwhile, I have a neural-feedback rig that needs a second operator."
+    m "Come back tomorrow. Read the consent packet first. All of it."
+
     $ dayMads += 1
     jump endOfDay
 
 label MadelineDayFive:
-    "You spend the day working with Madeline. (Visit 5 content in development)"
+    scene labOutline
+    "A stack of paper waits beside Madeline's helmet. The title page reads VOLUNTARY NEURAL-FEEDBACK CALIBRATION, followed by twenty-three pages of warnings."
+
+    show madeline at slot(0, total=1), bright zorder 10
+
+    m "Before you ask: no, the packet is not excessive."
+    m "We fought a villain called Mindbreak a while back. He controlled people's minds. I don't put anything near a brain without multiple ways to shut it the fuck down."
+    m "The helmet doesn't control thoughts. It reduces deliberate emotional filtering so I can calibrate interference in the scanner."
+
+    "She taps three marked safeguards: a physical cutoff in your hand, a verbal check-in sequence, and a strict maximum duration."
+
+    menu:
+        "I control the cutoff, and the first stop ends the test.":
+            $ mads += 2
+            show madeline flirty curious at slot(0, total=1), bright zorder 10
+            m "Correct. No negotiation, no request for one more reading, no deciding you know better than the person wearing it."
+        "You wrote twenty-three pages just to ask me to push a button?":
+            $ mads += 1
+            m "I wrote twenty-three pages so pushing the button remains the only decision you need to make."
+        "We'd get better data if we ignored the time limit.":
+            $ mads -= 2
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "Then you don't understand consent or experimental design. Read it again."
+
+    "Madeline signs the form, makes you sign beneath her, and places the helmet over her head. Its narrow visor lights across her glasses."
+
+    m "Beginning baseline. Motor control intact. Reasoning intact. You're standing too close."
+
+    "You take one step back."
+
+    m "I didn't tell you to move."
+    m "Shit. Filtering reduction confirmed."
+
+    if mads >= MADELINE_HIGH_THRESHOLD:
+        m "I enjoy it when you arrive. More than the work alone accounts for."
+        m "I've recalculated whether you're flirting with me eleven times, and the probability keeps getting worse."
+        m "Worse for concentration. Not— Fuck. Continue the test."
+    elif mads >= MADELINE_WARM_THRESHOLD:
+        m "You're significantly more competent than I predicted. I have revised your file upward four times."
+        m "I also notice when you aren't here, which is an inefficient use of attention."
+    else:
+        m "I trust you to follow the procedure. That is not a statement I make about most people here."
+
+    "The helmet emits a warning tone. Madeline's hand tightens against the chair."
+
+    m "Stop."
+
+    menu:
+        "Hit the cutoff immediately.":
+            $ mads += 2
+            "The visor goes dark before the next tone."
+        "Ask if she is certain.":
+            $ mads -= 1
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "I said stop!"
+            "You hit the cutoff."
+        "Wait for one more reading.":
+            $ mads -= 3
+            "The helmet reaches its hard time limit and shuts itself down. Madeline tears it off."
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "Get one thing straight, newb. Better data does not outrank the person inside the machine."
+
+    "Madeline removes the helmet. Her face is red with equal parts anger and embarrassment."
+
+    if mads >= MADELINE_WARM_THRESHOLD:
+        show madeline flirty at slot(0, total=1), bright zorder 10
+        m "Anything I said under reduced filtering remains scientifically valid and socially inadmissible."
+    else:
+        m "Calibration complete. We are never discussing the verbal output again."
+
+    "Madeline locks the helmet away, then returns to the preserved wound sample while the corrected residue array continues calibrating."
+    "Under magnification, fine debris around the wound resolves into a clear handling pattern."
+
+    $ madeline_day_five_organization = suspectAttributes[killer]["organization"]
+    $ madeline_day_five_organization_hint = MADELINE_ORGANIZATION_SCENE_HINTS[madeline_day_five_organization]
+
+    "[madeline_day_five_organization_hint]"
+
+    m "Powers influence habits more than people admit. Fire users trend passionate. Ice users often run cold and calm. Light users get weird about dirt and order."
+    m "Tendencies, not laws. Everyone is still individually stupid in exciting new ways."
+    m "This pattern doesn't prove anything by itself, but it's interesting."
+
+    menu:
+        "A tendency isn't an identity. We keep it provisional.":
+            $ mads += 2
+            m "Exactly. Correlation is useful right up until some idiot treats it as destiny."
+        "You really do get the bird's-eye view of everyone.":
+            $ mads += 1
+            m "Finally, somebody understands the burden of being surrounded by ground-level thinking."
+        "Clean people are innocent. Problem solved.":
+            $ mads -= 2
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "That may be the dumbest sentence produced in this laboratory, and Ica visits regularly."
+
+    m "The corrected residue array will finish calibrating overnight."
+    m "Tomorrow we classify the power category and cut the list to three. For now, get back to Ulysses."
+
     $ dayMads += 1
     jump endOfDay
 
 label MadelineDaySix:
-    "You spend the day working with Madeline. (Visit 6 content in development)"
+    scene labOutline
+    "Three sealed reference cartridges sit in a row across Madeline's workbench: FIRE, ICE, and LIGHT. The preserved wound swab rests beneath a glass cover beside them."
+
+    show madeline madScienist at slot(0, total=1), bright zorder 10
+
+    m "Final test. Day Three isolated the blood trace. Day Four separated the wound sequence from the surrounding damage."
+    m "The corrected array finished calibrating overnight."
+    m "Today we compare the residue in the wound against all three broad power categories."
+    m "Load the references left to right and don't touch the swab."
+
+    menu:
+        "Check every seal, then load Fire, Ice, and Light.":
+            $ mads += 2
+            m "Correct order and you checked the seals without being told. Your file is becoming annoyingly positive."
+        "You could probably do this faster yourself.":
+            $ mads += 1
+            m "Obviously. I'm testing whether you can do it correctly. Try to keep up."
+        "Skip the controls and test the swab directly.":
+            $ mads -= 2
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "No controls means no trustworthy result. Six days in and you're still trying to invent shortcuts to being wrong."
+
+    "You inspect each seal and lock the cartridges into the reader. Madeline lowers her helmet over her glasses and connects its scanner to the prototype."
+
+    $ madeline_day_six_power = suspectAttributes[killer]["power"]
+    $ madeline_day_six_residue = MADELINE_POWER_RESIDUE_TEXT[madeline_day_six_power]
+
+    "The first pass sends three colored traces across her visor. Two collapse into environmental noise. One remains."
+
+    m "[madeline_day_six_residue]"
+
+    "Madeline lifts the visor, openly grinning."
+
+    show madeline madScienist at slot(0, total=1), bright zorder 10
+
+    m "[madeline_day_six_power]. Fuck yes."
+
+    menu:
+        "Repeat it blind before we report.":
+            $ mads += 2
+            show madeline flirty curious at slot(0, total=1), bright zorder 10
+            m "I was already going to."
+            m "Still, excellent answer. Painfully excellent."
+        "I knew your machine would work, genius.":
+            $ mads += 1
+            m "Of course it worked. The question was whether reality had the sense to agree with me twice."
+        "One result is close enough.":
+            $ mads -= 2
+            show madeline distress at slot(0, total=1), bright zorder 10
+            m "Close enough is what people say immediately before ruining six days of evidence."
+
+    "Madeline scrambles the cartridge positions, masks their labels, and runs the test again. The same trace survives."
+
+    $ madeline_day_six_clue = "Repeated residue tests identify the attacker's broad power category as {}.".format(madeline_day_six_power)
+    $ record_planned_route_reveal(
+        "madeline", 6, clue_text=madeline_day_six_clue, expected_count=3)
+    $ madeline_day_six_remaining_names = ", ".join(
+        [suspectNames[suspect_id] for suspect_id in remainingSuspects])
+
+    m "Repeated, controlled, and consistent. The attacker belongs to the [madeline_day_six_power] category."
+    m "That leaves [madeline_day_six_remaining_names]."
+    m "The machine gets us to three. Choosing between them is your job."
+
+    "She prints the result, signs it, and files it with the evidence packet without offering another hint."
+
+    if mads >= MADELINE_HIGH_THRESHOLD:
+        "When Madeline opens her personal notebook, the folded miniature-golf scorecard slips from the section labeled NEWB. Your name is written across the back beneath several dense lines of observations."
+        show madeline flirty at slot(0, total=1), bright zorder 10
+        m "You saw nothing."
+        "She places the scorecard carefully back inside instead of hiding it somewhere else."
+        m "Your work this week was intelligent, careful, and consistently less irritating than expected. Put that in your report."
+    elif mads >= MADELINE_WARM_THRESHOLD:
+        "Madeline adds one final line to the section labeled NEWB."
+        m "Final assessment: competent under supervision."
+        m "That is extremely high praise. Don't make me quantify it."
+    else:
+        m "The evidence is sound. Give Ulysses the three names and prepare for the final meeting."
+
+    m "We're done for today, newb."
+
     $ dayMads += 1
     jump endOfDay
 

@@ -19,12 +19,12 @@ define suspectAttributes = {
     1: {"blood_type": "A", "power": "Fire", "height": "Short", "unique_drop": "Missing Hair", "unique_id": "Mole", "organization": "Clean", "build": "Brawny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Calculated"},
     2: {"blood_type": "B", "power": "Ice", "height": "Average", "unique_drop": "Missing Tooth", "unique_id": "Glasses", "organization": "Messy", "build": "Skinny", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "Panicked"},
     3: {"blood_type": "A", "power": "Ice", "height": "Tall", "unique_drop": "Ear Chunk", "unique_id": "Missing Arm", "organization": "Clean", "build": "Average", "injuries": "None", "hair": "Blonde", "temperament": "Calm", "kill_reaction": "None"},
-    4: {"blood_type": "O", "power": "Ice", "height": "Average", "unique_drop": "Missing Hair", "unique_id": "Scar", "organization": "Clean", "build": "Skinny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "None"},
+    4: {"blood_type": "B", "power": "Ice", "height": "Average", "unique_drop": "Missing Hair", "unique_id": "Scar", "organization": "Clean", "build": "Skinny", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "None"},
     5: {"blood_type": "O", "power": "Fire", "height": "Tall", "unique_drop": "Missing Tooth", "unique_id": "Birthmark", "organization": "Messy", "build": "Average", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "Calculated"},
-    6: {"blood_type": "B", "power": "Fire", "height": "Short", "unique_drop": "Ear Chunk", "unique_id": "Tattoos", "organization": "Messy", "build": "Brawny", "injuries": "None", "hair": "Blonde", "temperament": "Passionate", "kill_reaction": "Panicked"},
-    7: {"blood_type": "A", "power": "Light", "height": "Short", "unique_drop": "Missing Hair", "unique_id": "Piercings", "organization": "Clean", "build": "Average", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Panicked"},
+    6: {"blood_type": "A", "power": "Fire", "height": "Short", "unique_drop": "Ear Chunk", "unique_id": "Tattoos", "organization": "Messy", "build": "Brawny", "injuries": "None", "hair": "Blonde", "temperament": "Passionate", "kill_reaction": "Panicked"},
+    7: {"blood_type": "B", "power": "Light", "height": "Short", "unique_drop": "Missing Hair", "unique_id": "Piercings", "organization": "Clean", "build": "Average", "injuries": "Bruised Knuckles", "hair": "Brown", "temperament": "Calm", "kill_reaction": "Panicked"},
     8: {"blood_type": "O", "power": "Light", "height": "Average", "unique_drop": "Missing Tooth", "unique_id": "Eye Patch", "organization": "Messy", "build": "Brawny", "injuries": "Scuffed Hands", "hair": "Black", "temperament": "Passionate", "kill_reaction": "None"},
-    9: {"blood_type": "B", "power": "Light", "height": "Tall", "unique_drop": "Ear Chunk", "unique_id": "Vitiligo", "organization": "Clean", "build": "Skinny", "injuries": "None", "hair": "Blonde", "temperament": "Nervous", "kill_reaction": "Calculated"},
+    9: {"blood_type": "O", "power": "Light", "height": "Tall", "unique_drop": "Ear Chunk", "unique_id": "Vitiligo", "organization": "Clean", "build": "Skinny", "injuries": "None", "hair": "Blonde", "temperament": "Nervous", "kill_reaction": "Calculated"},
 }
 
 ## Shared one-person clearing used by routes whose first evidence visit clears
@@ -69,10 +69,38 @@ define dhampirDayOneEliminationByKiller = {
     9: 7,
 }
 
-## All five evidence characters live here. For unwritten visits, the cycle
-## selects a ruled-out attribute value that never contains the saved killer.
-## The exact number removed can differ outside Razzle because the source
-## attribute groups are not all balanced 3/3/3.
+## Madeline's fingerprint target is chosen from the blood-type group her
+## third visit will exclude. The fingerprint clears one member first, so the
+## blood test removes exactly two more while preserving the killer's complete
+## three-person power group for the positive Visit 6 result.
+define madelineDayOneEliminationByKiller = {
+    1: 2,
+    2: 5,
+    3: 8,
+    4: 9,
+    5: 4,
+    6: 7,
+    7: 1,
+    8: 3,
+    9: 6,
+}
+
+define madelineFocusedRoutePlan = {
+    1: {"blood_type": "B"},
+    2: {"blood_type": "O"},
+    3: {"blood_type": "O"},
+    4: {"blood_type": "O"},
+    5: {"blood_type": "B"},
+    6: {"blood_type": "B"},
+    7: {"blood_type": "A"},
+    8: {"blood_type": "A"},
+    9: {"blood_type": "A"},
+}
+
+## All five evidence characters live here. Generic cycle visits select a
+## ruled-out attribute value that never contains the saved killer. Razzle,
+## Madeline, and Dhampir use focused mappings where their route structure
+## requires exact elimination counts.
 define investigationRoutes = {
     "razzle": {
         "name": "Razzle Dazzle",
@@ -85,9 +113,9 @@ define investigationRoutes = {
     "madeline": {
         "name": "Madeline",
         "visits": {
-            1: {"kind": "single", "eliminations": singleEliminationByKiller, "template": "Fingerprint analysis clears {suspect}."},
-            3: {"kind": "attribute", "attribute": "blood_type", "cycle": {"A": "B", "B": "O", "O": "A"}, "template": "Lab evidence rules out blood type {value}."},
-            6: {"kind": "attribute", "attribute": "power", "cycle": {"Fire": "Ice", "Ice": "Light", "Light": "Fire"}, "template": "Lab evidence rules out the {value} power type."},
+            1: {"kind": "single", "eliminations": madelineDayOneEliminationByKiller, "template": "Fingerprint analysis clears {suspect}."},
+            3: {"kind": "madeline_attribute", "attribute": "blood_type", "template": "Lab evidence rules out blood type {value}."},
+            6: {"kind": "retain_killer_attribute", "attribute": "power", "template": "Lab evidence identifies the {value} power category."},
         },
     },
     "winston": {
@@ -162,9 +190,32 @@ init python:
                             "Razzle killer {} left non-matching hair suspects {}.".format(
                                 killer_id, wrong_hair))
 
-                if route_id == "dhampir" and counts != [8, 6, 3]:
-                    raise Exception("Dhampir killer {} produced counts {}, not 8/6/3.".format(
-                        killer_id, counts))
+                if route_id in ("madeline", "dhampir") and counts != [8, 6, 3]:
+                    raise Exception("{} killer {} produced counts {}, not 8/6/3.".format(
+                        store.investigationRoutes[route_id]["name"], killer_id, counts))
+
+                if route_id == "madeline":
+                    killer_power = store.suspectAttributes[killer_id]["power"]
+                    wrong_power = [
+                        suspect_id for suspect_id in active
+                        if store.suspectAttributes[suspect_id]["power"] != killer_power
+                    ]
+                    if wrong_power:
+                        raise Exception(
+                            "Madeline killer {} left wrong-power suspects {}.".format(
+                                killer_id, wrong_power))
+
+                    soft_pairs = [
+                        (
+                            store.suspectAttributes[suspect_id]["injuries"],
+                            store.suspectAttributes[suspect_id]["organization"],
+                        )
+                        for suspect_id in active
+                    ]
+                    if len(set(soft_pairs)) != len(soft_pairs):
+                        raise Exception(
+                            "Madeline killer {} has duplicate wound/organization hints {}."
+                            .format(killer_id, soft_pairs))
 
     def get_planned_route_reveal(route_id, visit, killer_id=None):
         """Resolve one route/visit into a killer-safe clue and suspect list."""
@@ -194,6 +245,12 @@ init python:
                 ])
             elif kind == "razzle_attribute":
                 value = store.razzleFocusedRoutePlan[killer_id][attribute]
+                eliminated_ids = sorted([
+                    suspect_id for suspect_id, attributes in store.suspectAttributes.items()
+                    if attributes[attribute] == value
+                ])
+            elif kind == "madeline_attribute":
+                value = store.madelineFocusedRoutePlan[killer_id][attribute]
                 eliminated_ids = sorted([
                     suspect_id for suspect_id, attributes in store.suspectAttributes.items()
                     if attributes[attribute] == value

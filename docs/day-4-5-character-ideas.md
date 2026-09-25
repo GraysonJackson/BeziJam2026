@@ -80,14 +80,15 @@ Madeline should be serious, strategic, cautious, passionate once engaged, and mo
 
 ### Day 4 — The wrong machine
 
-**Core idea:** Madeline builds a prototype intended to separate power residue from ordinary contamination. It works perfectly on the control samples and gives an impossible result on the murder sample.
+**Core idea:** Madeline builds a prototype intended to separate elemental residue from physical wound trauma. It gives an impossible result because her model assumes each wound has only one cause.
 
 What to do:
 
-- Let the first half be fun laboratory problem-solving: balancing inputs, replacing a scorched component, or choosing which control sample to run.
-- The apparent failure should have multiple plausible causes—contamination, a mixed sample, damaged equipment, or a bad assumption. Do not let it identify a power category yet.
-- Madeline's instinct is to rebuild everything alone and hide the error until she understands it. The player can challenge the assumption, check the chain of custody, or help her document the failure honestly.
-- Make the "wrong result" useful because it proves the final Day 6 power test needs a cleaner comparison, not because failure magically solves the case.
+- The prototype reports Fire, Ice, and Light in the same tiny area. The machine is functioning; the input model is wrong.
+- Let the player question the assumption, offer to stay for a complete retest, or insult Madeline for missing it.
+- Separating the events by sequence reveals how elemental damage, displaced surroundings, and direct physical contact combined during the struggle.
+- The corrected wound pattern subtly suggests `Bruised Knuckles`, `Scuffed Hands`, or `None`. Never name the category or add it to the notebook.
+- Make the failure useful because it improves the final Day 6 comparison, not because failure magically solves the case.
 
 Relationship beat:
 
@@ -96,7 +97,7 @@ Relationship beat:
 
 End beat:
 
-- Madeline realizes she needs live calibration data from known power users. She asks the player to help with the more personal test on Day 5.
+- Madeline realizes her helmet and scanner need a live neural-feedback calibration. She asks the player to control the safety cutoff during the more personal Day 5 test.
 
 ### Day 5 — The consent test
 
@@ -105,18 +106,18 @@ End beat:
 What to do:
 
 - Keep the effect mild and reversible—closer to a suit feedback loop than actual mind control.
-- Let the player choose safeguards: a manual cutoff, a verbal check-in sequence, or Winston standing by to nullify the system. This makes consent part of gameplay rather than background exposition.
+- Use all three agreed safeguards: a manual cutoff controlled by the player, a verbal check-in sequence, and a strict time limit. Winston is not present; Madeline's trust is expressed by giving the player control.
 - During calibration, Madeline's normal guarded presentation slips. She may become extremely candid, visibly nervous, or unable to hide how much she enjoys working with the player.
-- The investigation result should establish how genuine elemental residue behaves under the scanner, but stop before identifying the murder sample's exact power type.
+- The helmet calibrates scanner noise but does not reveal the killer's personality or evidence category. Afterward, a separate pass over the preserved sample subtly shows careful cleaning or uncontrolled dirt and transfer, hinting at `Clean` or `Messy` organization without logging it.
 
 Relationship beat:
 
-- Madeline can admit that she mentally rehearsed asking the player to help and prepared several versions of the invitation.
-- Reward the player for respecting the stop condition even if pushing longer would produce "better" data. That fits both her caution and her fear of losing control.
+- Reduced emotional filtering makes Madeline accidentally admit how much she enjoys or respects the player's presence.
+- Reward the player for respecting the first stop condition even if pushing longer would produce "better" data. Continuing is the route's most serious relationship violation.
 
 End beat:
 
-- The calibration succeeds. Madeline now has the reference set needed to classify the murder residue on Day 6.
+- The calibration succeeds. Madeline can now remove scanner noise during the final Fire/Ice/Light comparison on Day 6.
 
 ## Winston
 
