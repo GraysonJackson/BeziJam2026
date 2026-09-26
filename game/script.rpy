@@ -2985,7 +2985,7 @@ label MadelineDayOne:
         "The portable scanner.":
             $ mads += 1
             "You lift the compact scanner and its folded projection screen. Madeline gives the strap one testing tug before letting you keep it."
-            m "Don't drop it. I built the calibration assembly and I don't want to build it twice."
+            m "Don't drop it. I built the calibration assembly myself and I don't want to build it twice."
         "The sealed evidence case.":
             $ mads += 1
             "You take the empty transport case by its reinforced handle. Madeline checks both latches and adds a third seal from her pocket."
@@ -3048,7 +3048,7 @@ label MadelineDayOne:
             m "Come back next time and improve it."
         "Keeping files on everyone is creepy.":
             $ mads -= 1
-            m "It's efficient. Creepy is just efficient with poor branding."
+            m "It's efficient. Creepy is just efficient with shitty branding."
 
     m "Let's pack this before Nicky discovers I've been awake since yesterday. Apparently food becomes mandatory if I mention that near her."
 
@@ -3078,8 +3078,9 @@ label MadelineDayOne:
     elif madeline_day_one_food_plan == "carry":
         "You choose takeout with sugar, protein, and no table service. Madeline eats it in the parked car, balances the carton on the closed scanner case, and steals several of your fries without asking."
     else:
-        "The argument ends in a compromise: takeout now, sleep after the report. Madeline eats in the parked car, balances the carton on the closed scanner case, and shoves the unopened dessert into your hands so she cannot revise the agreement into more work."
+        "You decide on takeout now, sleep after the report. Madeline eats in the parked car, balances the carton on the closed scanner case, and shoves the unopened dessert into your hands so she cannot revise the agreement into more work."
     "For once, the notebook remains in her bag. She spends the drive criticizing the radio instead of recording observations about you."
+    "Eventually you make your way back to the office, where Madeline splits to let you report"
 
     $ dayMads += 1
     jump endOfDay
@@ -3116,7 +3117,7 @@ label MadelineDayTwo:
             $ mads -= 1
             m "Most recreation is pointless. That's why Winston thinks I'll benefit from it."
 
-    m "He learned the 'get out more' argument from Ulysses. Ulysses used to deploy it every time I slept in the lab."
+    m "Winston learned the 'get out more' argument from Ulysses. Ulysses used to deploy it every time I slept in the lab."
 
     "The familiarity in the sentence lands before Madeline appears to notice she said it."
 
@@ -3134,7 +3135,7 @@ label MadelineDayTwo:
     "She delivers the information like a correction to a lab record and immediately returns to criticizing the course brochure. You have to catch up before the elevator doors close."
 
     "At the elevator, Madeline realizes she is still carrying a soldering iron. She stares at it, considers bringing it, then drops it into a planter outside the lab."
-    m "Remind me that's there."
+    m "Remind me that's there later."
 
     menu:
         "Promise to remind her.":
@@ -3161,7 +3162,7 @@ label MadelineDayTwo:
         "Ask Madeline to choose for you.":
             $ mads += 1
             "She weighs three balls in her palms and gives you the one with the fewest surface defects."
-            m "This one. If you lose, find a better variable to blame."
+            m "This one. When you lose, find a better variable to blame."
 
     "Madeline refuses the tiny pencil, produces a mechanical one from her jacket, and records the starting time at the top of the scorecard."
     "At the first hole, Madeline crouches until her face is nearly level with the ball."
@@ -3239,7 +3240,7 @@ label MadelineDayTwo:
         "Ask for Madeline's recommendation.":
             $ mads += 1
             $ madeline_ice_cream_choice = "coffee"
-            m "Coffee. Sugar and caffeine, combined by somebody else. Efficient."
+            m "Coffee."
             "You order it. She chooses the same and pays before you can argue."
 
     "You carry the cups to a metal table away from a noisy birthday party. After the final hole, the two of you sit outside with ice cream while the sun sinks behind the plastic castle. Madeline has written the score, wind conditions, and several complaints across every empty section of the scorecard."
@@ -3272,6 +3273,8 @@ label MadelineDayTwo:
     else:
         m "Don't tell Winston he was right about this. He'll become unbearable."
 
+    m "I'll see you around. Go tell Ulysses we wasted a day on loseing to faulty architecture and landscaping."
+    "Madeline walks away, leaving you to ride back and report to Ulysses."
     $ dayMads += 1
     jump endOfDay
 
@@ -3350,7 +3353,7 @@ label MadelineDayThree:
             $ mads += 2
             show madeline madScientist at slot(1, total=2), bright zorder 10
             m "...It did."
-            m "The effective mass changed faster than the rotor speed. That's fucking useful."
+            m "The effective mass changed faster than the rotor speed. That's shockingly useful."
         "I think Ica improved your machine.":
             $ mads += 1
             show madeline distress at slot(1, total=2), bright zorder 10
@@ -3377,8 +3380,8 @@ label MadelineDayThree:
     hide ica
     show madeline distress at slot(0, total=1), bright zorder 10
 
-    m "I am not crediting her in the report."
-    m "We can reproduce the useful part with calibrated counterweights and fine trim. You balance. I monitor the sample."
+    m "I am NOT crediting her in the report."
+    m "We can reproduce the useful part with calibrated counterweights and fine trim. You balance while I monitor the sample."
 
     call RulesMadelineCentrifuge
     $ start_madeline_centrifuge_minigame()
@@ -3409,7 +3412,7 @@ label MadelineDayThree:
         "The missing marker matters more than the visible bands.":
             $ mads += 2
             show madeline flirty curious at slot(0, total=1), bright zorder 10
-            m "Everybody stares at what a test shows. Geniuses ask what should be there and isn't. You may be trainable."
+            m "Everybody stares at what a test shows. Geniuses ask what should be there and isn't. You just may be trainable after all."
         "Your centrifuge is incredible.":
             $ mads += 1
             m "Obviously. The operator was decent too."
@@ -3417,7 +3420,7 @@ label MadelineDayThree:
             $ mads -= 2
             show madeline distress at slot(0, total=1), bright zorder 10
             m "Ica moved a chair. We recognized, modeled, reproduced, and interpreted the result."
-            m "Do not make me explain the difference again."
+            m "Do not make me explain the difference again or I'll take your name off the report too."
 
     if mads >= MADELINE_HIGH_THRESHOLD:
         "Madeline opens the notebook and writes several lines beneath NEWB. When she notices you looking, she covers the page with one hand."
@@ -3435,10 +3438,11 @@ label MadelineDayThree:
     menu:
         "Eat it without asking.":
             $ mads += 1
-            m "Efficient. If it tastes like chalk, that's normal."
+            m "They're efficient. If it tastes like chalk, that's normal."
         "Ask whether she made these too.":
             $ mads += 1
             m "No. If I made them, they would taste less like insulation and contain forty percent more caffeine."
+            m "Maybe I should make my own though... not a bad idea newb."
         "Offer it to Ica before remembering she left.":
             m "She'd make it orbit her head for an hour and forget to eat it. Keep it."
 
@@ -3548,7 +3552,7 @@ label MadelineDayFour:
             show madeline flirty at slot(0, total=1), bright zorder 10
             m "That is scientifically meaningless."
             "She turns away before answering."
-            m "The machine peaked at four hundred degrees. So you're also wrong."
+            m "The machine peaked at four hundred degrees. So you're also wrong dumbass."
         "Maybe let somebody else rebuild it.":
             $ mads -= 2
             m "Maybe let somebody else form your sentences."
@@ -3571,6 +3575,12 @@ label MadelineDayFour:
             "She taps her bottle against yours."
         "Spend the six minutes in silence.":
             "Madeline does not seem uncomfortable with it. When the timer sounds, she looks marginally less angry than before."
+    "Madeline stands from her stool."
+    m "I'm going home for now. We'll start on the machine then. Remember:"
+    m "READ"
+    m "THE"
+    m "PACKET"
+    "Madeline walks out the door, leaving you to report to Ulysses."
 
     $ dayMads += 1
     jump endOfDay
@@ -3618,7 +3628,7 @@ label MadelineDayFive:
         m "I've recalculated whether you're flirting with me eleven times, and the probability keeps getting worse."
         m "Worse for concentration. That is not an invitation to interpret it. Fuck. Continue the test."
     elif mads >= MADELINE_WARM_THRESHOLD:
-        m "You're significantly more competent than I predicted. I have revised your file upward four times."
+        m "You're significantly more competent than I predicted. I have revised your file upwards of four times."
         m "I also notice when you aren't here, which is an inefficient use of attention."
     else:
         m "I trust you to follow the procedure. That is not a statement I make about most people here."
@@ -3641,8 +3651,9 @@ label MadelineDayFive:
             "The helmet reaches its hard time limit and shuts itself down. Madeline tears it off."
             show madeline distress at slot(0, total=1), bright zorder 10
             m "Get one thing straight, newb. Better data does not outrank the person inside the machine."
+            m "You do that shit again and I'll put a hole in your head."
 
-    "Madeline removes the helmet. Her face is red with equal parts anger and embarrassment."
+    "Madeline's face is red with equal parts anger and embarrassment."
 
     "She sits without speaking while the system records its shutdown. You give her the untouched glass of water and wait for her breathing to settle before either of you approaches the data."
 
@@ -3681,6 +3692,9 @@ label MadelineDayFive:
 
     "She files the helmet data separately from the case evidence, locks both cabinets, and checks that you kept your copy of the consent form. The embarrassment remains, but it no longer controls the room."
 
+    "She leaves."
+    "Time to report back."
+
     $ dayMads += 1
     jump endOfDay
 
@@ -3714,7 +3728,7 @@ label MadelineDaySix:
         "Skip the controls and test the swab directly.":
             $ mads -= 2
             show madeline distress at slot(0, total=1), bright zorder 10
-            m "No controls means no trustworthy result. Six days in and you're still trying to invent shortcuts to being wrong."
+            m "No controls means no trustworthy result. Six days in and you're still trying to invent shortcuts to being a dumbass."
 
     "You inspect each seal and lock the cartridges into the reader. Madeline watches your hands rather than the labels, then signs the setup line once the final lock clicks."
     "The machine runs a control cycle first. For three long minutes, nothing happens except the slow sweep of a progress bar and the cooling fan beneath the table. Madeline refuses to look away from it."
@@ -3783,7 +3797,7 @@ label MadelineDaySix:
     else:
         m "The evidence is sound. Give Ulysses the three names and prepare for the final meeting."
 
-    m "We're done for today, newb."
+    m "We're done for today, newb. See you tomorrow"
 
     $ dayMads += 1
     jump endOfDay
