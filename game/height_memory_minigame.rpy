@@ -28,6 +28,7 @@ default height_memory_refreshing = False
 default height_memory_progress = 0
 default height_memory_timer = 0.0
 default height_memory_setbacks = 0
+default height_memory_assisted = False
 default height_memory_feedback = ""
 default height_memory_cleared = []
 default height_memory_board = []
@@ -108,6 +109,7 @@ init python:
         store.height_memory_progress = 0
         store.height_memory_timer = 0.0
         store.height_memory_setbacks = 0
+        store.height_memory_assisted = False
         store.height_memory_feedback = "Clear the irrelevant thoughts. Keep the useful memories."
         store.height_memory_cleared = []
         store.height_memory_board = []
@@ -233,11 +235,11 @@ init python:
 
     # Public API: safely close the screen for menu/scene interruption handling.
     def abort_height_memory_minigame():
-        """Close the board without recording a clue; the scene can reopen it."""
-        store.height_memory_active = False
-        store.height_memory_refreshing = False
-        store.height_memory_timer = 0.0
-        store.height_memory_board = []
-        store.height_memory_feedback = ""
-        renpy.hide_screen("height_memory_minigame")
-        renpy.restart_interaction()
+        """Let Razzle finish so leaving never strands required evidence."""
+        if not store.height_memory_active or store.height_memory_completion_recorded:
+            return
+        store.height_memory_assisted = True
+        store.height_memory_feedback = (
+            "Razzle takes over, sorts the remaining thoughts, and preserves the measurement."
+        )
+        finish_height_memory_minigame()

@@ -30,7 +30,7 @@ init python:
         """Build six stable semantic pairs for the requested round."""
         if phase_index == 0:
             return [
-                ("device", "PHONE LOCATION", "WATCH MOVEMENT", "DEVICE DATA"),
+                ("pager", "PAGER COMPANY LOG", "PAY-PHONE CALLBACK", "COMMUNICATION"),
                 ("camera", "TRAFFIC CAMERA", "STREET TIMESTAMP", "VIDEO"),
                 ("booking", "BOOKING PHOTO", "INTAKE MEASUREMENTS", "POLICE FILE"),
                 ("medical", "MEDICAL INTAKE", "OLD INJURY RECORD", "HEALTH RECORD"),

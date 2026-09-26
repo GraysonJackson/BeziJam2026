@@ -210,18 +210,18 @@ label DaySevenAccusationReview:
 
 label DaySevenSuccess:
     $ day_seven_actual_name = suspectNames[killer]
+    $ day_seven_confession = day_seven_culprit_confession(killer)
 
     if daySevenIcaSpecial:
         "Nicky steps out to confirm the transfer from the holding room. The waiting lasts only a few minutes, though nobody manages to make them feel short."
-        "When she returns, she places a small recorder beside the evidence."
-        n "They have been in custody since they tried destroying the wallet in front of two ATLAS investigators. They also waived counsel long enough to make one very bad decision."
+        "When she returns, two officers escort [day_seven_actual_name] into the briefing room. Their eyes fix on the bloodstained wallet before anyone says a word."
+        n "They have been in custody since they tried destroying that wallet in front of two ATLAS investigators. They have also decided to speak in front of the team."
     else:
         "Nicky leaves the room with the reviewed file. The waiting lasts only a few minutes, though nobody manages to make them feel short."
-        "When she returns, she places a small recorder beside the evidence."
-        n "The suspect was taken into custody after our formal request. They waived counsel long enough to make one very bad decision."
-    "She presses Play. [day_seven_actual_name]'s recorded voice fills the briefing room."
-    "[day_seven_actual_name]" "Fine. I killed Enrico. I thought I had removed what mattered, and I thought the rest of you would keep chasing pieces that didn't connect."
-    "The recording ends. No one cheers immediately. The confession closes the case, but it does not make the reason for gathering here less grim."
+        "When she returns, two officers escort [day_seven_actual_name] into the briefing room. The surviving evidence has been laid out where they can see every piece."
+        n "The arrest is complete. They have also decided to speak in front of the team."
+    "[day_seven_actual_name]" "Fine. I killed Enrico. [day_seven_confession]"
+    "The admission leaves nowhere else for the week to turn. No one cheers immediately. Closing the case does not make the reason for gathering here less grim."
 
     u "The accusation is correct. Enrico Edge's killer is in custody, and the evidence supporting that arrest is sound."
     "Only then does the room release the breath it has been holding."
@@ -427,7 +427,7 @@ label DaySevenEndingNicky:
         n "You can still get on the bike, steal my fries, and yell at fictional federal agents with me. Friend terms."
         "Nicky's friendship remains playful and direct. When she wants your company, she asks without making either of you guess what she means."
     else:
-        show nicky angry accustion at slot(0, total=1), bright zorder 10
+        show nicky angry accusation at slot(0, total=1), bright zorder 10
         n "No. That's way too personal for where we are, and saying it more dramatically won't change the answer."
         n "Take the no properly."
         "You do. Nicky gives you a professional farewell and returns to the work waiting for her."

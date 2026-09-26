@@ -35,7 +35,7 @@ screen file_slots(title):
     use game_menu(title)
 
     fixed:
-        xsize 500 xalign 0.5
+        xsize 1520 xalign 0.5
         
         ## This ensures the input will get the enter event before any of the
         ## buttons do.
@@ -55,28 +55,27 @@ screen file_slots(title):
 
 
         #fancy tape decoration that i stole the code from frangame for. thanks past me.
-        grid 1 2:
+        grid 5 1:
             yoffset 20
             style_prefix "slot"
 
-            #TODO: ideally randomise these tapes. but also who cares.
-            for i in range(1*2):
+            for i in range(5):
                 $ slot = i + 1
-                add "gui/button/tape_[i].png"
+                add "gui/button/tape_[i % 2].png" xysize (105, 105)
 
         ## The grid of file slots.
-        grid 1 2:
+        grid 5 1:
             yoffset 20
             style_prefix "slot"
 
-            for i in range(1*2):
+            for i in range(5):
                 $ slot = i + 1
 
                 button:
                     action FileAction(slot)
                     has vbox
 
-                    add FileScreenshot(slot) xalign 0.5
+                    add FileScreenshot(slot) xalign 0.5 xysize (91, 50)
 
                     ## https://www.fabriziomusacchio.com/blog/2021-08-15-strftime_Cheat_Sheet/
                     text FileTime(slot,
@@ -113,7 +112,7 @@ style page_label:
     ypadding 5
     xalign 0.5
     yoffset 210
-    xoffset 180
+    xoffset 0
 
 style page_label_text:
     textalign 0.5
@@ -122,10 +121,10 @@ style page_label_text:
 style slot_grid:
     xalign 0.5
     yalign 0.5
-    spacing 15
+    spacing 4
 
 style slot_time_text:
-    size 24
+    size 13
     xalign 0.5
     font "fonts/RandoArtline.ttf"
     line_leading 0
@@ -135,13 +134,14 @@ style slot_vbox:
     spacing 12
 
 style slot_button:
-    xysize (295, 224)
-    padding (15, 15, 15, 15)
-    background "gui/button/slot_[prefix_]background.png"
+    xysize (105, 105)
+    padding (7, 7, 7, 7)
+    background None
+    hover_background Solid("#ffffff18")
 
 
 style slot_button_text:
-    size 21
+    size 13
     xalign 0.5
 
 style page_hbox:

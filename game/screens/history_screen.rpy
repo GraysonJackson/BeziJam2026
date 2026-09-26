@@ -18,37 +18,49 @@ screen history():
 
     use game_menu(_("Log"))
 
-    viewport:
-        style_prefix 'game_menu'
-        mousewheel True draggable True pagekeys True
-        scrollbars "vertical" yinitial 1.0
+    $ history_yinitial = 1.0 if len(_history_list) > 5 else 0.0
 
-        has vbox
+    frame:
+        style "history_container"
 
-        style_prefix "history"
+        viewport:
+            xfill True
+            yfill True
+            clipping True
+            mousewheel True draggable True pagekeys True
+            scrollbars "vertical" yinitial history_yinitial
 
-        for h in _history_list:
+            has vbox
 
-            frame:
-                has hbox
-                if h.who:
-                    label h.who style 'history_name':
+            style_prefix "history"
+
+            for h in _history_list:
+
+                frame:
+                    has hbox
+                    if h.who:
+                        label h.who style 'history_name':
+                            substitute False
+                            ## Take the color of the who text
+                            ## from the Character, if set
+                            if "color" in h.who_args:
+                                text_color h.who_args["color"]
+                            xsize 150  # this number and the null width
+                                        # number should be the same
+                    else:
+                        null width 150
+
+                    $ what = renpy.filter_text_tags(h.what, allow=gui.history_allow_tags)
+                    text what:
                         substitute False
-                        ## Take the color of the who text
-                        ## from the Character, if set
-                        if "color" in h.who_args:
-                            text_color h.who_args["color"]
-                        xsize 80   # this number and the null width
-                                    # number should be the same
-                else:
-                    null width 80
+                        xsize 420
 
-                $ what = renpy.filter_text_tags(h.what, allow=gui.history_allow_tags)
-                text what:
-                    substitute False
-
-        if not _history_list:
-            label _("The dialogue history is empty.") text_size 35 xoffset -30 yoffset 0 text_outlines [(0, "#ffffff", 0, 0)]
+            if not _history_list:
+                text _("The dialogue history is empty."):
+                    size 28
+                    xalign 0.5
+                    color "#b87160"
+                    font "fonts/MonaspaceNeon-Regular.otf"
 
 
 ## This determines what tags are allowed to be displayed on the history screen.
@@ -56,8 +68,17 @@ screen history():
 define gui.history_allow_tags = { "alt", "noalt", "rt", "rb", "art" }
 
 
+style history_container:
+    xsize 660
+    ysize 620
+    xalign 0.5
+    ypos 250
+    padding (0, 0)
+    background None
+
+
 style history_frame:
-    xsize 500
+    xsize 600
     ysize None
     background None
 
@@ -65,7 +86,7 @@ style history_hbox:
     spacing 15
 
 style history_vbox:
-    spacing -50
+    spacing 16
 
 style history_name:
     xalign 1.0
@@ -79,7 +100,7 @@ style history_name_text:
 style history_text:
     textalign 0.0
     font "fonts/MonaspaceNeon-Regular.otf"
-    size 27
+    size 23
     yoffset 10
     color "#b87160"
 

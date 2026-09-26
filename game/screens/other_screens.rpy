@@ -89,6 +89,7 @@ screen help():
 
             textbutton _("Keyboard") action SetScreenVariable("device", "keyboard")
             textbutton _("Mouse") action SetScreenVariable("device", "mouse")
+            textbutton _("Play") action SetScreenVariable("device", "play")
 
             if GamepadExists():
                 textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
@@ -99,6 +100,8 @@ screen help():
             use mouse_help
         elif device == "gamepad":
             use gamepad_help
+        elif device == "play":
+            use play_help
 
         null height 25
 
@@ -161,6 +164,29 @@ screen mouse_help():
         text _("Accesses the game menu.")
 
 
+screen play_help():
+
+    hbox:
+        label _("Choices")
+        text _("Choices are permanent after selection. Rollback is intentionally disabled.")
+
+    hbox:
+        label _("Log")
+        text _("Use Log from the dialogue bar or game menu to reread up to 250 recent lines.")
+
+    hbox:
+        label _("Suspects")
+        text _("Review remaining suspects and formally recorded evidence without advancing dialogue.")
+
+    hbox:
+        label _("Notes")
+        text _("Write your own notes for subtle observations that are not entered into the evidence file.")
+
+    hbox:
+        label _("Minigames")
+        text _("Rules appear before play. Leaving a required investigation game lets your partner finish so the story can continue.")
+
+
 screen gamepad_help():
 
     hbox:
@@ -190,7 +216,7 @@ style help_button:
     xmargin 12
     xoffset -15
 style help_button_text:
-    size 35
+    size 26
 
 
 style help_label:

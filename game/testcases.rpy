@@ -37,6 +37,8 @@ testcase ulysses_first_evening_flow:
     advance until screen "choice"
     click "Emphasize that Razzle slowed down for the witness."
     advance until screen "choice"
+    click "Stay a little longer after the report."
+    advance until screen "choice"
     click "Offer to help organize tomorrow's work."
     advance until screen "choice"
     click "Take a pineapple slice and keep working beside him."
@@ -67,6 +69,8 @@ testcase ulysses_first_evening_relaxed_flow:
     run Jump("UlyssesEvening")
     advance until screen "choice"
     click "Say the witness gave you a name to remove."
+    advance until screen "choice"
+    click "Stay a little longer after the report."
     advance until screen "choice"
     click "Say the report is finished and relax in the guest chair."
     advance until screen "choice"
@@ -103,6 +107,25 @@ testsuite ui_layout_smoke:
         advance until screen "day_seven_accusation"
         pause 0.2
         screenshot "ui_accusation.png"
+
+    testcase save_layout:
+        run Jump("UITestSave")
+        advance until screen "save"
+        pause 0.2
+        screenshot "ui_save.png"
+
+    testcase history_layout:
+        run Jump("UITestHistory")
+        advance until screen "history"
+        pause 0.2
+        screenshot "ui_history.png"
+
+    testcase play_help_layout:
+        run Jump("UITestHelp")
+        advance until screen "help"
+        click "Play"
+        pause 0.2
+        screenshot "ui_play_help.png"
 
 
 testsuite minigame_ui_smoke:
@@ -206,6 +229,37 @@ label UITestLongChoice:
 label UITestAccusation:
     window hide
     call screen day_seven_accusation
+    return
+
+
+label UITestSave:
+    window hide
+    call screen save
+    return
+
+
+label UITestHistory:
+    python:
+        _history_list[:] = []
+        for speaker, dialogue, color in [
+            ("Razzle Dazzle", "This entry is deliberately long because the log needs to wrap character dialogue while keeping a long speaker name legible inside the notebook margins.", "#5C9D54"),
+            ("Ulysses", "The report can wait until you have finished that sentence. I am not going anywhere.", "#4C6B9C"),
+            (None, "For once, the office settles into an easy silence.", "#b87160"),
+        ]:
+            entry = renpy.character.HistoryEntry()
+            entry.who = speaker
+            entry.what = dialogue
+            entry.who_args = {"color": color}
+            entry.what_args = {}
+            _history_list.append(entry)
+    window hide
+    call screen history
+    return
+
+
+label UITestHelp:
+    window hide
+    call screen help
     return
 
 

@@ -114,7 +114,7 @@ screen height_memory_minigame():
             ypos 840
             spacing 25
 
-            textbutton "Leave board":
+            textbutton "Let Razzle finish":
                 action Function(abort_height_memory_minigame)
                 text_size 23
 

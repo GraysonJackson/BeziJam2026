@@ -195,7 +195,8 @@ label start:
 
     # End intros and start moving scenes
     f "Well that's the team! Hopefully you can spend some quality time with them as you sort this whole mess out."
-    f "I'll see you at work tomorrow newbie! I'm with you the entire time, so you may see me pop up whenever something important needs to be said!"
+    f "That's the team! And that's my part done, newbie. I won't be around after today, so consider this my extremely permanent goodbye."
+    f "Good luck with ATLAS. Try not to let Winston explain the employee handbook."
 
     jump dayOneBrief
 
@@ -281,7 +282,7 @@ label dayOneBrief:
     n "We ended up bringing in a guy whose power is to make everyone in a thirty-foot radius throw up..."
     n "...So you can imagine the mess we had to deal with."
 
-    show nicky quesition at slot(0, total=2), bright zorder 10
+    show nicky question at slot(0, total=2), bright zorder 10
     n "Oh! Are we the only ones here so far?"
 
     u "It would appear so. Nicky, this is the new recruit."
@@ -299,7 +300,7 @@ label dayOneBrief:
             n "Nice handshake! Very profesh."
         "Stare at her hand":
             $ nick -= 1
-            show nicky quesition at slot(0, total=2), bright zorder 10
+            show nicky question at slot(0, total=2), bright zorder 10
             n "Okayyyyy, well anyways good to see ya!"
         "Give a super flimsy handshake":
             $ nick += 2
@@ -350,7 +351,7 @@ label dayOneBrief:
 
     d "Whoaaaaa man. You seem a bit angry right now, we should all chill out."
 
-    show madeline madScienist at slot(0, total=1), bright zorder 10
+    show madeline madScientist at slot(0, total=1), bright zorder 10
     m "Interesting... Winston seems to whittle down his temper exponentially."
     hide madeline
 
@@ -687,7 +688,6 @@ label RazzleDayOne:
             $ razzle_day_one_route = "both"
             r "Dealer's choice! Busy street there, park on the way back. We get both!"
 
-    # Witness scene or something
 
     show razzle at slot(0, total=1), bright zorder 10
     r "-And then I was like, 'You better pack a fire extinguisher next time!'"
@@ -706,22 +706,21 @@ label RazzleDayOne:
             show razzle mouth open at slot(0, total=1), bright zorder 10
             r "If not, you need to! Just work and sleep doesn't let you enjoy life at all!"
             show razzle hoorah at slot(0, total=1), bright zorder 10
-            r "For example, me and Winston go clubbing like ALL the time and it's awesome!"
-            r "We get to drink a shit load, meet new people, drink a shit load, then spend the next day talking about how much we shouldn't do that again."
-            r "It's a blast! Maybe next time you should come with us!"
+            r "Winston and I go clubbing whenever both of us make the same bad decision at once. Music, strangers, the worst drinks you can imagine, the whole thing."
+            r "Come with us sometime. Worst case, you hate it and finally have a hobby to complain about."
             show razzle at slot(0, total=1), bright zorder 10
         "I usually am out all day and night doing whatever the night says!":
             $ razz += 1
             show razzle hoorah at slot(0, total=1), bright zorder 10
             r "Hell yeah! That's what I'm talking about, I'm the same way!"
-            r "Me and Winston go clubbing like ALL the time and it's awesome!"
-            r "We get to drink a shit load, meet new people, drink a shit load, then spend the next day talking about how much we shouldn't do that again."
-            r "It's a blast! Maybe next time you should come with us!"
+            r "You might actually survive a night out with me and Winston."
+            r "We dance, make friends with everybody in the building, drink enough to regret our lives, then compare hangovers the next day!"
+            r "Next time we go, you're getting an invitation."
             show razzle at slot(0, total=1), bright zorder 10
         "Are you an option?":
             $ razz += 2
             show razzle flirty at slot(0, total=1), bright zorder 10
-            r "Is that so, newbie? I admire the courage, but you're gonna need to have some better lines if you want to get me hot and bothered."
+            r "Yeah, newbie? I admire the courage, but you're gonna need to have some better lines if you want to get me hot and bothered."
             r "For now though, maybe you can go clubbing with me sometime!"
             r "We can go drink, get shit faced, dance, get more shit faced..."
             r "...Then see if you can handle a night out with me before a more 'personal' evening."
@@ -762,10 +761,10 @@ label RazzleDayOne:
     r "We'll be able to use this information to help narrow down the suspects. If you think of anything else, please let us know!"
 
     show razzle mouth open at slot(0, total=1), bright zorder 10
-    r "You see that, newbie?? We actually got something!! Fuck yeah!!"
-    r "Hopefully we can talk to some more peeps tomorrow and learn a bit more about what the killer looks like!"
+    r "You see that, newbie?? We actually got something!! Hell yes!!"
+    r "Hopefully we can talk to some more peeps next time and learn a bit more about what the killer looks like!"
 
-    "Razzle makes sure Landon has the office number, repeats that even a small memory may matter, and waits while he adds it to his phone. Only then does she close her notebook."
+    "Razzle hands Landon an ATLAS card with the office number, repeats that even a small memory may matter, and waits while he tucks it behind the photograph on his refrigerator. Only then does she close her notebook."
 
     show razzle at slot(0, total=1), bright zorder 10
     r "Well, I know you gotta get back to report to boss man, but I'm probably gonna head home."
@@ -775,17 +774,17 @@ label RazzleDayOne:
         show razzle flirty at slot(0, total=1), bright zorder 10
         r "Keep thinking of ways to get me hot and bothered, newbie, I think you're close to a good line soon!"
     if razzle_day_one_route == "both":
-        "Razzle keeps her promise and takes the park on the way back. The slower path gives her time to replay the useful part of Landon's statement aloud, drift into a story about Winston, and circle back before you reach ATLAS."
+        "Razzle keeps her promise and takes the park on the way back. The slower path gives her time to replay the useful part of Landon's statement aloud, drift into a story about Winston and a wild night out, and circle back before you reach ATLAS."
     elif razzle_day_one_route == "park":
-        "The walk back follows the busier street this time. Razzle replays the useful part of Landon's statement over the noise, catches herself drifting into a story about Winston, and circles back before you reach ATLAS."
+        "The walk back follows the busier street this time. Razzle replays the useful part of Landon's statement over the noise, catches herself drifting into a story about Winston and a wild night out, and circles back before you reach ATLAS."
     else:
-        "The walk back is slower. Razzle replays the useful part of Landon's statement aloud, catches herself drifting into a story about Winston, and circles back before you reach ATLAS."
+        "The walk back is slower. Razzle replays the useful part of Landon's statement aloud, catches herself drifting into a story about Winston and a wild night out, and circles back before you reach ATLAS."
     scene black with fade
     $ dayRazz += 1
     jump endOfDay
         
 label RazzleDayTwo:
-    "You make your way back to Razzle Dazzle's cubicle and find her sitting in her flameproof chair, looking at cat videos on her computer."
+    "You make your way back to Razzle Dazzle's cubicle and find her sitting in her flameproof chair with a novelty VHS playing on a tiny television. A cat repeatedly attempts to jump onto a windowsill and repeatedly misses."
     show razzle at slot(0, total=1), bright zorder 10
     r "Oh! Hey newbie! Whatcha up to today? Coming back to do some more work?"
 
@@ -794,7 +793,12 @@ label RazzleDayTwo:
             $ razz += 1
             show razzle mouth open at slot(0, total=1), bright zorder 10
             r "I like the enthusiasm, but I'm taking today to chill for a bit."
-            r "The rest of this week is going to be a lot, so I wanna take it easy today!"
+            if dayWin >= 6:
+                r "Tomorrow's deadline is gonna be brutal, so I want one hour where my brain isn't chewing on witness statements."
+            elif dayWin >= 5:
+                r "The final meeting's getting close, so I want one hour where my brain isn't chewing on witness statements."
+            else:
+                r "This week is gonna be a lot, so I wanna take it easy today!"
         "Nah, I just wanted to see you again":
             $ razz += 2
             show razzle flirty at slot(0, total=1), bright zorder 10
@@ -803,8 +807,8 @@ label RazzleDayTwo:
         "I don't have time for this, let's get to work":
             $ razz -= 2
             show razzle enraged at slot(0, total=1), bright zorder 10
-            r "Hey man, no need to be a dick."
-            r "If we're gonna solve this together, we need to at least be nice!"
+            r "Okay, captain stopwatch. I heard you."
+            r "If we're gonna solve this together, you don't have to be a dick"
 
     # Lunch: takes you somewhere nearby, but either gets rejected because she is on fire. She casually heats/cooks something with her hands or gets outside food.
     show razzle at slot(0, total=1), bright zorder 10
@@ -814,16 +818,15 @@ label RazzleDayTwo:
     menu:
         "That sounds irresponsible.":
             $ razz += 1
-            r "That's the spirit! Let's just have some fun and not worry about work for a bit."
+            r "That's the spirit!"
         "Sounds like my kind of day.":
             $ razz += 1
             show razzle mouth open at slot(0, total=1), bright zorder 10
             r "See? I knew there was a reason I liked you."
-
         "Is setting something on fire part of the plan?":
             r "Okay, first of all, probably."
             show razzle sad at slot(0, total=1), bright zorder 10
-            r "Second of all, I only accidentally set things on fire like... thirty percent of the time."
+            r "Second of all, I only accidentally set things on fire like... fifty percent of the time."
             show razzle at slot(0, total=1), bright zorder 10
 
     show razzle hoorah at slot(0, total=1), bright zorder 10
@@ -856,9 +859,7 @@ label RazzleDayTwo:
 
         "Can we even go inside a restaurant with you on fire?":
             r "..."
-
             show razzle sad at slot(0, total=1), bright zorder 10
-
             r "Okay, so there is one tiny problem with the plan."
             show razzle at slot(0, total=1), bright zorder 10
             r "We'll figure it out! Let's just go find some pizza!!"
@@ -888,15 +889,15 @@ label RazzleDayTwo:
     menu:
         "Order pepperoni and extra cheese.":
             $ razzle_day_two_pizza = "pepperoni"
-            r "Classic! And extra cheese means extra chances for me to set the box on fire."
+            r "Classic! Way to play it safe newbie"
         "Order every spicy topping they have.":
             $ razz += 1
             $ razzle_day_two_pizza = "spicy"
-            r "You're ordering spicy food for the woman made of fire? That's either thoughtful or a challenge."
+            r "Yessssi I love a spicy pizza!!"
         "Order half your choice, half Razzle's.":
             $ razz += 1
             $ razzle_day_two_pizza = "split"
-            r "A diplomatic pizza! Put everything dangerous on my half."
+            r "Put everything dangerous on my half please!"
 
     "You finish the order together through the doorway. Razzle spends the wait rating every passing dog and trying to guess which pedestrians will cross the street before they notice her."
 
@@ -952,7 +953,8 @@ label RazzleDayTwo:
             $ razz += 1
             $ razzle_day_two_detour = "market"
             "Razzle stops at every stall she can approach safely and buys a pair of sunglasses she does not need after sunset."
-            r "They complete the look! The look is 'woman who makes excellent purchases.'"
+            r "They complete the look!'"
+            r "Don't ask what the look is though, I'm not entirely sure..."
         "Walk through the park.":
             $ razzle_day_two_detour = "park"
             "You take the quieter path back. Razzle narrates an ongoing feud between two squirrels until both vanish into a tree."
@@ -961,7 +963,6 @@ label RazzleDayTwo:
             $ razz += 1
             $ razzle_day_two_detour = "wandering"
             "The route becomes a series of detours: a street musician, a mural, and a store window full of terrible hats."
-            r "Doing nothing is way more work than people think!"
 
     scene black
     "Eventually, the familiar ATLAS building comes back into view. Rather than go inside, Razzle points toward the roof and races you to the stairwell door."
@@ -999,7 +1000,7 @@ label RazzleDayTwo:
     "Razzle watches the street below. A restaurant worker is carrying chairs inside for the night, and she follows the movement until the last one disappears through the door."
 
     r "Thanks for not making the pizza thing worse, by the way."
-    r "I joke about it because it happens all the time. Sometimes the joke gets there before I can decide if I'm actually annoyed."
+    r "I joke about it because it happens all the time, but sometimes it can really be annoying. Not too much though."
 
     menu:
         "Ask whether it still bothers her.":
@@ -1011,30 +1012,16 @@ label RazzleDayTwo:
             $ razz += 1
             "You stay beside her without filling the silence. After a few breaths, she continues on her own."
 
-    "For a moment longer, she's quieter than usual."
-
-    show razzle sad at slot(0, total=1), bright zorder 10
-    r "People get kinda weird around me sometimes."
-
-    r "Which, y'know, fair. I'm constantly on fire."
-
-    r "But sometimes it feels like that's all they see."
-
-    show razzle at slot(0, total=1), bright zorder 10
-    r "ATLAS is nice because nobody here really cares. I'm not 'the fire girl.' I'm just Razzle."
-
-    "She glances over at you."
-
-    r "Well... usually."
+    "For a moment longer, she's quieter than usual. Then she bumps her shoulder lightly against yours, stopping before the flames can follow."
+    r "Still not gonna stop me from getting pizza. Just means the next place better appreciate outdoor seating."
 
     menu:
-        "You're definitely more than your power.":
+        "I'd get pizza with you again.":
             $ razz += 2
 
             show razzle flirty at slot(0, total=1), bright zorder 10
 
-            r "Careful, newbie."
-            r "Keep saying stuff like that and I might actually start liking you."
+            r "Good! Next time we're finding somewhere that serves it hot on purpose."
 
         "I dunno. The fire is pretty cool.":
             $ razz += 1
@@ -1042,12 +1029,12 @@ label RazzleDayTwo:
             show razzle mouth open at slot(0, total=1), bright zorder 10
             r "Okay, yeah. It is pretty cool."
 
-        "I mostly see a walking fire hazard.":
-            $ razz -= 2
+        "I get why the employee worried about the building.":
+            $ razz -= 1
 
-            show razzle annoyed at slot(0, total=1), bright zorder 10
+            show razzle sad at slot(0, total=1), bright zorder 10
 
-            r "And there goes the moment."
+            r "Yeah. I do too. That's the annoying part—sometimes everybody's being reasonable and it still sucks."
 
     "A moment of silence passes as you both enjoy the view of the city in each other's company."
     "Eventually, it's time to go back to work."
@@ -1056,7 +1043,10 @@ label RazzleDayTwo:
 
     if razz >= RAZZLE_WARM_THRESHOLD:
         show razzle flirty at slot(0, total=1), bright zorder 10
-        r "Maybe I'll see you tomorrow too?"
+        if dayWin >= 6:
+            r "Guess I'll see you in the briefing room, then. Sit somewhere I can see whether you're panicking."
+        else:
+            r "Maybe I'll see you next time too?"
     
     "Razzle leaves, leaving you alone on the rooftop before you head down to report to Ulysses."
 
@@ -1074,7 +1064,7 @@ label RazzleDayThree:
         "Duh, of course I do!":
             $ razz += 1
             show razzle hoorah at slot(0, total=1), bright zorder 10
-            r "Fuck yeah!! That's what I like to hear!"
+            r "Now that's what I like to hear!"
             r "Let's roll!"
         "Yeah. That's why I'm here.":
             $ razz -= 1
@@ -1087,7 +1077,7 @@ label RazzleDayThree:
     menu:
         "Ask what the witness has already reported.":
             $ razz += 1
-            r "A silhouette, maybe a big coat, and a whole lot of 'I think.' We're helping him sort memory from guesses."
+            r "A silhouette, maybe a big coat, and a whole lot of 'I think.' We're helping him sort memory from guesses today."
         "Offer to take notes while she leads.":
             $ razz += 1
             r "Please do! My handwriting gets kind of excited and stops being a real alphabet."
@@ -1141,12 +1131,12 @@ label RazzleDayThree:
         "Brandon" "Wait... yeah. The doorway, the shoulder line, and where their head crossed the frame."
         "Brandon" "Those two profile photographs don't fit what I saw. I'm certain about that much."
         show razzle hoorah at slot(0, total=1), bright zorder 10
-        r "Then [razzleDayThreeNames] are clear. Two measured profiles, no guessing the whole group."
-    r "Thanks, Brandon! We'll handle the detective work from here."
+        r "Then [razzleDayThreeNames] are clear."
+    r "Thanks, Brandon! We'll handle the other detective work from here."
     "Razzle does not hurry Brandon after the answer. She repeats what he remembered in neutral language, asks whether he wants anything corrected, and leaves him with the office number."
     scene black
     "You and Razzle leave Brandon with a much tidier thought board and a useful eyewitness lead. On the walk back, she stops twice to add details to her notes before they can blur together."
-    "Eventually, the two of you make your way back to the office, spread the statement beside yesterday's notes, and check that the new exclusion does not contradict the first witness."
+    "Eventually, the two of you make your way back to the office, spread the statement beside the notes from your previous interview, and check that the new exclusion does not contradict the first witness."
     scene cubicleOutline
     show razzle hoorah at slot(0, total=1), bright zorder 10
     r "Oh my God that was amazing!!"
@@ -1168,7 +1158,7 @@ label RazzleDayThree:
 
     show razzle hoorah at slot(0, total=1), bright zorder 10
     r "Anyways, we've made some really great progress!"
-    r "Hopefully we can do some more, but I'm still getting a good feeling about this!"
+    r "Hopefully we can do some more, I'm getting a good feeling about this!"
 
     show razzle at slot(0, total=1), bright zorder 10
     r "But for now I know you gotta talk to Uly, so I'll leave you be."
@@ -1187,14 +1177,17 @@ label RazzleDayFour:
     r "Hey hey!"
     r "About to go check out another witness. You coming with me?"
     menu:
-        "Of course!":
+        "Wouldn't miss the last witness.":
             $ razz += 1
             show razzle hoorah at slot(0, total=1), bright zorder 10
-            r "Fuck yeah!! That's what I like to hear! Let's roll!"
-        "Yeah. That's why I'm here.":
-            $ razz -= 1
-            show razzle annoyed at slot(0, total=1), bright zorder 10
-            r "Well damn, you can at least pretend to want to be here. Fine. Let's go."
+            r "That's the spirit! Elena's got one more angle on this and we're gonna help her find it."
+        "I'm coming, but we need to avoid leading her.":
+            $ razz += 1
+            show razzle question at slot(0, total=1), bright zorder 10
+            r "Fair. If I start answering my own questions, kick me under something nonflammable."
+        "Tell me what we know on the walk.":
+            show razzle at slot(0, total=1), bright zorder 10
+            r "Deal. You get the short version first, which is still gonna be kind of long."
     "Razzle gathers the notes from both previous witnesses and clips them separately so today's account cannot quietly borrow details from either one."
     "On the walk, she rehearses a careful introduction, gets distracted by a food truck, then starts again from the top before you reach Elena's street."
     scene black with fade
@@ -1268,22 +1261,17 @@ label RazzleDayFour:
     menu:
         "What made the person seem tall or short?":
             $ razz += 1
-
             show razzle question at slot(0, total=1), bright zorder 10
             r "Yeah! Don't worry about guessing their exact height."
             r "What made them look that way from where you were sitting?"
-
             show razzle at slot(0, total=1), dim zorder 0
             "Elena" "I suppose it was where their head appeared against the window."
             "Elena" "They seemed terribly tall at first, but the yard is uneven."
 
         "Do you think the killer was tall?":
             $ razz -= 1
-
             show razzle question at slot(0, total=1), bright zorder 10
-
             r "Careful, newbie. We don't wanna put an answer in her head."
-
             show razzle at slot(0, total=1), dim zorder 0
             "Elena" "I really couldn't say. Perhaps they were, but perhaps not."
 
@@ -1322,7 +1310,7 @@ label RazzleDayFour:
 
             show razzle hoorah at slot(0, total=1), bright zorder 10
 
-            r "That's the spirit! Try to look suspicious, newbie!"
+            r "Hell yeah you were born for this! Try to look suspicious, newbie!"
 
         "Only if you promise to arrest me afterward.":
             $ razz += 2
@@ -1354,20 +1342,23 @@ label RazzleDayFour:
     "You return inside as Elena studies the window."
 
     show razzle at slot(0, total=1), dim zorder 0
-    "Elena" "That was much closer. The figure wasn't necessarily large or heavy."
-    "Elena" "They were holding something bulky against their coat and leaning forward."
+    "Elena" "That was much closer. The figure was holding something bulky against their coat and leaning forward."
+
+    $ razzleDayFourBuild = suspectAttributes[killer]["build"]
+    $ razzleDayFourBuildHint = RAZZLE_BUILD_SCENE_HINTS[razzleDayFourBuild]
+    "Elena" "[razzleDayFourBuildHint]"
 
     show razzle question at slot(0, total=1), bright zorder 10
-    r "Aha! So that hunch and whatever they were lugging made their build look wide, and that slope messed with the height!"
-    r "Brandon had that doorway frame to measure against yesterday, but out here, posture completely warps the silhouette."
+    r "Aha! The bundle made the whole silhouette look wider, but the moment it slipped, Elena could finally separate the person from what they carried."
+    r "The slope still wrecks the height, but that coat and the way it sat on their shoulders are a real detail."
 
     show razzle at slot(0, total=1), dim zorder 0
-    "Elena" "Yes, I believe so. And the lawn slopes upward near the window."
-    "Elena" "That may be why I first thought they were tall. I suppose you can't rely on the build either."
+    "Elena" "Yes, I believe so. And the lawn slopes upward near the window. That may be why I first thought they were tall."
+    "Elena" "I would not trust my first impression of their size, but I do remember the way the coat fit when the bundle moved."
 
     show razzle hoorah at slot(0, total=1), bright zorder 10
 
-    r "Holy shit, newbie! We actually cracked the case! Well, not really, but you know what I mean!"
+    r "No way, newbie! We actually cracked the case! Well, not really, but you know what I mean!"
 
     show razzle at slot(0, total=1), dim zorder 0
     "Elena" "Have I helped identify them?"
@@ -1393,7 +1384,7 @@ label RazzleDayFour:
 
     show razzle question at slot(0, total=1), bright zorder 10
 
-    r "Anything you remember could help."
+    r "Anything you remember could help ma'am."
 
     show razzle at slot(0, total=1), dim zorder 0
     "Elena" "When the car passed, the person raised a hand to shield their face. For just a moment, I could see the top of their head."
@@ -1433,9 +1424,8 @@ label RazzleDayFour:
 
             show razzle flirty at slot(0, total=1), bright zorder 10
 
-            r "Yeah?"
-
-            r "Careful, newbie. Compliment me like that and I'm gonna start making you come to every interview."
+            r "Yeah? Then you're officially my good-luck partner."
+            r "That means every interview, by the way. I hope you understand the trap you just walked into."
 
         "Stopping a bad clue is still progress.":
             $ razz += 1
@@ -1489,12 +1479,12 @@ label RazzleDayFour:
 
             r "Oh? Planning on inviting me over already?"
 
-        "Being on fire does make you a pretty serious hazard.":
-            $ razz -= 2
+        "I'd probably worry about my furniture too.":
+            $ razz -= 1
 
             show razzle sad at slot(0, total=1), bright zorder 10
 
-            r "Yeah. Thanks for the reminder."
+            r "Yeah. Me too. That's part of what makes it suck."
 
     show razzle at slot(0, total=1), bright zorder 10
 
@@ -1581,13 +1571,14 @@ label RazzleDayFive:
         "Take the popcorn.":
             $ razz += 1
             "Razzle warms the bowl with both hands. Half the kernels pop at once and leap onto the floor."
-            r "Interactive snacks! We'll clean that up later. Probably."
+            r "The survivors stay in the bowl. The others were too weak."
+            "She nudges the fallen kernels into a neat little casualty pile with the toe of her boot."
         "Take the sour candy.":
             $ razz += 1
             "Razzle eats two at once and immediately regrets the decision without admitting it."
             r "Great choice. My face always looks like this. Keep watching the tape."
         "Take the coffee.":
-            r "Smart! Six hours of footage and a timestamp that gave up on life. Caffeine is evidence equipment now."
+            r "Smart! Pass another cup newbie."
 
     scene cubicleOutline
     show razzle at slot(0, total=1), bright zorder 10
@@ -1635,7 +1626,7 @@ label RazzleDayFive:
     scene cubicleOutline
     show razzle hoorah at slot(0, total=1), bright zorder 10
 
-    r "Holy shit, that's them!"
+    r "That's them! That's actually them!"
     r "That's gotta be them!"
 
     "Razzle reaches over and rewinds the recording, playing the moment again."
@@ -1648,24 +1639,21 @@ label RazzleDayFive:
 
     r "Okay. Either the killer changed size halfway across the street, or this camera angle is complete garbage."
 
-    "The figure steps onto the sloped curb and briefly leans against the grocery store's outer wall."
+    $ razzleDayFiveReaction = suspectAttributes[killer]["kill_reaction"]
+    $ razzleDayFiveReactionAction = RAZZLE_REACTION_SCENE_HINTS[razzleDayFiveReaction]["action"]
+    $ razzleDayFiveReactionComment = RAZZLE_REACTION_SCENE_HINTS[razzleDayFiveReaction]["razzle"]
 
-    "One hand reaches out to steady themselves against the rough brick."
-    "The instant their knuckles brush the surface, they flinch hard and snatch their hand back, tucking it gingerly against their ribs."
+    "The figure steps onto the sloped curb beside the grocery store's outer wall."
+    "[razzleDayFiveReactionAction]"
+    r "[razzleDayFiveReactionComment]"
 
-    r "Yeesh. Look at that jerk-back."
-    r "You only pull away like that if your hand is already bruised or scraped raw."
-
-    r "Maybe our killer got banged up during the struggle? Or maybe they just hate rough masonry."
-    r "Wish this tape had enough resolution to see their skin."
-
-    "The figure flexes the injured fingers once under their sleeve, but the image skips before you can see anything more."
+    "Razzle rewinds and makes you watch it again before either of you trusts the impression."
 
     "A second later, the headlights pass over them."
 
     "The figure raises an arm to cover their face."
 
-    r "That's Elena's moment! The hand, the headlights—she remembered it!"
+    r "That's Elena's moment! The headlights, the arm over the face, she remembered it!"
 
     "Razzle advances the tape one frame at a time."
 
@@ -1677,8 +1665,8 @@ label RazzleDayFive:
     r "When they hunch forward over that bundle, they look wide as a truck..."
     r "...But when they step upright, it completely changes."
 
-    r "That proves our reenactment with Elena yesterday was spot-on!"
-    r "The 'wide build' was just an optical illusion from lugging that bulky package."
+    r "That proves our reenactment with Elena was onto something!"
+    r "The bundle distorted the outline, but look at the coat when they shift it. That's the same fit Elena described."
 
     r "And man, out on this uneven street, they look tall in one frame and short in the next!"
     r "Thank God Brandon had that doorway frame to rule out [razzleDayThreeHeight] height, because this tape's perspective is a total mess."
@@ -1765,7 +1753,7 @@ label RazzleDayFive:
 
     show razzle at slot(0, total=1), bright zorder 10
 
-    r "We'll need the same angle, the same distance, and something close to those headlights."
+    r "We'll need the same angle and the same distance. You can keep me honest on the order and write the numbers where Elena can't see them."
 
     r "Then maybe Elena can finally tell us what she saw!"
 
@@ -1804,7 +1792,7 @@ label RazzleDayFive:
 
     r "Anyway, I'll get everything ready for the reconstruction."
 
-    r "Tomorrow we figure out what Elena saw."
+    r "Next time we figure out what Elena saw."
 
     if razz >= RAZZLE_HIGH_THRESHOLD:
         show razzle flirty at slot(0, total=1), bright zorder 10
@@ -1817,7 +1805,7 @@ label RazzleDayFive:
 
     else:
         show razzle hoorah at slot(0, total=1), bright zorder 10
-        r "You better come with me tomorrow, newbie."
+        r "You better come with me next time, newbie."
         r "I need my favorite suspicious silhouette!"
 
     "Razzle gives you a grin before turning back toward the television."
@@ -1871,11 +1859,8 @@ label RazzleDaySix:
 
     r "Elena agreed to help us one more time."
 
-    r "We're putting each wig where the killer stood and recreating the headlights."
-    r "Then we see which one matches what she remembers."
-
-    r "No guessing from a list. No telling her which color we expect."
-    r "She just gets numbered samples."
+    r "We're putting each wig where the killer stood and recreating the headlights. Then we see which one matches what she remembers."
+    r "I worked out the positions from the tape. You helped make the controls boring enough to trust: covered samples, numbers, and a different order every time."
 
     menu:
         "We should change the order between tests.":
@@ -1883,8 +1868,8 @@ label RazzleDaySix:
 
             show razzle hoorah at slot(0, total=1), bright zorder 10
 
-            r "Already planned on it!"
-            r "Look at us doing real science!"
+            r "Exactly! I know where everything has to stand; you keep shuffling the order so neither of us accidentally feeds Elena an answer."
+            r "Look at us doing real science without making it miserable!"
 
         "We should remind Elena about the security tape.":
             $ razz -= 1
@@ -1912,7 +1897,7 @@ label RazzleDaySix:
 
     scene black with fade
 
-    "The borrowed car is already waiting downstairs. During the drive, Razzle keeps the mannequin heads facing away from the windows so passing drivers will stop staring."
+    "The borrowed car is already waiting downstairs, its seats and door panels covered in one of Madeline's flame-resistant transport blankets. During the drive, Razzle keeps the mannequin heads facing away from the windows so passing drivers will stop staring."
     "You and Razzle return to Elena's house and arrange the three covered mannequin heads outside."
 
     "Razzle parks a borrowed car where the vehicle appeared on the security tape."
@@ -1991,7 +1976,7 @@ label RazzleDaySix:
 
     show razzle hoorah at slot(0, total=1), bright zorder 10
 
-    r "Holy shit! We actually got it!"
+    r "We got it! We actually got it!"
 
     r "That means anyone without [razzleDaySixHair] hair comes off the suspect list."
 
@@ -2041,10 +2026,8 @@ label RazzleDaySix:
 
             show razzle flirty at slot(0, total=1), bright zorder 10
 
-            r "Careful."
-            r "Keep saying things like that and I might start believing I'm smart."
-
-            r "Then you'll never get rid of me."
+            r "Oh, hell yeah. Say it again so I can pretend I wasn't waiting all day to hear it."
+            r "Keep this up and you'll never get rid of me."
 
         "We make a good team.":
             $ razz += 1
@@ -2078,7 +2061,7 @@ label RazzleDaySix:
 
                 show razzle hoorah at slot(0, total=1), bright zorder 10
 
-                r "Fuck yeah! That's the answer I wanted!"
+                r "Yes! That's the answer I wanted!"
 
             "I'm looking forward to it.":
                 $ razz += 1
@@ -2108,7 +2091,7 @@ label DhampirDayOne:
     "A half-finished mug sits on the desk beside him. Whatever was mixed into it has left a thin red line around the rim."
 
     d "Sup, new blood."
-    d "I was reading the whole thing again. Pretty fucked up way to die man."
+    d "I was reading the whole thing again. Pretty fucked up way to die, man."
 
     "He folds the file shut and gets to his feet."
 
@@ -2134,7 +2117,7 @@ label DhampirDayOne:
     "Beyond the outfit, Dhampir seems different in every way."
     "Even his posture has changed. His shoulders square, his expression empties, and when he speaks again, the lazy drawl is gone, replaced by a gravelly voice."
 
-    d "Stay close. Touch nothing unless I tell you to new blood."
+    d "Stay close. Touch nothing unless I tell you to, new blood."
 
     menu:
         "You clean up terrifyingly well.":
@@ -2231,7 +2214,7 @@ label DhampirDayOne:
     $ record_planned_route_reveal(
         "dhampir", 1, clue_text=dhampir_day_one_clue, expected_count=1)
 
-    d "That clears [dhampir_day_one_cleared_name]. Eight left."
+    d "That clears [dhampir_day_one_cleared_name]. [len(remainingSuspects)] left."
     d "Not bad, right?"
 
     menu:
@@ -2281,6 +2264,10 @@ label DhampirDayTwo:
 
     d "They're showing Blood Moon IV tonight."
     d "I have been waiting three whole years to see how badly they fuck this up."
+    if dayWin >= 6:
+        d "Yeah, accusation's tomorrow. Evidence requests are already filed, and staring at the fax won't make it answer faster."
+    elif dayWin >= 5:
+        d "Yeah, the accusation's getting close. Evidence requests are already filed, and staring at the fax won't make it answer faster."
 
     menu:
         "Sounds important. I'm in.":
@@ -2292,7 +2279,7 @@ label DhampirDayTwo:
             d "Wasn't really this time though, sorry to burst a bubble."
         "I thought we were supposed to investigate today.":
             $ dhamp -= 1
-            d "We did yesterday. Murder'll still be there tomorrow. Besides, we need paperwork to go through apparently before doing more."
+            d "We worked the case last time. Murder'll still be there after the paperwork catches up. Apparently that's how evidence works."
 
     d "Showing's pretty late tonight, but we need to prep. Snacks first."
     d "Wait, guess I gotta catch you up on the other movies first that way you get this one."
@@ -2348,9 +2335,9 @@ label DhampirDayTwo:
         "Was that a squirrel?":
             $ dhamp += 1
             d "It was a donor. Its sacrifice will be treasured."
-        "That's disgusting.":
+        "That is going to take me a minute to process.":
             $ dhamp -= 1
-            d "Everything I eat needs blood in it. Maybe be more curious before being judgmental, dude."
+            d "Take the minute. Everything I eat needs blood in it, so I had to get practical eventually."
 
     "The theater lobby is crowded with people wearing plastic fangs and cheap black capes. Dhampir studies them with the solemn patience of a museum curator confronting several obvious forgeries."
     "You find seats near the back while trailers play. He mixes the vial into his popcorn a few drops at a time, shakes the bag, and offers it to you before remembering why that will not help."
@@ -2430,37 +2417,18 @@ label DhampirDayTwo:
     menu:
         "I wasn't disappointed.":
             $ dhamp += 2
-            d "Damn. Careful with lines like that."
-            d "I might start thinking you enjoy this haunted-tablecloth thing."
+            d "Damn. That's almost smooth, new blood."
+            d "Keep it up and I might start thinking you enjoy this haunted-tablecloth thing."
         "You're definitely weird.":
             $ dhamp += 1
             d "See? You get me."
-        "Maybe people are right to avoid you.":
-            $ dhamp -= 2
-            d "Maybe. Still rude to decide before I get a chance to annoy them personally."
+        "Some people panic before they think.":
+            $ dhamp -= 1
+            d "Sure. Still rude when they never get around to the thinking part."
 
     "The couple turns the corner. Dhampir keeps watching the empty sidewalk, not wounded by the reaction so much as accustomed to cataloging it."
 
-    menu:
-        "Ask when somebody first understood him.":
-            $ dhamp += 1
-            $ dhampir_rooftop_question = "understood"
-            d "Took a while. My family had a very specific idea of what I was supposed to be."
-        "Ask about the underground music scene.":
-            $ dhamp += 1
-            $ dhampir_rooftop_question = "music"
-            d "That came later. Loud enough that nobody cared about the fangs, dark enough that nobody stared."
-        "Wait and let him decide whether to continue.":
-            $ dhamp += 1
-            $ dhampir_rooftop_question = "wait"
-            "Dhampir sits with the quiet for a few seconds, then taps one boot against the ledge."
-            d "Guess I can give you the short version."
-
-    d "My family was big on beauty and nature. Elegant elf shit and all that."
-    d "They got me instead."
-    d "I spent a while playing music in little underground places after that. Loud rooms care less about what you look like."
-
-    "He looks over the city for a moment, perfectly at ease with the admission."
+    "He does not explain where he learned to stop caring about the look. He only tips his head toward the muffled music leaking through the theater roof."
 
     d "Anyway, Blood Moon II had a better soundtrack."
 
@@ -2624,9 +2592,9 @@ label DhampirDayThree:
 
     if dhamp >= DHAMPIR_WARM_THRESHOLD:
         d "You did good in there, new blood. Didn't rush, didn't disrespect the scene."
-        d "Come back tomorrow. There's something about the room after the killing that I wanna check."
+        d "Come back next time. There's something about the room after the killing that I wanna check."
     else:
-        d "We still have six names. Come back tomorrow ready to crack this thing. Hopefully."
+        d "We still have [len(remainingSuspects)] names. Come back next time ready to crack this thing. Hopefully."
 
     $ dayDham += 1
     jump endOfDay
@@ -2635,7 +2603,7 @@ label DhampirDayFour:
     scene cubicleOutline
     "Dhampir has traded the hero suit for his Hawaiian shirt again. He has arranged photographs of Enrico's house across an otherwise empty desk."
 
-    d "Yesterday told us how the fight worked. Today I wanna know what happened after."
+    d "Last time told us how the fight worked. Now I wanna know what happened after."
     d "People get weird after they kill somebody."
 
     menu:
@@ -2718,6 +2686,12 @@ label DhampirDayFour:
             $ dhamp -= 2
             d "Wasn't grief. It was a solution."
 
+    if dhamp >= DHAMPIR_WARM_THRESHOLD:
+        "The answer does not end the conversation. Dhampir rolls one of the scarlet trinkets between two fingers, considering how much more to give you."
+        d "Before them, my family had a very specific idea of what I was supposed to be. Beauty, nature, elegant elf shit."
+        d "Then they got me. Fangs, gun, bad attitude. Took underground shows and the Hunters before I found rooms where nobody looked disappointed."
+        "He says it without asking for sympathy. The fact that he says it at all feels deliberate."
+
     "Dhampir lifts the original evidence inventory and compares it to the room one last time."
 
     d "Huh."
@@ -2725,10 +2699,10 @@ label DhampirDayFour:
     "One numbered marker in an early photograph has no matching item in the evidence log. Whatever had been there was small enough to miss and violent enough to be torn loose."
 
     d "Something from the attacker got left in this room."
-    d "Police never found it. Tomorrow we figure out where it landed."
+    d "Police never found it. Next time we figure out where it landed."
     "He photographs the empty marker from two angles, then helps you compare every numbered item against the log. Nothing else is missing."
     d "For now, you gotta get back to Ulysses and report what we did. I'll reseal the room."
-    d "See ya tomorrow, new blood."
+    d "See ya next time, new blood."
 
     $ dayDham += 1
     jump endOfDay
@@ -2806,17 +2780,17 @@ label DhampirDayFive:
 
     "He picks up the photographs showing the missing evidence marker and aligns them beside the dummy."
 
-    d "Like I told you, my whole crew died. I spent three years getting better at killing the people who did it."
+    d "The Hunters taught me to end a fight before it spreads. I ignored that lesson once, and somebody else paid for the extra seconds."
 
     "He says it with the same tone someone else might use to describe taking an evening class."
 
-    d "Really improved my work ethic. Terrible networking opportunity."
+    d "After that, I stopped treating efficiency like a style choice. Terrible lesson. Great retention."
 
     menu:
         "At least the training paid off.":
             $ dhamp += 2
             d "Trauma's expensive. Might as well demand store credit."
-        "You don't have to joke about that.":
+        "You don't have to make that lesson sound funny.":
             $ dhamp += 1
             d "I know."
             d "The real answer is dragging a fight out gets innocent people killed. I finish things fast because I learned what happens when you don't."
@@ -2827,7 +2801,7 @@ label DhampirDayFive:
     "Dhampir places one photograph over another and traces a line from the struggle to the far side of the room."
 
     d "Whatever came loose didn't vanish. It traveled."
-    d "Tomorrow I go through the wall, the floor, and anything else the first search couldn't reach."
+    d "Next time I go through the wall, the floor, and anything else the first search couldn't reach."
 
     "He lowers the damaged dummy, puts the replicas back in their rack, and hands you the water bottle from his note. Only after the room is cleared does he lean against the wall and let the last of the work posture drain away."
 
@@ -2873,7 +2847,7 @@ label DhampirDaySix:
             d "Then we prove where it isn't and keep looking. Last search doesn't mean last guess."
 
     scene black with fade
-    "The final drive is quiet. Dhampir reviews the projected angle on his phone while you watch familiar blocks pass the window. At the house, two officers record the search plan and unlock the scene one last time."
+    "The final drive is quiet. Dhampir reviews Madeline's transparent angle overlays against a set of printed scene photographs while you watch familiar blocks pass the window. At the house, two officers record the search plan and unlock the scene one last time."
     "You photograph the intact seal before entering. Dhampir waits inside the doorway until the time, personnel, and conditions are written into the log."
     "The final search begins at the point Dhampir identified during the reconstruction. He measures the angle once, then lets his body turn pale and insubstantial."
     "He passes an arm through the wall, then sinks through the floor up to his shoulders, searching spaces no ordinary investigator could reach."
@@ -2916,7 +2890,7 @@ label DhampirDaySix:
         "Not bad for a haunted rat.":
             $ dhamp += 2
             "Dhampir's severe expression breaks into a grin as his work voice disappears."
-            d "Careful. That's professional haunted rat to you."
+            d "That's {i}professional{/i} haunted rat to you. I have references."
         "You did incredible work this week.":
             $ dhamp += 1
             d "We did. You spotted the room; I crawled through the floor like a haunted rat."
@@ -2972,7 +2946,7 @@ label MadelineDayOne:
             m "Genius is accurate. Asking before contaminating things is promising. Put on gloves, newb."
         "The evidence tray is already inside your contamination boundary.":
             $ mads += 2
-            show madeline madScienist at slot(0, total=1), bright zorder 10
+            show madeline madScientist at slot(0, total=1), bright zorder 10
             m "Oh, good. You actually looked before opening your mouth."
             m "That's annoyingly rare."
         "Touch the nearest slide anyway.":
@@ -3021,7 +2995,7 @@ label MadelineDayOne:
     "The police tape lifts in the afternoon wind. Inside, the house is quiet enough that the scanner's case sounds too loud when you set it down."
     "Madeline pulls on a fresh pair of gloves and kneels beside the sealed shard without touching it. A portable scanner projects the partial print several feet high across the wall."
 
-    show madeline madScienist at slot(0, total=1), bright zorder 10
+    show madeline madScientist at slot(0, total=1), bright zorder 10
 
     $ madeline_day_one_reveal = get_planned_route_reveal("madeline", 1)
     $ madeline_day_one_cleared_id = madeline_day_one_reveal["eliminated"][0]
@@ -3039,10 +3013,10 @@ label MadelineDayOne:
         "You knew that before you enlarged it, didn't you?":
             $ mads += 1
             m "Obviously. The display was for you. Try to appreciate the educational effort."
-        "Then arrest whoever the print does match.":
-            $ mads -= 2
+        "So the database search failed.":
+            $ mads -= 1
             show madeline distress at slot(0, total=1), bright zorder 10
-            m "We don't have a match, dumbass. We have an exclusion. Those are not interchangeable concepts."
+            m "No. It succeeded at exclusion. Not producing a name is not the same thing as producing nothing."
 
     $ madeline_day_one_clue = "The bloody fingerprint from the struggle does not match {}'s police record.".format(madeline_day_one_cleared_name)
     $ record_planned_route_reveal(
@@ -3050,7 +3024,7 @@ label MadelineDayOne:
 
     show madeline at slot(0, total=1), bright zorder 10
 
-    m "[madeline_day_one_cleared_name] is out. Eight suspects left."
+    m "[madeline_day_one_cleared_name] is out. [len(remainingSuspects)] suspects left."
     m "This is why databases are useful. People keep making the same stupid mistake, and computers remember it for us. Or me."
 
     "She adds the result to her notebook, then writes another short line beneath your name."
@@ -3064,7 +3038,7 @@ label MadelineDayOne:
             $ mads += 2
             show madeline flirty curious at slot(0, total=1), bright zorder 10
             m "For one test. Confidence interval's still shit."
-            m "Come back tomorrow and improve it."
+            m "Come back next time and improve it."
         "Keeping files on everyone is creepy.":
             $ mads -= 1
             m "It's efficient. Creepy is just efficient with poor branding."
@@ -3093,11 +3067,11 @@ label MadelineDayOne:
 
     scene black with fade
     if madeline_day_one_food_plan == "driver":
-        "With you driving, Madeline directs you to a takeout window and vetoes two menu items on nutritional inefficiency. She balances the chosen carton on the closed scanner case and steals several of your fries without asking."
+        "With you driving, Madeline directs you to a takeout window and vetoes two menu items on nutritional inefficiency. She balances the chosen carton on the closed scanner case, then wordlessly holds your drink whenever traffic makes it difficult to eat."
     elif madeline_day_one_food_plan == "carry":
         "You choose takeout with sugar, protein, and no table service. Madeline eats it in the parked car, balances the carton on the closed scanner case, and steals several of your fries without asking."
     else:
-        "The argument ends in a compromise: takeout now, sleep after the report. Madeline eats in the parked car, balances the carton on the closed scanner case, and steals several of your fries without asking."
+        "The argument ends in a compromise: takeout now, sleep after the report. Madeline eats in the parked car, balances the carton on the closed scanner case, and shoves the unopened dessert into your hands so she cannot revise the agreement into more work."
     "For once, the notebook remains in her bag. She spends the drive criticizing the radio instead of recording observations about you."
 
     $ dayMads += 1
@@ -3112,6 +3086,10 @@ label MadelineDayTwo:
     m "Winston says I need to get out more."
     m "He gave me these and said staring at a failed prototype for fourteen consecutive hours doesn't count as recreation."
     m "He's a moron, but I have not yet produced a successful counterargument."
+    if dayWin >= 6:
+        m "The final meeting is tomorrow. The remaining tests are running unattended, so this is apparently the least irresponsible time to leave."
+    elif dayWin >= 5:
+        m "The final meeting is getting close. The remaining tests are running unattended, so this is apparently the least irresponsible time to leave."
 
     "She holds out one pass."
 
@@ -3120,7 +3098,7 @@ label MadelineDayTwo:
     menu:
         "Of course. A rigorous miniature-golf experiment.":
             $ mads += 2
-            show madeline madScienist at slot(0, total=1), bright zorder 10
+            show madeline madScientist at slot(0, total=1), bright zorder 10
             m "Surface friction, incline, impact loss, obstacle timing. You understand the scope. Good."
         "Want me to pretend it is a date anyway?":
             $ mads += 2
@@ -3146,7 +3124,7 @@ label MadelineDayTwo:
             "Madeline starts toward the elevator, then speaks without looking back."
             m "We dated, if that's the question you're pretending not to ask. We're fine now."
 
-    "She delivers the information like a correction to a lab record and immediately returns to criticizing the course website. You have to catch up before the elevator doors close."
+    "She delivers the information like a correction to a lab record and immediately returns to criticizing the course brochure. You have to catch up before the elevator doors close."
 
     "At the elevator, Madeline realizes she is still carrying a soldering iron. She stares at it, considers bringing it, then drops it into a planter outside the lab."
     m "Remind me that's there."
@@ -3154,7 +3132,7 @@ label MadelineDayTwo:
     menu:
         "Promise to remind her.":
             $ mads += 1
-            m "Put it in your phone. Human memory is embarrassing."
+            m "Put it in your notebook. Human memory is embarrassing."
         "Ask why it was in her hand.":
             m "I was repairing something when Winston interrupted me. I do not know which thing. It'll become obvious when it catches fire."
         "Suggest it might improve the golf course.":
@@ -3162,7 +3140,7 @@ label MadelineDayTwo:
             m "Don't tempt me. I haven't even seen how badly they built it yet."
 
     scene black with fade
-    "The trip across town gives Madeline time to read every negative review of the course and explain why most reviewers misunderstood basic geometry."
+    "The trip across town gives Madeline time to read every negative review clipped from a local entertainment guide and explain why most reviewers misunderstood basic geometry."
     "The miniature-golf course is an explosion of plastic castles, painted animals, artificial ponds, and badly maintained green turf. A teenager at the counter slides a rack of colored balls toward you."
 
     menu:
@@ -3181,7 +3159,7 @@ label MadelineDayTwo:
     "Madeline refuses the tiny pencil, produces a mechanical one from her jacket, and records the starting time at the top of the scorecard."
     "At the first hole, Madeline crouches until her face is nearly level with the ball."
 
-    show madeline madScienist at slot(0, total=1), bright zorder 10
+    show madeline madScientist at slot(0, total=1), bright zorder 10
 
     m "There are seventeen holes after this one."
     m "If I account for incline, surface friction, wind speed, ball deformation, and the windmill's rotational period, I can finish this in two strokes."
@@ -3196,7 +3174,7 @@ label MadelineDayTwo:
     menu:
         "The mushroom corrected the angle. Add it to your model.":
             $ mads += 2
-            show madeline madScienist at slot(0, total=1), bright zorder 10
+            show madeline madScientist at slot(0, total=1), bright zorder 10
             m "It should not have sufficient elasticity."
             m "Move. I need to measure the mushroom."
         "You look cute when you're concentrating.":
@@ -3363,7 +3341,7 @@ label MadelineDayThree:
     menu:
         "That tube separated more cleanly under the gravity shift.":
             $ mads += 2
-            show madeline madScienist at slot(1, total=2), bright zorder 10
+            show madeline madScientist at slot(1, total=2), bright zorder 10
             m "...It did."
             m "The effective mass changed faster than the rotor speed. That's fucking useful."
         "I think Ica improved your machine.":
@@ -3403,7 +3381,7 @@ label MadelineDayThree:
 
     if madeline_centrifuge_result["completed"]:
         if madeline_centrifuge_result["quality"] == "perfect":
-            show madeline madScienist at slot(0, total=1), bright zorder 10
+            show madeline madScientist at slot(0, total=1), bright zorder 10
             m "Balanced on the first run. No vibration, clean separation, readable bands."
             m "You're allowed to look pleased with yourself. Briefly."
         else:
@@ -3415,7 +3393,7 @@ label MadelineDayThree:
 
     if madeline_centrifuge_result.get("scope") == "category":
         m "No type [madeline_day_three_blood_type] markers in the attacker trace."
-        m "That rules out [madeline_day_three_removed_names]. Six suspects left."
+        m "That rules out [madeline_day_three_removed_names]. [len(remainingSuspects)] suspects left."
     else:
         m "The separated markers conflict with both preserved reference profiles."
         m "That clears [madeline_day_three_removed_names] individually. Same count, narrower claim."
@@ -3459,7 +3437,7 @@ label MadelineDayThree:
 
     "You eat at the clean end of the bench while Madeline annotates the run. The conversation wanders from Ica's impossible luck to whether the lab needs a better snack drawer."
 
-    m "Come back tomorrow. I have a new prototype to test. For now, report to Ulysses."
+    m "Come back next time. I have a new prototype to test. For now, report to Ulysses."
     $ dayMads += 1
     jump endOfDay
 
@@ -3467,7 +3445,7 @@ label MadelineDayFour:
     scene labOutline
     "A new machine occupies most of Madeline's central workbench. Cables run from a sealed wound swab to three separate readers labeled FIRE, ICE, and LIGHT."
 
-    show madeline madScienist at slot(0, total=1), bright zorder 10
+    show madeline madScientist at slot(0, total=1), bright zorder 10
 
     m "The victim's wounds contain power residue, but residue alone is useless if we can't tell how it entered the body."
     m "This separates elemental damage from ordinary contact trauma. In theory."
@@ -3515,7 +3493,7 @@ label MadelineDayFour:
     menu:
         "The machine may be separating causes that happened to the same wound.":
             $ mads += 2
-            show madeline madScienist at slot(0, total=1), bright zorder 10
+            show madeline madScientist at slot(0, total=1), bright zorder 10
             m "Power, impact, and environmental damage stacked together..."
             m "Yes. The machine isn't wrong. My input model is. Fuck. Say that again while I write it down."
         "Rebuild it. I'll stay for the retest.":
@@ -3569,7 +3547,7 @@ label MadelineDayFour:
             m "Maybe let somebody else form your sentences."
 
     m "The corrected design needs time to settle before I trust it on the final residue test. Meanwhile, I have a neural-feedback rig that needs a second operator."
-    m "Come back tomorrow. Read the consent packet first. All of it."
+    m "Come back next time. Read the consent packet first. All of it."
 
     "The second run finishes without alarms. Madeline does not celebrate; she labels the output PROVISIONAL and starts a timer for the cooling cycle."
     "You remain until the sample is resealed and the failed page—pencil tear included—is filed beside the successful one. Only then does she let you clear the bench and leave."
@@ -3692,7 +3670,7 @@ label MadelineDayFive:
             m "That may be the dumbest sentence produced in this laboratory, and Ica visits regularly."
 
     m "The corrected residue array will finish calibrating overnight."
-    m "Tomorrow we classify the power category and cut the list to three. For now, get back to Ulysses."
+    m "Next time we classify the power category and cut the list to three. For now, get back to Ulysses."
 
     "She files the helmet data separately from the case evidence, locks both cabinets, and checks that you kept your copy of the consent form. The embarrassment remains, but it no longer controls the room."
 
@@ -3703,7 +3681,7 @@ label MadelineDaySix:
     scene labOutline
     "Three sealed reference cartridges sit in a row across Madeline's workbench: FIRE, ICE, and LIGHT. The preserved wound swab rests beneath a glass cover beside them."
 
-    show madeline madScienist at slot(0, total=1), bright zorder 10
+    show madeline madScientist at slot(0, total=1), bright zorder 10
 
     m "Final test. Day Three isolated the blood trace. Day Four separated the wound sequence from the surrounding damage."
     m "The corrected array finished calibrating overnight."
@@ -3744,7 +3722,7 @@ label MadelineDaySix:
 
     "Madeline lifts the visor, openly grinning."
 
-    show madeline madScienist at slot(0, total=1), bright zorder 10
+    show madeline madScientist at slot(0, total=1), bright zorder 10
 
     m "[madeline_day_six_power]. Fuck yes."
 
@@ -3805,7 +3783,7 @@ label MadelineDaySix:
 
 label NickyDayOne:
     scene debriefRoomOutline
-    "Nicky has covered one end of the debrief table with a phone-location export, smartwatch activity logs, and still frames from three different street cameras."
+    "Nicky has covered one end of the debrief table with pager-company call records, a laundromat receipt, and still frames from three different street cameras."
     "The rest of the room is still waking up. A printer hums somewhere behind you, and a paper cup of coffee cools beside Nicky's elbow while she sorts the last few pages into crooked piles."
 
     show nicky content happy at slot(0, total=1), bright zorder 10
@@ -3813,9 +3791,9 @@ label NickyDayOne:
     n "Morning, rookie! Welcome to the exciting world of proving somebody didn't do a murder."
     n "It's less dramatic than catching them, but the paperwork smells exactly the same."
 
-    "She slides the phone and watch records toward you. Their timestamps disagree with the city-camera stills by exactly one hour."
+    "She slides the pager log and receipt toward you. Their timestamps disagree with the city-camera stills by exactly one hour."
 
-    n "One system adjusted its clock automatically. The other was apparently built by a person who considers daylight saving time an act of war."
+    n "Somebody reset one clock and ignored the others. Apparently daylight saving time is where civilization ends."
     n "What do you do first?"
 
     menu:
@@ -3827,10 +3805,10 @@ label NickyDayOne:
             $ nick += 1
             n "Finally, somebody willing to arrest the real criminal."
             n "Sadly, the district attorney says I can't charge a clock. Yet."
-        "The phone says they were elsewhere. Good enough.":
+        "The pager log says they were elsewhere. Good enough.":
             $ nick -= 2
-            show nicky angry accustion at slot(0, total=1), bright zorder 10
-            n "Nope. Phones get left behind, handed off, spoofed, stolen, and dropped in toilets. Corroboration, rookie."
+            show nicky angry accusation at slot(0, total=1), bright zorder 10
+            n "Nope. Pagers get borrowed, lost, handed off, and used by people who swear they never touched them. Corroboration, rookie."
 
     "Nicky gives you room at the table instead of reaching over you. For a few minutes, the two of you work in the soft shuffle of paper and the occasional squeak of a marker against the whiteboard."
     "Once the timestamps are normalized, three records remain. Any one of them could still be misleading on its own."
@@ -3838,28 +3816,28 @@ label NickyDayOne:
     n "Pick our next victim. Technologically speaking."
 
     menu:
-        "Trace the phone's route across town.":
-            "You map each cell-tower handoff. The route is continuous, but broad enough that it cannot place its owner at a particular storefront."
-            n "Useful outline, fuzzy details. Phones are a lot like eyewitnesses, except people trust them more because they have expensive screens."
-        "Check the watch's movement and pulse data.":
+        "Trace the pager calls and callbacks.":
+            "You map the incoming pages against calls returned from public phones. The pattern follows one neighborhood, but it cannot prove who stood at each receiver."
+            n "Useful outline, fuzzy details. A pager tells us somebody wanted to talk. It does not tell us who picked up the pay phone."
+        "Check the laundromat's handwritten refund log.":
             $ nick += 1
-            "The watch records a brisk walk, a long period of frustrated pacing, and a sudden spike in heart rate."
-            n "Either somebody picked a fight, ran a sprint, or met a vending machine with boundary issues. Let's see which."
+            "The attendant recorded the time, the jammed snack number, and an increasingly furious series of refund requests."
+            n "That is either a very committed fake alibi or somebody met a vending machine with boundary issues. Let's see which."
         "Line up the traffic-camera stills.":
             $ nick += 1
             "You arrange the stills by intersection. Nicky leans across the table to rotate one you placed upside down, then leaves her hand beside yours while she studies it."
-            n "There. Same coat, same posture, same deeply personal argument with an appliance. Now we can connect it to the devices."
+            n "There. Same coat, same posture, same deeply personal argument with an appliance. Now connect it to the paper trail."
 
     $ nicky_day_one_reveal = get_planned_route_reveal("nicky", 1)
     $ nicky_day_one_cleared_id = nicky_day_one_reveal["eliminated"][0]
     $ nicky_day_one_cleared_name = suspectNames[nicky_day_one_cleared_id]
 
-    "With the remaining records arranged beside it, the full route finally forms across town. The watch tracks an elevated pulse while a traffic camera catches [nicky_day_one_cleared_name] fighting a vending machine outside a laundromat."
+    "With the records arranged beside one another, the alibi finally holds together. The receipt and refund log put [nicky_day_one_cleared_name] at the laundromat while a traffic camera catches them fighting the vending machine outside."
     "A second camera shows the machine winning."
 
     show nicky content happy at slot(0, total=1), bright zorder 10
 
-    n "There they are. Wrong neighborhood, continuous device movement, two independent cameras, and approximately four dollars lost to cheese crackers."
+    n "There they are. Wrong neighborhood, a clerk who remembers the argument, two independent cameras, and approximately four dollars lost to cheese crackers."
     n "Embarrassing? Absolutely. Murder? Unless that vending machine was Enrico in disguise, no."
 
     menu:
@@ -3868,15 +3846,15 @@ label NickyDayOne:
             n "Then half this team narrowly avoids consecutive life sentences. I'll tell Ulysses the good news."
         "You already knew from their pheromones, didn't you?":
             $ nick += 1
-            show nicky quesition at slot(0, total=1), bright zorder 10
+            show nicky question at slot(0, total=1), bright zorder 10
             n "I knew they lied about why they were at the laundromat. Turns out the answer was 'emotional support blanket.'"
             n "My nose gives me questions. Evidence gives me answers."
         "Keep them on the list. They still look suspicious.":
             $ nick -= 2
-            show nicky angry accustion at slot(0, total=1), bright zorder 10
+            show nicky angry accusation at slot(0, total=1), bright zorder 10
             n "Absolutely not. We don't keep innocent people under suspicion because the truth has bad vibes."
 
-    $ nicky_day_one_clue = "Device records and independent street footage verify {}'s alibi.".format(nicky_day_one_cleared_name)
+    $ nicky_day_one_clue = "Pager records, a timestamped receipt, a witness statement, and independent street footage verify {}'s alibi.".format(nicky_day_one_cleared_name)
     $ record_planned_route_reveal(
         "nicky", 1, clue_text=nicky_day_one_clue, expected_count=1)
 
@@ -3916,6 +3894,8 @@ label NickyDayTwo:
 
     n "I have spent six hours listening to three departments argue over who entered one timestamp wrong."
     n "I'm clearing my head before I start using the table as a stress ball. There's a limited pressing I want at a record shop across town."
+    if dayWin >= 5:
+        n "Yes, I know the final meeting is close. That is exactly why I need one hour where nobody says 'chain of custody' at me."
     n "You can come if you want."
 
     "She tosses you the second helmet."
@@ -3931,7 +3911,7 @@ label NickyDayTwo:
             "Her antennae tilt toward you as she smiles."
         "I suppose I can tolerate a record store.":
             $ nick -= 1
-            show nicky quesition at slot(0, total=1), bright zorder 10
+            show nicky question at slot(0, total=1), bright zorder 10
             n "Try not to drown me in enthusiasm, rookie."
 
     "Nicky waits while you fit the helmet, then reaches over to tighten the loose strap beneath your chin. Her fingers linger just long enough for her antennae to tilt with amusement."
@@ -3981,7 +3961,7 @@ label NickyDayTwo:
         "The calmest classical album available.":
             $ nick -= 1
             $ nicky_day_two_music = "classical"
-            show nicky quesition at slot(0, total=1), bright zorder 10
+            show nicky question at slot(0, total=1), bright zorder 10
             n "Damn. I thought we were getting along too."
 
     "Nicky disappears into the hip-hop aisle and gives you half of a stack to browse. She has an opinion about every cover you lift: too polished, secretly excellent, one good track, career-ending hat."
@@ -4003,7 +3983,7 @@ label NickyDayTwo:
     show nicky curious flirty at slot(0, total=1), bright zorder 10
 
     n "Rookie, either shared headphones terrify you or you're nervous for a more interesting reason."
-    n "Your pheromones are not subtle."
+    n "I can tell. Don't worry—I'm off duty enough not to narrate the chemical evidence."
 
     menu:
         "You're standing this close on purpose.":
@@ -4015,7 +3995,7 @@ label NickyDayTwo:
             n "Good rookie."
         "Then stop smelling me.":
             $ nick -= 1
-            show nicky quesition at slot(0, total=1), bright zorder 10
+            show nicky question at slot(0, total=1), bright zorder 10
             n "I can't turn my nose off, but I can stop helping you make this fun."
 
     "Nicky buys the record, tucks it carefully into the bike's storage compartment, and holds the shop door for you with an exaggerated little bow."
@@ -4042,7 +4022,7 @@ label NickyDayTwo:
             n "Responsible. Suspicious, but responsible. I'm still making you try the fries."
 
     "The server leaves. For a while, the conversation stays easy: terrible album covers, the bike, and Nicky's theory that every diner owns the same three coffee mugs."
-    "When the food arrives, she waits until the server has gone before reaching across the table and stealing whichever bite looks easiest to reach. Only then does her voice settle into something quieter."
+    "When the food arrives, she waits until the server has gone, arranges the ketchup and sugar caddy into a less obstructive formation, and settles deeper into the booth. Only then does her voice turn quieter."
 
     show nicky at slot(0, total=1), bright zorder 10
 
@@ -4063,7 +4043,7 @@ label NickyDayTwo:
         "Whatever let you order people around.":
             $ nick += 1
             show nicky curious flirty at slot(0, total=1), bright zorder 10
-            n "Careful, rookie. That answer sounds informed."
+            n "That answer sounds suspiciously informed. Maybe I should keep you where I can question you."
 
     n "I wanted the police before I knew what my powers would become. Warrants, evidence, somebody checking your work."
     n "Superheroes can save a city and still leave the legal system crying in a parking lot. I like making sure the rescue survives court."
@@ -4084,10 +4064,10 @@ label NickyDayTwo:
         "You shouldn't have to keep proving yourself.":
             $ nick += 1
             n "No, but everybody proves something eventually. I just make sure I pick what."
-        "At least the department hired you anyway.":
-            $ nick -= 2
+        "Maybe the badge makes strangers less nervous.":
+            $ nick -= 1
             show nicky sad upset at slot(0, total=1), bright zorder 10
-            n "Yeah. What a generous reward for being good at my job."
+            n "Sometimes. Other times they decide the badge must be a costume too. People get creative when they want their first guess to stay true."
 
     "The heavier moment passes without disappearing. Nicky nudges the ketchup toward you, tells you about the first suspect who tried to lie while wearing three kinds of cologne, and lets the story become ridiculous before the check arrives."
     "You linger long enough to finish your drinks and argue over which song should play first. Then Nicky pays her half, leaves an exact tip, and slides out of the booth."
@@ -4142,7 +4122,7 @@ label NickyDayThree:
 
     "A small flame eats through the corner of the duplicate form in Razzle's hand. She pats it out against the table."
 
-    show nicky quesition at slot(1, total=2), bright zorder 10
+    show nicky question at slot(1, total=2), bright zorder 10
     show razzle at slot(0, total=2), dim zorder 0
 
     n "The coat detail is useful. The arson is less useful."
@@ -4171,7 +4151,7 @@ label NickyDayThree:
             n "Thank you. Crime is temporary. Finding ways not to die of boredom is forever."
         "The strongest impact came from the biggest suspect. Start there.":
             $ nick -= 2
-            show nicky angry accustion at slot(0, total=1), bright zorder 10
+            show nicky angry accusation at slot(0, total=1), bright zorder 10
             n "You are standing beside a woman who can lift thousands of pounds. Try that assumption again."
 
     n "Two rounds. Match each claim to independent support. Speed is nice; accuracy is nicer. Neither one changes what the evidence says."
@@ -4216,13 +4196,14 @@ label NickyDayThree:
         "Force never established build. The records did.":
             $ nick += 2
             show nicky curious flirty at slot(0, total=1), bright zorder 10
-            n "There it is. You followed the records without trying to sound like a courtroom drama. Careful, rookie. I have a type."
+            n "There it is. You followed the records without trying to sound like a courtroom drama."
+            n "Competent and not boring. Annoyingly close to my type, rookie."
         "Your card game made paperwork almost fun.":
             $ nick += 1
             n "Almost? Damn. I'll add dramatic lighting next time."
         "So the witness was just wrong.":
             $ nick -= 1
-            show nicky quesition at slot(0, total=1), bright zorder 10
+            show nicky question at slot(0, total=1), bright zorder 10
             n "The witness described what they perceived. Our job is separating perception from measurement, not blaming them for being human."
 
     n "I'll package the result for Ulysses. You can tell him we made bureaucracy entertaining without setting anything important on fire."
@@ -4269,11 +4250,11 @@ label NickyDayFour:
             n "Facts can imply things. They don't get to put on a fake mustache and pretend assumptions were there the whole time."
         "We should discard every report copied from it.":
             $ nick -= 1
-            show nicky quesition at slot(0, total=1), bright zorder 10
+            show nicky question at slot(0, total=1), bright zorder 10
             n "We correct the bad inference. We don't burn useful observations because one sentence got ambitious."
         "A police officer wrote it, so it should stay.":
             $ nick -= 2
-            show nicky angry accustion at slot(0, total=1), bright zorder 10
+            show nicky angry accusation at slot(0, total=1), bright zorder 10
             n "The badge does not make a guess become evidence. I say that as somebody currently wearing one."
 
     "Together, you separate direct observations from copied conclusions. It takes longer than tearing the pages down would have, but useful details survive: the table's direction of travel, the wall impact, and the order of the blood marks."
@@ -4303,13 +4284,13 @@ label NickyDayFour:
             n "I shouldn't. But if I'm proving something anyway, I might as well make it undeniable."
         "At least nobody here treats you differently.":
             $ nick -= 1
-            show nicky quesition at slot(0, total=1), bright zorder 10
+            show nicky question at slot(0, total=1), bright zorder 10
             n "That's nice, rookie, but pretending it never happens doesn't help when it does."
 
     show nicky at slot(0, total=1), bright zorder 10
 
     n "This preserved sample should resolve one more part of the reconstruction. The outer custody label has been corrected, but nobody signed the correction."
-    n "We check it in person tomorrow. No shortcuts, no assumptions, and preferably no flaming paperwork."
+    n "We check it in person next time. No shortcuts, no assumptions, and preferably no flaming paperwork."
 
     "Nicky photographs the corrected board before removing a single page. You take down the copies in reverse order while she rebuilds the official packet beneath them."
     "The disputed bag record stays out. She places it alone in a bright red folder, writes DO NOT TEST across the front, and tucks it under one arm for the walk to evidence control."
@@ -4321,7 +4302,7 @@ label NickyDayFive:
     scene labOutline
     "The preserved vial rests inside two layers of evidence packaging. Its inner seal is intact. The outer bag has a rewritten time, fresh tape, and no initials beside either correction."
 
-    show nicky angry accustion at slot(0, total=1), bright zorder 10
+    show nicky angry accusation at slot(0, total=1), bright zorder 10
 
     n "Somebody corrected this bag neatly enough to look official and forgot the part where official work identifies who did it."
     n "The evidence technician says it was routine. Their pheromones say they are lying about something."
@@ -4343,7 +4324,7 @@ label NickyDayFive:
             n "A correct result obtained carelessly is how a guilty person walks free."
         "Throw it away and pretend we never received it.":
             $ nick -= 2
-            show nicky angry accustion at slot(0, total=1), bright zorder 10
+            show nicky angry accusation at slot(0, total=1), bright zorder 10
             n "Destroying compromised evidence is still destroying evidence. Please never improvise around an evidence locker."
 
     "Nicky files the discrepancy and calls evidence control. The call takes twenty minutes, two supervisors, and one very long hold tune. She puts it on speaker so both of you can suffer equally."
@@ -4356,7 +4337,7 @@ label NickyDayFive:
 
     "Nicky divides the trace across three labeled wells: Anti-A, Anti-B, and Anti-D. [nicky_day_five_blood_reaction]"
 
-    show nicky quesition at slot(0, total=1), bright zorder 10
+    show nicky question at slot(0, total=1), bright zorder 10
 
     n "Clumping means the corresponding marker is present. Anti-D is the positive factor; no Anti-D reaction is negative."
     n "Useful direction, not a courtroom exclusion. The broken outer chain stays attached to every sentence we write about this."
@@ -4367,7 +4348,7 @@ label NickyDayFive:
             n "That's how it stays useful. We learn from uncertain evidence without pretending the uncertainty vanished."
         "Your nose and the test agree. That's enough for me.":
             $ nick -= 1
-            show nicky quesition at slot(0, total=1), bright zorder 10
+            show nicky question at slot(0, total=1), bright zorder 10
             n "Flattering. Still not how proof works."
         "Then the whole test was pointless.":
             $ nick -= 1
@@ -4409,7 +4390,7 @@ label NickyDayFive:
             $ nick += 2
             $ nicky_day_five_break_mood = "flirt"
             show nicky curious flirty at slot(0, total=1), bright zorder 10
-            n "Careful. I might make you explain exactly what you mean."
+            n "Then say it like you mean it, rookie. I enjoy watching suspects commit to an answer."
         "You deserve seven minutes where nobody needs anything from you.":
             $ nick += 1
             $ nicky_day_five_break_mood = "kind"
@@ -4417,25 +4398,25 @@ label NickyDayFive:
         "We should use the time to finish the report.":
             $ nick -= 2
             $ nicky_day_five_break_mood = "work"
-            show nicky quesition at slot(0, total=1), bright zorder 10
+            show nicky question at slot(0, total=1), bright zorder 10
             n "Wet blanket behavior. Deeply disappointing."
             "She takes the report folder from your side of the table and puts it beneath her chair, where reaching for it would require moving her."
             n "Seven minutes. You can survive being irresponsible that long."
 
     if nick >= NICKY_WARM_THRESHOLD and nicky_day_five_break_mood != "work":
         "Nicky settles close enough that her shoulder remains against yours. Her antennae angle toward you."
-        n "Also, your pheromones are doing that thing again. Very loud."
-        n "You can relax. I didn't move away."
+        n "You got nervous again."
+        "She leaves the observation there instead of explaining how she knows. More importantly, she does not move away."
     elif nicky_day_five_break_mood == "work":
         "Nicky starts the episode and plants both boots on the hidden report folder. She passes you the snacks without moving closer, committed to enforcing the break you tried to cancel."
     else:
         "Nicky opens a beer and provides increasingly aggressive commentary about the fictional agents' refusal to request warrants."
 
-    "Before the episode ends, a secure message reaches her phone: the final warrant returns, recent interview images, and a behavioral profile are ready for review."
+    "Before the episode ends, the secure fax on the far wall begins printing: the final warrant returns, recent interview images, and a behavioral profile are ready for review."
 
-    n "There's tomorrow's problem. Tonight, the government is hiding aliens in a filing cabinet and these idiots still haven't documented the search."
+    n "There's our next problem. Tonight, the government is hiding aliens in a filing cabinet and these idiots still haven't documented the search."
 
-    "She turns the phone face-down and lets the episode finish. The message remains unanswered for the promised seven minutes—and several more after that."
+    "She leaves the pages face-down in the fax tray and lets the episode finish. The message remains unanswered for the promised seven minutes—and several more after that."
 
     $ dayNick += 1
     jump endOfDay
@@ -4478,7 +4459,7 @@ label NickyDaySix:
             n "Three independent supports, one conclusion, and none of them is 'trust my weird ant nose.' That can survive review."
         "Your pheromone sense is good enough. Skip the rest.":
             $ nick -= 2
-            show nicky angry accustion at slot(0, total=1), bright zorder 10
+            show nicky angry accusation at slot(0, total=1), bright zorder 10
             n "No. My power guides an interview. It does not convict somebody."
         "This sounds like judging people by how they look.":
             $ nick += 1
@@ -4506,17 +4487,17 @@ label NickyDaySix:
             n "And not one illegal shortcut in the pile. I knew I liked having you around."
         "Finally. I thought the paperwork would never end.":
             $ nick -= 1
-            show nicky quesition at slot(0, total=1), bright zorder 10
+            show nicky question at slot(0, total=1), bright zorder 10
             n "The paperwork is how the ending survives longer than five minutes."
 
     if nick >= NICKY_HIGH_THRESHOLD:
         if nicky_day_two_music == "romantic":
-            "A suspiciously romantic track begins playing quietly from Nicky's phone. She notices you recognize it and does not pretend the selection was accidental."
+            "A suspiciously romantic track begins playing quietly from Nicky's portable cassette player. She notices you recognize it and does not pretend the selection was accidental."
         elif nicky_day_two_music == "classical":
-            "A bass-heavy remix of the classical album you chose begins playing quietly from Nicky's phone. She notices your surprise."
+            "A bass-heavy remix of the classical album you chose begins playing quietly from Nicky's portable cassette player. She notices your surprise."
             n "I improved your evidence. You're welcome."
         else:
-            "Backseat Royalty begins playing quietly from Nicky's phone. She notices you recognize the song."
+            "Backseat Royalty begins playing quietly from Nicky's portable cassette player. She notices you recognize the song."
         show nicky curious flirty at slot(0, total=1), bright zorder 10
         if nicky_day_two_music == "hiphop":
             n "I bought myself another copy. You still have mine."
@@ -4546,7 +4527,7 @@ label WinstonDayOne:
     menu:
         "I'm here to work. Unfortunately.":
             $ winn += 1
-            w "Tragic. All right, let's at least we can suffer efficiently."
+            w "Tragic. Fine. We suffer efficiently, finish early, and invoice despair for overtime."
         "I came to witness an important scientific breakthrough.":
             $ winn += 2
             w "Finally, somebody recognizes leadership when they see it."
@@ -4651,6 +4632,7 @@ label WinstonDayOne:
     "The food arrives before Winston begins the formal report. He clears a space by transferring the clutter from one side of his desk to the other, then hands you the first portion."
     "Between bites, he tells you that before ATLAS he was an ordinary working superhero: stop the powered criminal, level the playing field, then win the fistfight."
     w "Turns out founding an organization is mostly fighting paperwork, and paperwork doesn't lose its powers when I stare at it."
+    w "Ulysses and I were doing the work together years before ATLAS had a name. Back then it was less 'organization' and more 'please stop the teenager from filing mission plans under my door.'"
     w "Still. One innocent person off the board. Not a bad first round."
     "He raises his drink toward you before opening the report. By the time you leave for the daily meeting with Ulysses, the jokes have returned, but the document is complete and exact."
 
@@ -4677,7 +4659,11 @@ label WinstonDayTwo:
 
     "Winston sits up, rubs both hands over his face, and checks the clock. He shows no alarm at the time."
     w "I have made an executive decision. I'm doing absolutely fucking nothing today."
-    w "You can come. Not a date. I need a witness in case the waitress thinks I'm sad for eating alone."
+    if dayWin >= 6:
+        w "Final meeting's breathing down our necks. Which means if I don't take one afternoon now, Ulysses will find me fused to this couch tomorrow."
+    elif dayWin >= 5:
+        w "Final meeting's breathing down our necks. This is our last responsible window for irresponsible behavior."
+    w "You can come. Not officially a date. It may be shaped suspiciously like one, but I need plausible deniability and a witness in case the waitress thinks I'm sad for eating alone."
 
     menu:
         "Obviously not a date. You'd have dressed up.":
@@ -4685,10 +4671,10 @@ label WinstonDayTwo:
             w "This is my formal tank top. Show some respect."
         "I'd be happy to go with you.":
             $ winn += 1
-            w "Careful with that tone. Somebody might think you enjoy my company."
+            w "That eager, huh? Great. Now the waitress is definitely going to think I planned this."
         "Shouldn't we be investigating?":
             $ winn -= 1
-            w "Tomorrow. Today I'm demonstrating sustainable leadership by fleeing the building."
+            w "Next time. Today I'm demonstrating sustainable leadership by fleeing the building."
 
     scene black with fade
     "Winston insists on calling a taxi. When you ask why the cofounder of ATLAS does not drive, he lists three crashes, a flooded loading dock, and an incident involving a statue that the city still blames on weather."
@@ -4715,9 +4701,9 @@ label WinstonDayTwo:
     if winston_day_two_order == "burger":
         "When the plates arrive, Winston takes one of your fries before touching his own."
     elif winston_day_two_order == "sweet":
-        "When the plates arrive, Winston cuts an unauthorized corner from your pancakes before touching his burger. Syrup lands on his thumb; he treats this as proof the theft was worth it."
+        "When the plates arrive, Winston attempts to pour your syrup with the solemn precision of a surgeon. The result resembles a crime scene; he treats this as improved presentation."
     else:
-        "When the plates arrive, Winston steals the least responsible-looking piece from your lighter order, exactly as promised, then returns to the burger threatening the structural integrity of his plate."
+        "When the plates arrive, Winston slides one of his onion rings onto your lighter plate and calls it a leadership-mandated nutritional compromise."
 
     menu:
         "Steal two of his fries in return.":
@@ -4774,7 +4760,7 @@ label WinstonDayTwo:
 
     "The match stretches through two songs and a rematch Winston insists does not count as competitiveness. By the end, your drinks have warmed and his pager has begun chirping again from inside his jacket."
     "He takes it out, reads the fourth message, and turns it face down."
-    w "Madeline needs authorization to borrow equipment she already borrowed. That's a tomorrow problem wearing today's shoes."
+    w "Madeline needs authorization to borrow equipment she already borrowed. That's a later problem wearing today's shoes."
     "For the first time since leaving ATLAS, nothing else interrupts. Winston rolls the cue between his palms and watches the empty table."
     w "Everybody there can do something impossible. Fire, flight, seeing tomorrow, whatever."
     w "Then something goes wrong and they look for me to make the impossible stop."
@@ -4820,7 +4806,7 @@ label WinstonDayTwo:
         "He returns muttering about heroism, then walks with you to the end-of-day report."
     elif winston_day_two_exit == "sort":
         "The scream turns out to involve a spider and an overturned wastebasket. Winston shouts instructions from his desk until somebody else handles both, then divides Ulysses's list between you."
-        "You finish the urgent items before walking together to the end-of-day report. The rest remain tomorrow problems."
+        "You finish the urgent items before walking together to the end-of-day report. The rest remain later problems."
     else:
         "You leave him with the scream, the list, and his final afternoon of freedom. By the time you reach Ulysses's office for the end-of-day report, Winston is in the hall arguing that spider removal qualifies as field leadership."
 
@@ -4995,7 +4981,7 @@ label WinstonDayFour:
         "You're convincing until you start caring.":
             $ winn += 2
             "Winston turns a dart between his fingers and studies it more closely than necessary."
-            w "Dangerous observation, newbie. Keep that up and people might think I'm emotionally available."
+            w "You keep noticing where the act ends. Rude. Possibly attractive, but rude."
         "You missed on purpose.":
             $ winn += 1
             w "Prove it. Preferably after I finish eating."
@@ -5099,20 +5085,27 @@ label WinstonDayFive:
         "Tell him nobody believes the act anyway.":
             w "They believe exactly as much as I need. You being annoyingly observant is a separate problem."
 
+    if winn >= WINSTON_WARM_THRESHOLD:
+        "Winston winds the discarded tape around two fingers, then stops playing with it."
+        w "People call when they need the emergency brake. That's fair. It's the job."
+        w "Playing the fool is how I make sure the job doesn't become the only version of me anybody gets."
+        "He glances at you, measuring whether the admission needs a joke. This time he lets it stand."
+
     if winn >= WINSTON_WARM_THRESHOLD and winston_day_five_cleanup == "help":
-        "You reach for the last strip of tape at the same time. Winston's hand closes over yours and remains there after either of you needs help removing it."
-        w "You know, you fit into my terrible methods disturbingly well."
         menu:
-            "Lean closer and ask whether that frightens him.":
+            "Leave your hand beneath his when you both reach for the tape.":
                 $ winn += 2
-                w "Little bit. Mostly it's doing something else."
+                "Winston notices the contact and leaves his hand over yours after either of you needs help removing the tape."
+                w "You know, you fit into my terrible methods disturbingly well."
+                w "Little frightening. Mostly doing something else."
                 "He releases your hand only when footsteps pass outside the office."
-            "Tell him somebody has to supervise him.":
+            "Pass him the tape and tell him somebody has to supervise him.":
                 $ winn += 1
+                "You peel up the strip and place it in his open palm."
                 w "There it is. Romance dies under middle management."
-            "Let the moment remain quiet.":
+            "Reach for a different strip and let the moment remain quiet.":
                 $ winn += 1
-                "Winston looks ready to fill the silence, then chooses not to."
+                "Winston looks ready to fill the silence between you, then chooses not to."
     elif winn >= WINSTON_WARM_THRESHOLD:
         "When the last prop is put away, Winston leans beside you against the cleared desk instead of reclaiming the space behind it."
         w "You fit into my terrible methods disturbingly well. Cleanup habits aside."
@@ -5121,7 +5114,7 @@ label WinstonDayFive:
         "Winston tosses you the last harmless prop and catches the tape roll when you throw it back."
         w "Not a bad reconstruction, newbie. Weird enough to work."
 
-    "He packages the tentative sequence separately from the formal evidence. A second witness statement and the verified call timeline should arrive tomorrow."
+    "He packages the tentative sequence separately from the formal evidence. A second witness statement and the verified call timeline should arrive before your next session."
     "The two of you restore the office just enough for Winston to locate the door, then head toward the daily report with an impression—not yet a conclusion."
 
     $ dayWinn += 1
@@ -5132,7 +5125,7 @@ label WinstonDaySix:
     "The crude reconstruction is gone. In its place, Winston has arranged the active suspect files, a telephone timeline, and a sealed written statement in three exact rows."
     "For once, there are no darts in his hand. His eyes move from timestamp to timestamp while you enter."
     w "Morning, newbie. Second witness heard the exit from the street. Phone company finally verified when the nearby call connected."
-    w "Yesterday gave us a shape. Today we find out whether it holds weight."
+    w "Last time gave us a shape. Today we find out whether it holds weight."
 
     menu:
         "Verify the timeline before opening the statement.":
@@ -5141,12 +5134,12 @@ label WinstonDaySix:
         "Open the statement and compare it as you read.":
             $ winn += 1
             w "Works, as long as you don't let the first sentence bully the timestamps."
-        "Trust yesterday's reconstruction and skip the repeat.":
+        "Trust the last reconstruction and skip the repeat.":
             $ winn -= 2
-            w "No. Yesterday was useful. Useful and proven are not the same thing."
+            w "No. Last time was useful. Useful and proven are not the same thing."
 
     "You verify the call connection, the responding unit's dispatch time, and the second witness's estimate against the same office clock. Winston makes you read the numbers aloud while he records them."
-    "Only after the independent times agree does he break the seal on the new statement. Its description contains the same three sounds as yesterday, but now their order can be fixed."
+    "Only after the independent times agree does he break the seal on the new statement. Its description contains the same three sounds as the earlier reconstruction, but now their order can be fixed."
 
     $ winston_day_six_reaction = suspectAttributes[killer]["kill_reaction"]
     $ winston_day_six_reaction_display = WINSTON_REACTION_DISPLAY[winston_day_six_reaction]
@@ -5204,9 +5197,22 @@ label WinstonDaySixSequence:
 
     "Winston signs the final interview packet, carries it to the outgoing tray, and then takes the dart cup from the corner of his desk."
     w "Case is as far as it gets today. One throw before the report."
-    "He hands you a dart and steps behind you. This time his hand settles at your waist while the other corrects your wrist. The contact is deliberate enough that neither of you can mistake it for ordinary instruction."
+    "He hands you a dart and steps behind you. One hand corrects your wrist; the other pauses open beside your waist instead of assuming permission."
 
-    if winn >= WINSTON_HIGH_THRESHOLD:
+    menu:
+        "Guide his hand to your waist.":
+            $ winn += 2
+            $ winston_day_six_waist_contact = True
+            "You close the last inch yourself. His hand settles at your waist, deliberate enough that neither of you can mistake it for ordinary instruction."
+        "Ask him to keep the lesson to your wrist.":
+            $ winston_day_six_waist_contact = False
+            "Winston nods and keeps the lesson focused on your grip."
+            w "Professional technique. Ulysses would be devastated."
+        "Step aside and take the throw alone.":
+            $ winston_day_six_waist_contact = False
+            "You reset your stance on your own. Winston gives you room without turning it into a joke."
+
+    if winn >= WINSTON_HIGH_THRESHOLD and winston_day_six_waist_contact:
         "Your dart remains raised while Winston realizes where his hand is. A flush reaches his face before the familiar grin can cover it."
         menu:
             "Lean back and ask if this is part of his leadership method.":
@@ -5221,7 +5227,7 @@ label WinstonDaySixSequence:
                 $ winn += 1
                 "Winston steps back slowly, still smiling at the floor."
                 w "Very professional of both of us. Nobody check the security footage."
-    elif winn >= WINSTON_WARM_THRESHOLD:
+    elif winn >= WINSTON_WARM_THRESHOLD and winston_day_six_waist_contact:
         "Winston notices the intimacy a beat late and moves his hand, suddenly fascinated by your grip on the dart."
         w "Right. Technique. That's what we're doing."
     else:
@@ -5345,6 +5351,10 @@ label IcaDayTwo:
     "You make your way back to Ica's cubicle, where she is reclined so far in her chair that only her shoes are visible over the desk."
     show ica at slot(0, total=1), bright zorder 10
     i "Oh, look who's back? Enjoy slacking off last time?"
+    if dayWin >= 6:
+        i "Final accusation's tomorrow, by the way. Figured I'd mention it before we bravely continue doing nothing."
+    elif dayWin >= 5:
+        i "Final accusation's getting close, by the way. Figured I'd mention it before we bravely continue doing nothing."
 
     menu:
         "Yeah! It killed a day.":
@@ -5479,8 +5489,8 @@ label IcaDayThree:
     w "Reach or pass the finish to win! If you overshoot, you stop at the finish."
     i "And no moving pieces with gravity. Apparently that's cheating."
     w "It is cheating, and I will absolutely call you out unless it happens to somebody else."
-    i "Isn't this just that one game?"
-    w "Yeah but we can't name it. Laws and all that jazz."
+    i "Isn't this just Bump Off, but shorter?"
+    w "Legally distinct. Ours has worse pieces and executive sponsorship."
     i "Cool."
 
     "Winston produces three drinks and an open bag of chips from behind his desk like he prepared for this exact emergency."
@@ -5548,7 +5558,7 @@ label IcaDayThree:
 
     "The final game ends only because the automatic lights dim around you. By the time the three of you finally look up, the entire workday is gone."
 
-    w "Same time tomorrow? I have darts too."
+    w "Same time next round? I have darts too."
     i "See, freshie? Winnie gets it."
     w "We can move the desk and make room for both."
 
@@ -5698,14 +5708,14 @@ label IcaDayFour:
             i "Heroic. Wait ten minutes so I can enjoy not being the loser yet."
         "Suggest ordering dessert.":
             $ ica += 1
-            "Ica stares at you long enough to resemble yesterday's contest."
+            "Ica stares at you long enough to resemble the hot-dog contest."
             i "You're terrifying, freshie."
 
     "Ica looks toward the hallway leading to Ulysses's office."
 
     i "You know what would be funny?"
     i "His office would look way better pink."
-    i "Tomorrow, bring clothes you don't care about. Or don't. Getting paint on the nice ones might be funnier."
+    i "Next time, bring clothes you don't care about. Or don't. Getting paint on the nice ones might be funnier."
 
     $ dayIca += 1
     jump endOfDay
@@ -5858,7 +5868,7 @@ label IcaDayFive:
         show ica at slot(0, total=1), bright zorder 10
         i "You complain a lot, but the office is pink. I'll call that a win."
 
-    i "Tomorrow, we're doing absolutely nothing. I need a break."
+    i "Next time, we're doing absolutely nothing. I need a break."
 
     $ dayIca += 1
     jump endOfDay

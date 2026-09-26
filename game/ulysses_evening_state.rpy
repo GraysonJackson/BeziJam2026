@@ -1,8 +1,11 @@
 ## State and helpers for Ulysses's mandatory end-of-day route.
 
 define ULYSSES_WARM_THRESHOLD = 18
-define ULYSSES_HIGH_THRESHOLD = 36
-define ULYSSES_DATE_ACCEPT_THRESHOLD = 46
+define ULYSSES_HIGH_THRESHOLD = 30
+define ULYSSES_ROMANCE_WARM_THRESHOLD = 4
+define ULYSSES_ROMANCE_HIGH_THRESHOLD = 7
+define ULYSSES_DATE_ACCEPT_THRESHOLD = 8
+define ULYSSES_DATE_MIN_PERSONAL_EVENINGS = 5
 
 define ULYSSES_REPEAT_COMMENTS = {
     "razzle": {
@@ -50,6 +53,8 @@ define ULYSSES_REPEAT_COMMENTS = {
 }
 
 default ulyssesEveningsCompleted = 0
+default ulyssesPersonalEvenings = 0
+default ulyssesRomanceInterest = 0
 default ulyssesReportHistory = []
 default ulyssesReportingStyle = {"honest": 0, "thoughtful": 0, "deflecting": 0}
 default ulyssesBoundaryViolation = False

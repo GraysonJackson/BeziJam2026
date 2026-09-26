@@ -13,24 +13,38 @@ define DAY_SEVEN_PARTNERS = [
 ## These are calibrated against the maximum points available in each route.
 ## "Hard" means less room for incompatible answers, never perfection.
 define DAY_SEVEN_ROMANCE_THRESHOLDS = {
-    "razzle": 40,
-    "winston": 40,
-    "nicky": 34,
-    "ica": 32,
-    "ulysses": 46,
-    "madeline": 40,
-    "dhampir": 40,
+    "razzle": 20,
+    "winston": 20,
+    "nicky": 25,
+    "ica": 24,
+    "ulysses": 30,
+    "madeline": 30,
+    "dhampir": 30,
 }
 
 define DAY_SEVEN_FRIEND_THRESHOLDS = {
-    "razzle": 16,
-    "winston": 18,
-    "nicky": 15,
-    "ica": 13,
+    "razzle": 9,
+    "winston": 9,
+    "nicky": 10,
+    "ica": 9,
     "ulysses": 18,
-    "madeline": 15,
-    "dhampir": 15,
+    "madeline": 11,
+    "dhampir": 11,
 }
+
+## Relationship endings also require time together. Scores decide how those
+## visits went; visit counts prevent one unusually strong afternoon from
+## standing in for an arc.
+define DAY_SEVEN_MIN_ROMANCE_VISITS = {
+    "razzle": 3,
+    "winston": 3,
+    "nicky": 4,
+    "ica": 4,
+    "ulysses": 0,
+    "madeline": 5,
+    "dhampir": 5,
+}
+define DAY_SEVEN_MIN_FRIEND_VISITS = 2
 
 define DAY_SEVEN_PROFILE_FIELDS = [
     ("Blood Type", "blood_type"),
@@ -201,19 +215,57 @@ init python:
             return "rejection"
 
         score = day_seven_score(partner_id)
+        if partner_id == "ulysses":
+            visits = int(store.ulyssesPersonalEvenings)
+        else:
+            visits = int(store.ulysses_completed_visits(partner_id))
         romance_allowed = True
         if partner_id == "ulysses":
             romance_allowed = (
                 not store.ulyssesBoundaryViolation
                 or store.ulyssesBoundaryApology
             )
+            romance_allowed = (
+                romance_allowed
+                and store.ulyssesRomanceInterest >= store.ULYSSES_DATE_ACCEPT_THRESHOLD
+                and store.ulyssesPersonalEvenings >= store.ULYSSES_DATE_MIN_PERSONAL_EVENINGS
+            )
 
         if (romance_allowed
+                and (partner_id == "ulysses"
+                     or visits >= store.DAY_SEVEN_MIN_ROMANCE_VISITS[partner_id])
                 and score >= store.DAY_SEVEN_ROMANCE_THRESHOLDS[partner_id]):
             return "romance"
-        if score >= store.DAY_SEVEN_FRIEND_THRESHOLDS[partner_id]:
+        if ((partner_id == "ulysses" or visits >= store.DAY_SEVEN_MIN_FRIEND_VISITS)
+                and score >= store.DAY_SEVEN_FRIEND_THRESHOLDS[partner_id]):
             return "friend"
         return "rejection"
+
+    def day_seven_culprit_confession(suspect_id):
+        attrs = store.suspectAttributes[suspect_id]
+        temperament = attrs.get("temperament", "Calm")
+        reaction = attrs.get("kill_reaction", "None")
+        organization = attrs.get("organization", "Messy")
+
+        temperament_lines = {
+            "Calm": "I knew exactly what Enrico would do once he discovered what I had done. He was going to expose me, so I decided he would not leave that room.",
+            "Passionate": "Enrico discovered what I had done and said he would expose me. I lost my temper. By the time I understood how far it had gone, he was dead.",
+            "Nervous": "Enrico discovered what I had done. He said he would expose me, and I panicked. I kept thinking I could still stop everything from collapsing.",
+        }
+        reaction_lines = {
+            "Calculated": "Afterward, I forced myself to slow down, clean what I could, and leave as though nothing had changed.",
+            "Panicked": "Afterward, I rushed. I hit things, missed things, and left before I had any idea what I had exposed.",
+            "None": "Afterward, I simply left. I thought behaving normally would make the room look less connected to me.",
+        }
+        organization_lines = {
+            "Clean": "I removed every trace I recognized. I was certain the pieces I missed would never be enough on their own.",
+            "Messy": "I trusted the disorder to bury whatever I missed. I thought you would keep chasing pieces that looked unrelated.",
+        }
+        return "{} {} {}".format(
+            temperament_lines.get(temperament, temperament_lines["Calm"]),
+            reaction_lines.get(reaction, reaction_lines["None"]),
+            organization_lines.get(organization, organization_lines["Messy"]),
+        )
 
     def day_seven_favorite_investigator():
         counts = store.ulysses_visit_counts()
@@ -358,7 +410,21 @@ init python:
         }
         original_boundary = store.ulyssesBoundaryViolation
         original_apology = store.ulyssesBoundaryApology
+        original_ulysses_romance = store.ulyssesRomanceInterest
+        original_ulysses_personal = store.ulyssesPersonalEvenings
+        original_visit_counters = {
+            route_id: int(getattr(store, data[2]))
+            for route_id, data in store.ULYSSES_ROUTE_DATA.items()
+        }
         try:
+            store.ulyssesRomanceInterest = store.ULYSSES_DATE_ACCEPT_THRESHOLD
+            store.ulyssesPersonalEvenings = store.ULYSSES_DATE_MIN_PERSONAL_EVENINGS
+            for route_id, data in store.ULYSSES_ROUTE_DATA.items():
+                setattr(
+                    store,
+                    data[2],
+                    store.DAY_SEVEN_MIN_ROMANCE_VISITS[route_id] + 1,
+                )
             for suspect_id in store.suspectNames:
                 store.killer = suspect_id
                 store.remainingSuspects = [suspect_id]
@@ -390,6 +456,10 @@ init python:
             store.remainingSuspects = original_remaining
             store.ulyssesBoundaryViolation = original_boundary
             store.ulyssesBoundaryApology = original_apology
+            store.ulyssesRomanceInterest = original_ulysses_romance
+            store.ulyssesPersonalEvenings = original_ulysses_personal
+            for route_id, value in original_visit_counters.items():
+                setattr(store, store.ULYSSES_ROUTE_DATA[route_id][2], value)
             for partner_id, value in original_scores.items():
                 day_seven_set_score(partner_id, value)
         return True

@@ -48,7 +48,8 @@ screen game_menu(title):
         textbutton _("Help") action ShowMenu("help")
 
         if not main_menu:
-            textbutton _("Quit") action MainMenu() 
+            textbutton _("Main Menu") action MainMenu(confirm=True)
+            textbutton _("Quit Game") action Quit(confirm=True)
 
     imagebutton auto "gui/return_%s.png" action Return() focus_mask True
 

@@ -22,3 +22,6 @@ errors.txt
 game/saves/navigation.json
 game/script_version.txt
 game/saves/sync/**
+docs/writing_quality_evaluation.md
+docs/quality_audit_report.md
+docs/audit_report.md

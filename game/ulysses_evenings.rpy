@@ -8,6 +8,16 @@ label UlyssesEvening:
 
     if ulysses_completed_visits("ica") >= 5:
         "The route to Ulysses's desk now passes through an aggressively pink office. The color has dried; the room remains as precisely ordered as it was before Ica touched it."
+    elif dayWin == 2:
+        "You follow the hall to Ulysses's office. Tonight the door is propped open by a dented archive box, and a filing drawer waits half-emptied beside his desk."
+    elif dayWin == 3:
+        "You follow the smell of fresh coffee to Ulysses's office. The jazz is quiet enough to leave room for the rain ticking against the window."
+    elif dayWin == 4:
+        "Only the desk lamp is on when you reach Ulysses's office. A record turns at low volume while an old staff photograph rests face-down beside the case folder."
+    elif dayWin == 5:
+        "A cassette case, two books, and a folded chessboard have displaced the usual second stack of files in Ulysses's office. The day's report still occupies the center of his desk."
+    elif dayWin >= 6:
+        "Ulysses's office is brighter than usual. Every remaining file is already arranged across his desk, and the record player is silent."
     else:
         "You follow the quiet hall to Ulysses's office. Light reaches beneath the door, accompanied by low jazz and the soft turn of paper."
 
@@ -18,18 +28,47 @@ label UlyssesEvening:
     call expression ulysses_report_label
     call UlyssesFocusComment
 
-    if dayWin == 1:
-        call UlyssesEveningOne
-    elif dayWin == 2:
-        call UlyssesEveningTwo
-    elif dayWin == 3:
-        call UlyssesEveningThree
-    elif dayWin == 4:
-        call UlyssesEveningFour
-    elif dayWin == 5:
-        call UlyssesEveningFive
-    else:
+    if dayWin >= 6:
         call UlyssesEveningSix
+    else:
+        $ ulysses_stay_for_personal_time = False
+        menu:
+            "Stay a little longer after the report.":
+                $ ulysses_stay_for_personal_time = True
+                $ ulyssesPersonalEvenings += 1
+                if dayWin == 1:
+                    u "Very well. Dinner is already on its way, and the work is less objectionable with company."
+                elif dayWin == 2:
+                    u "Stay. I have something less urgent than homicide and more useful than small talk."
+                elif dayWin == 3:
+                    u "All right. The remaining forms can tolerate a conversation between them."
+                elif dayWin == 4:
+                    u "Stay. There is context I would rather give you deliberately than let you assemble incorrectly."
+                else:
+                    u "Good. I had hoped the evening would not end with the last line of the report."
+            "Call it a night.":
+                if dayWin == 1:
+                    u "Sensible. Good first day, recruit."
+                elif dayWin == 2:
+                    u "Good night. The files will remain exactly this unreasonable tomorrow."
+                elif dayWin == 3:
+                    u "Then rest. Accuracy deteriorates when exhaustion starts impersonating dedication."
+                elif dayWin == 4:
+                    u "Of course. Thank you for the report—and for the care you took with its certainty."
+                else:
+                    u "Go home before Winston finds another reason to order food for twelve people."
+
+        if ulysses_stay_for_personal_time:
+            if dayWin == 1:
+                call UlyssesEveningOne
+            elif dayWin == 2:
+                call UlyssesEveningTwo
+            elif dayWin == 3:
+                call UlyssesEveningThree
+            elif dayWin == 4:
+                call UlyssesEveningFour
+            else:
+                call UlyssesEveningFive
 
     $ ulyssesEveningsCompleted += 1
     jump advanceDayAfterDebrief
@@ -163,6 +202,7 @@ label UlyssesEveningOne:
     menu:
         "Tell him the vest looks good on him.":
             $ uly += 2
+            $ ulyssesRomanceInterest += 2
             "Ulysses's hand pauses against one cuff."
             u "Apparently a compliment can still make a simple answer unnecessarily difficult."
             "He finishes rolling the sleeve with excessive concentration. The faint color at his ears lasts longer than the task."
@@ -237,6 +277,7 @@ label UlyssesEveningTwo:
             u "For approximately six minutes. Then I realized I had just encountered the only person my foresight could not render clearly."
         "You look cute in the photograph.":
             $ uly += 2
+            $ ulyssesRomanceInterest += 2
             "A reluctant smile moves across his face."
             u "I was covered in ash and furious. Your standards are concerning."
 
@@ -265,6 +306,7 @@ label UlyssesEveningThree:
             u "Efficiency is not the only consideration. People deserve ownership of their own words."
         "Try to surprise him with a sudden compliment.":
             $ uly += 2
+            $ ulyssesRomanceInterest += 2
             "You tell him his eyes are beautiful. The exact sentence pulls color into his face."
             u "The smaller details change. You appear determined to weaponize that fact."
 
@@ -292,7 +334,7 @@ label UlyssesEveningThree:
         u "The future is not permission to take a choice away from someone. Neither is curiosity."
     else:
         "You return to the remaining forms. At one point both of you reach for the same page. Your fingers meet over the paper and remain there for one quiet second."
-        if uly >= ULYSSES_WARM_THRESHOLD:
+        if ulyssesRomanceInterest >= ULYSSES_ROMANCE_WARM_THRESHOLD:
             "Ulysses looks at your joined hands, then at you."
             u "That detail changed."
             "He withdraws carefully, visibly flustered despite whatever larger shape of the evening he remembers."
@@ -343,10 +385,10 @@ label UlyssesEveningFour:
         "Ask what Winston did during those four months.":
             $ uly += 1
             u "Stayed. Handled ATLAS poorly, kept it alive successfully, and insulted every physician who used the phrase 'wait and see.'"
-        "Ask whether one carefully chosen word could name the killer.":
-            $ uly -= 5
-            $ ulyssesBoundaryViolation = True
-            u "You have mistaken the severity of this conversation. We will not make that mistake twice."
+        "Ask how he safely gives the team useful guidance.":
+            $ uly += 2
+            u "I speak from evidence, experience, and ordinary judgment. If I cannot defend advice without invoking the future, I do not give it."
+            u "It is slower than certainty and considerably safer than pretending certainty belongs to me alone."
 
     u "There is no pain from ordinary use. No headache, no warning, nothing dramatic enough to make people stop envying it."
     u "I simply remember a future I cannot share. Sometimes I hate it. Sometimes I would surrender it if surrender were possible."
@@ -357,6 +399,7 @@ label UlyssesEveningFour:
             u "It can be. Especially when concern sounds like secrecy and preparation looks like control."
         "Tell him he can be uncertain with you anyway.":
             $ uly += 3
+            $ ulyssesRomanceInterest += 1
             "His expression softens."
             u "That should be impossible. I find the offer appealing."
         "Say the power is still worth having.":
@@ -377,6 +420,7 @@ label UlyssesEveningFour:
             "He sets the paperback within reach but does not press it on you. The two of you let the music carry the next minute instead."
         "Call his taste terrible but charming.":
             $ uly += 2
+            $ ulyssesRomanceInterest += 1
             $ ulysses_day_four_release = "smile"
             u "That was nearly smooth. The qualification saved you."
             "He turns the book over as though reconsidering the cover, but the corner of his mouth stays lifted."
@@ -441,32 +485,38 @@ label UlyssesEveningFive:
             "Avoid bringing the earlier question up again.":
                 "Ulysses does not force the conversation. The distance it created remains present between the chairs."
 
-    if uly >= ULYSSES_WARM_THRESHOLD:
-        if ulysses_day_five_activity == "chess":
-            "You rest your hand beside his on the edge of the board, then turn it palm-up."
-        else:
-            "When both books come to rest on the table, you leave your hand beside his and turn it palm-up."
-        "Ulysses looks at the invitation. The color reaches his face before his fingers settle carefully into yours."
-        u "This evening has become difficult to categorize. I was not sufficiently prepared."
-        menu:
-            "Tell him he can stop categorizing it.":
-                $ uly += 3
-                "His thumb moves once across your hand."
-                u "For one hour, perhaps."
-            "Tell him he is cute when he loses control of a conversation.":
-                $ uly += 2
-                u "I have not lost control. I have strategically declined to recover it."
-            "Let the silence remain comfortable.":
-                $ uly += 2
-                if ulysses_day_five_activity == "chess":
-                    "You sit together while the music plays and the abandoned chess game waits."
-                else:
-                    "You sit together while the music plays, your places held in two books neither of you is in a hurry to reopen."
-    else:
-        if ulysses_day_five_activity == "chess":
-            "You finish the game in comfortable quiet. Ulysses wins, though he gives your failed ambush more consideration than it deserves."
-        else:
-            "You reach the end of a chapter in comfortable quiet. Ulysses notices where you stop and waits until your bookmark is in place before standing."
+    menu:
+        "Turn your hand palm-up beside his.":
+            $ uly += 2
+            $ ulyssesRomanceInterest += 3
+            if ulysses_day_five_activity == "chess":
+                "You rest your hand beside his on the edge of the board, then turn it palm-up."
+            else:
+                "When both books come to rest on the table, you leave your hand beside his and turn it palm-up."
+            "Ulysses looks at the invitation. The color reaches his face before his fingers settle carefully into yours."
+            u "This evening has become difficult to categorize. I was not sufficiently prepared."
+            menu:
+                "Tell him he can stop categorizing it.":
+                    $ uly += 2
+                    $ ulyssesRomanceInterest += 1
+                    "His thumb moves once across your hand."
+                    u "For one hour, perhaps."
+                "Tell him he is cute when he loses control of a conversation.":
+                    $ uly += 1
+                    $ ulyssesRomanceInterest += 1
+                    u "I have not lost control. I have strategically declined to recover it."
+                "Let the silence remain comfortable.":
+                    $ uly += 2
+                    if ulysses_day_five_activity == "chess":
+                        "You sit together while the music plays and the abandoned chess game waits."
+                    else:
+                        "You sit together while the music plays, your places held in two books neither of you is in a hurry to reopen."
+        "Keep the moment companionable rather than romantic.":
+            $ uly += 2
+            if ulysses_day_five_activity == "chess":
+                "You finish the game in comfortable quiet. Ulysses wins, though he gives your failed ambush more consideration than it deserves."
+            else:
+                "You reach the end of a chapter in comfortable quiet. Ulysses notices where you stop and waits until your bookmark is in place before standing."
 
     if ulysses_day_five_music == "jazz":
         "The hour stretches beyond its promised edge. Neither of you points that out until the record reaches its final groove."
@@ -506,37 +556,58 @@ label UlyssesEveningSix:
         u "Your reporting became more precise as the week continued. There is still room to improve. That is not an insult."
 
     menu:
+        "Stay after the final report.":
+            $ ulyssesPersonalEvenings += 1
+            u "Stay. The accusation can wait behind a closed folder for one evening."
+        "Call it a night and preserve the professional boundary.":
+            u "Of course. You did the work honestly, and I will see you in the briefing room tomorrow."
+            "Ulysses walks you to the door. The closed accusation packet remains on his desk, complete without requiring the evening to become anything else."
+            return
+
+    menu:
         "Tell him these evenings became the best part of the week.":
             $ uly += 3
+            $ ulyssesRomanceInterest += 2
             $ ulysses_day_six_invited_closeness = True
             "Ulysses looks down at the closed packet, then back at you."
             u "They became the portion I most looked forward to as well. That sentence was not in the report."
         "Thank him for trusting your judgment.":
             $ uly += 2
-            $ ulysses_day_six_invited_closeness = True
             u "You earned trust by giving me reasons to revise it every evening. Keep doing that."
         "Say you are relieved the reports are over.":
             u "Understandable. I am less certain that I share the relief."
 
     if ulysses_day_six_invited_closeness:
-        "When you stand, you notice his tie has shifted during the long review. You reach across the desk and straighten it against his collar."
+        menu:
+            "Step close and straighten his tie.":
+                $ ulyssesRomanceInterest += 2
+                "When you stand, you reach across the desk and straighten the shifted tie against his collar."
+            "Tell him his tie shifted and let him fix it.":
+                $ ulysses_day_six_invited_closeness = False
+                "You mention the crooked knot. Ulysses corrects it himself, smiling faintly at your attention."
     else:
         "When you stand, you mention that his tie has shifted during the long review. Ulysses corrects the knot and smooths it back into place."
 
-    if uly >= ULYSSES_HIGH_THRESHOLD and ulysses_day_six_invited_closeness:
+    if (uly >= ULYSSES_HIGH_THRESHOLD
+            and ulyssesRomanceInterest >= ULYSSES_ROMANCE_HIGH_THRESHOLD
+            and ulysses_day_six_invited_closeness):
         "Ulysses catches your hand before you can withdraw it. His composure lasts until your thumb brushes the edge of his vest."
         menu:
             "Tell him he looks good when he forgets the next line.":
                 $ uly += 3
+                $ ulyssesRomanceInterest += 1
                 u "I have not forgotten it. I am reconsidering whether it deserves to interrupt this."
             "Lean closer and let him decide the distance.":
                 $ uly += 3
+                $ ulyssesRomanceInterest += 1
                 "He leans forward until only a breath remains between you, then stops. His hand stays around yours."
                 u "Tomorrow has its own decisions. I will not borrow them tonight."
             "Squeeze his hand and remain beside him.":
                 $ uly += 2
                 "The two of you stay there, close enough that neither can mistake the silence for professionalism."
-    elif uly >= ULYSSES_WARM_THRESHOLD and ulysses_day_six_invited_closeness:
+    elif (uly >= ULYSSES_WARM_THRESHOLD
+            and ulyssesRomanceInterest >= ULYSSES_ROMANCE_WARM_THRESHOLD
+            and ulysses_day_six_invited_closeness):
         "Ulysses catches your hand briefly, then releases it with a small, flustered smile."
         u "You have become extremely comfortable adjusting your cofounder."
     else:
@@ -833,7 +904,7 @@ label UlyssesReportDhampir5:
         "Connect the force test to the missing object's path.":
             $ uly += 2
             $ ulysses_note_reporting_style("honest")
-            u "Good. Tomorrow's search now has a bounded location instead of a hopeful wall."
+            u "Good. The next search now has a bounded location instead of a hopeful wall."
     return
 
 
@@ -1128,7 +1199,7 @@ label UlyssesReportWinston1:
         "Say Winston wasted most of the day.":
             $ uly -= 1
             $ ulysses_note_reporting_style("deflecting")
-            u "Then you missed the work happening beneath the waste. Review the interview before tomorrow."
+            u "Then you missed the work happening beneath the waste. Review the interview before you join him again."
     return
 
 
@@ -1152,7 +1223,7 @@ label UlyssesReportWinston2:
 
 
 label UlyssesReportWinston3:
-    u "A blackjack table, eight suspects, and Dhampir volunteering as bad cop. I would call that a procedural nightmare if the consent forms were not already on my desk."
+    u "A blackjack table, [len(remainingSuspects)] suspects, and Dhampir volunteering as bad cop. I would call that a procedural nightmare if the consent forms were not already on my desk."
     "You explain controlled pressure, repeated interviews, Dhampir's terrifying perfect turn, and the individual stress profiles that failed the established timeline."
     if winston_pressure_result.get("quality") == "controlled":
         u "You completed the queue without pushing a suspect beyond the usable threshold. Winston called that 'annoyingly responsible.'"
@@ -1198,7 +1269,7 @@ label UlyssesReportWinston4:
 label UlyssesReportWinston5:
     u "Winston requested masking tape, a coat rack, and permission to label a pizza box CABINET. I authorized two of those things."
     "You report the heightened-hearing witness, the careful pacing, and the reconstructed aftermath whose final two sounds still lack a verified order."
-    u "Then the impression remains provisional. His second statement and telephone record should settle the sequence tomorrow."
+    u "Then the impression remains provisional. His second statement and telephone record should settle the sequence when you return to it."
     menu:
         "Emphasize that the witness controlled when to stop.":
             $ uly += 3

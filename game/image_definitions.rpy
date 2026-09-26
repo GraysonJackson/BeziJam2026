@@ -11,15 +11,15 @@ image madeline = Crop((100, 70, 1820, 2411), "images/madelineBaseClosedMouthEmot
 image madeline distress = Crop((100, 70, 1820, 2411), "images/madelineDistressEmotion.png")
 image madeline flirty curious = Crop((100, 70, 1820, 2411), "images/madelineFlirtyCuriousEmotion.png")
 image madeline flirty = Crop((100, 70, 1820, 2411), "images/madelineFlirtyEmotion.png")
-image madeline madScienist = Crop((100, 70, 1820, 2411), "images/madelineMadScienistEmotion.png")
+image madeline madScientist = Crop((100, 70, 1820, 2411), "images/madelineMadScienistEmotion.png")
 image madeline sad upset = Crop((100, 70, 1820, 2411), "images/madelineSadUpsetEmotion.png")
 
-image nicky angry accustion = Crop((250, 140, 1670, 2341), "images/nickyAngryAccustionEmotion.png")
+image nicky angry accusation = Crop((250, 140, 1670, 2341), "images/nickyAngryAccustionEmotion.png")
 image nicky = Crop((250, 140, 1670, 2341), "images/nickyBaseMouthClosedEmotion.png")
 image nicky content happy = Crop((250, 140, 1670, 2341), "images/nickyContentHappyEmotion.png")
 image nicky curious flirty = Crop((250, 140, 1670, 2341), "images/nickyCuriousFlirtyEmotion.png")
 image nicky enraged = Crop((250, 140, 1670, 2341), "images/nickyEnragedEmotion.png")
-image nicky quesition = Crop((250, 140, 1670, 2341), "images/nickyQuesitionEmotion.png")
+image nicky question = Crop((250, 140, 1670, 2341), "images/nickyQuesitionEmotion.png")
 image nicky sad upset = Crop((250, 140, 1670, 2341), "images/nickySadUpsetEmotion.png")
 
 image razzle = Crop((250, 0, 1670, 2481), "images/razzelBaseMouthCloseEmotion.png")
