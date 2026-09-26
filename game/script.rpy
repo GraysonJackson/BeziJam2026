@@ -1870,6 +1870,7 @@ label RazzleDaySix:
 
             r "Exactly! I know where everything has to stand; you keep shuffling the order so neither of us accidentally feeds Elena an answer."
             r "Look at us doing real science without making it miserable!"
+            r "Suck it Madeline!!"
 
         "We should remind Elena about the security tape.":
             $ razz -= 1
@@ -1890,7 +1891,7 @@ label RazzleDaySix:
             $ razz += 1
             r "Please do. The cab driver already thinks I'm opening a cursed salon."
         "Carry the lighting equipment.":
-            r "Careful with that one! It's the only lamp Madeline would lend me without a written threat."
+            r "Careful with that one! It's the only lamp Madeline would lend me."
         "Carry the numbered covers.":
             $ razz += 1
             r "Keep them mixed up. If I can guess the color from the order, Elena might too."
@@ -1900,7 +1901,7 @@ label RazzleDaySix:
     "The borrowed car is already waiting downstairs, its seats and door panels covered in one of Madeline's flame-resistant transport blankets. During the drive, Razzle keeps the mannequin heads facing away from the windows so passing drivers will stop staring."
     "You and Razzle return to Elena's house and arrange the three covered mannequin heads outside."
 
-    "Razzle parks a borrowed car where the vehicle appeared on the security tape."
+    "Razzle parks the borrowed car where the vehicle appeared on the security tape."
 
     "Tape marks show where the figure stood and where the headlights crossed the lawn."
 
@@ -2016,7 +2017,7 @@ label RazzleDaySix:
     if razzle_day_two_pizza == "spicy":
         r "After the report, we're celebrating with that dangerous pizza again. My half can be hotter this time."
     elif razzle_day_two_pizza == "split":
-        r "After the report, we should get another diplomatic pizza. Fifty-fifty, like the team."
+        r "After the report, we should get another pizza."
     elif razzle_day_two_pizza == "pepperoni":
         r "After the report, pepperoni and extra cheese. This time I'm reheating it before we leave the restaurant."
 
@@ -2035,7 +2036,7 @@ label RazzleDaySix:
             show razzle hoorah at slot(0, total=1), bright zorder 10
             r "Hell yeah we do!"
 
-            r "You handle the thinking, I handle the fire, and we split everything else fifty-fifty."
+            r "You handle the thinking, I handle the fire!"
 
         "Elena did most of the work.":
             $ razz -= 1
