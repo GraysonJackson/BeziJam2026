@@ -3821,7 +3821,7 @@ label NickyDayOne:
         "Normalize the timestamps, then compare the movement records.":
             $ nick += 2
             show nicky content happy at slot(0, total=1), bright zorder 10
-            n "There we go! Evidence first, confidence second. You're already ahead of half the people who send me reports."
+            n "There we go! You're already ahead of half the people who send me reports at the station."
         "So our first suspect is bad software design.":
             $ nick += 1
             n "Finally, somebody willing to arrest the real criminal."
@@ -3834,7 +3834,7 @@ label NickyDayOne:
     "Nicky gives you room at the table instead of reaching over you. For a few minutes, the two of you work in the soft shuffle of paper and the occasional squeak of a marker against the whiteboard."
     "Once the timestamps are normalized, three records remain. Any one of them could still be misleading on its own."
 
-    n "Pick our next victim. Technologically speaking."
+    n "Pick our next victim rookie."
 
     menu:
         "Trace the pager calls and callbacks.":
@@ -3847,7 +3847,7 @@ label NickyDayOne:
         "Line up the traffic-camera stills.":
             $ nick += 1
             "You arrange the stills by intersection. Nicky leans across the table to rotate one you placed upside down, then leaves her hand beside yours while she studies it."
-            n "There. Same coat, same posture, same deeply personal argument with an appliance. Now connect it to the paper trail."
+            n "There. Same coat, same posture. Now connect it to the paper trail."
 
     $ nicky_day_one_reveal = get_planned_route_reveal("nicky", 1)
     $ nicky_day_one_cleared_id = nicky_day_one_reveal["eliminated"][0]
@@ -3868,8 +3868,8 @@ label NickyDayOne:
         "You already knew from their pheromones, didn't you?":
             $ nick += 1
             show nicky question at slot(0, total=1), bright zorder 10
-            n "I knew they lied about why they were at the laundromat. Turns out the answer was 'emotional support blanket.'"
-            n "My nose gives me questions. Evidence gives me answers."
+            n "I knew they lied about why they were at the laundromat. Didn't know why they were lying though."
+            n "Real evidence is more admissiable then 'they smelled weird.'"
         "Keep them on the list. They still look suspicious.":
             $ nick -= 2
             show nicky angry accusation at slot(0, total=1), bright zorder 10
@@ -3883,7 +3883,7 @@ label NickyDayOne:
 
     "Nicky gathers the records slowly enough to keep the camera stills in order, then caps the marker with her teeth. The cleared suspect's name comes off the board with one clean swipe."
     n "One innocent person officially spared a week of superhero detective logic. That's a pretty good morning."
-    n "And I appreciate the help, rookie. You made the paperwork less painful, which is almost medically impossible."
+    n "And I appreciate the help, rookie. You made the paperwork less painful, which is almost impossible!"
 
     "She glances toward the vending machines in the hall, then back to the image of [nicky_day_one_cleared_name] losing their fight."
 
@@ -3891,16 +3891,16 @@ label NickyDayOne:
 
     menu:
         "Coffee. The report is going to need it.":
-            n "Practical. I'll allow it, but if you call black coffee a personality trait, I'm leaving you here."
+            n "Good call, could you get me one too? But if you call black coffee a personality trait, I'm leaving you here."
             "You return with two coffees. Nicky claims the one with more sugar and uses the cardboard sleeve to keep the camera stills flat."
         "Something sweet. We cleared an innocent person.":
             $ nick += 1
-            n "Now that is evidence-based celebration. Get me whatever has the least respectable amount of frosting."
+            n "Now that is evidence-based celebration. Get me whatever has the most ergregious amount of frosting."
             "The hallway kiosk has a pastry that qualifies. Nicky divides it with the edge of a clean evidence ruler and gives you the larger half."
         "Cheese crackers, in honor of the fallen four dollars.":
             $ nick += 1
-            n "Cruel. Appropriate. Buy two."
-            "You feed both packets enough money to prove the machine's hostility was personal. Nicky salutes the security camera before taking hers."
+            n "Cruel. Appropriate. Buy two. May the four dollars rest in piece."
+            "You feed the machine enough money to prove the laundromat's hostility was personal. Nicky salutes the security camera before taking hers."
 
     "You take a short break in the hallway before returning to finish the report. By the time the file is signed, the room feels less like a crime board and more like a place where one person's week just became much easier."
 
@@ -3913,19 +3913,19 @@ label NickyDayTwo:
 
     show nicky content happy at slot(0, total=1), bright zorder 10
 
-    n "I have spent six hours listening to three departments argue over who entered one timestamp wrong."
+    n "I have spent six hours listening to three departments argue over who entered the wrong timestamp."
     n "I'm clearing my head before I start using the table as a stress ball. There's a limited pressing I want at a record shop across town."
     if dayWin >= 5:
         n "Yes, I know the final meeting is close. That is exactly why I need one hour where nobody says 'chain of custody' at me."
-    n "You can come if you want."
+    n "You can come if you want!"
 
     "She tosses you the second helmet."
 
     menu:
-        "Gladly. You drive; I'll hold on.":
+        "Gladly. You drive, I'll hold on.":
             $ nick += 2
             show nicky curious flirty at slot(0, total=1), bright zorder 10
-            n "Oh, I know you'll hold on. I accelerate quickly."
+            n "Oh, I know you will. I go fast."
         "Is this how detectives invite people on dates?":
             $ nick += 2
             n "No clue. I'll ask one if I see her."
@@ -3938,7 +3938,7 @@ label NickyDayTwo:
     "Nicky waits while you fit the helmet, then reaches over to tighten the loose strap beneath your chin. Her fingers linger just long enough for her antennae to tilt with amusement."
     n "There. I'd hate to explain to Ulysses that I lost the new hire before we reached the first stoplight."
 
-    n "We have time. Pick a route: fast, scenic, or dealer's choice?"
+    n "We have some time. Pick a route: fast, scenic, or dealer's choice?"
 
     menu:
         "Fast. Show me what the bike can do.":
@@ -3951,7 +3951,7 @@ label NickyDayTwo:
         "Dealer's choice. Surprise me.":
             $ nick += 1
             $ nicky_day_two_route = "surprise"
-            n "Dangerous amount of trust this early, rookie. I like it."
+            n "Dangerous amount of trust in me this early, rookie. I like it."
 
     scene black with fade
     "The motorcycle tears away from ATLAS, the engine swallowing the last of the office noise. Nicky takes the first few streets easily, giving you time to settle behind her before the road opens up."
@@ -3961,19 +3961,18 @@ label NickyDayTwo:
     n "Relax back there! The bike isn't going anywhere I don't tell it to."
 
     "Twenty minutes later, she rolls to a stop beneath a faded record-store awning. She removes her helmet, shakes out her hair, and checks that both antennae survived the trip."
-    "Inside, old concert flyers cover the walls from floor to ceiling. The record store owner greets Nicky by name and immediately glances at you."
-    "Nicky ignores the look with the confidence of someone who has already decided it is funny."
+    "Inside, old concert flyers cover the walls from floor to ceiling. The record store owner greets Nicky by name"
 
     show nicky content happy at slot(0, total=1), bright zorder 10
 
-    n "New album from Backseat Royalty. Limited pressing, ridiculous cover, excellent bass."
+    n "We're looking for the new album from Backseat Royalty. Limited pressing, ridiculous cover, excellent bass."
     n "Important question. We get one album for the ride to the diner. What are you picking?"
 
     menu:
         "The loudest hip-hop album in the store.":
             $ nick += 2
             $ nicky_day_two_music = "hiphop"
-            n "Now we're shopping. Find me a bass line that makes the shelves nervous."
+            n "Now we're cooking. Let's find a bass line that makes the shelves shake."
         "Something romantic. Purely for scientific reasons.":
             $ nick += 2
             $ nicky_day_two_music = "romantic"
@@ -3993,36 +3992,37 @@ label NickyDayTwo:
             n "Thank you. Art should make you ask at least one question the artist refuses to answer."
         "Ask what makes this pressing special.":
             $ nick += 1
-            n "Alternate mix on the last track, heavier drums, and only five hundred copies. Also, I wanted it. That's the technical explanation."
+            n "Alternate mix on the last track, heavier drums, and only five hundred copies. Also, I wanted it."
         "Tell her the driver is clearly the real star.":
             $ nick += 1
-            n "Finally, somebody respects the working class. Backseat royalty gets all the attention while that hero finds parking."
-
+            n "Finally, somebody respects the working class! Backseat royalty gets all the attention while that hero finds them parking."
+    n "Look, they have a listening station! Let me show you what peak hip-hop sounds like."
     "At the listening station, Nicky fits one side of the headphones over her antenna and passes you the other. The short cord forces you shoulder to shoulder."
     "A heavy beat begins. Her fingers tap the counter in perfect time."
 
     show nicky curious flirty at slot(0, total=1), bright zorder 10
 
     n "Rookie, either shared headphones terrify you or you're nervous for a more interesting reason."
-    n "I can tell. Don't worry—I'm off duty enough not to narrate the chemical evidence."
 
     menu:
         "You're standing this close on purpose.":
             $ nick += 2
             n "Good observation. Took you long enough."
-        "Yes, detective.":
+        "Yes, detective, it's not the headphones.":
             $ nick += 2
+            n "How honest."
             "Nicky's mandibles shift around a satisfied smile."
-            n "Good rookie."
+            n "Good little rookie."
         "Then stop smelling me.":
             $ nick -= 1
             show nicky question at slot(0, total=1), bright zorder 10
             n "I can't turn my nose off, but I can stop helping you make this fun."
 
-    "Nicky buys the record, tucks it carefully into the bike's storage compartment, and holds the shop door for you with an exaggerated little bow."
-
+    "Nicky walks away, buying the record, tucking it carefully into the bike's storage compartment, and holding the shop door for you with an exaggerated little bow."
+    show nicky content happy at slot(0, total=1), bright zorder 10
+    n "I'm thining we can get some food real quick. C'mon, I know a place!"
     scene black with fade
-    "The ride to the diner is shorter and slower. Backseat Royalty plays through the bike's speakers while late-afternoon traffic gathers around you."
+    "The ride to the diner is shorter and slower. Backseat Royalty blasts through the bike's speakers while late-afternoon traffic gathers around you."
     "At the diner, Nicky claims a booth and loosens her tie. A server drops two menus between you and waits with a pen poised."
 
     n "Order carefully. I judge people by breakfast food at non-breakfast hours."
@@ -4030,13 +4030,14 @@ label NickyDayTwo:
     menu:
         "A burger and fries.":
             $ nicky_day_two_order = "burger"
-            "The server writes it down. Nicky orders the same burger, adds extra pickles, and immediately declares your fries communal property."
-            n "Solid. Difficult to ruin, easy to steal from."
+            "The server writes it down. Nicky orders the same burger and adds extra pickles."
+            n "Solid choice. Difficult to ruin, easy to steal fries from."
+            "She shoots you a wink."
         "A full stack of pancakes.":
             $ nick += 1
             $ nicky_day_two_order = "pancakes"
             "Nicky's antennae perk as the server writes down your order. She adds hash browns and a milkshake to hers."
-            n "Excellent disregard for the clock. Breakfast answers to us now."
+            n "Excellent disregard for the clock. Breakfast is for every meal."
         "A salad. Something light after the ride.":
             $ nicky_day_two_order = "salad"
             "Nicky orders a patty melt and studies you over the top of her menu."
@@ -4067,25 +4068,25 @@ label NickyDayTwo:
             n "That answer sounds suspiciously informed. Maybe I should keep you where I can question you."
 
     n "I wanted the police before I knew what my powers would become. Warrants, evidence, somebody checking your work."
-    n "Superheroes can save a city and still leave the legal system crying in a parking lot. I like making sure the rescue survives court."
+    n "Superheroes can save a city and leave the legal system crying in a parking lot. I like making sure the rescue survives court."
 
     "A laugh from the next booth draws a glance toward Nicky. One of the diners notices her mandibles, goes quiet, and pulls their bag closer."
     "Nicky notices. Her antennae dip for half a second before she reaches for another fry."
 
-    n "And that part comes with the badge too. People see the antennae and mandibles and decide what I am before I've said a word."
-    n "I'm fine with how I look. I like how I look. Being judged before I do anything still gets old."
+    n "And that part comes with the badge too. People see the antennae, the madibles, the badge, and decide what I am before I've said a word."
+    n "I'm fine with how I look. I like how I look. Being judged before I get to do anything still gets old."
 
     menu:
         "The antennae suit you. Pass the fries.":
             $ nick += 2
             show nicky content happy at slot(0, total=1), bright zorder 10
             n "They do, don't they?"
-            "She steals another fry, but her grin softens around the edges."
-            n "Thanks for not turning it into a whole speech, rookie."
+            "She eats another fry, but her grin softens around the edges."
+            n "Thanks for not turning it into a whole speech, rookie. That would've been awkward in the middle of a diner."
         "You shouldn't have to keep proving yourself.":
             $ nick += 1
             n "No, but everybody proves something eventually. I just make sure I pick what."
-        "Maybe the badge makes strangers less nervous.":
+        "Surely the badge makes strangers less nervous?":
             $ nick -= 1
             show nicky sad upset at slot(0, total=1), bright zorder 10
             n "Sometimes. Other times they decide the badge must be a costume too. People get creative when they want their first guess to stay true."
@@ -4128,7 +4129,7 @@ label NickyDayThree:
     show nicky at slot(1, total=2), dim zorder 0
     show razzle hoorah at slot(0, total=2), bright zorder 10
 
-    r "HELLO, FELLOW PROFESSIONAL INVESTIGATORS! I am here to request witness information through the proper channels!"
+    r "HELLO, FELLOW INVESTIGATORS! I'm here to request witness information through the proper channels like Ulysses told me too!"
 
     show nicky content happy at slot(1, total=2), bright zorder 10
     show razzle at slot(0, total=2), dim zorder 0
@@ -4157,7 +4158,7 @@ label NickyDayThree:
     hide razzle
     show nicky at slot(0, total=1), bright zorder 10
 
-    n "Three full seconds. New record."
+    n "Wow, three full seconds. That's a new record."
     n "She's right about the coat, though. We have to separate measurements from assumptions before we rule anybody out."
 
     "Nicky gives the singed witness form time to cool before slipping it into a protective sleeve. Then she replaces the card Razzle borrowed and turns the whole grid toward you."
@@ -4166,14 +4167,14 @@ label NickyDayThree:
         "Show me how you sorted the sources before I touch the cards.":
             $ nick += 2
             n "Look at you respecting procedure without becoming boring about it."
-        "You made federal paperwork into concentration. I respect the hustle.":
+        "You made federal paperwork into a game. I respect the hustle.":
             $ nick += 1
             show nicky content happy at slot(0, total=1), bright zorder 10
             n "Thank you. Crime is temporary. Finding ways not to die of boredom is forever."
         "The strongest impact came from the biggest suspect. Start there.":
             $ nick -= 2
             show nicky angry accusation at slot(0, total=1), bright zorder 10
-            n "You are standing beside a woman who can lift thousands of pounds. Try that assumption again."
+            n "You are standing beside a short woman who can lift thousands of pounds. Try that assumption again."
 
     n "Two rounds. Match each claim to independent support. Speed is nice; accuracy is nicer. Neither one changes what the evidence says."
 
@@ -4198,9 +4199,9 @@ label NickyDayThree:
 
     if nicky_memory_result["completed"]:
         if nicky_memory_result["quality"] == "perfect":
-            n "No mismatches, no hints, and you beat the clock twice. Very profesh."
+            n "No mismatches, no hints, and you beat the clock twice. Very profesh rookie!"
         elif nicky_memory_result["quality"] == "steady":
-            n "A few wrong pairings, but you corrected them instead of getting stubborn. That's how review is supposed to work."
+            n "A few wrong pairings, but you corrected them instead of getting stuck, good work!"
         else:
             n "Messy process, valid result. Luckily, the law does not require you to be graceful."
     else:
@@ -4221,7 +4222,7 @@ label NickyDayThree:
             n "Competent and not boring. Annoyingly close to my type, rookie."
         "Your card game made paperwork almost fun.":
             $ nick += 1
-            n "Almost? Damn. I'll add dramatic lighting next time."
+            n "Almost? Damn. I'll add some dramatic lighting next time."
         "So the witness was just wrong.":
             $ nick -= 1
             show nicky question at slot(0, total=1), bright zorder 10
@@ -4245,6 +4246,8 @@ label NickyDayThree:
             "Nicky leans back, closes her eyes, and lets the silence last without trying to entertain either of you."
 
     "For five minutes, the case files remain closed. When Nicky sits forward again, the work feels like something you are returning to rather than something that swallowed the entire day."
+
+    "The two of you finish your work for the day and Nicky leaves you to your report."
 
     $ dayNick += 1
     jump endOfDay
@@ -4292,13 +4295,13 @@ label NickyDayFour:
 
     n "Remember what I said at the diner? Reports can do the same thing people do. They see one obvious detail and let it decide everything that follows."
     n "People see the antennae and mandibles and decide what I am before I open my mouth. This officer saw force and decided what the attacker had to look like."
-    n "Most days I can laugh about it. Other days I would like to fold somebody's car into a tasteful metal cube. Legally, I do not."
+    n "Most days I can laugh about it. Other days I would like to fold somebody's car into a tasteful metal cube. Legally, I do and can not."
 
     menu:
         "The antennae suit you. Which report is next?":
             $ nick += 2
             show nicky curious flirty at slot(0, total=1), bright zorder 10
-            n "They do. And you didn't turn that into pity, so you get to keep helping."
+            n "They do."
             n "The bag record. Right here."
         "You shouldn't have to prove yourself every time.":
             $ nick += 1
@@ -4311,10 +4314,12 @@ label NickyDayFour:
     show nicky at slot(0, total=1), bright zorder 10
 
     n "This preserved sample should resolve one more part of the reconstruction. The outer custody label has been corrected, but nobody signed the correction."
-    n "We check it in person next time. No shortcuts, no assumptions, and preferably no flaming paperwork."
+    n "We check it in person next time. Preferably with no flaming paperwork this time though."
 
     "Nicky photographs the corrected board before removing a single page. You take down the copies in reverse order while she rebuilds the official packet beneath them."
     "The disputed bag record stays out. She places it alone in a bright red folder, writes DO NOT TEST across the front, and tucks it under one arm for the walk to evidence control."
+
+    n "Right, I'll see you tomorrow rookie!"
 
     $ dayNick += 1
     jump endOfDay
@@ -4326,7 +4331,7 @@ label NickyDayFive:
     show nicky angry accusation at slot(0, total=1), bright zorder 10
 
     n "Somebody corrected this bag neatly enough to look official and forgot the part where official work identifies who did it."
-    n "The evidence technician says it was routine. Their pheromones say they are lying about something."
+    n "The evidence technician says it was routine. Their pheromones say they're lying about something."
 
     show nicky at slot(0, total=1), bright zorder 10
 
@@ -4346,7 +4351,7 @@ label NickyDayFive:
         "Throw it away and pretend we never received it.":
             $ nick -= 2
             show nicky angry accusation at slot(0, total=1), bright zorder 10
-            n "Destroying compromised evidence is still destroying evidence. Please never improvise around an evidence locker."
+            n "Destroying compromised evidence is still destroying evidence. Please never improvise around an evidence locker again."
 
     "Nicky files the discrepancy and calls evidence control. The call takes twenty minutes, two supervisors, and one very long hold tune. She puts it on speaker so both of you can suffer equally."
     "When authorization finally arrives, the technician joins you as a witness. The intact inner vial is opened for one limited investigative test while Nicky reads each step into the record."
@@ -4361,7 +4366,7 @@ label NickyDayFive:
     show nicky question at slot(0, total=1), bright zorder 10
 
     n "Clumping means the corresponding marker is present. Anti-D is the positive factor; no Anti-D reaction is negative."
-    n "Useful direction, not a courtroom exclusion. The broken outer chain stays attached to every sentence we write about this."
+    n "Useful direction, not a courtroom exclusion though. The broken outer chain stays attached to every sentence we write about this."
 
     menu:
         "Keep it as a lead and request a clean comparison.":
@@ -4397,10 +4402,8 @@ label NickyDayFive:
         "Pick the spicy chips.":
             $ nick += 1
             "Nicky tears the bag open and immediately regrets how much seasoning reaches her antennae. She eats another anyway."
-            n "These are legally hostile. Excellent choice."
         "Pick the chocolate bar.":
             "Nicky breaks it cleanly in half and slides your share across the table."
-            n "Peaceful choice after evidence-control warfare. I get it."
         "Let Nicky choose.":
             $ nick += 1
             "She pushes the pretzels toward you and claims the chips, chocolate, and one of the beers."
@@ -4439,6 +4442,8 @@ label NickyDayFive:
 
     "She leaves the pages face-down in the fax tray and lets the episode finish. The message remains unanswered for the promised seven minutes—and several more after that."
 
+    "In time, the two of you finish some episodes and depart, leaving the paper for tomorrow."
+
     $ dayNick += 1
     jump endOfDay
 
@@ -4449,7 +4454,7 @@ label NickyDaySix:
     show nicky at slot(0, total=1), bright zorder 10
 
     n "Final profile. The killer's behavior after the attack tells us how they handle being physically dirty."
-    n "The psychology unit compared that behavior with the warrant returns and recent interviews. I checked their work because I enjoy sleeping at night."
+    n "The psychology unit compared that behavior with the warrant returns and recent interviews. I double checked their work because I don't enjoy sleeping at night."
 
     "Instead of handing you a conclusion, Nicky divides the table into three sections: physical residue, documented behavior, and records obtained under warrant."
     n "Choose where we start. Every section has to agree before anybody comes off this board."
@@ -4462,7 +4467,7 @@ label NickyDaySix:
             n "All right. Patterns, not single bad days. Nobody becomes a murderer because their sink had dishes once."
         "Start with the warrant records.":
             $ nick += 1
-            n "Paperwork first. Somewhere, a judge just felt appreciated and doesn't know why."
+            n "Paperwork first. Somewhere, a judge just felt appreciated and doesn't even know why."
 
     "You spend the next hour moving between the three sections. Whenever one item seems decisive, Nicky makes you find its support in the other two before it stays on the board."
 
@@ -4477,7 +4482,7 @@ label NickyDaySix:
         "Use the residue, warrant photographs, and repeated behavior together.":
             $ nick += 2
             show nicky content happy at slot(0, total=1), bright zorder 10
-            n "Three independent supports, one conclusion, and none of them is 'trust my weird ant nose.' That can survive review."
+            n "Three independent supports, one conclusion, and none of them is 'trust my weird ant nose.' That can survive review!"
         "Your pheromone sense is good enough. Skip the rest.":
             $ nick -= 2
             show nicky angry accusation at slot(0, total=1), bright zorder 10
@@ -4526,7 +4531,7 @@ label NickyDaySix:
             n "I kept your pick in the rotation. Don't make that expression."
         n "Don't look so pleased. You make the paperwork less painful, rookie. That's all you're getting before the report is filed."
     elif nick >= NICKY_WARM_THRESHOLD:
-        n "You made this week easier and significantly less boring. That's a rare combination."
+        n "You made this week easier and significantly less boring. That's a rare combination, I appreciate it."
     else:
         n "The case file is clean, lawful, and ready. Get it to Ulysses."
 
