@@ -1,7 +1,7 @@
 ## Razzle Visit 3: forgiving witness-memory cleanup minigame.
 
 # Give players time to read the thought cards before each board scramble.
-define height_memory_time_limit = 12.0
+define height_memory_time_limit = 15.0
 define height_memory_max_visible_distractors = 6
 define height_memory_required_cleanups = 10
 define height_memory_catalog = (
@@ -15,10 +15,10 @@ define height_memory_catalog = (
     {"id": "distractor_mail", "text": "The neighbor's overdue mail pile.", "category": "distractor", "protected": False},
     {"id": "distractor_bird", "text": "A bird with a very loud opinion.", "category": "distractor", "protected": False},
     {"id": "distractor_socks", "text": "One glove, two socks, zero answers.", "category": "distractor", "protected": False},
-    {"id": "distractor_coat", "text": "The figure may have worn a bulky coat.", "category": "distractor", "protected": False},
-    {"id": "distractor_footsteps", "text": "Footsteps hurried across the gravel.", "category": "distractor", "protected": False},
+    {"id": "distractor_coat", "text": "A bulky coat rack standing by the door.", "category": "distractor", "protected": False},
+    {"id": "distractor_footsteps", "text": "A stray gust rattling the wind chimes.", "category": "distractor", "protected": False},
     {"id": "distractor_portrait", "text": "A crooked family portrait hung inside.", "category": "distractor", "protected": False},
-    {"id": "distractor_bush", "text": "The hedge shook after the figure passed.", "category": "distractor", "protected": False},
+    {"id": "distractor_bush", "text": "A garden hose coiled up near the porch.", "category": "distractor", "protected": False},
 )
 
 default height_memory_active = False
@@ -29,6 +29,7 @@ default height_memory_progress = 0
 default height_memory_timer = 0.0
 default height_memory_setbacks = 0
 default height_memory_assisted = False
+default height_memory_quality = "clean"
 default height_memory_feedback = ""
 default height_memory_cleared = []
 default height_memory_board = []
@@ -85,6 +86,30 @@ init python:
 
         return board
 
+    def _height_memory_replace_card(card_id):
+        """Replace a cleared distractor in place so remaining cards stay stable."""
+        board_ids = set(c["id"] for c in store.height_memory_board)
+        available = [
+            dict(c) for c in store.height_memory_catalog
+            if not c["protected"]
+            and c["id"] not in store.height_memory_cleared
+            and c["id"] not in board_ids
+        ]
+        if not available:
+            store.height_memory_board = _height_memory_build_board()
+            return
+
+        renpy.random.shuffle(available)
+        replacement = available[0]
+        new_board = []
+        for card in store.height_memory_board:
+            if card["id"] == card_id:
+                replacement["position"] = card["position"]
+                new_board.append(replacement)
+            else:
+                new_board.append(card)
+        store.height_memory_board = new_board
+
     def _height_memory_undo_cleanup():
         """Undo one earlier cleanup while leaving the puzzle fully recoverable."""
         if not store.height_memory_cleared:
@@ -110,7 +135,8 @@ init python:
         store.height_memory_timer = 0.0
         store.height_memory_setbacks = 0
         store.height_memory_assisted = False
-        store.height_memory_feedback = "Clear the irrelevant thoughts. Keep the useful memories."
+        store.height_memory_quality = "clean"
+        store.height_memory_feedback = "Clear thoughts irrelevant to height. Preserve the two doorframe memories."
         store.height_memory_cleared = []
         store.height_memory_board = []
         _height_memory_refresh_feedback()
@@ -152,12 +178,12 @@ init python:
                 store.height_memory_cleared = store.height_memory_cleared + [card_id]
                 store.height_memory_progress += 1
                 store.height_memory_feedback = (
-                    "Razzle: Excellent! That thought was pure eyewitness confetti."
+                    "Razzle: Nice! That thought had nothing to do with doorframe height."
                 )
                 if store.height_memory_progress >= store.height_memory_required_cleanups:
                     should_finish = True
                 else:
-                    reshuffle_height_memory_board()
+                    _height_memory_replace_card(card_id)
         finally:
             store.height_memory_refreshing = False
 
@@ -170,7 +196,7 @@ init python:
     def height_memory_tick():
         """Refresh the distractors when the light timer expires."""
         if (not store.height_memory_active or store.height_memory_complete
-                or store.height_memory_refreshing):
+                or store.height_memory_refreshing or getattr(store, "minigame_paused", False)):
             return
 
         store.height_memory_timer += 0.5
@@ -207,8 +233,9 @@ init python:
     # Public API: award the planned killer-safe height clue exactly once.
     def finish_height_memory_minigame():
         """Close the board and record Razzle's planned Visit 3 reveal."""
-        if (store.height_memory_completion_recorded or not store.height_memory_active
-                or store.height_memory_progress < store.height_memory_required_cleanups):
+        if store.height_memory_completion_recorded or not store.height_memory_active:
+            return
+        if not store.height_memory_assisted and store.height_memory_progress < store.height_memory_required_cleanups:
             return
 
         store.height_memory_completion_recorded = True
@@ -216,6 +243,8 @@ init python:
         store.height_memory_active = False
         store.height_memory_refreshing = False
         store.height_memory_timer = 0.0
+        if not store.height_memory_assisted:
+            store.height_memory_quality = "flawless" if store.height_memory_setbacks == 0 else "scrambled"
         renpy.hide_screen("height_memory_minigame")
         reveal = get_planned_route_reveal("razzle", 3)
         if reveal.get("scope") == "category":
@@ -239,6 +268,7 @@ init python:
         if not store.height_memory_active or store.height_memory_completion_recorded:
             return
         store.height_memory_assisted = True
+        store.height_memory_quality = "assisted"
         store.height_memory_feedback = (
             "Razzle takes over, sorts the remaining thoughts, and preserves the measurement."
         )

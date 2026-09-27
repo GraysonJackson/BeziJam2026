@@ -5,6 +5,10 @@ define MADELINE_HIGH_THRESHOLD = 27
 
 default madeline_ice_cream_choice = ""
 default madeline_prototype_watch = ""
+default madeline_flirted = False
+default mads_cutoff_violated = False
+default madsRomanceEligible = True
+default mads_apology_accepted = False
 
 define MADELINE_WOUND_SCENE_HINTS = {
     "Bruised Knuckles": (

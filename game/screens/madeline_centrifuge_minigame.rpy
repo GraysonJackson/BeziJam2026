@@ -152,7 +152,7 @@ screen madeline_centrifuge_minigame():
                 elif madeline_centrifuge_phase == "retry":
                     textbutton "UNLOCK & RETRY" action Function(madeline_centrifuge_balance, "retry")
                 elif madeline_centrifuge_phase == "read_pending":
-                    textbutton "READ BANDS" action Function(madeline_centrifuge_read_result)
+                    textbutton "INSPECT DENSITY BANDS" action Function(madeline_centrifuge_read_result)
                 elif madeline_centrifuge_phase == "result":
                     if centrifuge_individual_result:
                         text "INDIVIDUAL REFERENCES CLEARED" style "madeline_centrifuge_result"

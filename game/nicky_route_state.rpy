@@ -7,6 +7,7 @@ define NICKY_HIGH_THRESHOLD = 30
 default nicky_day_two_route = ""
 default nicky_day_two_music = ""
 default nicky_day_two_order = ""
+default nicky_album_exchange_type = ""
 default nicky_day_five_break_mood = ""
 
 define NICKY_BUILD_RECORD_DESCRIPTIONS = {

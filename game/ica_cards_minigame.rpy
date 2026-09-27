@@ -13,9 +13,9 @@ define ICA_CARDS_APPROACH_LABELS = {
 }
 
 define ICA_CARDS_APPROACH_DESCRIPTIONS = {
-    "flirt": "Keep the banter going. Ica's attention wanders, making the game a little easier.",
-    "cheat": "Steal a look whenever Ica is too comfortable to guard the deck.",
-    "play_fair": "No tricks, no speech, no pressure. Just play like neither of you has somewhere better to be.",
+    "flirt": "Keep banter flowing. Fluster Ica so close calls and ties lean your way (+1 card leeway).",
+    "cheat": "Shave the margins. Cut close calls and ties in your favor with a little sleight of hand (+2 card leeway).",
+    "play_fair": "No tricks, no speech, no pressure. Just play straight cards.",
 }
 
 default ica_cards_session_active = False
@@ -172,9 +172,29 @@ init python:
             store.ica_cards_current_player_card,
             store.ica_cards_current_ica_card)
 
+        raw_win = False
+        prediction = action.replace("double_", "")
+        if prediction == "higher" and store.ica_cards_current_player_card > store.ica_cards_current_ica_card:
+            raw_win = True
+        elif prediction == "lower" and store.ica_cards_current_player_card < store.ica_cards_current_ica_card:
+            raw_win = True
+
+        leeway_win = player_won_round and not raw_win
+
         if player_won_round:
             store.ica_cards_player_score += store.ica_cards_current_wager
-            if store.ica_cards_current_wager == 2:
+            if leeway_win:
+                if store.ica_cards_approach == "cheat":
+                    store.ica_cards_round_result = (
+                        "Sleight of hand flips the round! Your {} (+{} leeway) beats Ica's {}."
+                        .format(store.ica_cards_current_player_card, store.ica_cards_difficulty_reduction, store.ica_cards_current_ica_card)
+                    )
+                else:
+                    store.ica_cards_round_result = (
+                        "Distracted call! Your {} (+{} banter leeway) edges past Ica's {}."
+                        .format(store.ica_cards_current_player_card, store.ica_cards_difficulty_reduction, store.ica_cards_current_ica_card)
+                    )
+            elif store.ica_cards_current_wager == 2:
                 store.ica_cards_round_result = "Your double call lands. Ica barely sits up, which is as close as she gets to panic."
             elif store.ica_cards_approach == "flirt":
                 store.ica_cards_round_result = "You take the round. Ica critiques your flirting instead of admitting it distracted her."

@@ -61,7 +61,7 @@ screen file_slots(title):
 
             for i in range(5):
                 $ slot = i + 1
-                add "gui/button/tape_[i % 2].png" xysize (105, 105)
+                add "gui/button/tape_[i % 2].png" xysize (140, 75)
 
         ## The grid of file slots.
         grid 5 1:
@@ -75,7 +75,7 @@ screen file_slots(title):
                     action FileAction(slot)
                     has vbox
 
-                    add FileScreenshot(slot) xalign 0.5 xysize (91, 50)
+                    add FileScreenshot(slot) xalign 0.5 xysize (220, 124)
 
                     ## https://www.fabriziomusacchio.com/blog/2021-08-15-strftime_Cheat_Sheet/
                     text FileTime(slot,
@@ -124,7 +124,7 @@ style slot_grid:
     spacing 4
 
 style slot_time_text:
-    size 13
+    size 17
     xalign 0.5
     font "fonts/RandoArtline.ttf"
     line_leading 0
@@ -134,7 +134,7 @@ style slot_vbox:
     spacing 12
 
 style slot_button:
-    xysize (105, 105)
+    xysize (240, 185)
     padding (7, 7, 7, 7)
     background None
     hover_background Solid("#ffffff18")

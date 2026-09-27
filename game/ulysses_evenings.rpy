@@ -23,26 +23,27 @@ label UlyssesEvening:
 
     "You knock."
     u "Come in, recruit."
+    show ulysses at slot(0, total=1), bright zorder 10
     "Ulysses waits behind his desk with the day's case folder already open and a guest chair pulled into place."
 
-    call expression ulysses_report_label
-    call UlyssesFocusComment
+    call expression ulysses_report_label from _call_expression
+    call UlyssesFocusComment from _call_UlyssesFocusComment
 
     if dayWin >= 6:
-        call UlyssesEveningSix
+        call UlyssesEveningSix from _call_UlyssesEveningSix
     else:
         $ ulysses_stay_for_personal_time = False
         menu:
             "Stay a little longer after the report.":
                 $ ulysses_stay_for_personal_time = True
                 $ ulyssesPersonalEvenings += 1
-                if dayWin == 1:
+                if ulyssesPersonalEvenings == 1:
                     u "Very well. Dinner is already on its way, and the work is less objectionable with company."
-                elif dayWin == 2:
+                elif ulyssesPersonalEvenings == 2:
                     u "Stay. I have something less urgent than homicide and more useful than small talk."
-                elif dayWin == 3:
+                elif ulyssesPersonalEvenings == 3:
                     u "All right. The remaining forms can tolerate a conversation between them."
-                elif dayWin == 4:
+                elif ulyssesPersonalEvenings == 4:
                     u "Stay. There is context I would rather give you deliberately than let you assemble incorrectly."
                 else:
                     u "Good. I had hoped the evening would not end with the last line of the report."
@@ -59,17 +60,18 @@ label UlyssesEvening:
                     u "Go home before Winston finds another reason to order food for twelve people."
 
         if ulysses_stay_for_personal_time:
-            if dayWin == 1:
-                call UlyssesEveningOne
-            elif dayWin == 2:
-                call UlyssesEveningTwo
-            elif dayWin == 3:
-                call UlyssesEveningThree
-            elif dayWin == 4:
-                call UlyssesEveningFour
+            if ulyssesPersonalEvenings == 1:
+                call UlyssesEveningOne from _call_UlyssesEveningOne
+            elif ulyssesPersonalEvenings == 2:
+                call UlyssesEveningTwo from _call_UlyssesEveningTwo
+            elif ulyssesPersonalEvenings == 3:
+                call UlyssesEveningThree from _call_UlyssesEveningThree
+            elif ulyssesPersonalEvenings == 4:
+                call UlyssesEveningFour from _call_UlyssesEveningFour
             else:
-                call UlyssesEveningFive
+                call UlyssesEveningFive from _call_UlyssesEveningFive
 
+    hide ulysses
     $ ulyssesEveningsCompleted += 1
     jump advanceDayAfterDebrief
 
@@ -93,13 +95,13 @@ label UlyssesFocusComment:
         $ ulysses_repeat_comment = ULYSSES_REPEAT_COMMENTS[ulysses_today_route][ulysses_today_count]
         u "[ulysses_repeat_comment]"
 
-        if dayWin == 2:
+        if ulysses_today_count == 2:
             u "Two choices are a preference, not a failure to investigate. I only need you to know what that preference is giving you, and what it is not."
-        elif dayWin == 3:
+        elif ulysses_today_count == 3:
             u "A pattern is beginning to form. That can create useful depth if you continue testing the method instead of merely becoming comfortable inside it."
-        elif dayWin == 4:
+        elif ulysses_today_count == 4:
             u "Four days is enough time for trust to improve the work and familiarity to distort it. Pay attention to which one is happening."
-        elif dayWin == 5:
+        elif ulysses_today_count == 5:
             u "You have invested most of the week here. I am not asking you to abandon that choice; I am asking you to make its limits visible before tomorrow."
         else:
             u "The depth is real. So is the responsibility to translate it into an accusation the rest of us can independently review."
@@ -151,7 +153,10 @@ label UlyssesEveningOne:
     $ ulysses_day_one_helped = False
     $ ulysses_day_one_left_promptly = False
     "Ulysses aligns your report with the edge of the folder and adds one brief note in the margin. Only when the formal work is closed does he lean back."
-    u "That completes your first day. You were thorough enough that I do not have to send the report back before dinner."
+    if dayWin == 1:
+        u "That completes your first day. You were thorough enough that I do not have to send the report back before dinner."
+    else:
+        u "The formal report is finished. You were thorough enough that I do not have to send it back before dinner."
 
     menu:
         "Offer to help organize tomorrow's work.":
@@ -197,7 +202,7 @@ label UlyssesEveningOne:
             u "That one is mine, but I respect the efficiency. There is another cup beneath the files."
             "He rescues both cups from the paperwork. You take the hidden one and make it drinkable while he accepts his black."
 
-    "Jazz fills the quiet left by the closed case folder. Ulysses removes his jacket, leaving the vest and button-up Freddy, and rolls each sleeve once."
+    "Jazz fills the quiet left by the closed case folder. Ulysses removes his jacket, leaving the vest and button-up, and rolls each sleeve once."
 
     menu:
         "Tell him the vest looks good on him.":
@@ -219,7 +224,10 @@ label UlyssesEveningOne:
         "Ulysses walks you to the office door rather than calling the farewell across his desk."
     else:
         "When the conversation finds a natural pause, you fold the empty pizza box and stand. Ulysses walks you to the office door."
-    u "Good first day. Tomorrow, give me the truth before you give me the version that sounds impressive."
+    if dayWin == 1:
+        u "Good first day. Tomorrow, give me the truth before you give me the version that sounds impressive."
+    else:
+        u "Good work tonight. Tomorrow, give me the truth before you give me the version that sounds impressive."
     if ulysses_day_one_helped:
         "Behind him, the remaining stack is noticeably shorter than it was when dinner arrived."
     else:
@@ -275,11 +283,11 @@ label UlyssesEveningTwo:
             u "Eventually. First it made everything louder, faster, and considerably less predictable. Then we captured the villain."
         "You must have hated him.":
             u "For approximately six minutes. Then I realized I had just encountered the only person my foresight could not render clearly."
-        "You look cute in the photograph.":
+        "You were remarkably stubborn in that photo. You carry it better now.":
             $ uly += 2
             $ ulyssesRomanceInterest += 2
-            "A reluctant smile moves across his face."
-            u "I was covered in ash and furious. Your standards are concerning."
+            "Ulysses looks from the photograph to you, caught off-guard. A faint warmth reaches his face before he can look back down at the desk."
+            u "A compliment directed at the present is considerably harder to deflect. Thank you."
 
     "He returns the photograph to its exact place, but not before looking at Winston's blurred outline once more."
     u "We worked together after that. ATLAS became official when I was fifteen. He supplied the reputation. I supplied the legal structure."
@@ -292,7 +300,9 @@ label UlyssesEveningTwo:
 
 
 label UlyssesEveningThree:
+    $ ulysses_day_three_seen = True
     $ ulysses_day_three_tension = False
+    $ ulysses_day_three_choice = ""
     "Ulysses reaches for the report before you finish setting it down. His answer comes a heartbeat before your question."
     u "The supporting statement is already clipped behind the laboratory copy."
     "You had been about to ask where it belonged. He closes his eyes briefly."
@@ -312,20 +322,24 @@ label UlyssesEveningThree:
 
     "He pours fresh black coffee and leaves the second cup for you to prepare however you like. The music remains low enough that neither of you has to raise your voice."
     u "There is a more important limit. I cannot tell anyone what will happen. Not aloud, not in writing, not through a clever sequence of yes-or-no answers."
-    u "Vague advice is safe only when it communicates no future event. Anything more exact triggers the power against me."
+    u "People sometimes ask why Winston cannot simply negate my power while I speak. Foresight is memory already burned into my mind, not an active radiating field. Suppressing my power does not erase the memory, and speaking a forbidden future triggers systemic shock that physical dampening cannot prevent."
+    u "Vague advice is safe only when it communicates no future event. Anything more exact triggers the penalty against me."
 
     menu:
         "Ask how he learned the boundary, without asking what he saw.":
             $ uly += 2
+            $ ulysses_day_three_choice = "learned_boundary"
             u "Carefully phrased. I learned it badly. I will explain when I can do so without turning tonight into a medical history."
         "Ask him to identify the killer through a loophole.":
             $ uly -= 3
             $ ulyssesBoundaryViolation = True
             $ ulysses_day_three_tension = True
+            $ ulysses_day_three_choice = "loophole"
             u "No. There is no loophole, and my life is not a puzzle mechanism for you to test."
             "He moves the coffee aside and returns the open case forms to the center of the desk. The invitation to discuss his power is over."
         "Tell him he never has to prove the power to you.":
             $ uly += 2
+            $ ulysses_day_three_choice = "never_prove"
             u "Thank you. Most people hear an impossible boundary and begin searching for the trick."
 
     if ulysses_day_three_tension:
@@ -354,19 +368,38 @@ label UlyssesEveningFour:
         "Say certainty should be earned.":
             $ uly += 1
             u "Yes. Especially when certainty is easy to imitate."
-        "Say his warning about future statements stayed with you.":
+        "Say his warning about future statements stayed with you." if ulysses_day_three_seen:
             $ uly += 2
             "The pen goes still beneath his fingers."
             u "Then you listened more carefully than most people do."
+        "Say you wanted to leave room for the unexpected." if not ulysses_day_three_seen:
+            $ uly += 2
+            "The pen goes still beneath his fingers."
+            u "A sensible habit. The easiest way to miss the truth is assuming tomorrow is already settled."
         "Joke that you feared his red pen.":
             u "A rational fear, but not the reason I hoped for."
             "The dry answer eases into a small smile before he closes the report."
 
     "Instead of opening the next folder, Ulysses refreshes both coffees and lowers the jazz until the office feels private rather than merely quiet. He takes his time returning to the desk."
-    if ulysses_day_three_tension:
-        u "Yesterday ended poorly. Even so, leaving you with only the warning would make the boundary sound arbitrary. It is not."
+    if ulyssesBoundaryViolation and not ulyssesBoundaryApology:
+        u "There is a strict limit on my power: I cannot tell anyone what will happen. Anything exact triggers it violently against me."
+        u "You pushed against that boundary before. I am stating the rule clearly now so there is no confusion: it is a matter of survival, not preference."
+        u "Let us return to the case."
+        "He keeps the rest of the evening strictly professional, reviewing the evidence logs without opening the old drawer or the personal photographs."
+        "When the files are in order, he bids you a polite, distant goodnight."
+        return
+
+    if not ulysses_day_three_seen:
+        u "You have been careful with your reporting this week. Most people in this building push for certainty—or ask me to provide it for them."
+        u "There is a strict limit on my power: I cannot tell anyone what will happen. Anything exact triggers it violently against me. Leaving you without context would make that boundary seem arbitrary. It is not."
+    elif ulysses_day_three_tension:
+        u "During our last conversation, things ended poorly. Even so, leaving you with only the warning would make the boundary sound arbitrary. It is not."
+    elif ulysses_day_three_choice == "never_prove":
+        u "When we spoke last, you told me I never had to prove the boundary to you. Even so, leaving you with only the warning would make it sound arbitrary. It is not."
+    elif ulysses_day_three_choice == "learned_boundary":
+        u "When we spoke last, you asked how I learned the boundary without asking me to demonstrate it. I said I would explain when I could do so honestly."
     else:
-        u "Yesterday, you asked how I learned the boundary without asking me to demonstrate it. I said I would explain when I could do so honestly."
+        u "When we spoke last, we discussed the boundaries around my foresight. Leaving you with only the warning would make it sound arbitrary. It is not."
 
     "He opens a shallow drawer and removes an old staff photograph. His younger face is easy to find. Beside him stands a coworker whose badge reads DAKOTA."
     u "Last year, when I was nineteen, Dakota and I were working late. I had seen something that affected our friend, and I believed I had found language indirect enough to talk about why it bothered me."
@@ -382,7 +415,7 @@ label UlyssesEveningFour:
         "Ask about Dakota, not the forbidden warning.":
             $ uly += 2
             u "A capable coworker and a great friend. Patient with me and how grumpy I can be."
-            u "She did'nt blame me for what happened. I managed that adequately on my own."
+            u "She didn't blame me for what happened. I managed that adequately on my own."
         "Ask what Winston did during those four months.":
             $ uly += 1
             u "Stayed. Handled ATLAS poorly, kept it alive successfully, and insulted every physician who used the phrase 'wait and see.'"
@@ -465,7 +498,7 @@ label UlyssesEveningFive:
             $ uly += 2
             $ ulysses_day_five_activity = "reading"
             u "Good choice. Conversation remains optional."
-        "Leave the jazz on and ask him to choose a passtime.":
+        "Leave the jazz on and ask him to choose a pastime.":
             $ uly += 1
             $ ulysses_day_five_music = "jazz"
             u "Comfortable delegation. Chess, then. I have spent all week watching you make decisions; reciprocity seems fair."
@@ -487,7 +520,7 @@ label UlyssesEveningFive:
                 "Ulysses does not force the conversation. The distance it created remains present between the chairs."
 
     menu:
-        "Turn your hand palm-up beside his.":
+        "Turn your hand palm-up beside his." if not (ulyssesBoundaryViolation and not ulyssesBoundaryApology):
             $ uly += 2
             $ ulyssesRomanceInterest += 3
             if ulysses_day_five_activity == "chess":
@@ -531,7 +564,7 @@ label UlyssesEveningSix:
     "Ulysses places every remaining suspect file across his desk. Tonight the music is off. The only sounds are paper, the office clock, and distant traffic."
 
     if ulysses_one_each_strategy():
-        call UlyssesCrossReportDeduction
+        call UlyssesCrossReportDeduction from _call_UlyssesCrossReportDeduction
     elif len(remainingSuspects) == 1:
         u "Your work already leaves one name. We will verify the chain once more, but there is nothing honest to add to that conclusion."
         "You follow the evidence from the first elimination to the final surviving file. Ulysses checks each connection, then lets you seal the accusation packet yourself."
@@ -565,13 +598,28 @@ label UlyssesEveningSix:
             "Ulysses walks you to the door. The closed accusation packet remains on his desk, complete without requiring the evening to become anything else."
             return
 
+    if ulyssesBoundaryViolation and not ulyssesBoundaryApology:
+        menu:
+            "Apologize for treating his survival like another clue.":
+                $ uly += 3
+                $ ulyssesBoundaryApology = True
+                u "Thank you. I do not need perfection. I need to know that a boundary remains real after curiosity appears."
+            "Leave the past unaddressed.":
+                "Ulysses does not force the conversation. The distance it created remains between you."
+
     menu:
-        "Tell him these evenings became the best part of the week.":
+        "Tell him these evenings became the best part of the week." if ulyssesPersonalEvenings >= 3 and not (ulyssesBoundaryViolation and not ulyssesBoundaryApology):
             $ uly += 3
             $ ulyssesRomanceInterest += 2
             $ ulysses_day_six_invited_closeness = True
             "Ulysses looks down at the closed packet, then back at you."
             u "They became the portion I most looked forward to as well. That sentence was not in the report."
+        "Tell him you were glad you stayed late tonight." if ulyssesPersonalEvenings < 3 and not (ulyssesBoundaryViolation and not ulyssesBoundaryApology):
+            $ uly += 2
+            $ ulyssesRomanceInterest += 1
+            $ ulysses_day_six_invited_closeness = True
+            "Ulysses looks down at the closed packet, then back at you."
+            u "I am glad as well. The work is less grueling with company."
         "Thank him for trusting your judgment.":
             $ uly += 2
             u "You earned trust by giving me reasons to revise it every evening. Keep doing that."
@@ -580,7 +628,7 @@ label UlyssesEveningSix:
 
     if ulysses_day_six_invited_closeness:
         menu:
-            "Step close and straighten his tie.":
+            "Step close and straighten his tie." if not (ulyssesBoundaryViolation and not ulyssesBoundaryApology):
                 $ ulyssesRomanceInterest += 2
                 "When you stand, you reach across the desk and straighten the shifted tie against his collar."
             "Tell him his tie shifted and let him fix it.":
@@ -589,7 +637,12 @@ label UlyssesEveningSix:
     else:
         "When you stand, you mention that his tie has shifted during the long review. Ulysses corrects the knot and smooths it back into place."
 
-    if (uly >= ULYSSES_HIGH_THRESHOLD and ulyssesRomanceInterest >= ULYSSES_ROMANCE_HIGH_THRESHOLD and ulysses_day_six_invited_closeness):
+    $ ulysses_romance_eligible = (
+        not (ulyssesBoundaryViolation and not ulyssesBoundaryApology)
+        and ulyssesPersonalEvenings >= ULYSSES_DATE_MIN_PERSONAL_EVENINGS
+    )
+
+    if (uly >= ULYSSES_HIGH_THRESHOLD and ulyssesRomanceInterest >= ULYSSES_ROMANCE_HIGH_THRESHOLD and ulysses_day_six_invited_closeness and ulysses_romance_eligible):
         "Ulysses catches your hand before you can withdraw it. His composure lasts until your thumb brushes the edge of his vest."
         menu:
             "Tell him he looks good when he forgets the next line.":
@@ -604,7 +657,7 @@ label UlyssesEveningSix:
             "Squeeze his hand and remain beside him.":
                 $ uly += 2
                 "The two of you stay there, close enough that neither can mistake the silence for professionalism."
-    elif (uly >= ULYSSES_WARM_THRESHOLD and ulyssesRomanceInterest >= ULYSSES_ROMANCE_WARM_THRESHOLD and ulysses_day_six_invited_closeness):
+    elif (uly >= ULYSSES_WARM_THRESHOLD and ulyssesRomanceInterest >= ULYSSES_ROMANCE_WARM_THRESHOLD and ulysses_day_six_invited_closeness and ulysses_romance_eligible):
         "Ulysses catches your hand briefly, then releases it with a small, flustered smile."
         u "You have become extremely comfortable adjusting your cofounder."
     else:
@@ -620,11 +673,12 @@ label UlyssesEveningSix:
 
 label UlyssesCrossReportDeduction:
     u "You did something none of the focused approaches could do. You spent one day inside every investigative method."
-    u "Each report is shallow by itself. Together, they overlap. We can clear the remaining contradiction without relying on anything I know about tomorrow."
-    "He arranges the four remaining files around the center of the desk and makes you place the witness, scene, laboratory, records, and interrogation reports between them."
+    u "Each report is shallow by itself, but together they eliminated five names. That leaves four surviving files."
+    u "Before Enrico died, he caught someone siphoning illegal chemical stimulants from the evidence lockup. I pulled the ATLAS badge access logs and dispatch records for that exact window."
+    "He arranges the four remaining files around the center of the desk and places the badge access and dispatch logs between them."
     $ ulysses_candidate_profiles = ulysses_candidate_profile_text()
-    "The surviving profiles read:\n[ulysses_candidate_profiles]"
-    u "Do not choose the most dramatic trait. Find the one complete profile that survives every independent report."
+    "The surviving suspect logs read:\n\n[ulysses_candidate_profiles]"
+    u "Three of these suspects were logged across town or in separate wings. Only one person swiped into Evidence Storage C during the siphoning window."
     $ ulyssesCrossReportAttempts = 0
     jump UlyssesCrossReportChoice
 
@@ -657,7 +711,7 @@ label UlyssesCrossReportChoice:
 
     if ulysses_cross_choice != killer:
         $ ulyssesCrossReportAttempts += 1
-        u "No. That profile requires us to ignore at least one independent report. Begin with the physical condition, then test the behavior against it."
+        u "No. Check the log again. That person was logged outside the storage wing during the siphoning window. Look for the authorized swipe into Evidence Storage C."
         jump UlyssesCrossReportChoice
 
     if ulyssesCrossReportAttempts == 0:
@@ -669,7 +723,7 @@ label UlyssesCrossReportChoice:
 
     $ record_ulysses_cross_report_reveal()
     $ ulysses_cross_killer_name = suspectNames[killer]
-    u "Every report converges on [ulysses_cross_killer_name]. No other remaining profile survives the overlap."
+    u "Every report converges on [ulysses_cross_killer_name]. No other remaining profile had access to the lockup during that window."
     "Ulysses enters the cross-report analysis into the formal case log. The other three files close, leaving one name at the center of the desk."
     return
 
@@ -721,7 +775,9 @@ label UlyssesReportRazzle2:
 label UlyssesReportRazzle3:
     u "Brandon's revised statement arrived before you did. It is considerably less crowded than his first account."
     "You explain the memory board, the irrelevant details removed from it, and the doorway observation that survived every pass."
-    if height_memory_setbacks == 0:
+    if height_memory_assisted:
+        u "Razzle stepped in to finish organizing the board, but the doorway observation remained intact. Record the assistance alongside the result."
+    elif height_memory_setbacks == 0:
         u "You protected both reliable memories without discarding either one. Efficiently done."
     else:
         u "You disturbed the useful memories [height_memory_setbacks] times, corrected the board, and still preserved the source. Record both the recovery and the result."
@@ -764,7 +820,7 @@ label UlyssesReportRazzle4:
 
 label UlyssesReportRazzle5:
     u "Six hours of grocery-store tape. I assume the cat attacking the bag was not our culprit."
-    "You describe the preserved frame, the position of the car, and the brief headlight sweep that exposes the killer's hair while their hand catches against the brick."
+    "You describe the preserved frame, the position of the car, the killer's stress reaction under the headlights, and the brief sweep that exposed their loose hair."
     u "Useful, but not yet a formal identification. Recreating the light is better than pretending monochrome footage contains color because we want it to."
     menu:
         "Explain Razzle labeled, duplicated, and timed the tape.":
@@ -773,7 +829,7 @@ label UlyssesReportRazzle5:
             u "Then her enthusiasm did not outrun her evidence handling. Make certain that appears in the report."
         "Focus only on the possible hair clue.":
             $ uly += 1
-            u "Possible. Preserve the hand movement too. Quiet details often become useful after the list is smaller."
+            u "Possible. Preserve the observed stress reaction too. Behavioral cues often become useful after the list is smaller."
         "Say the reconstruction will definitely identify the killer.":
             $ uly -= 1
             $ ulysses_note_reporting_style("deflecting")
@@ -932,7 +988,11 @@ label UlyssesReportMadeline1:
     if ulyssesCurrentClue:
         u "The formal conclusion is [ulyssesCurrentClue]"
     menu:
-        "Mention that Madeline tested your procedure before trusting you near evidence.":
+        "Admit you failed her test and touched a slide before gloves." if getattr(store, "madeline_touched_slide", False):
+            $ uly += 1
+            $ ulysses_note_reporting_style("honest")
+            u "At least you admit it here. She noted the contaminated disposal sleeve in her preamble with four exclamation marks. Touch nothing in her lab without clearance."
+        "Mention that Madeline tested your procedure before trusting you near evidence." if not getattr(store, "madeline_touched_slide", False):
             $ uly += 2
             $ ulysses_note_reporting_style("thoughtful")
             u "Then you passed the more difficult test. She can compare fingerprints more easily than judgment."
@@ -1013,21 +1073,38 @@ label UlyssesReportMadeline4:
 
 
 label UlyssesReportMadeline5:
-    u "Madeline's calibration protocol contains a manual cutoff, verbal checks, and a strict time limit. I recognize your handwriting beside all three."
-    "You report the helmet test, the emotional disinhibition it briefly caused, and the careful or careless residue pattern revealed only after the system was safely shut down."
-    u "After Mindbreak, she does not surrender control easily. She placed the cutoff in your hands anyway."
-    menu:
-        "Say stopping when agreed mattered more than extra data.":
-            $ uly += 3
-            $ ulysses_note_reporting_style("thoughtful")
-            u "Correct. Consent that disappears when inconvenient was never consent."
-        "Focus on the personal things she admitted.":
-            $ uly -= 1
-            u "Those were entrusted to you during a vulnerable test. They are not report material."
-        "Record only the residue observation and its uncertainty.":
-            $ uly += 2
-            $ ulysses_note_reporting_style("honest")
-            u "Exactly. Protect the person; preserve the relevant result."
+    if mads_cutoff_violated:
+        u "I have the telemetry log from Madeline's helmet calibration, recruit. The automatic timer triggered because you ignored her verbal stop command."
+        "You report the residue pattern, but you cannot disguise the fact that you ignored protocol and forced her past her limit."
+        u "After Mindbreak, Madeline does not surrender control easily. When an investigator inside a feedback helmet says stop, you hit the switch immediately. Period."
+        menu:
+            "Acknowledge the protocol breach directly without excuses.":
+                $ uly += 1
+                $ ulysses_note_reporting_style("honest")
+                u "At least you do not lie about it. But Madeline will remember that you put data ahead of her consent, and so will I."
+            "Argue that the extra data was necessary for the murder investigation.":
+                $ uly -= 2
+                $ ulysses_note_reporting_style("deflecting")
+                u "No piece of evidence justifies compromising a colleague's safety. Do not make that mistake in this agency again."
+            "Report only the residue observation without defending your conduct.":
+                $ ulysses_note_reporting_style("honest")
+                u "The residue reading is noted. Your conduct during the test remains a serious breach of professional discipline."
+    else:
+        u "Madeline's calibration protocol contains a manual cutoff, verbal checks, and a strict time limit. I recognize your handwriting beside all three."
+        "You report the helmet test, the emotional disinhibition it briefly caused, and the careful or careless residue pattern revealed only after the system was safely shut down."
+        u "After Mindbreak, she does not surrender control easily. She placed the cutoff in your hands anyway."
+        menu:
+            "Say stopping when agreed mattered more than extra data.":
+                $ uly += 3
+                $ ulysses_note_reporting_style("thoughtful")
+                u "Correct. Consent that disappears when inconvenient was never consent."
+            "Focus on the personal things she admitted.":
+                $ uly -= 1
+                u "Those were entrusted to you during a vulnerable test. They are not report material."
+            "Record only the residue observation and its uncertainty.":
+                $ uly += 2
+                $ ulysses_note_reporting_style("honest")
+                u "Exactly. Protect the person; preserve the relevant result."
     return
 
 
@@ -1075,21 +1152,38 @@ label UlyssesReportNicky1:
 
 label UlyssesReportNicky2:
     u "A record store, diner food, and a motorcycle ride. This is the first report this week with a soundtrack."
-    "You tell him about Nicky's hip-hop search, the album exchange, and the way she became playful once police work was no longer in front of her."
+    if nicky_album_exchange_type == "gift":
+        "You tell him about Nicky's hip-hop search, the album she bought you, and the way she became playful once police work was no longer in front of her."
+    elif nicky_album_exchange_type == "loan":
+        "You tell him about Nicky's hip-hop search, the tape she loaned you, and the way she became playful once police work was no longer in front of her."
+    else:
+        "You tell him about Nicky's hip-hop search, the album title she scribbled on your receipt, and the way she became playful once police work was no longer in front of her."
     u "She spends enough time being ATLAS's legal conscience. I am glad you met the person who goes home after the paperwork."
     menu:
-        "Say she chose something for you that proved she listened.":
+        "Say she gave you an album that proved she listened." if nicky_album_exchange_type == "gift":
             $ uly += 2
             $ ulysses_note_reporting_style("thoughtful")
             u "Attention is often more meaningful than spectacle. Remember that."
+        "Say she trusted you enough to lend you her own tape." if nicky_album_exchange_type == "loan":
+            $ uly += 2
+            $ ulysses_note_reporting_style("thoughtful")
+            u "Nicky protects her music fiercely. That loan is a genuine mark of trust."
+        "Mention the listening homework she scribbled on the receipt." if nicky_album_exchange_type == "recommendation":
+            $ uly += 2
+            $ ulysses_note_reporting_style("thoughtful")
+            u "A sensible recommendation. Nicky has strong taste, even if she enforces it aggressively."
         "Report honestly that the day advanced no evidence.":
             $ uly += 1
             $ ulysses_note_reporting_style("honest")
             u "Correct. It may still improve how well you work together later."
-        "Try to classify the purchased album as evidence.":
+        "Try to classify the album exchange as evidence." if nicky_album_exchange_type in ("gift", "loan"):
             $ uly -= 1
             $ ulysses_note_reporting_style("deflecting")
             u "I will place it beside Razzle's pizza receipt and Dhampir's film review."
+        "Try to classify the playlist notes as evidence." if nicky_album_exchange_type == "recommendation":
+            $ uly -= 1
+            $ ulysses_note_reporting_style("deflecting")
+            u "A diner receipt recommendation is not forensic evidence. Do not submit it as one."
     return
 
 
@@ -1202,17 +1296,21 @@ label UlyssesReportWinston1:
 
 label UlyssesReportWinston2:
     u "I ordered Winston to take a day off. I did not expect him to turn the order into a supervised diner and pool expedition."
-    "You describe the greasy burger, the increasingly ridiculous calls he ignored, his competitive pool game, and the quieter admission that he is tired of existing only as the team's emergency switch."
-    u "He answered none of the calls, then completed every item on my list after returning. Predictable in the broadest and most irritating sense."
+    "You describe the greasy burger, the calls he fielded at the diner, his competitive pool game, and the fourth call he finally set aside."
+    u "He answered [winston_calls_answered] of the calls before remembering how to take an afternoon off, then completed every item on my list after returning. Predictable in the broadest and most irritating sense."
     menu:
         "Say Winston deserved time where nobody needed his power.":
             $ uly += 2
             $ ulysses_note_reporting_style("thoughtful")
             u "He did. Thank you for giving him company without turning the day into another assignment."
-        "Report that he ignored four workplace problems.":
+        "Report that he answered three minor workplace crises before ignoring the fourth.":
             $ uly += 1
             $ ulysses_note_reporting_style("honest")
-            u "All four were deliberately nonessential. The team survived the educational experience."
+            u "All four crises were deliberately nonessential. The team survived the educational experience."
+        "Report his private confession about feeling like an emergency brake.":
+            $ uly -= 1
+            $ ulysses_note_reporting_style("deflecting")
+            u "Winston's private doubts about his role are between him and the people he trusts. They are not report material. Stick to the operational debrief."
         "Say he should take leadership more seriously.":
             $ uly -= 1
             u "He takes it seriously when seriousness helps. The rest is camouflage and self-preservation."
@@ -1355,8 +1453,13 @@ label UlyssesReportIca2:
 label UlyssesReportIca3:
     u "Winston's paperwork remains unfinished, his floor contains three pawn-shaped dents, and Ica says the office may be haunted."
     "You report the three-player pawn race, Winston's enthusiasm, Ica's gravity-assisted laziness, and the complete absence of case progress."
+    $ board_result_tier = ica_minigame_results.get("board", {}).get("result_tier", "")
     if ica_minigame_results.get("board", {}).get("won"):
         u "You won the race. Winston has requested a rematch during hours I have explicitly labeled operational."
+    elif board_result_tier == "loss_ica":
+        u "Ica won the race and claimed executive immunity from future filing. I informed her that exemption does not exist."
+    elif board_result_tier == "loss_withdrawn":
+        u "You withdrew from the race to let them bicker over the board. A remarkably prudent tactical retreat."
     else:
         u "Winston's supplementary report consists of a hand-drawn victory diagram. I will not preserve it."
     u "Two cofounders run this organization. Today, one of them chose to spend several hours being bumped back to start with you."
@@ -1381,7 +1484,7 @@ label UlyssesReportIca4:
     u "I can smell hot dogs from here."
     "You describe the bulk discount, the eating contest, the gravity-assisted cheating, the antacids, and Ica's proposal to paint his office pink."
     if ica_minigame_results.get("eating", {}).get("won"):
-        u "You apparently won. Your reward is responsibility for disposing of every tray involved."
+        u "You apparently won. Ica being forced to throw away her own trash is an unprecedented achievement in this building."
     else:
         u "Ica won. Her prize appears to have been making you carry the trash."
     u "That is disgusting. The food contest, specifically. The proposed vandalism has the virtue of not involving mystery sauce."
@@ -1389,21 +1492,29 @@ label UlyssesReportIca4:
         "Warn him plainly about the pink-office plan.":
             $ uly += 2
             $ ulysses_note_reporting_style("honest")
-            u "Thank you. I cannot prevent it, but I can move the irreplaceable files."
+            u "Thank you. Knowing Ica, she will manage it regardless, but I can at least move the irreplaceable files."
         "Say you intend to help Ica do it.":
             $ uly += 1
             u "Of course you do. Use the tarp. I would prefer my resignation letter remain beige."
         "Pretend Ica never mentioned a prank.":
             $ uly -= 2
             $ ulysses_note_reporting_style("deflecting")
-            u "Recruit, I have already seen the office. Your loyalty is admirable and very badly deployed."
+            u "Recruit, she left pink paint swatches clipped to the supply requisition this morning. Your loyalty is admirable and very badly deployed."
     return
 
 
 label UlyssesReportIca5:
     "The newly pink walls make denial impossible. Ulysses sits behind the restored desk while fresh paint dries around him."
-    u "I knew this was going to happen, and it still hurts."
-    "He checks the untouched case files, the protected carpet, and the furniture returned to its exact marks."
+    u "I suspected this was going to happen, and it still hurts."
+    if ica_paint_preparation == "tarp":
+        "He checks the untouched case files, the carefully taped tarp protecting the carpet, and the furniture returned to its exact marks."
+        u "At least you taped down a drop cloth. The floor survived your artistic impulses."
+    elif ica_paint_preparation == "cardboard":
+        "He checks the untouched case files, the pink specks marking the exposed carpet around the baseboards, and the furniture returned to its marks."
+        u "Cardboard beneath the cans did not protect the floor from roller splatter, recruit. That will come out of the maintenance budget."
+    else:
+        "He checks the untouched case files, the odd absence of floor splatter, and the furniture returned to its exact marks."
+        u "You didn't drop a tarp, but Ica's field evidently kept the floor clear of splatter. I suppose I should be grateful for small miracles."
     if not ica_minigame_results.get("prank", {}).get("completed"):
         u "You abandoned the hallway operation and finished the painting directly. Sensible, once subtlety had stopped serving a purpose."
     elif ica_prank_caught_count == 0:
@@ -1427,10 +1538,11 @@ label UlyssesReportIca5:
 
 
 label UlyssesReportIca6:
-    "Ulysses listens without interrupting as you describe the killer entering ATLAS, attempting to destroy Enrico's bloodstained wallet, overlooking both of you, and fleeing after Ica pulled the evidence away."
-    "He opens the safe, verifies the photographed chain, and compares the wallet to Enrico's property record."
+    "Ulysses listens without interrupting as you describe the killer entering ATLAS, attempting to use Enrico's cipher key on the workshop lockbox, overlooking both of you, and bolting through the fire exit after Ica intercepted the wallet."
+    "He opens the safe, verifies the photographed chain, and compares the wallet and key to Enrico's property record."
     $ ulysses_ica_killer_name = suspectNames[killer]
     u "Six days of games, one attempted destruction of evidence, and [ulysses_ica_killer_name] personally delivering the answer to our office."
+    u "Nicky and Dhampir are coordinating with LAPD patrol to run down their escape vector across the rail yard. We'll have them in custody before morning."
     u "I owe you an apology. I doubted your judgment because the method appeared to contain no judgment whatsoever. Somehow, staying with Ica worked."
     menu:
         "Accept the apology without pretending this was planned.":

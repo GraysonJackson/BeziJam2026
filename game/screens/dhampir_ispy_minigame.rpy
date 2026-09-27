@@ -62,6 +62,7 @@ screen dhampir_ispy_minigame():
                     xsize 500
 
                 for target_id, target_label, target_x, target_y in DHAMPIR_ISPY_TARGET_LAYOUT:
+                    $ is_inspected = target_id in dhampir_ispy_inspected_targets
                     textbutton "[dhampir_ispy_target_text(target_id, target_label)]":
                         xpos target_x
                         ypos target_y
@@ -70,8 +71,11 @@ screen dhampir_ispy_minigame():
                         text_style "dhampir_ispy_target_text"
                         background Solid(dhampir_ispy_target_color(target_id))
                         hover_background Solid("#D26143")
-                        sensitive dhampir_ispy_phase == "active" and target_id not in dhampir_ispy_inspected_targets
-                        action Function(dhampir_ispy_inspect, target_id)
+                        sensitive dhampir_ispy_phase in ("active", "complete_pending")
+                        if not is_inspected and dhampir_ispy_phase == "active":
+                            action Function(dhampir_ispy_inspect, target_id)
+                        else:
+                            action Function(dhampir_ispy_review, target_id)
 
         frame:
             xpos 1010
@@ -91,7 +95,7 @@ screen dhampir_ispy_minigame():
                 if dhampir_ispy_phase == "active":
                     textbutton _("CALIBRATE HINT") action Function(dhampir_ispy_hint)
                 elif dhampir_ispy_phase == "complete_pending":
-                    text _("The reconstruction is complete.") style "dhampir_ispy_hud_body"
+                    text _("All 3 discrepancies found.\nClick any object to review.") style "dhampir_ispy_hud_body"
                     textbutton _("FINISH SCAN") action Function(finish_dhampir_ispy_minigame)
 
         text _("[dhampir_ispy_feedback]") style "dhampir_ispy_feedback":

@@ -31,6 +31,12 @@ image razzle question = Crop((250, 0, 1670, 2481), "images/razzelQuestionEmotion
 image razzle sad = Crop((250, 0, 1670, 2481), "images/razzelSadEmotion.png")
 image razzle annoyed = Crop((250, 0, 1670, 2481), "images/razzelEngragedEmotion.png")
 
+image dhampir = Crop((438, 0, 2031, 2481), "images/dhampirBaseMouthClosed.png")
+image winston = Crop((438, 0, 2031, 2481), "images/winstonBaseMouthClosed.png")
+image ulysses = Crop((438, 0, 2031, 2481), "images/umbralBaseMouthClosed.png")
+image umbral = Crop((438, 0, 2031, 2481), "images/umbralBaseMouthClosed.png")
+image freddy = Crop((438, 0, 2031, 2481), "images/freddyTalkingBaseOutline.png")
+
 image cubicleOutline = "images/cubicleOutline.JPG"
 image cubicleOutlineInverted = "images/cubicleOutlineInverted.jpg"
 image debriefRoomOutline = "images/debriefRoomOutline.JPG"

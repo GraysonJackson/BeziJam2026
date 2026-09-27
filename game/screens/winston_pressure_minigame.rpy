@@ -43,26 +43,31 @@ screen winston_pressure_minigame():
                 vbox:
                     spacing 12
 
-                    text _("SUSPECT'S DEFENSE") style "winston_pressure_heading"
-                    hbox:
-                        spacing 14
-                        for index, card in enumerate(winston_pressure_dealer_hand):
-                            $ dealer_hidden = (index == 1 and not reveal_dealer)
-                            $ dealer_card_rank = card["rank"]
-                            $ dealer_card_suit = card["suit"]
-                            frame:
-                                xsize 180
-                                ysize 190
-                                background Solid("#283E52" if dealer_hidden else "#EFE2C8")
-                                padding (12, 12, 12, 12)
-                                if dealer_hidden:
-                                    text _("CASE\nFILE\n?") style "winston_pressure_card_hidden"
-                                else:
-                                    vbox:
-                                        xalign 0.5
-                                        yalign 0.5
-                                        text "[dealer_card_rank]" style "winston_pressure_card_rank"
-                                        text "[dealer_card_suit]" style "winston_pressure_card_suit"
+                    viewport:
+                        xsize 910
+                        ysize 200
+                        draggable True
+                        mousewheel "horizontal"
+
+                        hbox:
+                            spacing 14
+                            for index, card in enumerate(winston_pressure_dealer_hand):
+                                $ dealer_hidden = (index == 1 and not reveal_dealer)
+                                $ dealer_card_rank = card["rank"]
+                                $ dealer_card_suit = card["suit"]
+                                frame:
+                                    xsize 180
+                                    ysize 190
+                                    background Solid("#283E52" if dealer_hidden else "#EFE2C8")
+                                    padding (12, 12, 12, 12)
+                                    if dealer_hidden:
+                                        text _("CASE\nFILE\n?") style "winston_pressure_card_hidden"
+                                    else:
+                                        vbox:
+                                            xalign 0.5
+                                            yalign 0.5
+                                            text "[dealer_card_rank]" style "winston_pressure_card_rank"
+                                            text "[dealer_card_suit]" style "winston_pressure_card_suit"
 
                     if reveal_dealer:
                         text _("Defense total: [dealer_total]") style "winston_pressure_total"
@@ -109,7 +114,10 @@ screen winston_pressure_minigame():
                     if winston_pressure_phase == "playing":
                         textbutton _("PRESSURE — DRAW") action Function(winston_pressure_press)
                         textbutton _("QUESTION — STAND") action Function(winston_pressure_question)
-                        textbutton _("USE INTUITION") action Function(winston_pressure_use_intuition)
+                        if winston_pressure_intuition_uses < WINSTON_PRESSURE_MAX_INTUITION:
+                            textbutton _("USE INTUITION") action Function(winston_pressure_use_intuition)
+                        else:
+                            textbutton _("USE INTUITION (DEPLETED)") action None
                         textbutton _("LET WINSTON HANDLE THIS ONE") action Function(winston_pressure_assist_current)
                     elif winston_pressure_phase in ("bust", "retry"):
                         textbutton _("RESET THE INTERVIEW") action Function(winston_pressure_retry)
@@ -121,7 +129,7 @@ screen winston_pressure_minigame():
                     text _("Completed: [len(winston_pressure_completed)] / [len(winston_pressure_targets)]") style "winston_pressure_stat"
                     text _("Busts: [winston_pressure_busts]") style "winston_pressure_stat"
                     text _("Perfect 21s: [winston_pressure_exact_twenty_ones]") style "winston_pressure_stat"
-                    text _("Intuition reads: [winston_pressure_intuition_uses]") style "winston_pressure_stat"
+                    text _("Intuition reads: [winston_pressure_intuition_uses] / [WINSTON_PRESSURE_MAX_INTUITION]") style "winston_pressure_stat"
 
                     if winston_pressure_phase in ("playing", "bust", "retry"):
                         textbutton _("LET WINSTON FINISH ALL") action Function(winston_pressure_assist_all)

@@ -51,14 +51,14 @@ define DAY_SEVEN_PROFILE_FIELDS = [
     ("Rh Factor", "rh_factor"),
     ("Power", "power"),
     ("Height", "height"),
-    ("Trace Left at Scene", "unique_drop"),
+    ("Known Biological/Physical Markers", "unique_drop"),
     ("Identifying Feature", "unique_id"),
     ("Personal Habits", "organization"),
     ("Build", "build"),
     ("Hand Injuries", "injuries"),
     ("Hair Color", "hair"),
     ("Temperament", "temperament"),
-    ("Reaction After Killing", "kill_reaction"),
+    ("Crisis Behavior / Stress Reaction", "kill_reaction"),
 ]
 
 default daySevenSelectedSuspect = 0
@@ -182,7 +182,7 @@ init python:
         if clue_key in store.recordedClueKeys:
             return
         clue_text = (
-            "{} was caught attempting to destroy Enrico Edge's bloodstained wallet."
+            "{} was caught attempting to destroy Enrico Edge's bloodstained wallet and workshop lockbox key."
             .format(store.suspectNames[store.killer])
         )
         clue = {
@@ -230,6 +230,11 @@ init python:
                 and store.ulyssesRomanceInterest >= store.ULYSSES_DATE_ACCEPT_THRESHOLD
                 and store.ulyssesPersonalEvenings >= store.ULYSSES_DATE_MIN_PERSONAL_EVENINGS
             )
+        elif partner_id == "madeline":
+            if not getattr(store, "madsRomanceEligible", True):
+                romance_allowed = False
+            if getattr(store, "mads_cutoff_violated", False) and not getattr(store, "mads_apology_accepted", False):
+                return "rejection"
 
         if (romance_allowed
                 and (partner_id == "ulysses" or visits >= store.DAY_SEVEN_MIN_ROMANCE_VISITS[partner_id])
@@ -247,9 +252,25 @@ init python:
         organization = attrs.get("organization", "Messy")
 
         temperament_lines = {
-            "Calm": "I knew exactly what Enrico would do once he discovered what I had done. He was going to expose me, so I decided he would not leave that room.",
-            "Passionate": "Enrico discovered what I had done and said he would expose me. I lost my temper. By the time I understood how far it had gone, he was dead.",
-            "Nervous": "Enrico discovered what I had done. He said he would expose me, and I panicked. I kept thinking I could still stop everything from collapsing.",
+            "Calm": (
+                "Enrico caught me siphoning untested chemical stimulants from the evidence lockup. "
+                "The old hero spent thirty years on the street, but he still thought he could lecture me "
+                "about duty from a warehouse supply desk. He said he would take his inventory log straight "
+                "to Ulysses in the morning. I knew exactly what that meant for my life, so I decided he would "
+                "not leave that workshop."
+            ),
+            "Passionate": (
+                "Enrico caught me red-handed skimming the seized stimulant vials from lockup! The retired veteran "
+                "hero was supposed to be tinkering with his spare parts, not playing detective on warehouse supplies. "
+                "He called me a disgrace to the badge. I lost my temper. By the time the shouting ended and I looked "
+                "down at what I'd done, he was dead."
+            ),
+            "Nervous": (
+                "Enrico was just managing warehouse supplies—he wasn't supposed to audit the chemical lockup until "
+                "Friday! When he found the missing stimulant vials and logged them, he told me I had one hour to turn "
+                "myself in before he delivered his cipher log to Ulysses. I panicked. I just wanted the logbook back, "
+                "I swear, but everything spun out of control and he died."
+            ),
         }
         reaction_lines = {
             "Calculated": "Afterward, I forced myself to slow down, clean what I could, and leave as though nothing had changed.",
@@ -274,27 +295,77 @@ init python:
         leaders = [key for key, value in counts.items() if value == highest and value > 0]
         return leaders[0] if len(leaders) == 1 else ""
 
-    def day_seven_mismatch_text(selected_id):
-        chosen = store.suspectAttributes[selected_id]
-        actual = store.suspectAttributes[store.killer]
-        priority = [
-            "unique_id", "blood_type", "rh_factor", "height", "build",
-            "injuries", "power", "organization", "kill_reaction",
-            "unique_drop", "hair", "temperament",
-        ]
+    def day_seven_mismatch_info(selected_id):
+        """Evaluate contradiction strictly using gathered evidence rather than the hidden answer key."""
+        if selected_id == store.killer:
+            return {
+                "kind": "matches",
+                "text": "The selected file matches all gathered evidence.",
+            }
+
         labels = dict((key, label) for label, key in store.DAY_SEVEN_PROFILE_FIELDS)
-        for key in priority:
-            if chosen.get(key) != actual.get(key):
-                return (
-                    "{}'s file lists {} as {}, while the combined evidence points to {}."
-                    .format(
-                        store.suspectNames[selected_id],
-                        labels.get(key, key),
-                        chosen.get(key),
-                        actual.get(key),
-                    )
-                )
-        return "The selected file cannot account for the complete evidence chain."
+
+        # 1. Does this suspect contradict any recorded positive reveal from Day 6?
+        for clue_key, reveal in store.recordedRouteReveals.items():
+            if reveal.get("kind") == "retain_killer_attribute" or reveal.get("visit") == 6:
+                attr = reveal.get("attribute")
+                val = reveal.get("value")
+                if attr and val:
+                    chosen_val = store.suspectAttributes[selected_id].get(attr)
+                    if chosen_val != val:
+                        field_name = labels.get(attr, attr)
+                        return {
+                            "kind": "contradicts_gathered",
+                            "text": (
+                                "Our gathered evidence identifies {} as {}, "
+                                "but {}'s file lists {} as {}."
+                                .format(
+                                    field_name,
+                                    val,
+                                    store.suspectNames[selected_id],
+                                    field_name,
+                                    chosen_val,
+                                )
+                            ),
+                        }
+
+        # 2. Did any gathered clue already eliminate this suspect?
+        for clue in store.investigationClues:
+            if selected_id in clue.get("eliminated", []):
+                return {
+                    "kind": "already_eliminated",
+                    "text": (
+                        "{} was already ruled out by our case record: \"{}\" "
+                        "You accused a suspect whose innocence was already established in your own notes."
+                        .format(store.suspectNames[selected_id], clue.get("text", ""))
+                    ),
+                }
+
+        # 3. Check Ulysses cross-report badge deduction if completed
+        if getattr(store, "ulyssesCrossReportCompleted", False):
+            if selected_id != store.killer:
+                return {
+                    "kind": "contradicts_cross_report",
+                    "text": (
+                        "Our cross-report badge analysis already established that only {} "
+                        "had authorized access to Evidence Storage C during the stimulant siphoning window."
+                        .format(store.suspectNames[store.killer])
+                    ),
+                }
+
+        # 4. Insufficient evidence: The suspect survived the player's gathered clues,
+        # but the player made an unsupported guess between the surviving files.
+        return {
+            "kind": "insufficient_evidence",
+            "text": (
+                "Our gathered evidence does not isolate {} over the other surviving suspects. "
+                "Accusing them without verified proof was an unsupported guess."
+                .format(store.suspectNames[selected_id])
+            ),
+        }
+
+    def day_seven_mismatch_text(selected_id):
+        return day_seven_mismatch_info(selected_id)["text"]
 
     def day_seven_ending_key(solved, partner_id, outcome):
         result = "success" if solved else "failure"
@@ -411,13 +482,60 @@ init python:
         original_apology = store.ulyssesBoundaryApology
         original_ulysses_romance = store.ulyssesRomanceInterest
         original_ulysses_personal = store.ulyssesPersonalEvenings
+        original_mads_cutoff = getattr(store, "mads_cutoff_violated", False)
+        original_mads_romance = getattr(store, "madsRomanceEligible", True)
+        original_mads_apology = getattr(store, "mads_apology_accepted", False)
+        original_clues = list(store.investigationClues)
+        original_reveals = dict(store.recordedRouteReveals)
+        original_cross = getattr(store, "ulyssesCrossReportCompleted", False)
         original_visit_counters = {
             route_id: int(getattr(store, data[2]))
             for route_id, data in store.ULYSSES_ROUTE_DATA.items()
         }
         try:
+            # Verify accusation mismatch evaluation model
+            store.killer = 1
+            if day_seven_mismatch_info(1)["kind"] != "matches":
+                raise Exception("day_seven_mismatch_info failed on killer match.")
+            store.recordedRouteReveals = {
+                "razzle_visit_6": {
+                    "route": "Razzle", "visit": 6, "attribute": "hair", "value": "Brown",
+                    "eliminated": [2, 3, 5, 6, 8, 9]
+                }
+            }
+            store.investigationClues = [
+                {
+                    "key": "razzle_visit_6", "route": "Razzle", "visit": 6,
+                    "text": "Eyewitness evidence identifies Brown hair.",
+                    "eliminated": [2, 3, 5, 6, 8, 9]
+                }
+            ]
+            if day_seven_mismatch_info(6)["kind"] != "contradicts_gathered":
+                raise Exception("day_seven_mismatch_info failed to prioritize positive reveal contradiction.")
+
+            store.recordedRouteReveals = {}
+            store.investigationClues = [
+                {"key": "test", "route": "Madeline", "visit": 1, "text": "cleared", "eliminated": [2]}
+            ]
+            if day_seven_mismatch_info(2)["kind"] != "already_eliminated":
+                raise Exception("day_seven_mismatch_info failed on eliminated suspect.")
+
+            store.investigationClues = []
+            store.ulyssesCrossReportCompleted = False
+            if day_seven_mismatch_info(2)["kind"] != "insufficient_evidence":
+                raise Exception("day_seven_mismatch_info failed on insufficient evidence.")
+
+            store.ulyssesCrossReportCompleted = True
+            if day_seven_mismatch_info(2)["kind"] != "contradicts_cross_report":
+                raise Exception("day_seven_mismatch_info failed on cross-report.")
+
             store.ulyssesRomanceInterest = store.ULYSSES_DATE_ACCEPT_THRESHOLD
             store.ulyssesPersonalEvenings = store.ULYSSES_DATE_MIN_PERSONAL_EVENINGS
+            store.ulyssesBoundaryViolation = False
+            store.ulyssesBoundaryApology = False
+            store.madsRomanceEligible = True
+            store.mads_cutoff_violated = False
+            store.mads_apology_accepted = False
             for route_id, data in store.ULYSSES_ROUTE_DATA.items():
                 setattr(
                     store,
@@ -450,6 +568,16 @@ init python:
             day_seven_set_score("ulysses", store.DAY_SEVEN_ROMANCE_THRESHOLDS["ulysses"])
             if day_seven_relationship_outcome("ulysses", True) == "romance":
                 raise Exception("An unresolved Ulysses boundary violation allowed romance.")
+
+            store.madsRomanceEligible = False
+            store.mads_cutoff_violated = True
+            store.mads_apology_accepted = False
+            day_seven_set_score("madeline", store.DAY_SEVEN_ROMANCE_THRESHOLDS["madeline"])
+            if day_seven_relationship_outcome("madeline", True) != "rejection":
+                raise Exception("An un-apologized Madeline cutoff violation allowed romance/friendship.")
+            store.mads_apology_accepted = True
+            if day_seven_relationship_outcome("madeline", True) != "friend":
+                raise Exception("An apologized Madeline cutoff violation failed to restore friendship.")
         finally:
             store.killer = original_killer
             store.remainingSuspects = original_remaining
@@ -457,6 +585,12 @@ init python:
             store.ulyssesBoundaryApology = original_apology
             store.ulyssesRomanceInterest = original_ulysses_romance
             store.ulyssesPersonalEvenings = original_ulysses_personal
+            store.mads_cutoff_violated = original_mads_cutoff
+            store.madsRomanceEligible = original_mads_romance
+            store.mads_apology_accepted = original_mads_apology
+            store.investigationClues = original_clues
+            store.recordedRouteReveals = original_reveals
+            store.ulyssesCrossReportCompleted = original_cross
             for route_id, value in original_visit_counters.items():
                 setattr(store, store.ULYSSES_ROUTE_DATA[route_id][2], value)
             for partner_id, value in original_scores.items():

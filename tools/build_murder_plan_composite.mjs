@@ -1,10 +1,17 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import sharp from "file:///C:/Users/grays/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/sharp/dist/index.mjs";
 
-const sourceRoot = "C:/Users/grays/Nextcloud/Documents/NeatNotes/MD";
+let sharp;
+try {
+  sharp = (await import("sharp")).default;
+} catch {
+  const fallbackPath = process.env.SHARP_RUNTIME_PATH || "file:///C:/Users/grays/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/sharp/dist/index.mjs";
+  sharp = (await import(fallbackPath)).default;
+}
+
+const sourceRoot = process.env.MURDER_PLAN_SOURCE_ROOT || "C:/Users/grays/Nextcloud/Documents/NeatNotes/MD";
 const canvasPath = path.join(sourceRoot, "MurderGamePlan.canvas");
-const outputPath = "C:/Users/grays/Desktop/sw/gameJam/BeziJam2026/docs/murder-game-plan-composite.png";
+const outputPath = process.env.MURDER_PLAN_OUTPUT_PATH || path.resolve("docs/murder-game-plan-composite.png");
 const canvasWidth = 25408;
 const canvasHeight = 13476;
 const tileWidth = 794;

@@ -268,7 +268,7 @@ screen day_seven_partner_choice():
                 size 48
                 color "#8d3027"
                 font "fonts/RandoSharpie.ttf"
-            text "You may ask one person on an explicitly romantic date. You cannot ask someone else if they decline.":
+            text "You may speak with one person before the night ends. You cannot ask someone else if they decline.":
                 xalign 0.5
                 text_align 0.5
                 size 25
@@ -278,7 +278,7 @@ screen day_seven_partner_choice():
             null height 12
 
             for partner_id, partner_name, _score_var in DAY_SEVEN_PARTNERS:
-                textbutton "Ask [partner_name] on a romantic date":
+                textbutton "Spend time with [partner_name]":
                     xalign 0.5
                     xsize 850
                     action Show(
@@ -288,7 +288,7 @@ screen day_seven_partner_choice():
 
             null height 8
 
-            textbutton ("Celebrate with the team as friends" if daySevenCaseSolved else "Leave without asking anyone out"):
+            textbutton ("Celebrate with the team as friends" if daySevenCaseSolved else "Leave without talking to anyone"):
                 xalign 0.5
                 xsize 850
                 action Show(
@@ -315,13 +315,13 @@ screen day_seven_confirm_partner(partner_id, partner_name):
             spacing 26
 
             if partner_id:
-                text "Ask [partner_name] on a romantic date?":
+                text "Spend time with [partner_name] before the night ends?":
                     xalign 0.5
                     text_align 0.5
                     size 34
                     color "#251d18"
             else:
-                text ("End the night with the team?" if daySevenCaseSolved else "Leave without asking anyone out?"):
+                text ("End the night with the team?" if daySevenCaseSolved else "Leave without speaking to anyone?"):
                     xalign 0.5
                     text_align 0.5
                     size 34
@@ -373,23 +373,51 @@ screen ending_gallery():
                 color "#DB8D7A"
                 xmaximum 1000
 
-            for entry in catalog:
-                if entry["key"] in unlocked:
-                    textbutton entry["title"]:
-                        xsize 920
-                        text_size 24
-                        action Replay(
-                            "DaySevenGalleryReplay",
-                            scope={"daySevenGalleryReplayKey": entry["key"]},
-                            locked=False)
-                else:
-                    frame:
-                        xsize 920
-                        background Solid("#2a2323aa")
-                        padding (18, 13)
-                        text "??? — LOCKED":
-                            size 24
-                            color "#778288"
+            for group_id, group_name in [
+                    ("razzle", "RAZZLE DAZZLE"),
+                    ("winston", "WINSTON"),
+                    ("nicky", "NICKY"),
+                    ("ica", "ICA"),
+                    ("ulysses", "ULYSSES"),
+                    ("madeline", "MADELINE"),
+                    ("dhampir", "DHAMPIR"),
+                    ("", "ATLAS TEAM & SOLO")]:
+                $ group_entries = [e for e in catalog if e["partner"] == group_id]
+                $ group_unlocked = [e for e in group_entries if e["key"] in unlocked]
+
+                null height 8
+                text "[group_name] — ([len(group_unlocked)]/[len(group_entries)])":
+                    size 26
+                    color "#E47751"
+                    font "fonts/RandoSharpie.ttf"
+
+                for entry in group_entries:
+                    if entry["key"] in unlocked:
+                        textbutton entry["title"]:
+                            xsize 920
+                            text_size 23
+                            action Replay(
+                                "DaySevenGalleryReplay",
+                                scope={"daySevenGalleryReplayKey": entry["key"]},
+                                locked=False)
+                    else:
+                        $ status_label = "Solved" if entry["solved"] else "Unclosed"
+                        if entry["partner"] == "":
+                            $ hint_text = ("Team Celebration — Case " + status_label) if entry["solved"] else ("Solo Departure — Case " + status_label)
+                        elif entry["outcome"] == "romance":
+                            $ hint_text = entry["title"].split(" — ")[0] + " — Romance — Case " + status_label + " (Locked: Requires romantic connection)"
+                        elif entry["outcome"] == "friend":
+                            $ hint_text = entry["title"].split(" — ")[0] + " — Friendship — Case " + status_label + " (Locked: Requires friendship trust)"
+                        else:
+                            $ hint_text = entry["title"].split(" — ")[0] + " — Professional Distance — Case " + status_label + " (Locked)"
+
+                        frame:
+                            xsize 920
+                            background Solid("#2a2323aa")
+                            padding (18, 12)
+                            text "[hint_text]":
+                                size 20
+                                color "#9b8d84"
 
 
 transform day_seven_credit_scroll:
@@ -469,18 +497,6 @@ screen day_seven_credits():
         text "Madi Wander\nFenik\nBeau Maher\nMonaspace\nRen'Py":
             xalign 0.5
             text_align 0.5
-            size 31
-            color "#f0d9cf"
-
-        null height 90
-
-        text "MUSIC":
-            xalign 0.5
-            size 42
-            color "#E47751"
-            font "fonts/RandoSharpie.ttf"
-        text "To Be Added":
-            xalign 0.5
             size 31
             color "#f0d9cf"
 

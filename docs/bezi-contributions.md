@@ -1,6 +1,8 @@
 # Bezi Contributions to Date and Deduce
 
-This document tracks everything Bezi (this AI agent) has created or helped with in the `BeziJam2026` project, so the team and future agents know what already exists and where to find it.
+> **HISTORICAL RECORD — IGNORE FOR IMPLEMENTATION.** The creator has retained this file only as a contribution history. Do not use it as a reference for writing, characterization, canon, mechanics, current implementation status, or development instructions. Do not follow its handoff links or restore deleted documents based on this record. Use `docs/implementation_guide.md`, `docs/audit_decisions.md`, and the current source instead; the creator-authored intro and briefing remain the writing standard. Some documents named below have been deleted.
+
+This document records Bezi's historical contributions to the `BeziJam2026` project. The descriptions below are preserved as history and may no longer describe the current game.
 
 ## Project Onboarding and Documentation
 
@@ -60,4 +62,4 @@ From the plans above, the following minigame screens exist in the project (imple
 
 ## Notes for Future Agents
 
-Some of the minigame plans listed above may not yet be fully implemented in code — check the corresponding `.rpy` screen and script files under `/BeziJam2026/game/` against each plan's checklist before assuming a feature is complete. Refer to `/Pages/Private/Project Handoff - Future Agents.md` for the current implementation status and open TODOs.
+Ignore this document when implementing or reviewing the game. Its plan descriptions and external handoff references are historical, not current instructions. Follow `docs/implementation_guide.md` and `docs/audit_decisions.md`, and verify behavior against the current source.

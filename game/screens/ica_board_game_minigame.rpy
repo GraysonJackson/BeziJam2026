@@ -98,17 +98,24 @@ screen ica_board_game_minigame():
                     else:
                         text _("Your one-time movement bonus has been spent.") style "ica_board_hint"
 
+                    null height 6
+                    textbutton _("Withdraw from Race") action Function(ica_board_withdraw)
+
                 elif ica_board_phase == "ica_turn":
-                    textbutton _("Resolve Ica's turn") action Function(ica_board_ica_turn)
+                    timer 1.0 action Function(ica_board_ica_turn)
+                    textbutton _("Resolve Ica's turn (or wait...)") action Function(ica_board_ica_turn)
 
                 elif ica_board_phase == "winston_turn":
-                    textbutton _("Resolve Winston's turn") action Function(ica_board_winston_turn)
+                    timer 1.0 action Function(ica_board_winston_turn)
+                    textbutton _("Resolve Winston's turn (or wait...)") action Function(ica_board_winston_turn)
 
                 elif ica_board_phase == "complete_pending":
                     if ica_board_winner == "player":
                         text _("You win the race. Ica stares at the board, then gives you a grudging nod.") style "ica_board_body"
                     elif ica_board_winner == "ica":
                         text _("Ica wins the race. She barely looks up from the board: 'Skill issue, freshie.'") style "ica_board_body"
+                    elif ica_board_winner == "withdrawn":
+                        text _("You withdrew from the race. Winston and Ica immediately argue over who gets your pawn.") style "ica_board_body"
                     else:
                         text _("Winston wins the race and celebrates like he just saved the city.") style "ica_board_body"
                     textbutton _("Finish Game") action Function(finish_ica_board_game_minigame)

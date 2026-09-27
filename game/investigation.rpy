@@ -418,24 +418,49 @@ init python:
                 if preferred_value is not None:
                     candidate_values.append(preferred_value)
                 for suspect_id in priority:
-                    value = store.suspectAttributes[suspect_id][attribute]
-                    if (value != store.suspectAttributes[killer_id][attribute]
-                            and value not in candidate_values):
-                        candidate_values.append(value)
+                    val = store.suspectAttributes[suspect_id][attribute]
+                    if (val != store.suspectAttributes[killer_id][attribute]
+                            and val not in candidate_values):
+                        candidate_values.append(val)
 
-                for value in candidate_values:
-                    same_value = [
-                        suspect_id for suspect_id in priority
-                        if (suspect_id in active
-                            and suspect_id not in chosen
-                            and store.suspectAttributes[suspect_id][attribute] == value)
+                # First priority: find a candidate value with EXACTLY expected active innocents to complete category
+                found_exact = False
+                for val in candidate_values:
+                    val_active = [
+                        s for s in priority
+                        if s in active and store.suspectAttributes[s][attribute] == val
                     ]
-                    for suspect_id in same_value:
-                        chosen.append(suspect_id)
+                    if len(val_active) == expected:
+                        chosen = val_active
+                        found_exact = True
+                        break
+
+                if not found_exact:
+                    # Second priority: any candidate value with >= expected active innocents
+                    for val in candidate_values:
+                        val_active = [
+                            s for s in priority
+                            if s in active and store.suspectAttributes[s][attribute] == val
+                        ]
+                        if len(val_active) >= expected:
+                            chosen = val_active[:expected]
+                            found_exact = True
+                            break
+
+                if not found_exact:
+                    for val in candidate_values:
+                        same_value = [
+                            suspect_id for suspect_id in priority
+                            if (suspect_id in active
+                                and suspect_id not in chosen
+                                and store.suspectAttributes[suspect_id][attribute] == val)
+                        ]
+                        for suspect_id in same_value:
+                            chosen.append(suspect_id)
+                            if len(chosen) == expected:
+                                break
                         if len(chosen) == expected:
                             break
-                    if len(chosen) == expected:
-                        break
 
             if len(chosen) < expected:
                 for suspect_id in priority:
@@ -504,48 +529,58 @@ init python:
                     suspect_id for suspect_id, attributes in store.suspectAttributes.items()
                     if attributes[attribute] != value
                 ])
-            elif kind == "razzle_attribute":
-                value = store.razzleFocusedRoutePlan[killer_id][attribute]
-                preferred_ids = sorted([
-                    suspect_id for suspect_id, attributes in store.suspectAttributes.items()
-                    if attributes[attribute] == value
-                ])
-                eliminated_ids = _adapt_early_reveal(
-                    route_id, visit, killer_id, active_suspects,
-                    preferred_ids, attribute=attribute,
-                    preferred_value=value)
-            elif kind == "madeline_attribute":
-                value = store.madelineFocusedRoutePlan[killer_id][attribute]
-                preferred_ids = sorted([
-                    suspect_id for suspect_id, attributes in store.suspectAttributes.items()
-                    if attributes[attribute] == value
-                ])
-                eliminated_ids = _adapt_early_reveal(
-                    route_id, visit, killer_id, active_suspects,
-                    preferred_ids, attribute=attribute,
-                    preferred_value=value)
-            elif kind == "nicky_attribute":
-                value = store.nickyFocusedRoutePlan[killer_id][attribute]
-                preferred_ids = sorted([
-                    suspect_id for suspect_id, attributes in store.suspectAttributes.items()
-                    if attributes[attribute] == value
-                ])
-                eliminated_ids = _adapt_early_reveal(
-                    route_id, visit, killer_id, active_suspects,
-                    preferred_ids, attribute=attribute,
-                    preferred_value=value)
+                clue_text = reveal["template"].format(value=value)
             else:
-                killer_value = store.suspectAttributes[killer_id][attribute]
-                value = reveal["cycle"][killer_value]
+                if kind == "razzle_attribute":
+                    orig_val = store.razzleFocusedRoutePlan[killer_id][attribute]
+                elif kind == "madeline_attribute":
+                    orig_val = store.madelineFocusedRoutePlan[killer_id][attribute]
+                elif kind == "nicky_attribute":
+                    orig_val = store.nickyFocusedRoutePlan[killer_id][attribute]
+                else:
+                    killer_value = store.suspectAttributes[killer_id][attribute]
+                    orig_val = reveal["cycle"][killer_value]
+
                 preferred_ids = sorted([
                     suspect_id for suspect_id, attributes in store.suspectAttributes.items()
-                    if attributes[attribute] == value
+                    if attributes[attribute] == orig_val
                 ])
                 eliminated_ids = _adapt_early_reveal(
                     route_id, visit, killer_id, active_suspects,
                     preferred_ids, attribute=attribute,
-                    preferred_value=value)
-            clue_text = reveal["template"].format(value=value)
+                    preferred_value=orig_val)
+
+                # Determine actual eliminated category / value
+                selected_values = set(
+                    store.suspectAttributes[suspect_id][attribute]
+                    for suspect_id in eliminated_ids
+                )
+                if len(selected_values) == 1:
+                    selected_val = list(selected_values)[0]
+                    active_with_val = set(
+                        s for s in active_suspects
+                        if s != killer_id and store.suspectAttributes[s][attribute] == selected_val
+                    )
+                    category_complete = active_with_val == set(eliminated_ids)
+                else:
+                    category_complete = False
+
+                if category_complete:
+                    value = selected_val
+                    clue_text = reveal["template"].format(value=value)
+                else:
+                    value = "Individual profiles"
+                    names = " and ".join(store.suspectNames[s] for s in eliminated_ids)
+                    if route_id == "razzle":
+                        clue_text = "Doorframe measurements clear the individual profiles for {}.".format(names)
+                    elif route_id == "madeline":
+                        clue_text = "Separated blood markers clear the individual reference profiles for {}.".format(names)
+                    elif route_id == "dhampir":
+                        clue_text = "The reconstruction clears the individual wound profiles for {}.".format(names)
+                    elif route_id == "nicky":
+                        clue_text = "Corroborated measurements clear the individual profiles for {}.".format(names)
+                    else:
+                        clue_text = "Analysis clears the individual profiles for {}.".format(names)
 
         if visit in (1, 3):
             preferred_set = set(preferred_ids if kind != "single" else [reveal["eliminations"][killer_id]])
@@ -581,7 +616,7 @@ init python:
                 store.suspectAttributes[suspect_id][attribute]
                 for suspect_id in eliminated_ids
             ) if attribute else set()
-            if len(selected_values) == 1:
+            if len(selected_values) == 1 and kind != "focused_pair":
                 selected_value = list(selected_values)[0]
                 active_with_value = set(
                     suspect_id for suspect_id in active_suspects
@@ -593,6 +628,14 @@ init python:
                 category_complete = False
             result["scope"] = "category" if category_complete else "individual"
             result["selected_values"] = sorted(selected_values)
+            result["value"] = value
+            result["text"] = clue_text
+            target_val = list(selected_values)[0] if selected_values else (orig_val if "orig_val" in locals() else value)
+            result["target_value"] = target_val
+            result["target_injury"] = target_val if route_id == "dhampir" else None
+            result["target_height"] = target_val if route_id == "razzle" else None
+            result["target_blood_type"] = target_val if route_id == "madeline" else None
+            result["target_build"] = target_val if route_id == "nicky" else None
         else:
             result["scope"] = "single" if visit == 1 else "category"
 

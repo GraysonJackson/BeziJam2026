@@ -5,6 +5,7 @@ define DHAMPIR_HIGH_THRESHOLD = 28
 
 default dhampir_movie_snack = ""
 default dhampir_rooftop_question = ""
+default dhampir_rooftop_travel = "flight"
 
 ## Enrico's cause of death varies with the saved killer seed. None of these
 ## descriptions identifies the attacker's elemental power category.

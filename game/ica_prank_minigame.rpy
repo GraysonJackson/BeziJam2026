@@ -208,7 +208,7 @@ init python:
 
     def ica_prank_tick():
         """Advance Ulysses' deterministic patrol and check his visible tiles."""
-        if not store.ica_prank_session_active or store.ica_prank_phase != "active":
+        if not store.ica_prank_session_active or store.ica_prank_phase != "active" or getattr(store, "minigame_paused", False):
             return
 
         if store.ica_prank_safe_ticks > 0:

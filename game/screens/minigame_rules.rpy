@@ -1,12 +1,14 @@
 ## A consistent, readable rules card shown before every playable minigame.
 
+default minigame_paused = False
+
 screen minigame_rules(title, objective, rules, controls="", note=""):
     modal True
     zorder 300
 
     add Solid("#091017F2")
     add "gui/bgtile.png" alpha 0.10
-    key "game_menu" action NullAction()
+    key "game_menu" action [SetVariable("minigame_paused", False), Return(), Hide("minigame_rules")]
 
     frame:
         align (0.5, 0.5)
@@ -77,7 +79,7 @@ screen minigame_rules(title, objective, rules, controls="", note=""):
 
             textbutton "Start Game":
                 xalign 0.5
-                action Return()
+                action [SetVariable("minigame_paused", False), Return(), Hide("minigame_rules")]
                 text_size 31
 
 
@@ -142,8 +144,9 @@ label RulesWinstonPressure:
         [
             "Pressure draws another card. Question stands on your current total.",
             "The suspect follows dealer rules and must stand at 17 or higher.",
+            "Ties go to the suspect: you must strictly beat their total to break through their defense.",
             "Going over 21 overwhelms the interview and resets that suspect; it never changes the seeded evidence.",
-            "Intuition gives limited help. Winston can take one interview or finish the remaining set.",
+            "Intuition gives 3 limited reads per session. Winston can take one interview or finish the remaining set.",
         ],
         "Mouse: choose PRESSURE to draw or QUESTION to stand.")
     return
@@ -196,7 +199,7 @@ label RulesIcaEating:
         [
             "Take Bites to make fast progress, but every bite spends stamina.",
             "Pace Yourself to recover stamina and avoid choking incidents.",
-            "Your chosen approach grants one special action. Ica will also cheat during the contest.",
+            "Flirting and cheating grant a one-time special move; playing fair relies on steady Bite and Pace rhythm.",
             "The contest ends automatically when time runs out.",
         ],
         "Mouse: Bite, Pace Yourself, or use the special action. Keyboard: Space bites; R paces.")

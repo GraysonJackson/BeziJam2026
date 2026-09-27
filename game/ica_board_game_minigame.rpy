@@ -85,29 +85,43 @@ init python:
             store.ica_board_winston_hand.append(_ica_board_draw_winston_card())
 
     def _ica_board_choose_ai_card(pawn_id, hand):
-        """Prefer a legal bump, then take the largest available move."""
+        """Prefer winning move first, then character-specific strategic bump."""
         if not hand:
             return None
 
         if pawn_id == "ica":
             position = store.ica_board_ica_position
-            opponents = (
-                store.ica_board_player_position,
-                store.ica_board_winston_position,
-            )
         elif pawn_id == "winston":
             position = store.ica_board_winston_position
-            opponents = (
-                store.ica_board_player_position,
-                store.ica_board_ica_position,
-            )
         else:
             raise Exception("Unknown Ica board-game AI pawn: {}".format(pawn_id))
 
+        # 1. Winning move takes absolute priority
         for card_value in sorted(hand, reverse=True):
-            destination = min(store.ICA_BOARD_FINISH, position + card_value)
-            if destination < store.ICA_BOARD_FINISH and destination in opponents:
+            if position + card_value >= store.ICA_BOARD_FINISH:
                 return card_value
+
+        # 2. Personality-specific bump strategy
+        if pawn_id == "winston":
+            leader_pos = max(store.ica_board_player_position, store.ica_board_ica_position)
+            for card_value in sorted(hand, reverse=True):
+                destination = position + card_value
+                if destination == leader_pos and destination > 0:
+                    return card_value
+            for card_value in sorted(hand, reverse=True):
+                destination = position + card_value
+                if destination in (store.ica_board_player_position, store.ica_board_ica_position) and destination > 0:
+                    return card_value
+        elif pawn_id == "ica":
+            for card_value in sorted(hand, reverse=True):
+                destination = position + card_value
+                if destination == store.ica_board_winston_position and destination > 0:
+                    return card_value
+            for card_value in sorted(hand, reverse=True):
+                destination = position + card_value
+                if destination in (store.ica_board_player_position, store.ica_board_winston_position) and destination > 0:
+                    return card_value
+
         return max(hand)
 
     def start_ica_board_game_minigame(approach_id=None):
@@ -289,6 +303,16 @@ init python:
                 "" if pawn_id == "player" else "es")
         elif pawn_id == "player":
             store.ica_board_phase = "ica_turn"
+
+    def ica_board_withdraw():
+        """Allow player to withdraw from the race and let AI battle."""
+        if not store.ica_board_session_active or store.ica_board_phase == "complete":
+            return
+        store.ica_board_winner = "withdrawn"
+        store.ica_board_pending_won = False
+        store.ica_board_feedback = "You step back from the board to let Ica and Winston battle for supremacy."
+        store.ica_board_phase = "complete_pending"
+        renpy.restart_interaction()
 
     def finish_ica_board_game_minigame():
         """Record the settled race exactly once and close the modal screen."""

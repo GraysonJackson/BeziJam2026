@@ -1,7 +1,7 @@
 ## Nicky Visit 3: two-round records-and-alibis memory matching game.
 
 define NICKY_MEMORY_PHASE_SECONDS = 75
-define NICKY_MEMORY_MISMATCH_DELAY = 0.85
+define NICKY_MEMORY_MISMATCH_DELAY = 1.6
 define NICKY_MEMORY_PEEK_SECONDS = 2.0
 define NICKY_MEMORY_PAIRS_PER_PHASE = 6
 define NICKY_MEMORY_PHASE_NAMES = ("RECORD SOURCES", "SUSPECT PROFILES")
@@ -35,7 +35,7 @@ init python:
                 ("booking", "BOOKING PHOTO", "INTAKE MEASUREMENTS", "POLICE FILE"),
                 ("medical", "MEDICAL INTAKE", "OLD INJURY RECORD", "HEALTH RECORD"),
                 ("property", "PROPERTY LOG", "SIGNED EVIDENCE SEAL", "CUSTODY"),
-                ("witness", "WITNESS WORDING", "UNVERIFIED ASSUMPTION", "STATEMENT"),
+                ("witness", "WITNESS WORDING", "CANVASS INTERVIEW", "STATEMENT"),
             ]
 
         if phase_index != 1:
@@ -60,9 +60,9 @@ init python:
 
         return [
             ("suspect_a", "{}\nBOOKING FILE".format(first_name),
-             "MEASURED FRAME\n{}".format(first_description), "SUSPECT"),
+             "BOOKING MEASUREMENT\n{}".format(first_description), "SUSPECT"),
             ("suspect_b", "{}\nINTAKE FILE".format(second_name),
-             "MEASURED FRAME\n{}".format(second_description), "SUSPECT"),
+             "INTAKE MEASUREMENT\n{}".format(second_description), "SUSPECT"),
             ("scale", "CAMERA SCALE", "DOORFRAME WIDTH", "MEASUREMENT"),
             ("coat", "OVERSIZED COAT", "IGNORE SILHOUETTE", "CORRECTION"),
             ("power", "POWERED FORCE", "DOES NOT PROVE BUILD", "CORRECTION"),
@@ -203,6 +203,26 @@ init python:
             renpy.restart_interaction()
             return
 
+        if first["pair_id"] != second["pair_id"]:
+            if store.nicky_memory_phase_index == 1:
+                suspect_pairs = {"suspect_a", "suspect_b"}
+                if {first["pair_id"], second["pair_id"]} == suspect_pairs:
+                    file_cards = [c for c in (first, second) if "\nBOOKING FILE" in c["text"] or "\nINTAKE FILE" in c["text"]]
+                    meas_cards = [c for c in (first, second) if "MEASUREMENT\n" in c["text"] or "MEASURED FRAME\n" in c["text"]]
+                    if len(file_cards) == 1 and len(meas_cards) == 1:
+                        target_file = file_cards[0]
+                        target_meas = meas_cards[0]
+                        partner_meas = None
+                        for c in store.nicky_memory_cards:
+                            if c["pair_id"] == target_file["pair_id"] and ("MEASUREMENT\n" in c["text"] or "MEASURED FRAME\n" in c["text"]):
+                                partner_meas = c
+                                break
+                        if partner_meas is not None:
+                            meas_desc = target_meas["text"].split("\n", 1)[-1]
+                            partner_desc = partner_meas["text"].split("\n", 1)[-1]
+                            if meas_desc == partner_desc:
+                                target_meas["pair_id"], partner_meas["pair_id"] = partner_meas["pair_id"], target_meas["pair_id"]
+
         if first["pair_id"] == second["pair_id"]:
             matched = list(store.nicky_memory_matched_pairs)
             if first["pair_id"] not in matched:
@@ -250,7 +270,8 @@ init python:
         """Run a forgiving timer that offers assistance instead of failure."""
         if (not store.nicky_memory_active
                 or store.nicky_memory_phase != "matching"
-                or store.nicky_memory_time_remaining <= 0):
+                or store.nicky_memory_time_remaining <= 0
+                or getattr(store, "minigame_paused", False)):
             return
         store.nicky_memory_time_remaining = max(
             0, store.nicky_memory_time_remaining - 1)

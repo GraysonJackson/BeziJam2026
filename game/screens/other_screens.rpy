@@ -24,8 +24,6 @@ Created using {a=https://github.com/shawna-p/EasyRenPyGui}Fenik's EasyRen'Py GUI
 {a=https://beaumaher.gumroad.com/l/rando-sans}Rando Sans{/a} by Beau Maher.
 {a=https://monaspace.githubnext.com/}Monaspace{/a}.
 Built with {a=https://www.renpy.org/}Ren'Py{/a}.
-
-Music — To Be Added
 """)
 
 

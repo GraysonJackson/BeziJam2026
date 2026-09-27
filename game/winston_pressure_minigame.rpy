@@ -1,6 +1,7 @@
 ## Winston Visit 3: interrogation-pressure game using blackjack rules.
 
 define WINSTON_PRESSURE_DEALER_STAND = 17
+define WINSTON_PRESSURE_MAX_INTUITION = 3
 
 default winston_pressure_active = False
 default winston_pressure_phase = "idle"
@@ -107,6 +108,7 @@ init python:
         store.winston_pressure_exact_twenty_ones = 0
         store.winston_pressure_intuition_uses = 0
         store.winston_pressure_assists = 0
+        store.winston_pressure_assist_all_requested = False
         store.winston_pressure_dhampir_used = False
         store.winston_pressure_dhampir_total = 0
         store.winston_pressure_completion_recorded = False
@@ -122,6 +124,13 @@ init python:
         """Resume the existing queue after Dhampir's scripted turn."""
         if not store.winston_pressure_active:
             return None
+        if getattr(store, "winston_pressure_assist_all_requested", False):
+            while store.winston_pressure_target_index < len(store.winston_pressure_targets):
+                _winston_pressure_complete_current(assisted=True)
+            store.winston_pressure_phase = "result"
+            store.winston_pressure_feedback = (
+                "Winston finishes the remaining interviews and preserves every canonical result."
+            )
         return renpy.call_screen("winston_pressure_minigame")
 
     def winston_pressure_press():
@@ -155,6 +164,12 @@ init python:
     def winston_pressure_use_intuition():
         if (not store.winston_pressure_active
                 or store.winston_pressure_phase != "playing"):
+            return
+        if store.winston_pressure_intuition_uses >= store.WINSTON_PRESSURE_MAX_INTUITION:
+            store.winston_pressure_feedback = (
+                "You have exhausted your intuition reads for this session. Trust your detective gut."
+            )
+            renpy.restart_interaction()
             return
         total = winston_pressure_hand_total(store.winston_pressure_player_hand)
         store.winston_pressure_intuition_uses += 1

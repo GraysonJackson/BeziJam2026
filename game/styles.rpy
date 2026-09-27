@@ -74,8 +74,6 @@ style gui_text:
 style button:
     xysize (None, None)
     padding (0, 0)
-    hover_sound "audio/rollover3.ogg"
-    activate_sound "audio/click.ogg"
 
 style button_text:
     is gui_text

@@ -78,8 +78,21 @@ init python:
         store.dhampir_ispy_mistakes = 0
         store.dhampir_ispy_hints_used = 0
         store.dhampir_ispy_hint_target = ""
-        store.dhampir_ispy_feedback = (
-            "Inspect the room and find three details that do not fit Dhampir's current reconstruction.")
+        if excluded_injuries == "Bruised Knuckles":
+            store.dhampir_ispy_feedback = (
+                "Dhampir claims the attacker struck walls and furniture with bare fists. "
+                "Scan room impact points for evidence that contradicts wild fist strikes."
+            )
+        elif excluded_injuries == "Scuffed Hands":
+            store.dhampir_ispy_feedback = (
+                "Dhampir claims the attacker scraped their hands on rough entryways. "
+                "Scan the perimeter for evidence that contradicts scuffed palms."
+            )
+        else:
+            store.dhampir_ispy_feedback = (
+                "Dhampir claims the attacker escaped without a single injury. "
+                "Scan the room for traces showing the attacker was cut or wounded."
+            )
         store.dhampir_ispy_result = {}
 
     def start_dhampir_ispy_minigame(excluded_injuries):
@@ -95,6 +108,7 @@ init python:
         if target_id not in known_targets:
             raise Exception("Unknown Dhampir I-spy target: {}".format(target_id))
         if target_id in store.dhampir_ispy_inspected_targets:
+            dhampir_ispy_review(target_id)
             return
 
         inspected = list(store.dhampir_ispy_inspected_targets)
@@ -115,8 +129,19 @@ init python:
 
         if len(store.dhampir_ispy_found_targets) >= store.DHAMPIR_ISPY_REQUIRED_FINDS:
             store.dhampir_ispy_phase = "complete_pending"
+        renpy.restart_interaction()
+
+    def dhampir_ispy_review(target_id):
+        """Allow player to reread already discovered or cleared findings."""
+        if not store.dhampir_ispy_active:
+            return
+        if target_id in store.dhampir_ispy_found_targets:
             store.dhampir_ispy_feedback = (
-                "All three inconsistencies found. Madeline can combine the scanner layers.")
+                store.DHAMPIR_ISPY_VALID_FEEDBACK[
+                    store.dhampir_ispy_excluded_injuries][target_id])
+        elif target_id in store.dhampir_ispy_inspected_targets:
+            store.dhampir_ispy_feedback = store.DHAMPIR_ISPY_DECOY_FEEDBACK.get(
+                target_id, "No contradictions observed here.")
         renpy.restart_interaction()
 
     def dhampir_ispy_hint():
@@ -158,9 +183,9 @@ init python:
                 or store.dhampir_ispy_phase != "complete_pending"):
             return
 
-        if store.dhampir_ispy_mistakes == 0 and store.dhampir_ispy_hints_used == 0:
+        if store.dhampir_ispy_mistakes <= 1 and store.dhampir_ispy_hints_used == 0:
             quality = "perfect"
-        elif store.dhampir_ispy_mistakes <= 2:
+        elif store.dhampir_ispy_mistakes <= 3:
             quality = "careful"
         else:
             quality = "messy"

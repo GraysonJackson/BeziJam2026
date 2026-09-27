@@ -192,7 +192,7 @@ testsuite minigame_ui_smoke:
 
 label UITestRulesCard:
     window hide
-    call RulesWinstonPressure
+    call RulesWinstonPressure from _call_RulesWinstonPressure_1
     return
 
 

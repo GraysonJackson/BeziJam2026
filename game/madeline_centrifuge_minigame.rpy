@@ -5,10 +5,10 @@ define MADELINE_CENTRIFUGE_TRIM_MIN = -2
 define MADELINE_CENTRIFUGE_TRIM_MAX = 2
 
 define MADELINE_CENTRIFUGE_TUBES = {
-    "sample": {"label": "CRIME-SCENE SAMPLE", "mass": 6, "color": "#8D3027"},
+    "sample": {"label": "CRIME-SCENE SAMPLE", "mass": 5, "color": "#8D3027"},
     "control": {"label": "CONTROL SAMPLE", "mass": 4, "color": "#00719A"},
     "counter_red": {"label": "COUNTERWEIGHT 6", "mass": 6, "color": "#D26143"},
-    "counter_blue": {"label": "COUNTERWEIGHT 4", "mass": 4, "color": "#58A88A"},
+    "counter_blue": {"label": "COUNTERWEIGHT 3", "mass": 3, "color": "#58A88A"},
 }
 
 define MADELINE_CENTRIFUGE_SLOTS = (
@@ -41,7 +41,7 @@ init python:
         store.madeline_centrifuge_stability = 100
         store.madeline_centrifuge_attempts = 0
         store.madeline_centrifuge_feedback = (
-            "Place all four tubes. Keep the total mass equal on both sides of the rotor."
+            "Place all four tubes. Keep mass balanced across rotor sides (9g each), or use fine trim (±2g) for slight offsets."
         )
         store.madeline_centrifuge_reveal = get_planned_route_reveal(
             "madeline", 3)
@@ -184,7 +184,8 @@ init python:
     def madeline_centrifuge_tick():
         """Advance the active spin and resolve stability at the end."""
         if (not store.madeline_centrifuge_active
-                or store.madeline_centrifuge_phase != "spinning"):
+                or store.madeline_centrifuge_phase != "spinning"
+                or getattr(store, "minigame_paused", False)):
             return
 
         store.madeline_centrifuge_spin_progress = min(
@@ -197,7 +198,7 @@ init python:
                 store.madeline_centrifuge_phase = "read_pending"
                 store.madeline_centrifuge_stability = 100
                 store.madeline_centrifuge_feedback = (
-                    "Separation complete. The bands are stable enough to read."
+                    "Separation complete. Inspect the density bands to identify the excluded blood type."
                 )
             else:
                 store.madeline_centrifuge_phase = "retry"

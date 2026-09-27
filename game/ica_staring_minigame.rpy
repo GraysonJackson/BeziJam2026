@@ -166,7 +166,7 @@ init python:
         """Advance target movement, focus decay, overlap progress, and duration."""
         if not store.ica_staring_session_active or store.ica_staring_phase != "active":
             return
-        if store.ica_staring_completion_recorded:
+        if store.ica_staring_completion_recorded or getattr(store, "minigame_paused", False):
             return
 
         if not _ica_staring_position_is_valid(store.ica_staring_target_position):
@@ -204,6 +204,16 @@ init python:
         else:
             store.ica_staring_miss_time += store.ICA_STARING_TICK_INTERVAL
             store.ica_staring_feedback = "Blink! Catch the target again."
+
+        if store.ica_staring_success_time >= store.ica_staring_required_hold:
+            ica_staring_finish()
+            return
+
+        remaining_duration = store.ICA_STARING_DURATION - store.ica_staring_elapsed
+        remaining_needed = store.ica_staring_required_hold - store.ica_staring_success_time
+        if remaining_duration < remaining_needed:
+            ica_staring_finish()
+            return
 
         if store.ica_staring_elapsed >= store.ICA_STARING_DURATION:
             ica_staring_finish()

@@ -135,10 +135,10 @@ screen nicky_memory_minigame():
                     text _("CORROBORATED RESULT") style "nicky_memory_result_title"
                     if nicky_individual_result:
                         text _("The surviving measurements clear two individually tested suspect profiles.") style "nicky_memory_result_body"
-                        text _("Earlier mixed-route evidence changed which files required review. The result still clears two active innocents and never depends on speed or mistakes.") style "nicky_memory_result_explanation"
+                        text _("Cross-referenced booking sheets eliminate these two profiles from the crime scene timeline.") style "nicky_memory_result_explanation"
                     else:
                         text _("The surviving measurements do not support a [nicky_build_result] attacker.") style "nicky_memory_result_body"
-                        text _("This evidence rules out the remaining suspects in that build group. The result comes from the saved case seed, never from speed or mistakes.") style "nicky_memory_result_explanation"
+                        text _("Corroborated booking measurements rule out the surviving suspects matching this build group.") style "nicky_memory_result_explanation"
                     textbutton _("RECORD FINDING"):
                         xalign 0.5
                         action Function(finish_nicky_memory_minigame)

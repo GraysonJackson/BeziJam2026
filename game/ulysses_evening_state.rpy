@@ -65,6 +65,10 @@ default ulyssesCurrentRoute = ""
 default ulyssesCurrentRouteName = ""
 default ulyssesCurrentVisit = 0
 default ulyssesCurrentClue = ""
+default ulysses_day_three_tension = False
+default ulysses_day_three_seen = False
+default ulysses_day_three_choice = ""
+
 
 init python:
     ULYSSES_ROUTE_DATA = {
@@ -151,34 +155,35 @@ init python:
         styles[style_id] = styles.get(style_id, 0) + 1
         store.ulyssesReportingStyle = styles
 
+    ULYSSES_SIPHONING_ALIBIS = {
+        1: "Dispatch Log — 21:05-21:40 (Off-site patrol call, Sector 4)",
+        2: "Admin Desk Badge Reader — 21:12 (Main Lobby reception desk)",
+        3: "Motor Pool Badge Reader — 21:18 (Vehicle maintenance bay)",
+        4: "Dispatch Log — 21:08-21:35 (Traffic escort, 5th & Main)",
+        5: "Communications Desk Log — 21:10 (Radio dispatch room)",
+        6: "Armory Badge Reader — 21:22 (East Wing weapons locker)",
+        7: "Admin Desk Badge Reader — 21:15 (Records archives, Level 1)",
+        8: "Dispatch Log — 21:02-21:50 (Off-site perimeter check, Port)",
+        9: "Motor Pool Badge Reader — 21:20 (Vehicle maintenance bay)",
+    }
+
     def ulysses_candidate_profile_text():
         lines = []
         for suspect_id in store.remainingSuspects:
-            attributes = store.suspectAttributes[suspect_id]
-            lines.append(
-                "{} — {}; {}; {} build; {}; {}; {} reaction".format(
-                    store.suspectNames[suspect_id],
-                    attributes["unique_id"],
-                    attributes["height"],
-                    attributes["build"],
-                    attributes["injuries"],
-                    attributes["organization"],
-                    attributes["kill_reaction"],
-                )
-            )
+            if suspect_id == store.killer:
+                log = "ATLAS Lockup Badge Reader — 21:14 (Access Granted: Evidence Storage C)"
+            else:
+                log = ULYSSES_SIPHONING_ALIBIS.get(suspect_id, "Dispatch Log — 21:10 (Off-site patrol)")
+            lines.append("• {} — Log: {}".format(store.suspectNames[suspect_id], log))
         return "\n".join(lines)
 
     def ulysses_intuition_hint_text():
-        attributes = store.suspectAttributes[store.killer]
         return (
-            "Your intuition catches where three details overlap: {} build, {}, and a {} reaction."
-            .format(
-                attributes["build"],
-                attributes["organization"].lower(),
-                ("no-visible" if attributes["kill_reaction"] == "None" else attributes["kill_reaction"].lower()),
-            )
+            "Your detective intuition points straight to the lockup security logs. "
+            "Enrico logged the siphoned stimulants right around the 21:15 shift change. "
+            "Only one of the four surviving suspects swiped their badge into Evidence Storage C during that window."
         )
- 
+
     def record_ulysses_cross_report_reveal():
         if store.ulyssesCrossReportCompleted:
             return 0
@@ -195,8 +200,8 @@ init python:
                 .format(eliminated, store.remainingSuspects))
 
         clue_text = (
-            "Ulysses's cross-report analysis identifies {} as the only profile consistent "
-            "with every independent finding."
+            "ATLAS badge access logs during the stimulant siphoning window show {} "
+            "was the only surviving suspect with access to Evidence Storage C."
             .format(store.suspectNames[store.killer])
         )
         removed = store.record_investigation_clue(

@@ -81,7 +81,7 @@ init python:
         store.ica_eating_result = {}
 
         if reaction_id == "match_cheat":
-            store.ica_eating_feedback = "Ica caught your floating hot dog. Fine. Eat the rest."
+            store.ica_eating_feedback = "Ica caught your discarded hot dog with gravity and floated it back. Fine. Eat the rest."
         elif reaction_id == "flirt_back":
             extra_disappeared = 2 if store.ica >= store.ICA_HIGH_FLIRT_THRESHOLD else 3
             store.ica_eating_ica_progress += extra_disappeared * 0.35
@@ -169,7 +169,8 @@ init python:
         """Advance both contestants and guarantee a result when the timer expires."""
         if (not store.ica_eating_session_active
                 or store.ica_eating_phase != "active"
-                or store.ica_eating_completion_recorded):
+                or store.ica_eating_completion_recorded
+                or getattr(store, "minigame_paused", False)):
             return
 
         tick = store.ICA_EATING_TICK_INTERVAL

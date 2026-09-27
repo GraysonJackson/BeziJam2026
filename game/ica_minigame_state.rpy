@@ -17,6 +17,8 @@ define ICA_DATE_ACCEPT_THRESHOLD = 32
 default ica_day_one_candy = ""
 default ica_hotdog_style = ""
 default ica_paint_preparation = ""
+default ica_chicken_opted_in = False
+default ica_chicken_backed_down = False
 
 init python:
     def ica_record_minigame_result(game_id, approach_id, difficulty_reduction, won, result_tier):

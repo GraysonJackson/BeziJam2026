@@ -40,15 +40,39 @@ screen suspect_notebook():
 
                     null height 8
 
-                    for suspect_id in sorted(suspectNames.keys()):
-                        if suspect_id in remainingSuspects:
-                            text suspectNames[suspect_id]:
-                                size 28
-                                color "#251d18"
-                        else:
-                            text "{s}[suspectNames[suspect_id]]{/s}":
-                                size 28
-                                color "#8d3027"
+                    viewport:
+                        xsize 430
+                        ysize 555
+                        mousewheel True
+                        draggable True
+                        scrollbars "vertical"
+
+                        vbox:
+                            xsize 405
+                            spacing 12
+                            for suspect_id in sorted(suspectNames.keys()):
+                                $ s_power = suspectAttributes[suspect_id]["power"]
+                                $ s_build = suspectAttributes[suspect_id]["build"]
+                                $ s_height = suspectAttributes[suspect_id]["height"]
+                                if suspect_id in remainingSuspects:
+                                    vbox:
+                                        spacing 2
+                                        text suspectNames[suspect_id]:
+                                            size 24
+                                            bold True
+                                            color "#251d18"
+                                        text "[s_power] • [s_height] • [s_build]":
+                                            size 18
+                                            color "#654c3c"
+                                else:
+                                    vbox:
+                                        spacing 2
+                                        text "{s}[suspectNames[suspect_id]]{/s}":
+                                            size 22
+                                            color "#8d3027"
+                                        text "{s}[s_power] • [s_height] • [s_build]{/s} (CLEARED)":
+                                            size 16
+                                            color "#a07065"
 
             fixed:
                 xysize (570, 760)
@@ -149,15 +173,21 @@ screen suspect_notepad():
                 background Solid("#ffffff22")
                 padding (12, 12)
 
-                input:
-                    value VariableInputValue("playerInvestigationNotes")
-                    multiline True
-                    length 4000
-                    copypaste True
-                    xmaximum 500
-                    ymaximum 646
-                    size 25
-                    color "#251d18"
+                viewport:
+                    xsize 500
+                    ysize 646
+                    scrollbars "vertical"
+                    mousewheel True
+                    draggable True
+
+                    input:
+                        value VariableInputValue("playerInvestigationNotes")
+                        multiline True
+                        length 4000
+                        copypaste True
+                        xmaximum 480
+                        size 24
+                        color "#251d18"
 
         hbox:
             xalign 1.0

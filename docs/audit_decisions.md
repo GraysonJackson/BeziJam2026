@@ -2,7 +2,7 @@
 
 **Project:** *Date and Deduce: A D&D Spinoff!*  
 **Decision pass:** September 25, 2026  
-**Source critiques reviewed:** `audit_report.md`, `quality_audit_report.md`, and `writing_quality_evaluation.md`
+**Historical source critiques reviewed:** `audit_report.md`, `quality_audit_report.md`, and `writing_quality_evaluation.md`. These older reports were deleted at the creator's request on September 27, 2026; their approved decisions remain recorded here. Use `implementation_guide.md` for the current implementation checklist.
 
 This file records the creator's decisions after reviewing the audit reports. Future audits should treat the decisions marked **Locked** as intentional design, characterization, or scope—not unresolved defects. The two quality audit reports are duplicate copies; their repeated recommendations count as one review.
 
@@ -123,6 +123,36 @@ This file records the creator's decisions after reviewing the audit reports. Fut
 - Ica's clue-free Days 1–5 and accidental Day 6 solution are intentional and remain unchanged.
 - The Ica Day 3 board does not require new artwork.
 
+## September 27, 2026 Approved Decisions
+
+78. **Common Motive — Locked.** Enrico caught the culprit siphoning illegal, untested power-enhancing chemical stimulants from the evidence lockup.
+79. **Enrico's Identity — Locked.** Retired veteran hero turned warehouse supply manager who looked out for rookies and tinkered with spare parts in his workshop.
+80. **Ica Visit 6 Break-in — Locked.** Enrico kept the master key/cipher to his secure workshop lockbox in his wallet; the killer returned to ATLAS to open the lockbox and incinerate Enrico's inventory log and stimulant vials before discovery.
+81. **Ica Visit 6 Escape & Custody — Locked.** The killer flees through the fire exit during Visit 6; Nicky's LAPD patrol and Dhampir track their flight path overnight, arresting them just before the Day 7 morning briefing.
+82. **Suspect Profiles — Approved.** Re-label fields to general psychological/forensic baseline profiles on file (e.g. "Crisis Behavior / Stress Reaction", "Known Biological/Physical Markers") so innocent suspects don't sound like killers in their own files.
+83. **One-Each Breadth Deduction — Approved.** Ulysses cross-references ATLAS dispatch & badge access logs during the window Enrico logged siphoned stimulants, showing only 1 of the 4 had lockup access.
+84. **Wrong Accusation Sequence — Locked.** Team acts on rookie's recommendation and detains accused; suspect proves airtight alibi / contradiction; botched arrest tips off real killer who slips away; Ulysses fires rookie for reckless judgment.
+85. **Protagonist Identity — Approved.** Gender-neutral, open background, distinct selectable viewpoints (skepticism, dry humor, earnest competence, laid-back ease).
+86. **Direct Friendship on Day 7 — Approved.** Dialogue inside the scene clarifies whether hanging out as friends or on a date, branching cleanly based on player's direct answer.
+87. **Debrief Reports Policy — Approved.** Case facts mandatory, personal confidences default to private; Ulysses cuts off gossip unless operational safety is affected.
+88. **Madeline Helmet Cutoff — Approved.** Deliberately ignoring stop command sets persistent violation flag, cuts personal session short, debrief notes breach, romance locked out; sincere apology on Visit 6 can restore working friendship.
+89. **Ulysses Evening Sequencing — Approved.** Personal conversations advance by sessions experienced rather than calendar day.
+90. **Dhampir Squirrel Scene — Approved.** Valid reactions (disturbed shock, dark humor, practical indifference); Dhampir shrugs off casually without penalty.
+91. **Razzle Fire Rules — Locked.** Conscious flame control; emotional spikes flare heat; pauses to dial down heat before touching/kissing; hates being treated like a bomb in public.
+92. **Nicky Sensing Limits — Locked.** Biochemical sensing only (adrenaline, body heat, pulse), not mind reading; teases boldly, respects boundaries when corrected.
+93. **Winston Negation Rules — Locked.** Suppresses active powers on touch/proximity; replaces 'sobering up with superpowers' line with ordinary tolerance/coffee; stabilizes panicked witnesses, strictly refuses as coercive interrogation.
+94. **Ica Sincerity & Fluster — Approved.** Flustered/caught off-guard ("...Okay, don't make it weird, freshie"), covers with smirk & snack bribe or gravity trick, gaining affection while keeping nonchalant charm.
+95. **Minigame Design — Approved.** Character-driven narrative diversions; forgiving, playful, fun; clean pause/rules and reliable assist/skip option that always awards case clue.
+96. **Protected Opening Edits — Approved.** Remove stray "Freddy" word after "vest and button-up" in Ulysses evening description; merge duplicate "That's the team!" lines into one clean send-off.
+97. **Ending Timing — Approved.** Post-case weekend timing; lively, dialogue-driven vignette with concrete character interaction rather than generic summary montage.
+98. **Manison Context — Locked.** Enigmatic reference that Dhampir deflects with dry joke: "Dead mentor. The usual superhero package."
+99. **Deadline Cause — Locked.** Institutional pressure: LAPD and DA granted ATLAS strict 7-day exclusive window before LAPD takes jurisdiction, unseals files, and freezes ATLAS operational control.
+100. **Protagonist Intuition — Locked.** Ordinary sharp detective hunch / gut feeling, not a superpower; qualitative nudge, never reveals uncollected database facts, limited uses in minigames.
+101. **Teammates' Independent Work — Approved.** Ambient workplace banter and dead-end mentions in debriefs and hallway cameos without granting free eliminations.
+102. **Powers & Forensics Limits — Locked.** Powers leave elemental signatures but don't alter anatomy or grant shapeshifting; Dhampir's build inferences rely on physical collision dimensions (shoulder impact height, arm span).
+103. **Gallery Unlock Rules — Approved.** Unlocks upon reaching outro/credits after viewing; grouped by character with spoiler-safe status hints; soft clues unlogged with writable player notes field.
+
 ## Implementation rule for future passes
 
 If a future audit recommends reversing a **Locked** decision above, treat the recommendation as a documented disagreement rather than an actionable defect. Ask the creator before changing it. Accepted items may be refined for continuity, voice, pacing, and technical safety without reopening their underlying direction.
+

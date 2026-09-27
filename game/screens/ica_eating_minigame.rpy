@@ -89,6 +89,11 @@ screen ica_eating_minigame():
             xsize 1060
             ysize 22
 
+        if ica_eating_action_cooldown > 0.0:
+            text _("Recovering breath... ([ica_eating_action_cooldown:.1f]s)") style "ica_eating_status":
+                ypos 615
+                xsize 1300
+
         hbox:
             xpos 205
             ypos 650
@@ -97,31 +102,33 @@ screen ica_eating_minigame():
             textbutton _("TAKE A BITE"):
                 xsize 350
                 ysize 82
+                sensitive ica_eating_action_cooldown <= 0.0
                 action Function(ica_eating_action, "bite")
 
             textbutton _("PACE YOURSELF"):
                 xsize 350
                 ysize 82
+                sensitive ica_eating_action_cooldown <= 0.0
                 action Function(ica_eating_action, "pace")
 
             if ica_eating_approach == "flirt":
                 textbutton _("LEAN IN"):
                     xsize 350
                     ysize 82
-                    sensitive not ica_eating_special_used
+                    sensitive not ica_eating_special_used and ica_eating_action_cooldown <= 0.0
                     action Function(ica_eating_action, "special")
             elif ica_eating_approach == "cheat":
                 textbutton _("PALM ONE"):
                     xsize 350
                     ysize 82
-                    sensitive not ica_eating_special_used
+                    sensitive not ica_eating_special_used and ica_eating_action_cooldown <= 0.0
                     action Function(ica_eating_action, "special")
             else:
                 frame:
                     xsize 350
                     ysize 82
                     background Solid("#243846")
-                    text _("NO TRICKS") style "ica_eating_no_tricks":
+                    text _("PURE RHYTHM") style "ica_eating_no_tricks":
                         xalign 0.5
                         yalign 0.5
 
