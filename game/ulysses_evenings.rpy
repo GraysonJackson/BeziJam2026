@@ -94,7 +94,7 @@ label UlyssesFocusComment:
         u "[ulysses_repeat_comment]"
 
         if dayWin == 2:
-            u "Two choices are a preference, not a failure to investigate. I only need you to know what that preference is giving you—and what it is not."
+            u "Two choices are a preference, not a failure to investigate. I only need you to know what that preference is giving you, and what it is not."
         elif dayWin == 3:
             u "A pattern is beginning to form. That can create useful depth if you continue testing the method instead of merely becoming comfortable inside it."
         elif dayWin == 4:
@@ -105,7 +105,7 @@ label UlyssesFocusComment:
             u "The depth is real. So is the responsibility to translate it into an accusation the rest of us can independently review."
 
         if ulysses_today_route == "ica" and ulysses_today_count == 2:
-            u "I am curious which part brought you back. Not suspicious—curious."
+            u "I am curious which part brought you back. Not suspicious, but curious."
             menu:
                 "She notices things when it matters.":
                     $ uly += 1
@@ -174,7 +174,7 @@ label UlyssesEveningOne:
             "Before you can ask how many versions he remembers, someone knocks at the office door."
 
     "A delivery worker arrives with the remains of Winston's standing pizza order: two boxes, one covered in pineapple, and a cardboard tray holding black coffee. Ulysses tips generously from his own wallet."
-    u "Winston orders enough food for a siege because quantities are, in his words, 'future Ulysses's problem.'"
+    u "Winston orders enough food in advance for a siege because quantities are, in his words, 'future Ulysses's problem.'"
 
     menu:
         "Take a pineapple slice and keep working beside him.":
@@ -186,7 +186,7 @@ label UlyssesEveningOne:
             else:
                 "You reclaim your half of the call sheets before the grease can reach them."
             "Ulysses gives the slice an approving glance and turns the call sheets so both of you can read them."
-            u "Pineapple. Winston will be delighted to have an ally and unbearable about it."
+            u "Pineapple. Winston will be delighted to have an ally and be unbearable about it."
         "Take another slice and ask about the photographs on his desk.":
             $ uly += 1
             "You leave the paperwork on his side of the desk and angle your chair toward the photographs instead."
@@ -197,7 +197,7 @@ label UlyssesEveningOne:
             u "That one is mine, but I respect the efficiency. There is another cup beneath the files."
             "He rescues both cups from the paperwork. You take the hidden one and make it drinkable while he accepts his black."
 
-    "Jazz fills the quiet left by the closed case folder. Ulysses removes his jacket, leaving the vest and button-up Freddy described, and rolls each sleeve once."
+    "Jazz fills the quiet left by the closed case folder. Ulysses removes his jacket, leaving the vest and button-up Freddy, and rolls each sleeve once."
 
     menu:
         "Tell him the vest looks good on him.":
@@ -341,6 +341,7 @@ label UlyssesEveningThree:
         else:
             "Ulysses lets you take the page and redirects his attention to the next file."
         u "The future is not permission to stop participating in the present, recruit. I try to remember that."
+
     return
 
 
@@ -368,8 +369,8 @@ label UlyssesEveningFour:
         u "Yesterday, you asked how I learned the boundary without asking me to demonstrate it. I said I would explain when I could do so honestly."
 
     "He opens a shallow drawer and removes an old staff photograph. His younger face is easy to find. Beside him stands a coworker whose badge reads DAKOTA."
-    u "Last year, when I was nineteen, Dakota and I were working late. I had seen something that affected our assignment, and I believed I had found language indirect enough to warn them."
-    u "Dakota was a coworker I trusted. That trust made me careless about the difference between wanting to protect someone and being able to tell them why."
+    u "Last year, when I was nineteen, Dakota and I were working late. I had seen something that affected our friend, and I believed I had found language indirect enough to talk about why it bothered me."
+    u "Dakota is a coworker I trust deeply. That trust made me blind to the dangers of connecting to someone and being able to tell them what's on my mind."
     "His thumb rests against the edge of the photograph. The next sentence takes longer than the rest."
     u "I tried to tell Dakota. The power stopped me. I suffered a seizure before I finished and remained comatose for four months."
     "The statement is precise, but it no longer arrives without context. His grip on the photograph is the only part of him that looks rehearsed."
@@ -380,8 +381,8 @@ label UlyssesEveningFour:
             u "I know. Hearing someone else say it is still useful."
         "Ask about Dakota, not the forbidden warning.":
             $ uly += 2
-            u "A capable coworker. Patient with me when I was younger and considerably less patient with my habit of treating concern like a logistical problem."
-            u "They did not blame me for what happened. I managed that adequately on my own."
+            u "A capable coworker and a great friend. Patient with me and how grumpy I can be."
+            u "She did'nt blame me for what happened. I managed that adequately on my own."
         "Ask what Winston did during those four months.":
             $ uly += 1
             u "Stayed. Handled ATLAS poorly, kept it alive successfully, and insulted every physician who used the phrase 'wait and see.'"
@@ -464,7 +465,7 @@ label UlyssesEveningFive:
             $ uly += 2
             $ ulysses_day_five_activity = "reading"
             u "Good choice. Conversation remains optional."
-        "Leave the jazz on and ask him to choose.":
+        "Leave the jazz on and ask him to choose a passtime.":
             $ uly += 1
             $ ulysses_day_five_music = "jazz"
             u "Comfortable delegation. Chess, then. I have spent all week watching you make decisions; reciprocity seems fair."
@@ -588,9 +589,7 @@ label UlyssesEveningSix:
     else:
         "When you stand, you mention that his tie has shifted during the long review. Ulysses corrects the knot and smooths it back into place."
 
-    if (uly >= ULYSSES_HIGH_THRESHOLD
-            and ulyssesRomanceInterest >= ULYSSES_ROMANCE_HIGH_THRESHOLD
-            and ulysses_day_six_invited_closeness):
+    if (uly >= ULYSSES_HIGH_THRESHOLD and ulyssesRomanceInterest >= ULYSSES_ROMANCE_HIGH_THRESHOLD and ulysses_day_six_invited_closeness):
         "Ulysses catches your hand before you can withdraw it. His composure lasts until your thumb brushes the edge of his vest."
         menu:
             "Tell him he looks good when he forgets the next line.":
@@ -605,14 +604,12 @@ label UlyssesEveningSix:
             "Squeeze his hand and remain beside him.":
                 $ uly += 2
                 "The two of you stay there, close enough that neither can mistake the silence for professionalism."
-    elif (uly >= ULYSSES_WARM_THRESHOLD
-            and ulyssesRomanceInterest >= ULYSSES_ROMANCE_WARM_THRESHOLD
-            and ulysses_day_six_invited_closeness):
+    elif (uly >= ULYSSES_WARM_THRESHOLD and ulyssesRomanceInterest >= ULYSSES_ROMANCE_WARM_THRESHOLD and ulysses_day_six_invited_closeness):
         "Ulysses catches your hand briefly, then releases it with a small, flustered smile."
         u "You have become extremely comfortable adjusting your cofounder."
     else:
         if ulysses_day_six_invited_closeness:
-            "Ulysses thanks you and corrects the knot by another fraction of an inch."
+            "Ulysses thanks you and carefully corrects the knot by another fraction of an inch."
         else:
             "He checks the knot in the dark reflection of the office window, apparently satisfied with your warning."
 
@@ -668,7 +665,7 @@ label UlyssesCrossReportChoice:
         u "Correct. You built the conclusion instead of waiting for me to provide it."
     else:
         $ uly += 1
-        u "Correct. The first answer was wrong; the method you used to revise it was not."
+        u "Correct."
 
     $ record_ulysses_cross_report_reveal()
     $ ulysses_cross_killer_name = suspectNames[killer]

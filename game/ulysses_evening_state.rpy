@@ -17,7 +17,7 @@ define ULYSSES_REPEAT_COMMENTS = {
     },
     "dhampir": {
         2: "Dhampir makes difficult work look casual because he does not need an audience for competence. Returning gave you time to see the work beneath the jokes.",
-        3: "Three scenes with Dhampir have taught you how he reconstructs violence without sensationalizing the victim. Keep that distinction in your report.",
+        3: "Three days with Dhampir have taught you how he reconstructs violence without sensationalizing the victim. Keep that distinction in your report.",
         4: "You are learning when Dhampir's humor releases pressure and when the suit means he needs the room to become serious. Both versions are him.",
         5: "Dhampir trusts technique more than appearances. Your reports are strongest when you do the same instead of treating his confidence as proof.",
         6: "You stayed with Dhampir through the entire field investigation. Tomorrow, use what his method established without borrowing his certainty as your own.",
@@ -175,11 +175,10 @@ init python:
             .format(
                 attributes["build"],
                 attributes["organization"].lower(),
-                ("no-visible" if attributes["kill_reaction"] == "None"
-                 else attributes["kill_reaction"].lower()),
+                ("no-visible" if attributes["kill_reaction"] == "None" else attributes["kill_reaction"].lower()),
             )
         )
-
+ 
     def record_ulysses_cross_report_reveal():
         if store.ulyssesCrossReportCompleted:
             return 0
