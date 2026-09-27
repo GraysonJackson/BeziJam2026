@@ -4553,16 +4553,16 @@ label WinstonDayOne:
     menu:
         "I'm here to work. Unfortunately.":
             $ winn += 1
-            w "Tragic. Fine. We suffer efficiently, finish early, and invoice despair for overtime."
+            w "Tragic. Fine. We suffer as fast as possible, try to finish early."
         "I came to witness an important scientific breakthrough.":
             $ winn += 2
             w "Finally, somebody recognizes leadership when they see it."
-            w "The grant money should arrive any minute."
+            w "The grant money should arrive any minute at this point."
         "Ulysses said you needed supervision.":
             w "Ulysses says a lot of things."
 
     "Winston retrieves the pencil, drops it into a cup already crowded with darts, and nudges the case folder toward you. His posture changes before the folder stops moving."
-    w "One suspect downstairs. Lied twice in the preliminary statement and once about whether they'd lied."
+    w "One suspect downstairs lied twice in the preliminary statement and once about whether they'd lied."
     w "Doesn't make them the killer. Does make them irritating."
     w "Pick a job before we go in."
 
@@ -4570,7 +4570,7 @@ label WinstonDayOne:
         "Take notes and watch for contradictions.":
             $ winn += 2
             $ winston_day_one_role = "notes"
-            w "Useful and dangerously sensible. Write down what changes, not how guilty their face looks."
+            w "Good choice. Write down what changes, not how guilty their face looks."
         "Stay quiet and watch their reactions.":
             $ winn += 1
             $ winston_day_one_role = "observer"
@@ -4578,7 +4578,7 @@ label WinstonDayOne:
         "Act as the second interviewer.":
             $ winn += 1
             $ winston_day_one_role = "interviewer"
-            w "All yours when I give you the opening. Try not to accuse them of murder before we sit down."
+            w "All yours when I give you the opening. Try not to accuse them of murder before we sit down newbie."
 
     $ winston_day_one_reveal = get_planned_route_reveal("winston", 1)
     $ winston_day_one_cleared_id = winston_day_one_reveal["eliminated"][0]
@@ -4618,7 +4618,7 @@ label WinstonDayOne:
     "The resistance finally collapses. [winston_day_one_cleared_name] admits to [winston_day_one_lie]."
     "The embarrassing story comes with a receipt, two phone calls, and an independent witness. Together they cover the entire period surrounding Enrico's death."
 
-    w "See? Lied their ass off. Also didn't kill anybody. People contain multitudes. Most of the multitudes are humiliating."
+    w "See? Lied their ass off. Also didn't kill anybody. People contain multitudes. Most of the multitudes are humiliating enought to risk being tried for murder."
 
     menu:
         "Clear them. The lie and the murder are separate questions.":
@@ -4626,7 +4626,7 @@ label WinstonDayOne:
             w "Exactly. Suspicious isn't a conviction, and shame isn't a murder weapon."
         "That was almost disappointingly reasonable.":
             $ winn += 1
-            w "Sorry. Tomorrow I'll interrogate somebody by hanging them upside down over a shark."
+            w "Sorry. Tomorrow I'll interrogate somebody by hanging them upside down over a shark if you think that'll work better."
         "Keep them listed anyway. A liar is a liar.":
             $ winn -= 2
             w "Then we'd have to investigate everybody who ever filled out an ATLAS expense form. Including me. Especially me."
@@ -4637,7 +4637,8 @@ label WinstonDayOne:
 
     scene winstonOfficeOutline with fade
     "Back upstairs, Winston throws the cleared file onto the correct pile without looking. It lands squarely between two folders and stops."
-    w "Lunch before paperwork. If we reverse that order, civilization ends."
+    w "Lunch before paperwork. If we reverse that order, civilization as we know it ends."
+    w "I'm ordering takeout, what do you want?"
 
     menu:
         "Order greasy burgers and fries.":
@@ -4674,7 +4675,7 @@ label WinstonDayTwo:
         "Wake him by turning up the radio.":
             $ winn += 1
             "Winston opens one eye before you reach the dial."
-            w "Dangerous. I was one chorus away from solving the case subconsciously."
+            w "Don't. I was one chorus away from solving the case subconsciously."
         "Throw one of the couch cushions at him.":
             $ winn += 2
             "He catches it without opening his eyes and throws it back hard enough to knock the door shut behind you."
@@ -4694,7 +4695,7 @@ label WinstonDayTwo:
     menu:
         "Obviously not a date. You'd have dressed up.":
             $ winn += 2
-            w "This is my formal tank top. Show some respect."
+            w "This is my formal tank top. Put some respect on it's name."
         "I'd be happy to go with you.":
             $ winn += 1
             w "That eager, huh? Great. Now the waitress is definitely going to think I planned this."
@@ -4703,7 +4704,7 @@ label WinstonDayTwo:
             w "Next time. Today I'm demonstrating sustainable leadership by fleeing the building."
 
     scene black with fade
-    "Winston insists on calling a taxi. When you ask why the cofounder of ATLAS does not drive, he lists three crashes, a flooded loading dock, and an incident involving a statue that the city still blames on weather."
+    "Winston insists on calling a taxi. When you ask why the cofounder of ATLAS does not drive, he lists three crashes, a flooded loading dock, and an incident involving a statue that the city still blames on him."
     w "Bad luck. Every single time."
     "The taxi driver looks at him in the mirror and silently locks the window controls."
 
@@ -4721,7 +4722,7 @@ label WinstonDayTwo:
             w "Breakfast after noon. That's the kind of disrespect for structure I can support."
         "Order coffee and something light.":
             $ winston_day_two_order = "light"
-            w "Fine, but I'm stealing whatever part looks least responsible."
+            w "Fine, be that way."
 
     "The food takes long enough for the booth to become comfortable. Winston tells you which jukebox songs Razzle will scream over, which ones make Dhampir pretend not to dance, and why Ulysses has banned team karaoke from formal events."
     if winston_day_two_order == "burger":
@@ -4735,10 +4736,10 @@ label WinstonDayTwo:
         "Steal two of his fries in return.":
             $ winn += 2
             "Winston watches the second fry disappear and slowly moves his plate farther from you."
-            w "Escalation. Bold."
+            w "Escalation. Bold move rookie."
         "Push your plate closer so he can stop pretending.":
             $ winn += 1
-            w "This is entrapment. Delicious entrapment."
+            w "This is entrapment. Delicious entrapment, but entrapment all the same."
         "Guard your plate with both arms.":
             w "You can't protect it forever, newbie. I founded an organization. I understand siege warfare."
 
@@ -4751,7 +4752,7 @@ label WinstonDayTwo:
         "Make sure nobody is in danger, then unplug the pager.":
             $ winn += 2
             $ winston_day_two_calls = "screened"
-            w "Safety confirmed, nonsense rejected. You may be management material. My condolences."
+            w "Safety confirmed, nonsense rejected. You may be management material. Sorry."
         "Tell him ATLAS can survive one afternoon without him.":
             $ winn += 1
             $ winston_day_two_calls = "ignored"
@@ -4762,6 +4763,7 @@ label WinstonDayTwo:
             w "A leader should also teach people not to page him because a vending machine won an argument."
 
     "Winston pays, leaves a tip large enough to make the waitress check the amount twice, and guides you back into another taxi before the pager can object."
+    w "C'mon, I have an idea to burn some more time."
 
     scene black with fade
     "The pool hall is dim, loud, and committed to pretending daylight does not exist. Winston feeds coins into the table, selects a cue, and claims he is not competitive before the balls have finished rolling into place."
@@ -4786,11 +4788,11 @@ label WinstonDayTwo:
 
     "The match stretches through two songs and a rematch Winston insists does not count as competitiveness. By the end, your drinks have warmed and his pager has begun chirping again from inside his jacket."
     "He takes it out, reads the fourth message, and turns it face down."
-    w "Madeline needs authorization to borrow equipment she already borrowed. That's a later problem wearing today's shoes."
+    w "Madeline needs authorization to borrow equipment she already borrowed. That's a Ulysses problem."
     "For the first time since leaving ATLAS, nothing else interrupts. Winston rolls the cue between his palms and watches the empty table."
     w "Everybody there can do something impossible. Fire, flight, seeing tomorrow, whatever."
-    w "Then something goes wrong and they look for me to make the impossible stop."
-    w "Useful gig. Just makes it hard to tell when people want me around and when they want an emergency brake."
+    w "Then something goes wrong and they look for me to make the stop. Normally they go to Ulysses first, but I'm the 'oh-shit' handle who won't lecture them."
+    w "Just makes it hard to tell when people want me around and when they want a nice emergency brake."
 
     menu:
         "I like you better when you're not working anyway.":
@@ -4800,9 +4802,9 @@ label WinstonDayTwo:
             "He looks down the cue to hide a smile and fails."
         "They need you because you know when to let them be ridiculous too.":
             $ winn += 2
-            w "Yeah. Somebody has to point them in the right direction without making them march there."
+            w "Yeah, I guess somebody has to point them in the right direction without making them march there. God knows Uly won't."
         "Being useful isn't the worst problem to have.":
-            w "No. Just gets weird when useful becomes the only version people remember."
+            w "No. Just gets weird when useful becomes the only version people ask for."
         "That sounds unbearably tragic.":
             $ winn -= 1
             w "Please don't pity me in a building with this much sticky carpet. I have standards."
@@ -4818,7 +4820,7 @@ label WinstonDayTwo:
         "Check whether the scream involved actual danger.":
             $ winn += 1
             $ winston_day_two_exit = "check"
-            w "Correct answer. If it's murder, fire, or structural collapse, we help. If it's a spider, we delegate."
+            w "Fine. If it's murder, fire, or structural collapse, we help. If it's a spider, we delegate."
         "Stay here and help him sort Ulysses's list.":
             $ winn += 1
             $ winston_day_two_exit = "sort"
@@ -4841,58 +4843,51 @@ label WinstonDayTwo:
 
 label WinstonDayThree:
     scene winstonOfficeOutline
-    "Eight suspect folders form a crooked row across Winston's desk—or fewer, if work with the others has already narrowed the field. Beside them sits a deck of cards labeled ATLAS CONTROLLED PRESSURE SYSTEM in marker."
+    "Suspect folders form a crooked row across Winston's desk. Beside them sits a deck of cards labeled ATLAS CONTROLLED PRESSURE SYSTEM in marker."
     "Dhampir stands near the door in his hero suit, arms folded, expression severe enough to make the office feel several degrees colder."
 
-    w "Newbie, welcome to behavioral science. We made it look like gambling so people would actually participate."
-    d "I am the bad cop."
-    w "He practiced that in the hall."
+    w "Newbie, welcome to behavioral science! Or interrogation 101 if you want to call it that."
+    d "I'm bad cop."
+    w "He practiced that in the hall by the way."
     d "No, I didn't."
+    w "Yes he did."
 
     menu:
-        "Ask how the pressure system works before using it.":
+        "Ask about the pressure system.":
             $ winn += 2
-            w "Pressure draws a card. Question means you stand. Get close to twenty-one without going over."
-            w "The suspect's defense plays dealer rules and holds at seventeen. Beat it, and we ask while the rehearsed answer is wobbling."
-        "Ask whether Dhampir is allowed to eat the cards.":
+            w "It's our system for questioning suspects. Pressure builds stress. Question them when you get as close to their highest stress without pushing them over the edge."
+        "Ask whether Dhampir is allowed to hurt the suspects.":
             $ winn += 1
-            d "They're too dry."
-            w "This is why he gets supervised."
-        "Say you can pressure people without a game.":
+            d "I wish."
+            w "This is why he gets supervised during interrogation."
+        "Say you can question people without a system.":
             $ winn -= 1
             w "Anybody can be an asshole in a small room. The point is controlling the pressure well enough to learn something."
 
-    "Winston leads you downstairs. The interview room has been rearranged around a green felt table. No money is present; the chips mark completed questions, and every suspect has been told how the test works."
-    "One by one, the active suspects wait in a separate office while Winston resets the deck. Dhampir remains where each new arrival can see him through the glass."
+    "Winston leads you downstairs."
+    "One by one, the active suspects wait in a separate office while Winston resets the room. Dhampir remains where each new arrival can see him through the glass."
 
-    menu:
-        "Use intuition only when somebody is close to shutting down.":
-            $ winn += 2
-            w "Use the tool, don't let the tool do your thinking. That's the sweet spot."
-        "Trust the cards and your read of the room.":
-            $ winn += 1
-            w "Perfectly respectable way to gamble with somebody else's patience."
-        "Let Dhampir handle all of them.":
-            $ winn -= 1
-            w "We're collecting statements, not creating eight lifelong phobias."
+    w "Right, let's get started."
 
     call RulesWinstonPressure
     $ start_winston_pressure_minigame()
 
     if winston_pressure_phase == "dhampir_pause":
         scene black
-        "At the midpoint, Winston gathers the cards and gestures toward Dhampir."
-        w "One turn. Controlled pressure. You stop at twenty-one."
+        "At the midpoint, Winston gestures toward Dhampir."
+        w "One turn Dhampir, one turn."
         "Dhampir slides into the chair. His shoulders square, his voice drops, and every trace of the man who argued about darts disappears."
         d "You will answer the next question truthfully."
-        "The pressure display jumps directly to twenty-one. The suspect stares at him, waits for the threatened question, and answers it in full the instant Dhampir asks."
+        "The suspect stares at him, waits for the threatened question, and answers it in fully the instant Dhampir asks."
         "Dhampir turns back toward the observation window. His posture loosens."
         d "Did I do it right?"
         w "You were supposed to apply pressure, not make them see God."
-        d "God would've pushed it over twenty-one. I was precise."
-        w "Go play darts in my office before you improve the methodology again."
+        d "God would've killed them. I was merciful."
+        "Dhampir turns to the suspect"
+        d "Remember that."
+        w "Go play darts in my office before you scare the rest shitless."
         d "Rad."
-        "Dhampir leaves with the same casual wave he used when he arrived. The next suspect enters moments later and looks relieved until Winston reshuffles the deck."
+        "Dhampir leaves with the same casual wave he used when he arrived. The next suspect enters moments later and looks relieved until Winston and you re-enter."
         $ winston_pressure_dhampir_turn()
         $ resume_winston_pressure_minigame()
 
@@ -4900,7 +4895,7 @@ label WinstonDayThree:
     $ winston_day_three_cleared = " and ".join(winston_pressure_result.get("cleared_names", []))
 
     if winston_pressure_result.get("quality") == "controlled":
-        w "No shutdowns, no wasted pressure, and nobody cried except the guy Dhampir looked at. Clean work."
+        w "No shutdowns, no wasted pressure, and nobody cried except the guy Dhampir looked at. Clean work newbie!"
         $ winn += 2
     elif winston_pressure_result.get("quality") == "recovered":
         w "You pushed too far a couple times, backed off, and fixed it. That's why the resets exist."
@@ -4912,23 +4907,22 @@ label WinstonDayThree:
         w "Messy as hell, but nobody left worse than they entered and we got there eventually."
 
     w "The useful part: [winston_day_three_cleared] don't fit the behavioral timeline. They're off the board."
-    "Winston files the individual interview summaries behind the formal result. Six suspects remain if you have followed his investigation alone; mixed work may have narrowed the list differently."
+    "Winston files the individual interview summaries behind the formal result."
 
     menu:
         "Dhampir was your idea, wasn't he?":
             $ winn += 1
-            w "Yeah. Everybody else saw a terrifying vampire vigilante. I saw a terrifying vampire vigilante who followed rules he respected."
-            w "Finding the right rules was the fun part."
-        "You trust him a lot.":
+            w "Yeah. Everybody else saw a terrifying vampire vigilante. I saw a terrifying vampire vigilante who followed rules he respected. Also a chill dude."
+        "You trust Dhampir a lot.":
             $ winn += 2
             w "With my life. With office furniture, less so."
-        "Recruiting him still seems insane.":
+        "Recruiting Dhampir still seems insane.":
             $ winn -= 1
-            w "Most worthwhile decisions look insane before somebody does the paperwork."
+            w "Most worthwhile decisions look insane until you let them proves themself."
 
-    "Winston deals one final hand across the empty table, turns both cards face up, and adds them without looking."
-    w "Twenty-two. See? Even the system thinks we're done."
-    "You help return the chairs before taking the completed report to Ulysses. Winston pockets the homemade deck, already considering where else it can cause trouble."
+    "You help return the chairs before taking the completed report to Ulysses."
+
+    w "Go have fun talking to my better half. Catcha ya on the flip side!"
 
     $ dayWinn += 1
     jump endOfDay
@@ -4937,7 +4931,7 @@ label WinstonDayFour:
     scene winstonOfficeOutline
     "A takeout menu has been pinned over Winston's official interview plan. The witness sitting across from his desk appears unsure whether this is deliberate."
     "A dart lands in the board beside the menu. Winston does not look away from the witness when he throws it."
-    w "Newbie. Perfect. We were just discussing how formal this interview absolutely is."
+    w "Newbie. Perfect. We were just discussing how formal this interview is."
     "The witness saw the killer moving through the rear hall shortly after the attack. Their earlier statement described distance and direction; Winston has invited them back to describe habits."
 
     menu:
@@ -4945,7 +4939,7 @@ label WinstonDayFour:
             $ winn += 2
             $ winston_day_four_interview = "casual"
             "You ask whether the witness wants a drink. Their shoulders loosen while Winston pretends to search for a clean cup."
-            w "Don't open the bottom drawer. Those cups became an ecosystem."
+            w "Don't open the bottom drawer. Those cups became an ecosystem and I want them to lead their lives."
         "Quietly prepare the notes while Winston performs.":
             $ winn += 1
             $ winston_day_four_interview = "quiet"
@@ -4971,11 +4965,11 @@ label WinstonDayFour:
     menu:
         "Keep it as a tendency and ask the witness to continue.":
             $ winn += 2
-            w "Exactly. A useful nudge, not a shortcut to accusing somebody."
+            w "Exactly. A useful nudge, nothing we can use to accuse somebody."
         "Ask which habit the witness remembers most clearly.":
             $ winn += 1
-            "Winston repeats the question without leading them. The witness returns to the physical demonstration instead of guessing at a label."
-        "Decide the stereotype is enough to identify the killer.":
+            "Winston repeats the question without leading them. The witness returns to the physical demonstration ."
+        "Is that enough to identify the killer?":
             $ winn -= 2
             w "Nope. That's how a clue becomes a prejudice wearing a little detective hat."
 
@@ -4985,23 +4979,25 @@ label WinstonDayFour:
     "The witness finishes the account, checks the written wording, and leaves with a copy of the office number. Winston waits for the door to close before retrieving the dartboard."
 
     w "Your reward for surviving serious work is deciding what stains the desk next."
+    w "What'll we be having today newbie?"
 
     menu:
         "Order greasy burgers again.":
             $ winn += 1
             $ winston_day_four_takeout = "burgers"
-            w "Consistency. One of the less celebrated leadership virtues."
+            w "Consistency, one of the less celebrated leadership virtues. I like it."
         "Order pizza and make him choose the toppings.":
             $ winn += 1
             $ winston_day_four_takeout = "pizza"
             w "Pepperoni, peppers, and whatever topping will annoy Ulysses if he steals a slice."
         "Order noodles and protect the case files.":
             $ winston_day_four_takeout = "noodles"
-            w "A challenge meal. I respect it. Move the homicide photographs."
+            w "A challenge meal. Respect. Move the photographs."
 
-    "While you wait, Winston hands you three darts and stands behind your shoulder to correct the angle of your wrist. His touch remains easy and familiar rather than possessive."
+    # Fix this area please to sound better
+    "While you wait, Winston hands you three darts"
     "Your first dart lands near the outer wire. Winston's lands beside it instead of in the center."
-    w "See? Teamwork. We're both mediocre now."
+    w "Damn. We're both mediocre."
 
     menu:
         "You're convincing until you start caring.":
@@ -5013,16 +5009,16 @@ label WinstonDayFour:
             w "Prove it. Preferably after I finish eating."
         "Maybe Ulysses is the competent founder.":
             $ winn -= 1
-            w "He is. It's disgusting. Doesn't mean I'm not too."
+            w "He is. Doesn't mean I'm not too."
 
-    "The food arrives, and the story follows in pieces rather than one sudden confession. Winston mentions meeting Ulysses six or seven years ago, when Winston was already a working superhero and Ulysses was thirteen going on forty."
+    "The food arrives, and the story Winston tells follows in pieces. Winston mentions meeting Ulysses six or seven years ago, when Winston was already a working superhero and Ulysses was thirteen going on forty."
     w "I had the idea for ATLAS. Loose team, shared resources, somebody to answer the phone when a building exploded."
-    w "Ulysses turned it into an actual organization. Forms, projections, legal structure. Kid could make a filing cabinet feel underqualified."
-    w "I had the reputation people trusted. He had the plan that deserved it. Needed each other. Still do."
+    w "Ulysses turned it into an actual organization. Forms, projections, legal structure. Kid could make a filing cabinet feel real underqualified."
+    w "I had the reputation people trusted. He had the plan that deserved it, so we needed each other. Still do I guess."
 
-    "He says it proudly and without asking for credit. When the conversation threatens to settle into sincerity, he throws another dart and pins the takeout receipt to the wall."
-    w "Filed."
-    "You finish the meal, preserve the witness statement as an unconfirmed lead, and carry the formal portion of the day to Ulysses without adding the softer observations to the suspect notebook."
+    "He says it proudly. When the conversation threatens to settle into sincerity, he throws another dart and pins the takeout receipt to the wall."
+    w "Business expense filed."
+    "You finish the meal, preserve the witness statement as an unconfirmed lead, thank Winston for the day, and carry the formal portion of the day to Ulysses."
 
     $ dayWinn += 1
     jump endOfDay
@@ -5030,7 +5026,7 @@ label WinstonDayFour:
 label WinstonDayFive:
     scene winstonOfficeOutline
     "Winston's office has been transformed into a crime scene by someone with no budget and very little respect for furniture. Masking tape marks Enrico's position. A coat rack represents the rear door. A pizza box has been labeled CABINET."
-    "The returning witness stands just inside the doorway with an ATLAS escort. Their heightened hearing caught the aftermath from a hiding place, but fear broke the memory into disconnected sounds."
+    "A returning witness stands just inside the doorway with an ATLAS escort. Their heightened hearing caught the aftermath from a hiding place, but fear broke the memory into disconnected sounds."
     w "Nothing here is real except the questions and the terrible interior design. We stop whenever you say stop."
     "The witness nods. Winston introduces you, then lets you choose where to help."
 
@@ -5042,11 +5038,11 @@ label WinstonDayFive:
         "Take the witness's hiding position and reproduce what they heard.":
             $ winn += 2
             $ winston_day_five_role = "witness"
-            w "Best way to understand the limits of the account. Stay low and don't invent what you can't see."
+            w "Good call, stay low and don't invent what you can't see newbie."
         "Stand at Enrico's marked position.":
             $ winn += 1
             $ winston_day_five_role = "victim"
-            w "All right. The tape is a reference point, not an invitation to get theatrical."
+            w "All right. The tape is a reference point, so don't go getting theatrical on me."
 
     "Winston walks the witness through ordinary sounds first. A chair rolls. The desk drawer opens. He taps the cabinet with two knuckles and deliberately knocks over the coat rack."
     w "That's our highly trained door. It studied method acting."
@@ -5056,7 +5052,7 @@ label WinstonDayFive:
         "Let the witness set the pace.":
             $ winn += 2
             $ winston_day_five_care = "patient"
-            "You wait for each nod before resetting a prop. Winston follows your timing without needing to be told."
+            "You wait for each nod before resetting a prop. Winston follows your timing."
         "Use gentle jokes to keep them grounded.":
             $ winn += 2
             $ winston_day_five_care = "grounded"
@@ -5075,9 +5071,9 @@ label WinstonDayFive:
     "[winston_day_five_reconstruction]"
 
     "Winston notices the pattern before you do. Nothing changes in his face, and he never supplies a word the witness has not chosen. He repeats the sequence twice, deliberately changing one sound each time so the witness can reject it."
-    "On the final pass, every accepted noise fits within the same narrow stretch of time. The witness remains uncertain about the order of two moments, so Winston keeps the result out of the formal notebook."
+    "On the final pass, every accepted noise fits within the same narrow stretch of time. The witness remains uncertain about the order of two moments."
 
-    w "That's enough. You did the hard part. We'll verify the timing before anybody treats it like proof."
+    w "That's enough. You did the hard part. We'll verify the timing before anybody treats it like proof. Thank you so much."
     "The escort walks the witness out. Winston keeps his voice light until the door shuts behind them, then begins peeling tape from the floor."
 
     menu:
@@ -5108,7 +5104,7 @@ label WinstonDayFive:
         "Tell him the act only works because he knows when to stop.":
             $ winn += 2
             w "That's the trick. A joke's supposed to make room, not take it away from somebody who needs it."
-        "Tell him nobody believes the act anyway.":
+        "Tell him nobody believes his act.":
             w "They believe exactly as much as I need. You being annoyingly observant is a separate problem."
 
     if winn >= WINSTON_WARM_THRESHOLD:
@@ -5141,14 +5137,14 @@ label WinstonDayFive:
         w "Not a bad reconstruction, newbie. Weird enough to work."
 
     "He packages the tentative sequence separately from the formal evidence. A second witness statement and the verified call timeline should arrive before your next session."
-    "The two of you restore the office just enough for Winston to locate the door, then head toward the daily report with an impression—not yet a conclusion."
+    "The two of you restore the office just enough for Winston to locate the door, then head toward the daily report with an impression, but not yet a conclusion."
 
     $ dayWinn += 1
     jump endOfDay
 
 label WinstonDaySix:
     scene winstonOfficeOutline
-    "The crude reconstruction is gone. In its place, Winston has arranged the active suspect files, a telephone timeline, and a sealed written statement in three exact rows."
+    "The crude reconstruction from yesterday is gone. In its place, Winston has arranged the active suspect files, a telephone timeline, and a sealed written statement in three exact rows."
     "For once, there are no darts in his hand. His eyes move from timestamp to timestamp while you enter."
     w "Morning, newbie. Second witness heard the exit from the street. Phone company finally verified when the nearby call connected."
     w "Last time gave us a shape. Today we find out whether it holds weight."
@@ -5156,10 +5152,10 @@ label WinstonDaySix:
     menu:
         "Verify the timeline before opening the statement.":
             $ winn += 2
-            w "Good. Independent clock first, memory second. Keeps us from bending time around the answer we want."
+            w "Good. That'll keep us from bending time around the answer we want."
         "Open the statement and compare it as you read.":
             $ winn += 1
-            w "Works, as long as you don't let the first sentence bully the timestamps."
+            w "Make sure you don't let the first sentence bully the timestamps."
         "Trust the last reconstruction and skip the repeat.":
             $ winn -= 2
             w "No. Last time was useful. Useful and proven are not the same thing."
@@ -5192,7 +5188,7 @@ label WinstonDaySixSequence:
 
     if winston_day_six_sequence_attempts == 0:
         $ winn += 2
-        w "There it is. Same sequence, two listening positions, one timeline."
+        w "There it is! The order matches the verified call time and the witnesses' independent memories."
     else:
         $ winn += 1
         w "That's it. Took the scenic route, but the order holds."
@@ -5208,7 +5204,7 @@ label WinstonDaySixSequence:
 
     w "That leaves [winston_day_six_remaining_names]."
     w "Three people. Everything else we've noticed is yours to weigh when Ulysses asks for the name."
-    "He closes the formal evidence without summarizing the quieter observations from earlier interviews. The three remaining files stay visible on the desk."
+    "He closes the formal evidence. The three remaining files stay visible on the desk."
 
     menu:
         "Tell him you trust the work you did together.":
@@ -5219,25 +5215,23 @@ label WinstonDaySixSequence:
             w "Frighteningly? Keep talking like that and Dhampir's going to get jealous."
         "Say Ulysses can choose among the final three.":
             $ winn -= 1
-            w "He could. He hired you because he wants your judgment too. Don't crawl out of the hard part now."
+            w "He could. He hired you because he wants your judgment too. Don't crawl out of the hard part now newbie."
 
     "Winston signs the final interview packet, carries it to the outgoing tray, and then takes the dart cup from the corner of his desk."
     w "Case is as far as it gets today. One throw before the report."
-    "He hands you a dart and steps behind you. One hand corrects your wrist; the other pauses open beside your waist instead of assuming permission."
+    "He hands you a dart and steps behind you. You see Winston go to correct your stance but stop."
 
     menu:
         "Guide his hand to your waist.":
             $ winn += 2
             $ winston_day_six_waist_contact = True
-            "You close the last inch yourself. His hand settles at your waist, deliberate enough that neither of you can mistake it for ordinary instruction."
-        "Ask him to keep the lesson to your wrist.":
+            "His hand settles at your waist, deliberate enough that neither of you can mistake it for ordinary instruction."
+        "Guide his hand to your wrist.":
             $ winston_day_six_waist_contact = False
-            "Winston nods and keeps the lesson focused on your grip."
-            w "Professional technique. Ulysses would be devastated."
+            "Winston nods and teaches a lesson focused on your grip."
         "Step aside and take the throw alone.":
             $ winston_day_six_waist_contact = False
-            "You reset your stance on your own. Winston gives you room without turning it into a joke."
-
+            "You reset your stance on your own."
     if winn >= WINSTON_HIGH_THRESHOLD and winston_day_six_waist_contact:
         "Your dart remains raised while Winston realizes where his hand is. A flush reaches his face before the familiar grin can cover it."
         menu:
@@ -5257,7 +5251,7 @@ label WinstonDaySixSequence:
         "Winston notices the intimacy a beat late and moves his hand, suddenly fascinated by your grip on the dart."
         w "Right. Technique. That's what we're doing."
     else:
-        "Winston corrects your stance, steps away, and watches the throw with an approving nod."
+        "Winston watches the throw with an approving nod."
         w "Better. Still ugly, but accurately ugly."
 
     "The dart lands inside the inner ring. Winston plants a second beside it and leaves both in the board."
@@ -5265,7 +5259,7 @@ label WinstonDaySixSequence:
     w "That's... useful to know."
     "He reaches for another joke, thinks better of it, and picks up the final report instead."
     w "Come on. Ulysses is waiting, and if we make him wait too long he'll develop a second forehead vein."
-    "You leave the three suspect files on the desk and walk with him toward Ulysses's office. Winston stops at the door, bumps your shoulder, and leaves the formal report to you. The last moment remains unspoken, but not unclear."
+    "You leave the three suspect files on the desk and walk with him toward Ulysses's office. Winston stops at the door, bumps your shoulder, and leaves the formal report to you."
 
     $ dayWinn += 1
     jump endOfDay
