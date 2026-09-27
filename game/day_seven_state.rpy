@@ -232,8 +232,7 @@ init python:
             )
 
         if (romance_allowed
-                and (partner_id == "ulysses"
-                     or visits >= store.DAY_SEVEN_MIN_ROMANCE_VISITS[partner_id])
+                and (partner_id == "ulysses" or visits >= store.DAY_SEVEN_MIN_ROMANCE_VISITS[partner_id])
                 and score >= store.DAY_SEVEN_ROMANCE_THRESHOLDS[partner_id]):
             return "romance"
         if ((partner_id == "ulysses" or visits >= store.DAY_SEVEN_MIN_FRIEND_VISITS)

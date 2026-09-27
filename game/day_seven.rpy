@@ -147,7 +147,7 @@ label DaySevenTeamBriefing:
 
     if ulysses_one_each_strategy():
         u "You sampled every investigative method once. None of those reports was deep alone, but their overlap was enough for us to formally remove every remaining contradiction."
-        u "You chose breadth and then did the difficult work of synthesis. I was impressed."
+        u "You chose breadth and then did the difficult work of synthesis. I'm impressed."
     elif day_seven_focus_route:
         $ day_seven_focus_name = day_seven_partner_name(day_seven_focus_route)
         u "You concentrated most heavily on [day_seven_focus_name]'s method. That gave you depth, but it also gave you a preferred lens. Account for both."
@@ -225,7 +225,7 @@ label DaySevenSuccess:
 
     u "The accusation is correct. Enrico Edge's killer is in custody, and the evidence supporting that arrest is sound."
     "Only then does the room release the breath it has been holding."
-    r "We got them. We actually got them."
+    r "Holy shit, We actually got them!"
     m "Yes. Because the evidence was correct. Try celebrating without knocking it onto the floor."
     d "Nice work, new blood."
     n "You made the call and you supported it. That's the job."
@@ -249,7 +249,7 @@ label DaySevenSuccess:
         elif day_seven_favorite == "nicky":
             n "Good work, rookie. Guess I need a new nickname."
         elif day_seven_favorite == "winston":
-            w "Newbie status revoked. I'm still calling you that."
+            w "Newbie status revoked. I'm still calling you that though."
         elif day_seven_favorite == "ica":
             i "You worked just enough to keep the job. Beautiful."
 
@@ -356,17 +356,17 @@ label DaySevenEndingRazzle:
             r "Today sucked. Like, impressively. Still doesn't make me wanna say no to you."
         r "Yeah, newbie. Romantic date. Club, drinks, dancing, and somewhere fireproof when we want the noise to stop."
         "Razzle closes the distance before you can overthink the answer. The kiss is warm in every possible sense and brief only because she starts laughing against your mouth."
-        r "Okay! That was good. We're doing that again when I haven't spent all day solving—or chasing—a murder."
+        r "Okay! That was good. We're doing that again when I haven't spent all day solving a murder."
         "Your first date becomes an energetic night of dancing followed by a quiet walk where Razzle never once has to apologize for the flames beside you. Whatever comes after remains open, but neither of you mistakes it for casual interest."
     elif daySevenRelationshipOutcome == "friend":
         show razzle mouth open at slot(0, total=1), bright zorder 10
         r "I love spending time with you, but not like that. I don't wanna fake the romantic part just because this week got intense."
-        r "You are absolutely still coming clubbing with me. Winston too, probably. Friendship invitation. Very explicit."
+        r "You are absolutely still coming clubbing with me. Winston too, probably."
         "The next night out is loud, affectionate, and completely platonic. Razzle makes certain the word friend never sounds like a consolation prize."
     else:
         show razzle sad at slot(0, total=1), bright zorder 10
         r "No, sorry. We don't know each other like that, and I'm not gonna pretend we do."
-        r "I hope things work out for you. Just not as my date."
+        r "I hope things work out for you."
         "She gives you an honest goodbye and leaves the answer there instead of softening it into a promise she does not mean."
     return
 
@@ -387,12 +387,12 @@ label DaySevenEndingWinston:
             w "You solve one murder and immediately decide to attempt something dangerous. I respect the momentum."
         else:
             w "I think today proved you can make a terrible decision. This isn't one of them."
-        w "Yeah, newbie. Romantic date. Pool first, disgusting burgers after. I'm winning at both somehow."
+        w "Yeah, newbie. Romantic date. Pool first, disgusting burgers after. I'm winning at both, somehow."
         "His familiar grin returns as he catches you at the waist and pulls you close. It disappears again when you kiss him."
         "The first date becomes three fiercely competitive pool games and a diner meal neither of you admits was too greasy. Winston fills every silence until he realizes the quiet beside you no longer needs filling."
     elif daySevenRelationshipOutcome == "friend":
-        w "I like you. A lot, actually. Just not in the direction you're aiming."
-        w "Friend version's still available. Pool, food, occasional unsanctioned hero work—strictly no payroll implications."
+        w "I like you. A lot, actually. Just not in the direction you're aiming newbie."
+        w "Friend version's still availabl though. Pool, food, occasional unsanctioned hero work—strictly no payroll implications."
         "He keeps the promise. Friendship with Winston remains noisy, competitive, and dependable whenever it matters."
     else:
         w "No, newbie. You caught me charming at close range and drew an unsafe conclusion."
@@ -467,7 +467,6 @@ label DaySevenEndingIca:
         "She remains employed and continues saving you a chair whenever doing nothing could use company."
     else:
         i "Nope. Don't make it weird."
-        i "We can exist in the same building—or not, depending on the job thing—but there isn't a date."
         "The refusal is effortless and final. Ica returns to her floating snack before the silence can become dramatic."
     return
 
@@ -493,7 +492,7 @@ label DaySevenEndingUlysses:
         "Color reaches Ulysses's face before he finishes setting down the file. Knowing the question existed has done nothing to make answering it easy."
         u "An evening away from ATLAS. Explicitly personal. Intentionally uncertain."
         "You nod."
-        u "Yes. There is a bookstore that stays open late and a restaurant nearby with no connection to Winston's standing pizza order."
+        u "Yes. There is a bookstore that stays open late and a restaurant nearby with no connection to Winston's standing pizza orders."
         u "I would like to discover the evening in the order it occurs."
         "You step close enough to give him every opportunity to refuse, then kiss him. His surprise lasts only a heartbeat before one careful hand settles at your waist."
         "Your first date contains books, dinner, obscure references only the two of you enjoy, and no attempt to plan what the relationship must become. Ulysses finds that he enjoys the uncertainty."
