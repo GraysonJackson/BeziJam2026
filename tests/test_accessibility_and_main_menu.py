@@ -183,9 +183,8 @@ class AccessibilityAndMainMenuTests(unittest.TestCase):
 
         # Character sprites
         self.assertIn('"images/FINISHEDSPRITES/freddyNeutralSmile.png"', content)
-        self.assertIn('"images/umbralBaseMouthClosed.png"', content)
         self.assertIn('"images/FINISHEDSPRITES/razzelHappyPeaceSign.png"', content)
-        self.assertIn('add "mm_ulysses":', content)
+        self.assertNotIn('add "mm_ulysses":', content)
         self.assertIn('add "mm_razzle":', content)
         self.assertIn('add "mm_freddy":', content)
 
@@ -201,49 +200,48 @@ class AccessibilityAndMainMenuTests(unittest.TestCase):
         # Character sprite source files exist on disk
         self.assertTrue((ROOT / "game" / "images" / "officeFinal.jpg").is_file())
         self.assertTrue((ROOT / "game" / "images" / "FINISHEDSPRITES" / "freddyNeutralSmile.png").is_file())
-        self.assertTrue((ROOT / "game" / "images" / "umbralBaseMouthClosed.png").is_file())
         self.assertTrue((ROOT / "game" / "images" / "FINISHEDSPRITES" / "razzelHappyPeaceSign.png").is_file())
         self.assertTrue((ROOT / "game" / "gui" / "sidefade.png").is_file())
 
-    def test_main_menu_ulysses_positioning(self):
+    def test_main_menu_freddy_positioning(self):
         """Verify in game/screens/main_menu.rpy:
-        1. Ulysses is positioned strictly to the right of Razzle Dazzle (ulysses_xpos > razzle_xpos).
-        2. gui/sidefade.png is declared after mm_ulysses so it overlays him on the right.
-        3. All 7 main menu buttons remain present, styled, and aligned at xalign 0.9.
+        1. Ulysses is removed from the main menu.
+        2. Freddy is moved to where Ulysses was (xpos=500).
+        3. gui/sidefade.png is declared after mm_freddy so it overlays on the right.
+        4. All 7 main menu buttons remain present, styled, and aligned at xalign 0.9.
         """
         mm_path = ROOT / "game" / "screens" / "main_menu.rpy"
         content = mm_path.read_text(encoding="utf-8")
 
+        # Verify Ulysses is removed
+        self.assertNotIn('add "mm_ulysses"', content)
+
         # Extract sprite xpos within the fixed sprite container
-        ulysses_match = re.search(r'add\s+"mm_ulysses":\s*xpos\s+(\d+)', content)
         razzle_match = re.search(r'add\s+"mm_razzle":\s*xpos\s+(\d+)', content)
         freddy_match = re.search(r'add\s+"mm_freddy":\s*xpos\s+(\d+)', content)
 
-        self.assertIsNotNone(ulysses_match, "mm_ulysses xpos declaration not found")
         self.assertIsNotNone(razzle_match, "mm_razzle xpos declaration not found")
         self.assertIsNotNone(freddy_match, "mm_freddy xpos declaration not found")
 
-        ulysses_xpos = int(ulysses_match.group(1))
         razzle_xpos = int(razzle_match.group(1))
         freddy_xpos = int(freddy_match.group(1))
 
-        # Position checks: Razzle back-left (40), Freddy center (220), Ulysses back-right (500)
+        # Position checks: Razzle left (40), Freddy right (580)
         self.assertEqual(razzle_xpos, 40)
-        self.assertEqual(freddy_xpos, 220)
-        self.assertEqual(ulysses_xpos, 500)
+        self.assertEqual(freddy_xpos, 580)
 
-        # Strict position verification: Ulysses strictly to the right of Razzle
+        # Strict position verification: Freddy strictly to the right of Razzle
         self.assertGreater(
-            ulysses_xpos, razzle_xpos,
-            f"Ulysses (xpos={ulysses_xpos}) must be positioned to the right of Razzle (xpos={razzle_xpos})"
+            freddy_xpos, razzle_xpos,
+            f"Freddy (xpos={freddy_xpos}) must be positioned to the right of Razzle (xpos={razzle_xpos})"
         )
 
-        # Verify sidefade overlay order: declared after mm_ulysses to overlay on top
-        ulysses_idx = content.find('add "mm_ulysses"')
+        # Verify sidefade overlay order: declared after mm_freddy to overlay on top
+        freddy_idx = content.find('add "mm_freddy"')
         sidefade_idx = content.find('add "gui/sidefade.png"')
         self.assertGreater(
-            sidefade_idx, ulysses_idx,
-            "gui/sidefade.png must appear after mm_ulysses in screen declaration to overlay on top"
+            sidefade_idx, freddy_idx,
+            "gui/sidefade.png must appear after mm_freddy in screen declaration to overlay on top"
         )
 
         # Verify button unobstructed layout and alignment

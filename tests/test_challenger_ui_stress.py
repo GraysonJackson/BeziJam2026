@@ -221,26 +221,21 @@ class MainMenuAdversarialStressTests(unittest.TestCase):
         self.hm_path = FONTS_DIR / "HotMustardBTN.ttf"
 
     def test_main_menu_sprite_geometry_and_ordering(self):
-        """Stress-test sprite coordinates: Ulysses strictly right of Razzle, crop calculations, and fixed container bounds."""
+        """Stress-test sprite coordinates: Freddy moved to Ulysses position, crop calculations, and fixed container bounds."""
         # mm_razzle: Crop((479, 130, 1495, 2351)), zoom 0.35, xpos 40
         razzle_w = 1495 * 0.35  # 523.25px
         razzle_right = 40 + razzle_w  # 563.25px
 
-        # mm_ulysses: Crop((438, 38, 2031, 2443)), zoom 0.35, xpos 500
-        ulysses_w = 2031 * 0.35  # 710.85px
-        ulysses_right = 500 + ulysses_w  # 1210.85px
-
-        # mm_freddy: Crop((998, 481, 1153, 1812)), zoom 0.42, xpos 220
+        # mm_freddy: Crop((998, 481, 1153, 1812)), zoom 0.42, xpos 580
         freddy_w = 1153 * 0.42  # 484.26px
-        freddy_right = 220 + freddy_w  # 704.26px
+        freddy_right = 580 + freddy_w  # 1064.26px
 
-        # Strict R2 Requirement: Ulysses position strictly to the right of Razzle
-        self.assertGreater(500, 40, "Ulysses xpos (500) must be strictly greater than Razzle xpos (40)")
-        self.assertGreater(ulysses_right, razzle_right, "Ulysses right edge must be greater than Razzle right edge")
+        # Freddy position strictly to the right of Razzle
+        self.assertGreater(580, 40, "Freddy xpos (580) must be strictly greater than Razzle xpos (40)")
+        self.assertGreater(freddy_right, razzle_right, "Freddy right edge must be greater than Razzle right edge")
 
-        # Freddy foreground center: Freddy xpos between Razzle and Ulysses
-        self.assertGreater(220, 40, "Freddy xpos must be to the right of Razzle origin")
-        self.assertLess(220, 500, "Freddy xpos must be to the left of Ulysses origin")
+        # Ulysses removed
+        self.assertNotIn('add "mm_ulysses"', self.mm_content)
 
         # Container bounds: fixed xysize (1250, 1080)
         fixed_match = re.search(r'fixed:\s+xysize\s+\((\d+),\s*(\d+)\)', self.mm_content)
@@ -248,18 +243,17 @@ class MainMenuAdversarialStressTests(unittest.TestCase):
         fixed_w = int(fixed_match.group(1))
         self.assertEqual(fixed_w, 1250, "Fixed container width must be 1250px")
         self.assertLessEqual(
-            ulysses_right, fixed_w,
-            f"Ulysses right edge ({ulysses_right}px) must fit within fixed width ({fixed_w}px)"
+            freddy_right, fixed_w,
+            f"Freddy right edge ({freddy_right}px) must fit within fixed width ({fixed_w}px)"
         )
 
-        # Layering order in AST / file: Razzle, Ulysses, then Freddy (so Freddy renders in foreground over both)
+        # Layering order in AST / file: Razzle, then Freddy
         idx_razzle = self.mm_content.find('add "mm_razzle"')
-        idx_ulysses = self.mm_content.find('add "mm_ulysses"')
         idx_freddy = self.mm_content.find('add "mm_freddy"')
-        self.assertTrue(idx_razzle < idx_ulysses < idx_freddy, "Layering inside fixed: must be Razzle, Ulysses, then Freddy")
+        self.assertTrue(idx_razzle < idx_freddy, "Layering inside fixed: must be Razzle then Freddy")
 
     def test_sidefade_overlay_alpha_profile_and_layering(self):
-        """Verify gui/sidefade.png alpha profile shades Ulysses on the right while leaving left group unshaded."""
+        """Verify gui/sidefade.png alpha profile shades sprites on the right while leaving left group unshaded."""
         # Order in screen: sidefade declared AFTER fixed: container
         idx_fixed = self.mm_content.find('fixed:')
         idx_sidefade = self.mm_content.find('add "gui/sidefade.png"')
@@ -280,20 +274,9 @@ class MainMenuAdversarialStressTests(unittest.TestCase):
                     f"sidefade alpha at x={x} (Razzle area) must be 0"
                 )
 
-            # Freddy span: x=220..704 -> alpha must be 0
-            for x in [220, 450, 700]:
-                self.assertEqual(
-                    sidefade_img.getpixel((x, mid_y))[3], 0,
-                    f"sidefade alpha at x={x} (Freddy area) must be 0"
-                )
-
-            # Ulysses span: x=500..1211 -> alpha starts at 0, ramps up on right side (x > 850)
-            self.assertEqual(sidefade_img.getpixel((500, mid_y))[3], 0)
+            # Freddy span: x=580..1064 -> alpha starts at 0, ramps up on right side (x > 850)
+            self.assertEqual(sidefade_img.getpixel((580, mid_y))[3], 0)
             self.assertEqual(sidefade_img.getpixel((800, mid_y))[3], 0)
-            alpha_1000 = sidefade_img.getpixel((1000, mid_y))[3]
-            alpha_1200 = sidefade_img.getpixel((1200, mid_y))[3]
-            self.assertGreater(alpha_1000, 15, "sidefade should begin soft shading at x=1000")
-            self.assertGreater(alpha_1200, 80, "sidefade should have noticeable gradient shading at x=1200")
 
             # Button span: x=1500..1920 -> alpha must be heavy dark backing (> 220)
             for x in [1600, 1700, 1800]:
@@ -304,9 +287,9 @@ class MainMenuAdversarialStressTests(unittest.TestCase):
                 )
 
     def test_main_menu_buttons_clearance_across_fonts(self):
-        """Verify buttons (Start, Load, Settings, etc.) at xalign 0.9 maintain >= 250px clearance from Ulysses."""
+        """Verify buttons (Start, Load, Settings, etc.) at xalign 0.9 maintain >= 250px clearance from Freddy."""
         buttons = ["Start", "Load", "Settings", "About", "Endings", "Help", "Quit"]
-        ulysses_right = 500 + (2031 * 0.35)  # 1210.85px
+        freddy_right = 580 + (1153 * 0.42)  # 1064.26px
 
         # Test under both default RandoWB and OpenDyslexic (accessibility mode)
         for font_name, font_file in [
@@ -319,7 +302,7 @@ class MainMenuAdversarialStressTests(unittest.TestCase):
             # Button vbox at xalign 0.9 on 1920 screen
             vbox_w = max_button_w + 50  # including style xoffset 50
             vbox_left = 0.9 * (1920 - vbox_w)
-            clearance = vbox_left - ulysses_right
+            clearance = vbox_left - freddy_right
 
             self.assertGreaterEqual(
                 clearance, 250,
@@ -343,16 +326,16 @@ class MainMenuAdversarialStressTests(unittest.TestCase):
         # Sprites with yalign 1.0 (bottom anchored at 1080)
         # Razzle: height 2351 * 0.35 = 822.85 -> top = 1080 - 822.85 = 257.15px
         razzle_top = 1080 - (2351 * 0.35)
-        # Ulysses: height 2443 * 0.35 = 855.05 -> top = 1080 - 855.05 = 224.95px
-        ulysses_top = 1080 - (2443 * 0.35)
+        # Freddy: height 1812 * 0.42 = 761.04 -> top = 1080 - 761.04 = 318.96px
+        freddy_top = 1080 - (1812 * 0.42)
 
         self.assertLess(
             title_bottom, razzle_top,
             f"Title bottom ({title_bottom}px) must be above Razzle top ({razzle_top}px)"
         )
         self.assertLess(
-            title_bottom, ulysses_top,
-            f"Title bottom ({title_bottom}px) must be above Ulysses top ({ulysses_top}px)"
+            title_bottom, freddy_top,
+            f"Title bottom ({title_bottom}px) must be above Freddy top ({freddy_top}px)"
         )
 
 

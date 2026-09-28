@@ -60,8 +60,8 @@ image ulysses = Crop((438, 0, 2031, 2481), "images/umbralBaseMouthClosed.png")
 image umbral = Crop((438, 0, 2031, 2481), "images/umbralBaseMouthClosed.png")
 
 # --- BACKGROUNDS ---
-image cubicleOutline = "images/officeFinal.jpg"
-image cubicleOutlineInverted = "images/officeFinal.jpg"
+image cubicleOutline = "images/cubicleFinal.jpg"
+image cubicleOutlineInverted = "images/cubicleFinal.jpg"
 image debriefRoomOutline = "images/debriefRoomNoChairs.jpg"
 image debriefRoomOutlineInverted = "images/debriefRoomNoChairs.jpg"
 image labOutline = "images/labFinal.jpg"

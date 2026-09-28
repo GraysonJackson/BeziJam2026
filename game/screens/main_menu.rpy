@@ -8,7 +8,6 @@
 image main_menu_background = "images/officeFinal.jpg"
 
 image mm_freddy = Crop((998, 481, 1153, 1812), "images/FINISHEDSPRITES/freddyNeutralSmile.png")
-image mm_ulysses = Crop((438, 38, 2031, 2443), "images/umbralBaseMouthClosed.png")
 image mm_razzle = Crop((479, 130, 1495, 2351), "images/FINISHEDSPRITES/razzelHappyPeaceSign.png")
 
 
@@ -19,25 +18,19 @@ screen main_menu():
 
     add "main_menu_background"
 
-    # Character sprites on the left: Razzle on left, Freddy foreground center, Ulysses on right
+    # Character sprites on the left: Razzle on left, Freddy on right
     fixed:
         xysize (1250, 1080)
 
-        # Razzle (back-left of character group)
+        # Razzle (left)
         add "mm_razzle":
             xpos 40
             yalign 1.0
             zoom 0.35
 
-        # Ulysses (back-right of character group, strictly to the right of Razzle)
-        add "mm_ulysses":
-            xpos 500
-            yalign 1.0
-            zoom 0.35
-
-        # Freddy (foreground center)
+        # Freddy (right of Razzle)
         add "mm_freddy":
-            xpos 220
+            xpos 580
             yalign 1.0
             zoom 0.42
 
