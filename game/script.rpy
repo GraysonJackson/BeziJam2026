@@ -347,31 +347,33 @@ label dayOneBrief:
 
     hide nicky
     hide madeline
-    hide ulysses
 
-    show dhampir at slot(0, total=2), bright zorder 10
-    show winston at slot(1, total=2), dim zorder 0
+    show ulysses at slot(0, total=3), dim zorder 0
+    show dhampir at slot(1, total=3), bright zorder 10
+    show winston at slot(2, total=3), dim zorder 0
 
     d "Sup."
 
-    show dhampir at slot(0, total=2), dim zorder 0
-    show winston at slot(1, total=2), bright zorder 10
+    show dhampir at slot(1, total=3), dim zorder 0
+    show winston at slot(2, total=3), bright zorder 10
     w "We on time for the meeting?"
 
-    show winston at slot(1, total=2), dim zorder 0
+    show winston at slot(2, total=3), dim zorder 0
+    show ulysses at slot(0, total=3), bright zorder 10
     u "Not at all. Where were you two??"
 
-    show dhampir at slot(0, total=2), bright zorder 10
+    show ulysses at slot(0, total=3), dim zorder 0
+    show dhampir at slot(1, total=3), bright zorder 10
     d "Ulysses, relaaaaax man. We were just playing some darts in Winston's office."
     d "Besides, seems like we're still missing some people anyway."
 
-    show dhampir at slot(0, total=2), dim zorder 0
-    show winston at slot(1, total=2), bright zorder 10
+    show dhampir at slot(1, total=3), dim zorder 0
+    show winston at slot(2, total=3), bright zorder 10
     w "Yeah, Ulysses! We're not the last people here, so TECHNICALLY we're not even late at all!"
     w "And it was a tough game of darts! Still annoyed about those triple 20s you were throwing, though, Dhampir!"
 
-    show winston at slot(1, total=2), dim zorder 0
-    show dhampir at slot(0, total=2), bright zorder 10
+    show winston at slot(2, total=3), dim zorder 0
+    show dhampir at slot(1, total=3), bright zorder 10
     d "Look man, practice makes perfect."
     d "You just gotta keep throwing darts and maybe one day you'll be on my level."
 
@@ -381,16 +383,20 @@ label dayOneBrief:
     d "You must be that new person Ulysses has been in such a tizzy about."
     d "If you're anything like Ulysses, this may be a rough job, but if you're like me and Winnie, you'll love it here."
 
-    show dhampir at slot(0, total=2), dim zorder 0
+    show dhampir at slot(1, total=3), dim zorder 0
+    show ulysses at slot(0, total=3), bright zorder 10
     u "For the love of God, PLEASE don't be like them."
 
-    show winston at slot(1, total=2), bright zorder 10
+    show ulysses at slot(0, total=3), dim zorder 0
+    show winston at slot(2, total=3), bright zorder 10
     w "What's wrong with us?? We just know how to have fun, unlike you, Mr. Wet Blanket."
 
-    show winston at slot(1, total=2), dim zorder 0
+    show winston at slot(2, total=3), dim zorder 0
+    show ulysses at slot(0, total=3), bright zorder 10
     u "Oh I'll show you wet blanket-"
 
-    show winston at slot(1, total=2), bright zorder 10
+    show ulysses at slot(0, total=3), dim zorder 0
+    show winston at slot(2, total=3), bright zorder 10
     w "ULY WAIT-"
 
     scene black with fade
@@ -420,12 +426,15 @@ label dayOneBrief:
     r "OMG ARE WE WRESTLING? COUNT ME IN!"
 
     "Razzle Dazzle runs into the room and jumps into the fray right as Ulysses and Winston quickly separate so as not to be burned."
-    show razzle at slot(0, total=1), bright zorder 10
+    show razzle at slot(1, total=2), dim zorder 0
+    show ulysses at slot(0, total=2), bright zorder 10
     u "No, Razzle, sorry. Winston and I just had a disagreement."
 
-    show razzle at slot(0, total=1), dim zorder 0
+    show ulysses at slot(0, total=2), dim zorder 0
+    show nicky at slot(0, total=2), bright zorder 10
     n "Winston called him a wet blanket."
 
+    hide nicky
     show razzle sad at slot(0, total=1), bright zorder 10
     r "Awwwww man! I was really looking forward to it!"
     r "That's fine I guess, there's always time later, right newbie?"
@@ -445,19 +454,22 @@ label dayOneBrief:
             r "Oh? I hope you can handle some heat then..."
 
     show razzle at slot(0, total=1), dim zorder 0
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Alright you two, that's enough of that. Looks like we're only missing one more now. Where is she?"
     hide razzle
 
     "As if on cue, the final member of your team strolls through the door, carrying a weight of carelessness about her."
 
-    show ica at slot(0, total=1), bright zorder 10
+    show ica at slot(1, total=2), bright zorder 10
     i "Oh, hey guys. We doing something in here?"
 
-    show ica at slot(0, total=1), dim zorder 0
+    show ica at slot(1, total=2), dim zorder 0
+    show ulysses at slot(0, total=2), bright zorder 10
     u "Yes, we are. We're having a meeting that you're LATE to by over thirty minutes!"
 
     "Ica shrugs."
 
+    hide ulysses
     show ica happy at slot(0, total=1), bright zorder 10
     i "Whoopsie daisy! I was playing blackjack against myself."
     i "Pretty fun if you know what you're doing."
@@ -480,6 +492,7 @@ label dayOneBrief:
             i "Oh fun, another one of these nerds. Never mind then."
 
     hide ica
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Okay, great, now that everyone's here can we please begin?"
 
     "The team nods their heads and begins to take seats around the table while Ulysses sets up a projection."
@@ -743,6 +756,7 @@ label RazzleDayOne:
             r "Hell yeah! Let's get this done!"
             "Razzle shoulders her bag, checks that the travel mug is sealed, and lets you carry the map."
     scene black
+    show razzle at slot(0, total=1), bright zorder 10
     "You and Razzle Dazzle begin to walk through Los Angeles, heading to the house of the first witness."
     "As you walk, you notice Razzle Dazzle making conversation, mainly just talking aloud, but occasionally asking you questions."
 
@@ -910,6 +924,7 @@ label RazzleDayTwo:
     r "Come on already, I'm hungry!"
 
     scene black with fade
+    show razzle at slot(0, total=1), bright zorder 10
 
     "A few minutes later, you're walking through the city with Razzle."
 
@@ -1049,6 +1064,7 @@ label RazzleDayTwo:
     "By the time you reach the roof, the sun is beginning to set. You catch your breath while Razzle claims a place on the ledge."
 
     "Razzle sits on the edge of the roof, her flames standing out against the darkening sky."
+    show razzle at slot(0, total=1), bright zorder 10
 
     r "Thanks for hanging out with me today."
 
@@ -1626,6 +1642,7 @@ label RazzleDayFive:
     "Razzle presses play."
 
     scene black
+    show razzle at slot(0, total=1), bright zorder 10
 
     "A grainy black-and-white image appears on the television."
 
@@ -1684,6 +1701,7 @@ label RazzleDayFive:
             r "Well, that was a bust. Guess we'll just start watching!"
 
     scene black
+    show razzle at slot(0, total=1), bright zorder 10
 
     "You and Razzle begin working through the recording. Every half hour, one of you calls a break to stretch, refill the snacks, and note the tape counter in case the VCR decides to eat the evidence."
 
@@ -1706,6 +1724,7 @@ label RazzleDayFive:
     "Razzle reaches over and rewinds the recording, playing the moment again."
 
     scene black
+    show razzle at slot(0, total=1), bright zorder 10
 
     "The figure enters at the bottom of the frame."
 
@@ -2231,6 +2250,7 @@ label DhampirDayOne:
             d "Yeah. That's why at least one of 'em is stress-eating in the driveway right now."
 
     scene black with fade
+    show dhampir at slot(0, total=1), bright zorder 10
     "Outside, Dhampir chooses to walk instead of fly. The case file stays tucked under one arm while he points out a bakery he likes, a pawn shop he distrusts, and an alley where he once chased a man through three walls."
     "By the time Enrico's street comes into view, the casual commentary is gone. His shoulders square again before either of you reaches the police tape."
     "The two of you arrive at the crime scene."
@@ -2324,6 +2344,7 @@ label DhampirDayOne:
     d "Okay. Now pizza. Dramatic accusations can wait."
 
     scene black with fade
+    show dhampir at slot(0, total=1), bright zorder 10
     "The nearest pizza counter has metal stools and a cashier who does not react to Dhampir's Victorian murder suit. He orders two slices and produces a sealed blood packet for his own."
 
     menu:
@@ -2395,6 +2416,7 @@ label DhampirDayTwo:
     "The recap expands through lunch. Dhampir happily answers every question, performs several lines in the wrong accents, and pauses twice to correct his own diagram when he remembers an additional secret twin."
 
     scene black with fade
+    show dhampir at slot(0, total=1), bright zorder 10
     "By the time the day is coming to an end, you understand enough of the series to recognize at least four kinds of continuity error."
     "The two of you stop at a convenience store as the sun begins to set. Dhampir buys popcorn, some candy, and a small plastic cup with a lid."
 
@@ -2489,6 +2511,7 @@ label DhampirDayTwo:
     "The credits roll over an original song that rhymes 'eternity' with 'burning me' four separate times. Dhampir remains seated through all of it, just in case the filmmakers hid one last bad decision after the names."
 
     scene black with fade
+    show dhampir at slot(0, total=1), bright zorder 10
     "Outside, the crowd breaks into smaller groups arguing about the ending. Dhampir waits until the lobby empties, throws away the snack wrappers, then leads you around the side of the theater and looks up toward the roof."
 
     d "Roof's got a better view than the parking lot."
@@ -3041,6 +3064,7 @@ label DhampirDaySix:
             d "Then we prove where it isn't and keep looking. Last search doesn't mean last guess."
 
     scene black with fade
+    show dhampir at slot(0, total=1), bright zorder 10
     "The final drive is quiet. Dhampir reviews Madeline's transparent angle overlays against a set of printed scene photographs while you watch familiar blocks pass the window. At the house, two officers record the search plan and unlock the scene one last time."
     "You photograph the intact seal before entering. Dhampir waits inside the doorway until the time, personnel, and conditions are written into the log."
     $ dhampir_day_six_drop = suspectAttributes[killer]["unique_drop"]
@@ -3348,6 +3372,7 @@ label MadelineDayTwo:
             m "Don't tempt me. I haven't even seen how badly they built it yet."
 
     scene black with fade
+    show madeline at slot(0, total=1), bright zorder 10
     "The trip across town gives Madeline time to read every negative review clipped from a local entertainment guide and explain why most reviewers misunderstood basic geometry."
     "The miniature-golf course is an explosion of plastic castles, painted animals, artificial ponds, and badly maintained green turf. A teenager at the counter slides a rack of colored balls toward you."
 
@@ -3428,6 +3453,7 @@ label MadelineDayTwo:
     m "If that machine damaged them, their loss-prevention policy is about to become extremely relevant."
 
     scene black with fade
+    show madeline at slot(0, total=1), bright zorder 10
     "The balls emerge unharmed, so the course survives. At the snack window outside, Madeline studies the ice-cream menu longer than she studied the final shot."
 
     menu:
@@ -4250,6 +4276,7 @@ label NickyDayTwo:
             n "Dangerous amount of trust in me this early, rookie. I like it."
 
     scene black with fade
+    show nicky at slot(0, total=1), bright zorder 10
     "The motorcycle tears away from ATLAS, the engine swallowing the last of the office noise. Nicky takes the first few streets easily, giving you time to settle behind her before the road opens up."
     "At the first hard turn, your arms tighten around Nicky's waist."
     "She laughs loudly enough for you to hear through both helmets."
@@ -4323,6 +4350,7 @@ label NickyDayTwo:
     show nicky content happy at slot(0, total=1), bright zorder 10
     n "I'm thinking we can get some food real quick. C'mon, I know a place!"
     scene black with fade
+    show nicky at slot(0, total=1), bright zorder 10
     "The ride to the diner is shorter and slower. Backseat Royalty blasts through the bike's speakers while late-afternoon traffic gathers around you."
     "At the diner, Nicky claims a booth and loosens her tie. A server drops two menus between you and waits with a pen poised."
 
@@ -5001,6 +5029,7 @@ label WinstonDayOne:
 
 label WinstonDayTwo:
     scene winstonOfficeOutline
+    show winston at slot(0, total=1), bright zorder 10
     "Winston is asleep on the couch with one boot on the armrest and the other planted on a stack of unsigned supply requests. Mariah Carey plays quietly from a radio beside his desk."
     "The investigation folder is closed. A handwritten sign on top reads DAY OFF. THIS MEANS ME."
 

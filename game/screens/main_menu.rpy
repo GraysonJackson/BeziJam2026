@@ -19,25 +19,25 @@ screen main_menu():
 
     add "main_menu_background"
 
-    # Character sprites on the left grouped with slight overlap
+    # Character sprites on the left: Razzle on left, Freddy foreground center, Ulysses on right
     fixed:
-        xysize (1150, 1080)
+        xysize (1250, 1080)
 
-        # Ulysses (back-left)
-        add "mm_ulysses":
+        # Razzle (back-left of character group)
+        add "mm_razzle":
             xpos 40
             yalign 1.0
             zoom 0.35
 
-        # Razzle (back-right of character group)
-        add "mm_razzle":
-            xpos 470
+        # Ulysses (back-right of character group, strictly to the right of Razzle)
+        add "mm_ulysses":
+            xpos 500
             yalign 1.0
             zoom 0.35
 
-        # Freddy (foreground center-left)
+        # Freddy (foreground center)
         add "mm_freddy":
-            xpos 200
+            xpos 220
             yalign 1.0
             zoom 0.42
 

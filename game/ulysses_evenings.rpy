@@ -28,8 +28,8 @@ label UlyssesEvening:
         "You follow the quiet hall to Ulysses's office. Light reaches beneath the door, accompanied by low jazz and the soft turn of paper."
 
     "You knock."
-    u "Come in, recruit."
     show ulysses at slot(0, total=1), bright zorder 10
+    u "Come in, recruit."
     "Ulysses waits behind his desk with the day's case folder already open and a guest chair pulled into place."
 
     call expression ulysses_report_label from _call_expression

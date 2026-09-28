@@ -25,3 +25,11 @@ game/saves/sync/**
 docs/writing_quality_evaluation.md
 docs/quality_audit_report.md
 docs/audit_report.md
+
+# Agent directories and temporary test artifacts
+.agents/
+tmp/
+__pycache__/
+*.pyc
+tests/screenshots/**/*.diff.png
+tests/screenshots/**/*.new.png
