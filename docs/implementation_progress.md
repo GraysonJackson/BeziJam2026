@@ -1,5 +1,7 @@
 # Implementation Progress Ledger: Date and Deduce
 
+> Historical first-pass ledger. Its original completion claims are preserved below. The second review found remaining defects and verification gaps; use [implementation_guide_round_2.md](implementation_guide_round_2.md) and [implementation_progress_round_2.md](implementation_progress_round_2.md) for current work. Passing the listed tests does not establish every legal ending path or current visual correctness.
+
 This ledger tracks all **234 findings (A001–A234)** from `docs/implementation_guide.md`, cross-referenced with locked and approved decisions in `docs/audit_decisions.md`.
 
 ## Status Summary

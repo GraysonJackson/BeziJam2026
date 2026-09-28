@@ -4,9 +4,9 @@ screen dhampir_ispy_minigame():
     modal True
     zorder 250
 
+
     add "gui/bgtile.png"
     add Solid("#102F3DDD")
-    key "game_menu" action Function(dhampir_ispy_abort)
 
     fixed:
         xalign 0.5
@@ -106,6 +106,9 @@ screen dhampir_ispy_minigame():
             xpos 1220
             ypos 35
             action Function(dhampir_ispy_abort)
+
+    use minigame_controls("scanner")
+
 
 style dhampir_ispy_title:
     is gui_text

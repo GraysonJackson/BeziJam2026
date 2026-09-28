@@ -93,6 +93,7 @@ init python:
         """Start after both story choices, without asking for either choice again."""
         store.ica_clear_minigame_result("eating")
         _ica_eating_reset_state(approach_id, reaction_id)
+        push_minigame_music()
         renpy.call_screen("ica_eating_minigame")
 
     def ica_eating_action(action_id):
@@ -235,6 +236,7 @@ init python:
         store.ica_eating_completion_recorded = True
         store.ica_eating_phase = "complete"
         store.ica_eating_session_active = False
+        pop_minigame_music()
         renpy.hide_screen("ica_eating_minigame")
         renpy.end_interaction(True)
 
@@ -245,6 +247,7 @@ init python:
         store.ica_eating_phase = "aborted"
         store.ica_eating_session_active = False
         store.ica_eating_feedback = ""
+        pop_minigame_music()
         renpy.hide_screen("ica_eating_minigame")
         renpy.end_interaction(True)
 

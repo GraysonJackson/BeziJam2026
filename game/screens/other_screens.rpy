@@ -47,6 +47,7 @@ screen about():
         if gui.about:
             text "[gui.about!t]\n" xsize 500
 
+        text _("Music by JDSherbert\nMinigame Music Pack & Nostalgia Music Pack\n{a=https://jdsherbert.itch.io}https://jdsherbert.itch.io{/a}\n")
 
         text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
@@ -120,7 +121,7 @@ screen keyboard_help():
 
     hbox:
         label _("Escape")
-        text _("Accesses the game menu.")
+        text _("Opens the game menu, or Pause / Rules during a minigame.")
 
     hbox:
         label _("Ctrl")
@@ -159,7 +160,7 @@ screen mouse_help():
 
     hbox:
         label _("Right Click")
-        text _("Accesses the game menu.")
+        text _("Opens the game menu, or Pause / Rules during a minigame.")
 
 
 screen play_help():
@@ -182,7 +183,7 @@ screen play_help():
 
     hbox:
         label _("Minigames")
-        text _("Rules appear before play. Leaving a required investigation game lets your partner finish so the story can continue.")
+        text _("Rules appear before play. Pause / Rules, Escape, or right-click pauses the game and reopens them. Resume keeps your progress. Choose partner assistance or Withdraw explicitly to leave.")
 
 
 screen gamepad_help():
@@ -198,7 +199,7 @@ screen gamepad_help():
 
     hbox:
         label _("Start, Guide, B/Right Button")
-        text _("Accesses the game menu.")
+        text _("Opens the game menu, or Pause / Rules during a minigame.")
 
     hbox:
         label _("Y/Top Button")

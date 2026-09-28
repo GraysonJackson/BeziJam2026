@@ -105,6 +105,87 @@ screen audio_prefs():
 
 
 
+default persistent.dyslexic_font = False
+
+init python:
+    _dyslexic_sync_initialized = False
+
+    def set_dyslexic_font(enable):
+        enable = bool(enable)
+        persistent.dyslexic_font = enable
+        _preferences.font_transform = "opendyslexic" if enable else None
+        if getattr(persistent, "_gui_preference", None) is not None:
+            if enable:
+                persistent._gui_preference["font"] = "fonts/OpenDyslexic-Regular.ttf"
+                persistent._gui_preference["interface_font"] = "fonts/OpenDyslexic-Regular.ttf"
+                persistent._gui_preference["name_font"] = "fonts/OpenDyslexic-Regular.ttf"
+            else:
+                persistent._gui_preference["font"] = "MonaspaceNeon-Regular.otf"
+                persistent._gui_preference["interface_font"] = "MonaspaceNeon-Regular.otf"
+                persistent._gui_preference["name_font"] = "MonaspaceNeon-Regular.otf"
+        renpy.free_memory()
+        renpy.display.interface.display_reset = True
+        renpy.restart_interaction()
+
+    class SetDyslexicFont(Action, DictEquality):
+        def __init__(self, enable):
+            self.enable = bool(enable)
+
+        def __call__(self):
+            set_dyslexic_font(self.enable)
+
+        def get_selected(self):
+            is_dyslexic = (_preferences.font_transform == "opendyslexic") or bool(getattr(persistent, "dyslexic_font", False))
+            return is_dyslexic if self.enable else not is_dyslexic
+
+    def _sync_dyslexic_font_state():
+        global _dyslexic_sync_initialized
+        if not _dyslexic_sync_initialized:
+            _dyslexic_sync_initialized = True
+            if getattr(persistent, "dyslexic_font", False):
+                _preferences.font_transform = "opendyslexic"
+            elif _preferences.font_transform == "opendyslexic":
+                persistent.dyslexic_font = True
+            return
+
+        is_trans = (_preferences.font_transform == "opendyslexic")
+        if getattr(persistent, "dyslexic_font", False) != is_trans:
+            persistent.dyslexic_font = is_trans
+
+    if _sync_dyslexic_font_state not in config.interact_callbacks:
+        config.interact_callbacks.append(_sync_dyslexic_font_state)
+
+init 999 python:
+    if getattr(persistent, "dyslexic_font", False):
+        _preferences.font_transform = "opendyslexic"
+
+screen accessibility_prefs():
+    tag menu
+
+    use game_menu(_("Accessibility"))
+
+    viewport:
+        style_prefix 'game_menu'
+        mousewheel True pagekeys True
+        scrollbars "vertical"
+        has vbox
+
+        vbox:
+            yoffset 20
+            spacing 20
+
+            vbox:
+                style_prefix "radio"
+                label _("Dyslexic Font")
+                text _("Changes in-game text and UI fonts to OpenDyslexic for improved readability.") size 16 font "fonts/MonaspaceArgon-SemiBold.otf" color "#00719A"
+                null height 5
+
+                textbutton _("Default"):
+                    action SetDyslexicFont(False)
+                textbutton _("OpenDyslexic"):
+                    action SetDyslexicFont(True)
+
+
 ### PREF
 style pref_label:
     top_margin 15

@@ -35,7 +35,6 @@ screen file_slots(title):
     use game_menu(title)
 
     fixed:
-        xsize 1520 xalign 0.5
         
         ## This ensures the input will get the enter event before any of the
         ## buttons do.
@@ -54,35 +53,38 @@ screen file_slots(title):
                 value page_name_value
 
 
-        #fancy tape decoration that i stole the code from frangame for. thanks past me.
-        grid 5 1:
-            yoffset 20
-            style_prefix "slot"
-
-            for i in range(5):
-                $ slot = i + 1
-                add "gui/button/tape_[i % 2].png" xysize (140, 75)
-
-        ## The grid of file slots.
-        grid 5 1:
-            yoffset 20
-            style_prefix "slot"
+        ## Five rows fit inside the notebook without covering navigation.
+        vbox:
+            pos (650, 290)
+            spacing 8
 
             for i in range(5):
                 $ slot = i + 1
 
                 button:
+                    id ("save_slot_" + str(slot))
+                    style "slot_button"
                     action FileAction(slot)
-                    has vbox
 
-                    add FileScreenshot(slot) xalign 0.5 xysize (220, 124)
+                    hbox:
+                        spacing 16
+                        fixed:
+                            xysize (128, 80)
+                            add FileScreenshot(slot) ypos 8 xysize (128, 72)
+                            add "gui/button/tape_[i % 2].png" xpos 28 ypos -7 xysize (72, 30)
 
-                    ## https://www.fabriziomusacchio.com/blog/2021-08-15-strftime_Cheat_Sheet/
-                    text FileTime(slot,
-                            format=_("{#file_time}%B %d %Y, %H:%M"),
-                            empty=_("empty slot")):
-                        style "slot_time_text"
-                        yoffset -7
+                        vbox:
+                            spacing 4
+                            text ("Slot " + str(slot) + "  " + FileTime(slot,
+                                    format=_("{#file_time}%m/%d %H:%M"),
+                                    empty=_("Empty"))):
+                                style "slot_time_text"
+
+                            text FileJson(slot, "case_context", empty="", missing="Earlier save"):
+                                size 20
+                                font "fonts/MonaspaceNeon-Regular.otf"
+                                color "#251D18"
+                                xmaximum 350
 
                     key "save_delete" action FileDelete(slot)
         ## Buttons to access other pages.
@@ -124,20 +126,18 @@ style slot_grid:
     spacing 4
 
 style slot_time_text:
-    size 17
-    xalign 0.5
-    font "fonts/RandoArtline.ttf"
-    line_leading 0
-    line_spacing -4
+    size 19
+    color "#453B32"
+    font "fonts/MonaspaceNeon-Regular.otf"
 
 style slot_vbox:
     spacing 12
 
 style slot_button:
-    xysize (240, 185)
-    padding (7, 7, 7, 7)
-    background None
-    hover_background Solid("#ffffff18")
+    xysize (550, 100)
+    padding (12, 8)
+    background Solid("#F3E8D9CC")
+    hover_background Solid("#F6D7C7")
 
 
 style slot_button_text:

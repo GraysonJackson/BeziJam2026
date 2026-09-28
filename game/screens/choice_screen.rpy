@@ -19,6 +19,7 @@ screen choice(items):
         padding (20, 20)
 
         viewport:
+            xfill True
             mousewheel True
             draggable True
             pagekeys True

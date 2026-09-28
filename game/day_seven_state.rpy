@@ -74,6 +74,8 @@ default daySevenReplayKey = ""
 default daySevenIcaSpecial = False
 default daySevenRelationshipSnapshot = {}
 default daySevenBriefingResponse = ""
+default daySevenFailureResponse = ""
+default daySevenRelationshipIntent = ""
 
 default persistent.daySevenEndings = {}
 
@@ -114,6 +116,8 @@ init python:
         store.daySevenReplayKey = ""
         store.daySevenIcaSpecial = store.dayIca >= 7
         store.daySevenBriefingResponse = ""
+        store.daySevenFailureResponse = ""
+        store.daySevenRelationshipIntent = ""
         store.daySevenRelationshipSnapshot = {
             partner_id: day_seven_score(partner_id)
             for partner_id, _name, _score_var in store.DAY_SEVEN_PARTNERS
@@ -182,7 +186,7 @@ init python:
         if clue_key in store.recordedClueKeys:
             return
         clue_text = (
-            "{} was caught attempting to destroy Enrico Edge's bloodstained wallet and workshop lockbox key."
+            "{} brought Enrico Edge's bloodstained wallet key to the warehouse and attempted to destroy the lockbox contents."
             .format(store.suspectNames[store.killer])
         )
         clue = {
@@ -286,6 +290,18 @@ init python:
             reaction_lines.get(reaction, reaction_lines["None"]),
             organization_lines.get(organization, organization_lines["Messy"]),
         )
+
+    def day_seven_confession_pages(suspect_id):
+        """Keep the full admission readable in the dialogue panel."""
+        import re
+        sentences = re.split(r"(?<=[.!?])\s+", day_seven_culprit_confession(suspect_id))
+        pages = []
+        for sentence in sentences:
+            if pages and len(pages[-1]) + len(sentence) + 1 <= 180:
+                pages[-1] += " " + sentence
+            else:
+                pages.append(sentence)
+        return pages
 
     def day_seven_favorite_investigator():
         counts = store.ulysses_visit_counts()
@@ -414,6 +430,8 @@ init python:
         return None
 
     def day_seven_unlock_ending(key):
+        if store.daySevenReplayMode:
+            return
         entry = day_seven_catalog_entry(key)
         if entry is None:
             raise Exception("Unknown Day Seven ending key: {}".format(key))
@@ -421,6 +439,10 @@ init python:
         unlocked[key] = {
             "killer": int(store.killer),
             "ica_special": bool(store.daySevenIcaSpecial),
+            "intent": store.daySevenRelationshipIntent,
+            "failure_response": store.daySevenFailureResponse,
+            "mads_cutoff_violated": bool(store.mads_cutoff_violated),
+            "mads_apology_accepted": bool(store.mads_apology_accepted),
         }
         persistent.daySevenEndings = unlocked
         renpy.save_persistent()
@@ -436,6 +458,13 @@ init python:
         store.daySevenChosenPartner = entry["partner"]
         store.daySevenRelationshipOutcome = entry["outcome"]
         store.daySevenIcaSpecial = bool(metadata.get("ica_special", False))
+        # Legacy unlocks lack intent. A friendship replay defaults to a direct
+        # friendship ask; never depend on a different run's relationship state.
+        store.daySevenRelationshipIntent = metadata.get(
+            "intent", "friend" if entry["outcome"] == "friend" else "romance")
+        store.daySevenFailureResponse = metadata.get("failure_response", "accept")
+        store.mads_cutoff_violated = bool(metadata.get("mads_cutoff_violated", False))
+        store.mads_apology_accepted = bool(metadata.get("mads_apology_accepted", False))
         replay_killer = int(metadata.get("killer", 1))
         if replay_killer in store.suspectNames:
             store.killer = replay_killer

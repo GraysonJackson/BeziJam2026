@@ -1,47 +1,80 @@
-# Each character uses one shared crop box so expression changes do not jump.
+# Finished character sprites from images/FINISHEDSPRITES
+# All finished sprites are drawn on the shared 2469x2481 canvas, so expression changes register without jumping.
 
-image ica = Crop((180, 140, 1740, 2341), "images/icaBaseEmotion.png")
-image ica flirty = Crop((180, 140, 1740, 2341), "images/icaFlirtyEmotion.png")
-image ica happy = Crop((180, 140, 1740, 2341), "images/icaHappyEmotion.png")
-image ica sad = Crop((180, 140, 1740, 2341), "images/icaSadEmotion.png")
-image ica shock = Crop((180, 140, 1740, 2341), "images/icaShockEmotion.png")
-image ica whatTheFuckDidYouJustDoMC = Crop((180, 140, 1740, 2341), "images/icaWhatTheFuckDidYouJustDoMCEmotion.png")
+# --- ICA ---
+image ica = "images/FINISHEDSPRITES/icaBaseNeutralMouthclosed.png"
+image ica mouth open = "images/FINISHEDSPRITES/icaBaseNeutralMouthOpen.png"
+image ica flirty = "images/FINISHEDSPRITES/icaSlyMotherFucker.png"
+image ica happy = "images/FINISHEDSPRITES/icaHappyHappyHappy.png"
+image ica sad = "images/FINISHEDSPRITES/icaMCYouFuckedUpYouPissedOffTheJokeCharacterOfAllCharacters.png"
+image ica shock = "images/FINISHEDSPRITES/icaOhShitIFuckedUp.png"
+image ica whatTheFuckDidYouJustDoMC = "images/FINISHEDSPRITES/icaMCYouFuckedUpYouPissedOffTheJokeCharacterOfAllCharacters.png"
+image ica sly = "images/FINISHEDSPRITES/icaSlyMotherFucker.png"
 
-image madeline = Crop((100, 70, 1820, 2411), "images/madelineBaseClosedMouthEmotion.png")
-image madeline distress = Crop((100, 70, 1820, 2411), "images/madelineDistressEmotion.png")
-image madeline flirty curious = Crop((100, 70, 1820, 2411), "images/madelineFlirtyCuriousEmotion.png")
-image madeline flirty = Crop((100, 70, 1820, 2411), "images/madelineFlirtyEmotion.png")
-image madeline madScientist = Crop((100, 70, 1820, 2411), "images/madelineMadScienistEmotion.png")
-image madeline sad upset = Crop((100, 70, 1820, 2411), "images/madelineSadUpsetEmotion.png")
+# --- MADELINE ---
+image madeline = "images/FINISHEDSPRITES/madelineBaseNeutralMouthClosed.png"
+image madeline mouth open = "images/FINISHEDSPRITES/madelineBaseNeutralMouthOpen.png"
+image madeline distress = "images/FINISHEDSPRITES/madelineDissapointedUpset.png"
+image madeline flirty curious = "images/FINISHEDSPRITES/madelineCuriousBlush.png"
+image madeline flirty = "images/FINISHEDSPRITES/madelineSlightBlush.png"
+image madeline madScientist = "images/FINISHEDSPRITES/madelineMadScienist.png"
+image madeline sad upset = "images/FINISHEDSPRITES/madelineDissapointedUpset.png"
+image madeline enraged = "images/FINISHEDSPRITES/madelineEnraged.png"
+image madeline curious = "images/FINISHEDSPRITES/madelineCuriousBlush.png"
 
-image nicky angry accusation = Crop((250, 140, 1670, 2341), "images/nickyAngryAccustionEmotion.png")
-image nicky = Crop((250, 140, 1670, 2341), "images/nickyBaseMouthClosedEmotion.png")
-image nicky content happy = Crop((250, 140, 1670, 2341), "images/nickyContentHappyEmotion.png")
-image nicky curious flirty = Crop((250, 140, 1670, 2341), "images/nickyCuriousFlirtyEmotion.png")
-image nicky enraged = Crop((250, 140, 1670, 2341), "images/nickyEnragedEmotion.png")
-image nicky question = Crop((250, 140, 1670, 2341), "images/nickyQuesitionEmotion.png")
-image nicky sad upset = Crop((250, 140, 1670, 2341), "images/nickySadUpsetEmotion.png")
+# --- NICKY ---
+image nicky = "images/FINISHEDSPRITES/nickyBaseNeutralMothClosed.png"
+image nicky mouth open = "images/FINISHEDSPRITES/nickyBaseNeutralMouthOpen.png"
+image nicky angry accusation = "images/FINISHEDSPRITES/nickyEnragedUpset.png"
+image nicky content happy = "images/FINISHEDSPRITES/nickySlightBlush.png"
+image nicky curious flirty = "images/FINISHEDSPRITES/nickySlightBlush.png"
+image nicky enraged = "images/FINISHEDSPRITES/nickyEnragedUpset.png"
+image nicky question = "images/FINISHEDSPRITES/nickyBaseNeutralMouthOpen.png"
+image nicky sad upset = "images/FINISHEDSPRITES/nickyTearyEyedUpset.png"
+image nicky blush = "images/FINISHEDSPRITES/nickySlightBlush.png"
 
-image razzle = Crop((250, 0, 1670, 2481), "images/razzelBaseMouthCloseEmotion.png")
-image razzle mouth open = Crop((250, 0, 1670, 2481), "images/razzelBaseMouthOpenEmotion.png")
-image razzle enraged = Crop((250, 0, 1670, 2481), "images/razzelEngragedEmotion.png")
-image razzle flirty = Crop((250, 0, 1670, 2481), "images/razzelFlirtyEmotion.png")
-image razzle hoorah = Crop((250, 0, 1670, 2481), "images/razzelHoorahEmotion.png")
-image razzle question = Crop((250, 0, 1670, 2481), "images/razzelQuestionEmotion.png")
-image razzle sad = Crop((250, 0, 1670, 2481), "images/razzelSadEmotion.png")
-image razzle annoyed = Crop((250, 0, 1670, 2481), "images/razzelEngragedEmotion.png")
+# --- RAZZLE ---
+image razzle = "images/FINISHEDSPRITES/razzelBaseNeutralMouthClosed.png"
+image razzle mouth open = "images/FINISHEDSPRITES/razzelBaseNeutralMouthOpen.png"
+image razzle enraged = "images/FINISHEDSPRITES/razzelAngerEnraged.png"
+image razzle annoyed = "images/FINISHEDSPRITES/razzelAngerEnraged.png"
+image razzle flirty = "images/FINISHEDSPRITES/razzelHappyPeaceSign.png"
+image razzle hoorah = "images/FINISHEDSPRITES/razzelHappyPeaceSign.png"
+image razzle question = "images/FINISHEDSPRITES/razzelWhySoCurious.png"
+image razzle sad = "images/FINISHEDSPRITES/razzelUpsetTears.png"
+image razzle peace = "images/FINISHEDSPRITES/razzelHappyPeaceSign.png"
+image razzle curious = "images/FINISHEDSPRITES/razzelWhySoCurious.png"
 
+# --- FREDDY ---
+image freddy = "images/FINISHEDSPRITES/freddyNeutralSmile.png"
+image freddy arm up = "images/FINISHEDSPRITES/freddyBaseMouthClosedArmUp.png"
+image freddy arm up talk = "images/FINISHEDSPRITES/freddyBaseMouthOpenArmUp.png"
+image freddy blush = "images/FINISHEDSPRITES/freddyBlushMouthClose.png"
+image freddy blush agape = "images/FINISHEDSPRITES/freddyBlushMouthAgape.png"
+image freddy wtf = "images/FINISHEDSPRITES/freddyWhatTheFuckAreYouTalkingAboutMC.png"
+
+# --- REMAINING CAST (Outlines) ---
 image dhampir = Crop((438, 0, 2031, 2481), "images/dhampirBaseMouthClosed.png")
 image winston = Crop((438, 0, 2031, 2481), "images/winstonBaseMouthClosed.png")
 image ulysses = Crop((438, 0, 2031, 2481), "images/umbralBaseMouthClosed.png")
 image umbral = Crop((438, 0, 2031, 2481), "images/umbralBaseMouthClosed.png")
-image freddy = Crop((438, 0, 2031, 2481), "images/freddyTalkingBaseOutline.png")
 
-image cubicleOutline = "images/cubicleOutline.JPG"
-image cubicleOutlineInverted = "images/cubicleOutlineInverted.jpg"
-image debriefRoomOutline = "images/debriefRoomOutline.JPG"
-image debriefRoomOutlineInverted = "images/debriefRoomOutlineInverted.jpg"
-image labOutline = "images/labOutline.jpg"
-image labOutlineInverted = "images/labOutlineInverted.jpg"
-image winstonOfficeOutline = "images/winstonOfficeOutline.jpg"
-image winstonOfficeOutlineInverted = "images/winstonOfficeOutlineInverted.jpg"
+# --- BACKGROUNDS ---
+image cubicleOutline = "images/officeFinal.jpg"
+image cubicleOutlineInverted = "images/officeFinal.jpg"
+image debriefRoomOutline = "images/debriefRoomNoChairs.jpg"
+image debriefRoomOutlineInverted = "images/debriefRoomNoChairs.jpg"
+image labOutline = "images/labFinal.jpg"
+image labOutlineInverted = "images/labFinal.jpg"
+image winstonOfficeOutline = "images/winstonOfficeFinal.jpg"
+image winstonOfficeOutlineInverted = "images/winstonOfficeFinal.jpg"
+
+image officeFinal = "images/officeFinal.jpg"
+image debriefRoomNoChairs = "images/debriefRoomNoChairs.jpg"
+image labFinal = "images/labFinal.jpg"
+image winstonOfficeFinal = "images/winstonOfficeFinal.jpg"
+
+image office = "images/officeFinal.jpg"
+image debriefRoom = "images/debriefRoomNoChairs.jpg"
+image lab = "images/labFinal.jpg"
+image winstonOffice = "images/winstonOfficeFinal.jpg"

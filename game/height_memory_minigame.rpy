@@ -140,6 +140,7 @@ init python:
         store.height_memory_cleared = []
         store.height_memory_board = []
         _height_memory_refresh_feedback()
+        push_minigame_music()
         renpy.show_screen("height_memory_minigame")
         renpy.restart_interaction()
 
@@ -167,18 +168,18 @@ init python:
                 lost_progress = _height_memory_undo_cleanup()
                 if lost_progress:
                     store.height_memory_feedback = (
-                        "Razzle: That was a height anchor! One cleared thought just came back."
+                        "Razzle: That was a height anchor! One sorted thought came back to the board."
                     )
                 else:
                     store.height_memory_feedback = (
-                        "Razzle: That was a height anchor! At least there was no progress to lose."
+                        "Razzle: That was a height anchor! At least no sorted thoughts were lost."
                     )
                 reshuffle_height_memory_board()
             elif card_id not in store.height_memory_cleared:
                 store.height_memory_cleared = store.height_memory_cleared + [card_id]
                 store.height_memory_progress += 1
                 store.height_memory_feedback = (
-                    "Razzle: Nice! That thought had nothing to do with doorframe height."
+                    "Razzle: Nice! That memory had nothing to do with doorframe height. Filed aside."
                 )
                 if store.height_memory_progress >= store.height_memory_required_cleanups:
                     should_finish = True
@@ -205,11 +206,11 @@ init python:
             lost_progress = _height_memory_undo_cleanup()
             if lost_progress:
                 store.height_memory_feedback = (
-                    "Too slow—the thoughts scrambled and one distraction returned."
+                    "Too slow—the memories blurred and one sorted thought returned."
                 )
             else:
                 store.height_memory_feedback = (
-                    "Too slow—the thoughts scrambled, but you had no progress to lose."
+                    "Too slow—the memories blurred, but no sorted thoughts were lost."
                 )
             reshuffle_height_memory_board()
 
@@ -260,6 +261,7 @@ init python:
             )
         record_planned_route_reveal(
             "razzle", 3, clue_text=clue_text, expected_count=2)
+        pop_minigame_music()
         renpy.restart_interaction()
 
     # Public API: safely close the screen for menu/scene interruption handling.

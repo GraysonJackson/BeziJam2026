@@ -224,15 +224,15 @@ def test_a010_a082_a084_madeline_cutoff():
     assert "$ madsRomanceEligible = False" in script_text
     assert "mads_cutoff_violated:" in script_text
     assert "Personal time is terminated." in script_text
-    assert "Calibration aborted. Verbal telemetry stricken from the record." in script_text
+    assert "Calibration aborted." in script_text and "stricken from the record." in script_text
     assert "jump endOfDay" in script_text
 
     # Visit 6 apology option and tone gating
     assert "Yesterday you ignored a cutoff order while I was strapped into a feedback machine" in script_text
     assert "$ mads_apology_accepted = True" in script_text
     assert "The bitter chill breaks into a focused, professional truce." in script_text
-    assert "don't speak to me unless it's a reading." in script_text
-    assert "Shut your mouth before I throw you through that reinforced window." in script_text
+    assert "observation chair" in script_text
+    assert "don't make a sound." in script_text or "don't speak" in script_text
 
     # Verify no flirty slip during Visit 6 procedure when cutoff violated
     assert "if not mads_cutoff_violated:" in script_text

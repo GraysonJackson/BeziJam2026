@@ -94,6 +94,9 @@ screen ica_cards_minigame():
                 if ica_cards_phase in ("play", "feedback"):
                     textbutton _("Leave before the result") action Function(abort_ica_cards_minigame)
 
+    use minigame_controls("cards")
+
+
 style ica_cards_title:
     is gui_text
     xalign 0.5

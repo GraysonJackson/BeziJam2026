@@ -152,6 +152,7 @@ init python:
         store.ica_board_result_applied = False
         if approach_id is not None:
             ica_board_choose_approach(approach_id)
+        push_minigame_music()
         renpy.call_screen("ica_board_game_minigame")
 
     def ica_board_choose_approach(approach_id):
@@ -333,5 +334,6 @@ init python:
         store.ica_board_result_applied = True
         store.ica_board_phase = "complete"
         store.ica_board_session_active = False
+        pop_minigame_music()
         renpy.hide_screen("ica_board_game_minigame")
         renpy.end_interaction(True)

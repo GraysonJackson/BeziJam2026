@@ -36,12 +36,12 @@ screen say(who, what):
         frame:
             background None
             add "qmbook"
-            ypos 720
-            xpos 200
+            ypos 680
+            xpos 215
             vbox:
-                yoffset 10
-                xoffset 50
-                spacing 3
+                yoffset -5
+                xoffset 38
+                spacing 4
                 at rotated
                 style_prefix "quick"
                 hbox:
@@ -76,13 +76,14 @@ style say_dialogue:
     adjust_spacing False
     ypos 50
     xpos 650
-    xsize 1190
+    xsize 920
+    xmaximum 920
     color "#D26143"
     outlines [ (absolute(2), "#ffffffff", 0, 0) ]
     font "MonaspaceNeon-Regular.otf"
     line_leading 0
-    line_spacing 13
-    size 32
+    line_spacing 2
+    size 28
 
 # The style for dialogue said by the narrator
 style say_thought:
@@ -92,16 +93,16 @@ style say_thought:
 style namebox:
     xpos 600
     yoffset -20
-    xsize 500
+    xsize 400
     background Frame("gui/namebox.png", 5, 5, 5, 5, tile=False, xalign=0.0)
-    padding (25, 5, 50, 10)
+    padding (20, 4, 40, 8)
 
 # Style for the text with the speaker's name
 style say_label:
     xalign 0.0
     yalign 0.5
     font "RandoTexta.ttf"
-    size 52
+    size 42
     color "#008DBF"
     
 
@@ -146,12 +147,12 @@ style quick_button:
     hover_background "gui/hl1.png"
     selected_background "gui/none.png"
  
-    padding (9, 3, 9, 0)
+    padding (4, 2, 4, 0)
 
 
 style quick_button_text:
     font "fonts/RandoWB.ttf"
-    size 30
+    size 26
 
     selected_color '#D26143'
     idle_color "#E99067"
@@ -222,6 +223,7 @@ style nvl_label:
     xpos 645 xanchor 1.0
     ypos 0 yanchor 0.0
     xsize 225
+    xmaximum 225
     min_width 225
     textalign 1.0
 
@@ -231,6 +233,7 @@ style nvl_dialogue:
     xpos 675
     ypos 12
     xsize 885
+    xmaximum 885
     min_width 885
 
 # The style for dialogue said by the narrator in NVL

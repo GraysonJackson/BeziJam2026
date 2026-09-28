@@ -4,11 +4,13 @@ screen madeline_centrifuge_minigame():
     modal True
     zorder 250
 
+
     add "labOutline"
     add Solid("#121A24CC")
 
     if madeline_centrifuge_phase == "spinning":
-        timer 0.2 repeat True action Function(madeline_centrifuge_tick)
+        if not minigame_paused:
+            timer 0.2 repeat True action Function(madeline_centrifuge_tick)
 
     $ selected_tube_label = MADELINE_CENTRIFUGE_TUBES[madeline_centrifuge_selected_tube]["label"] if madeline_centrifuge_selected_tube else "NONE"
     $ centrifuge_left_mass = _madeline_centrifuge_side_mass("left")
@@ -176,6 +178,9 @@ screen madeline_centrifuge_minigame():
             xsize 240
             text_size 22
             action Function(madeline_centrifuge_assist)
+
+    use minigame_controls("centrifuge")
+
 
 style madeline_centrifuge_title:
     is gui_text

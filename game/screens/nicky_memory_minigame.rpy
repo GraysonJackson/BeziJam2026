@@ -4,15 +4,19 @@ screen nicky_memory_minigame():
     modal True
     zorder 250
 
+
     add Solid("#080B12")
     add "gui/bgtile.png" alpha 0.16
 
     if nicky_memory_phase == "matching" and nicky_memory_time_remaining > 0:
-        timer 1.0 repeat True action Function(nicky_memory_countdown_tick)
+        if not minigame_paused:
+            timer 1.0 repeat True action Function(nicky_memory_countdown_tick)
     if nicky_memory_phase == "mismatch":
-        timer NICKY_MEMORY_MISMATCH_DELAY action Function(nicky_memory_tick)
+        if not minigame_paused:
+            timer NICKY_MEMORY_MISMATCH_DELAY action Function(nicky_memory_tick)
     if nicky_memory_peek_active:
-        timer NICKY_MEMORY_PEEK_SECONDS action Function(nicky_memory_end_peek)
+        if not minigame_paused:
+            timer NICKY_MEMORY_PEEK_SECONDS action Function(nicky_memory_end_peek)
 
     $ nicky_phase_number = nicky_memory_phase_index + 1
     $ nicky_phase_name = NICKY_MEMORY_PHASE_NAMES[nicky_memory_phase_index]
@@ -146,6 +150,9 @@ screen nicky_memory_minigame():
             text _("[nicky_memory_feedback]") style "nicky_memory_feedback":
                 ypos 800
                 xsize 1220
+
+    use minigame_controls("memory")
+
 
 style nicky_memory_title:
     is gui_text

@@ -118,18 +118,20 @@ init python:
     def start_winston_pressure_minigame():
         """Begin the suspect queue and return when Dhampir interrupts or play ends."""
         _winston_pressure_reset()
+        push_minigame_music()
         return renpy.call_screen("winston_pressure_minigame")
 
     def resume_winston_pressure_minigame():
         """Resume the existing queue after Dhampir's scripted turn."""
         if not store.winston_pressure_active:
             return None
+        push_minigame_music()
         if getattr(store, "winston_pressure_assist_all_requested", False):
             while store.winston_pressure_target_index < len(store.winston_pressure_targets):
                 _winston_pressure_complete_current(assisted=True)
             store.winston_pressure_phase = "result"
             store.winston_pressure_feedback = (
-                "Winston finishes the remaining interviews and preserves every canonical result."
+                "Winston finishes the remaining interviews, securing all required witness statements."
             )
         return renpy.call_screen("winston_pressure_minigame")
 
@@ -174,11 +176,11 @@ init python:
         total = winston_pressure_hand_total(store.winston_pressure_player_hand)
         store.winston_pressure_intuition_uses += 1
         if total <= 12:
-            message = "Your intuition says they can take considerably more pressure."
+            message = "Detective read: The suspect's guard is up, waiting you out. You can safely press for more."
         elif total <= 16:
-            message = "Your intuition says they are getting close, but have not closed off yet."
+            message = "Detective read: Their composure is wavering. Another push risks a shutdown, but questions now might leave gaps."
         else:
-            message = "Your intuition catches the edge of withdrawal. Questioning now feels safer."
+            message = "Detective read: They're on the edge of giving up their statement. Questioning now feels optimal."
         store.winston_pressure_feedback = message
         renpy.restart_interaction()
 
@@ -250,6 +252,7 @@ init python:
                 and store.winston_pressure_target_index < len(store.winston_pressure_targets)):
             store.winston_pressure_phase = "dhampir_pause"
             store.winston_pressure_feedback = "Dhampir steps forward for his turn."
+            pop_minigame_music()
             renpy.hide_screen("winston_pressure_minigame")
             renpy.end_interaction("dhampir_pause")
             return True
@@ -319,7 +322,7 @@ init python:
 
         store.winston_pressure_phase = "result"
         store.winston_pressure_feedback = (
-            "Winston finishes the remaining interviews and preserves every canonical result."
+            "Winston finishes the remaining interviews, securing all required witness statements."
         )
         renpy.restart_interaction()
 
@@ -367,6 +370,7 @@ init python:
             return
         store.winston_pressure_active = False
         store.winston_pressure_phase = "complete"
+        pop_minigame_music()
         renpy.hide_screen("winston_pressure_minigame")
         renpy.end_interaction(True)
 
@@ -375,6 +379,7 @@ init python:
         store.winston_pressure_phase = "aborted"
         store.winston_pressure_player_hand = []
         store.winston_pressure_dealer_hand = []
+        pop_minigame_music()
         renpy.hide_screen("winston_pressure_minigame")
         renpy.end_interaction(False)
 

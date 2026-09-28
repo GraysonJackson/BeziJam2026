@@ -102,6 +102,7 @@ init python:
         _ica_staring_reset_state()
         if approach_id is not None:
             ica_staring_choose_approach(approach_id, restart=False)
+        push_minigame_music()
         renpy.call_screen("ica_staring_minigame")
 
     def ica_staring_choose_approach(approach_id, restart=True):
@@ -240,6 +241,7 @@ init python:
         store.ica_staring_completion_recorded = True
         store.ica_staring_phase = "complete"
         store.ica_staring_session_active = False
+        pop_minigame_music()
         renpy.hide_screen("ica_staring_minigame")
         renpy.end_interaction(True)
 
@@ -251,6 +253,7 @@ init python:
         store.ica_staring_session_active = False
         store.ica_staring_elapsed = 0.0
         store.ica_staring_feedback = ""
+        pop_minigame_music()
         renpy.hide_screen("ica_staring_minigame")
         renpy.end_interaction(True)
 

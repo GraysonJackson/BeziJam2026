@@ -1,4 +1,3 @@
-
 ## Main Menu screen ############################################################
 ##
 ## Used to display the main menu when Ren'Py starts.
@@ -6,8 +5,11 @@
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
 
-image main_menu_background = "images/bg sky.png"
-## Replace this with your background image, if you like
+image main_menu_background = "images/officeFinal.jpg"
+
+image mm_freddy = Crop((998, 481, 1153, 1812), "images/FINISHEDSPRITES/freddyNeutralSmile.png")
+image mm_ulysses = Crop((438, 38, 2031, 2443), "images/umbralBaseMouthClosed.png")
+image mm_razzle = Crop((479, 130, 1495, 2351), "images/FINISHEDSPRITES/razzelHappyPeaceSign.png")
 
 
 screen main_menu():
@@ -16,7 +18,47 @@ screen main_menu():
     tag menu
 
     add "main_menu_background"
-    add "gui/sidefade.png" #you can remove this if your main menu image accommodates the buttons 
+
+    # Character sprites on the left grouped with slight overlap
+    fixed:
+        xysize (1150, 1080)
+
+        # Ulysses (back-left)
+        add "mm_ulysses":
+            xpos 40
+            yalign 1.0
+            zoom 0.35
+
+        # Razzle (back-right of character group)
+        add "mm_razzle":
+            xpos 470
+            yalign 1.0
+            zoom 0.35
+
+        # Freddy (foreground center-left)
+        add "mm_freddy":
+            xpos 200
+            yalign 1.0
+            zoom 0.42
+
+    add "gui/sidefade.png"
+
+    # Title positioned at top-left above the characters
+    vbox:
+        pos (80, 50)
+        spacing 10
+
+        text _("Date and Deduce"):
+            font "fonts/HotMustardBTN.ttf"
+            size 76
+            color "#D26143"
+            outlines [ (absolute(4), "#FFFFFF", 0, 0) ]
+
+        text _("A D&D Spinoff!"):
+            font "fonts/HotMustardBTN.ttf"
+            size 36
+            color "#D26143"
+            outlines [ (absolute(3), "#FFFFFF", 0, 0) ]
 
     vbox:
         style_prefix "main_menu"
@@ -56,9 +98,6 @@ style main_menu_button_text:
     idle_color "#D26143"
     insensitive_color "#778288"
     hover_color "#008DBF"
-
-    # xcenter 0.5 
-    # ycenter 0.5
 
     xoffset 50
     yoffset 10

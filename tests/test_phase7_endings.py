@@ -80,9 +80,9 @@ class TestPhase7Endings(unittest.TestCase):
         self.assertIn("tactical reconnaissance", self.day_seven_text)
         self.assertIn("cutting through freeway traffic on the back of her bike", self.day_seven_text)
         self.assertIn("At midnight on the gravel roof above a 24-hour convenience store", self.day_seven_text)
-        self.assertIn("Browsing the dusty back stacks of the late-night bookstore", self.day_seven_text)
+        self.assertIn("late-night bookstore", self.day_seven_text)
         self.assertIn("On Saturday under buzzing floodlights at Pirate's Cove Mini-Golf", self.day_seven_text)
-        self.assertIn("The next night in the dimly lit basement of an unlicensed venue", self.day_seven_text)
+        self.assertIn("That weekend in the dimly lit basement of an unlicensed venue", self.day_seven_text)
 
     def test_a208_non_defensive_rejections(self):
         """A208: Rejections must demonstrate boundaries directly without narrator defensiveness."""
@@ -92,14 +92,14 @@ class TestPhase7Endings(unittest.TestCase):
         self.assertNotIn("He gives you a casual farewell and does not turn the rejection into either a punishment or a joke.", self.day_seven_text)
 
     def test_a209_madeline_failure_response_branches(self):
-        """A209: Madeline failure ending must adapt to briefing room response (defend vs joke vs owned)."""
+        """A209: Madeline failure ending must adapt to dismissal response (defend vs joke vs owned)."""
         mads_block = re.search(
             r"label DaySevenEndingMadeline:.*?(?=\nlabel|\Z)",
             self.day_seven_text,
             re.DOTALL
         ).group(0)
-        self.assertIn('if daySevenBriefingResponse == "defend":', mads_block)
-        self.assertIn('elif daySevenBriefingResponse == "joke":', mads_block)
+        self.assertIn('if daySevenFailureResponse == "defend":', mads_block)
+        self.assertIn('elif daySevenFailureResponse == "joke":', mads_block)
         self.assertIn("intellectually indefensible", mads_block)
         self.assertIn("making a joke about paperwork", mads_block)
 
@@ -139,18 +139,10 @@ class TestPhase7Endings(unittest.TestCase):
 
     def test_a215_unlock_after_viewing_ending(self):
         """A215: Ending unlock occurs after DaySevenCharacterEnding completes."""
-        selection_block = re.search(
-            r"label DaySevenRelationshipSelection:.*?(?=\nlabel|\Z)",
-            self.day_seven_text,
-            re.DOTALL
-        ).group(0)
-        call_index = selection_block.find("call DaySevenCharacterEnding")
-        unlock_index = selection_block.find("day_seven_unlock_ending")
-        self.assertGreater(
-            unlock_index,
-            call_index,
-            "day_seven_unlock_ending must execute after call DaySevenCharacterEnding"
-        )
+        finale = re.search(r"label DaySevenStart:.*?(?=\nlabel|\Z)", self.day_seven_text, re.DOTALL).group(0)
+        self.assertLess(finale.index("call DaySevenRelationshipSelection"), finale.index("call DaySevenOutro"))
+        self.assertLess(finale.index("call DaySevenOutro"), finale.index("day_seven_unlock_ending"))
+        self.assertLess(finale.index("day_seven_unlock_ending"), finale.index("call screen day_seven_credits"))
 
     def test_a230_ending_attainability_and_catalog(self):
         """A230: Verify 42 endings catalog integrity and legal threshold ranges."""

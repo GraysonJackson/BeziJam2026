@@ -1,0 +1,270 @@
+
+[rpytest] Starting test run
+[rpytest] Platform:      Windows-11-10.0.26200-SP0
+[rpytest] Python:        3.12.7
+[rpytest] Ren'Py:        Ren'Py 8.5.3.26051504
+[rpytest] Game Version:  1.0
+
+[rpytest] [exc] + global
+[rpytest] [exc]   + release_checks
+[rpytest] [exc]     - all_catalog_ending_scenes
+[rpytest] [exc]     - all_catalog_ending_scenes (6.905 s)
+[rpytest] [exc]     - all_confessions_preserve_text
+[rpytest] [exc]     - all_confessions_preserve_text (0.011 s)
+[rpytest] [exc]     - long_dialogue_layout
+[rpytest] [exc]     - long_dialogue_layout (0.506 s)
+[rpytest] [exc]     - save_slot_layout
+
+Full traceback:
+  File "game/testcases.rpy", line 243, in script
+    call screen save
+  File "renpy/ast.py", line 2251, in execute
+    self.call("execute")
+    ~~~~~~~~~^^^^^^^^^^^
+  File "renpy/ast.py", line 2205, in call
+    return renpy.statements.call(method, parsed, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/statements.py", line 381, in call
+    return method(parsed, *args, **kwargs)
+           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/common/000statements.rpy", line 698, in execute_call_screen
+    store._return = renpy.call_screen(name, *args, **kwargs)
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/exports/statementexports.py", line 341, in call_screen
+    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/ui.py", line 306, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/core.py", line 2163, in interact
+    repeat, rv = self.interact_core(
+                 ~~~~~~~~~~~~~~~~~~^
+        preloads=preloads,
+        ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "renpy/display/core.py", line 2709, in interact_core
+    root_widget.visit_all(lambda d: d.per_interact())
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/display/displayable.py", line 460, in visit_all
+    d.visit_all(callback, seen)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "renpy/display/displayable.py", line 460, in visit_all
+    d.visit_all(callback, seen)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "renpy/display/displayable.py", line 460, in visit_all
+    d.visit_all(callback, seen)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "renpy/display/screen.py", line 503, in visit_all
+    callback(self)
+    ~~~~~~~~^^^^^^
+  File "renpy/display/core.py", line 2709, in <lambda>
+    root_widget.visit_all(lambda d: d.per_interact())
+                                    ~~~~~~~~~~~~~~^^ 
+  File "renpy/display/screen.py", line 514, in per_interact
+    self.update()
+    ~~~~~~~~~~~^^
+  File "renpy/display/screen.py", line 715, in update
+    self.screen.function(**self.scope)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "game/screens/save_load.rpy", line 16, in execute
+    screen save():
+  File "game/screens/save_load.rpy", line 16, in execute
+    screen save():
+  File "game/screens/save_load.rpy", line 20, in execute
+    use file_slots(_("Save"))
+  File "game/screens/save_load.rpy", line 29, in execute
+    screen file_slots(title):
+  File "game/screens/save_load.rpy", line 29, in execute
+    screen file_slots(title):
+  File "game/screens/save_load.rpy", line 37, in execute
+    fixed:
+  File "game/screens/save_load.rpy", line 91, in execute
+    vbox:
+  File "game/screens/save_load.rpy", line 95, in execute
+    hbox:
+  File "game/screens/save_load.rpy", line 96, in execute
+    textbutton _("<") action FilePagePrevious()
+  File "game/screens/save_load.rpy", line 96, in keywords
+    textbutton _("<") action FilePagePrevious()
+  File "renpy/python.py", line 1308, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/python.py", line 1301, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "game/screens/save_load.rpy", line 96, in <module>
+    textbutton _("<") action FilePagePrevious()
+                             ~~~~~~~~~~~~~~~~^^
+  File "renpy/common/00action_file.rpy", line 917, in __init__
+    page = str(int(page) - 1)
+               ~~~^^^^^^     
+ValueError: invalid literal for int() with base 10: 'release-check'
+
+While running game code:
+  File "game/testcases.rpy", line 243, in script
+    call screen save
+  File "game/screens/save_load.rpy", line 16, in execute
+    screen save():
+  File "game/screens/save_load.rpy", line 16, in execute
+    screen save():
+  File "game/screens/save_load.rpy", line 20, in execute
+    use file_slots(_("Save"))
+  File "game/screens/save_load.rpy", line 29, in execute
+    screen file_slots(title):
+  File "game/screens/save_load.rpy", line 29, in execute
+    screen file_slots(title):
+  File "game/screens/save_load.rpy", line 37, in execute
+    fixed:
+  File "game/screens/save_load.rpy", line 91, in execute
+    vbox:
+  File "game/screens/save_load.rpy", line 95, in execute
+    hbox:
+  File "game/screens/save_load.rpy", line 96, in execute
+    textbutton _("<") action FilePagePrevious()
+  File "game/screens/save_load.rpy", line 96, in keywords
+    textbutton _("<") action FilePagePrevious()
+  File "game/screens/save_load.rpy", line 96, in <module>
+    textbutton _("<") action FilePagePrevious()
+                             ~~~~~~~~~~~~~~~~^^
+ValueError: invalid literal for int() with base 10: 'release-check'
+File "C:\Users\grays\OneDrive\Desktop\Software\BeziJam2026\game\testcases.rpy", line 243, in script
+  call screen save
+
+During testcase execution:
+  File "C:\Users\grays\OneDrive\Desktop\Software\BeziJam2026\.", line 0, in None
+    
+  File "C:\Users\grays\OneDrive\Desktop\Software\BeziJam2026\game\release_testcases.rpy", line 2, in testsuite global
+    testsuite release_checks:
+  File "C:\Users\grays\OneDrive\Desktop\Software\BeziJam2026\game\release_testcases.rpy", line 32, in testsuite release_checks
+    testcase save_slot_layout:
+  File "C:\Users\grays\OneDrive\Desktop\Software\BeziJam2026\game\release_testcases.rpy", line 38, in testcase save_slot_layout
+    advance until screen "save"
+
+====================
+[rpytest] [exc]     - save_slot_layout (0.278 s)
+
+Full traceback:
+  File "game/script.rpy", line 120, in script
+    "Los Angeles, 1996."
+  File "renpy/ast.py", line 2935, in execute
+    Say.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "renpy/ast.py", line 994, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/exports/sayexports.py", line 129, in say
+    who(what, *args, **kwargs)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 1565, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 1220, in do_display
+    display_say(who, what, self.do_show, **display_args)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 902, in display_say
+    rv = renpy.ui.interact(mouse="say", type=type, roll_forward=roll_forward)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/ui.py", line 297, in interact
+    raise Exception(
+    ...<2 lines>...
+    )
+Exception: ui.interact called with non-empty widget/layer stack. Did you forget a ui.close() somewhere?
+Stack was <Layer: 'transient'>
+<Many: <renpy.display.layout.Fixed object at 0x0000000012a1e300>>
+
+While running game code:
+  File "game/script.rpy", line 120, in script
+    "Los Angeles, 1996."
+Exception: ui.interact called with non-empty widget/layer stack. Did you forget a ui.close() somewhere?
+Stack was <Layer: 'transient'>
+<Many: <renpy.display.layout.Fixed object at 0x0000000012a1e300>>
+  File "C:\Users\grays\OneDrive\Desktop\Software\BeziJam2026\game\script.rpy", line 120, in script
+    "Los Angeles, 1996."
+
+During testcase execution:
+  File "C:\Users\grays\OneDrive\Desktop\Software\BeziJam2026\.", line 0, in None
+    
+  File "C:\Users\grays\OneDrive\Desktop\Software\BeziJam2026\game\release_testcases.rpy", line 2, in testsuite global
+    testsuite release_checks:
+  File "<during last test>", line 0, in testsuite release_checks
+    
+
+====================
+
+Full traceback:
+  File "game/script.rpy", line 120, in script
+    "Los Angeles, 1996."
+  File "renpy/ast.py", line 2935, in execute
+    Say.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "renpy/ast.py", line 994, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/exports/sayexports.py", line 129, in say
+    who(what, *args, **kwargs)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 1565, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 1220, in do_display
+    display_say(who, what, self.do_show, **display_args)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/character.py", line 902, in display_say
+    rv = renpy.ui.interact(mouse="say", type=type, roll_forward=roll_forward)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "renpy/ui.py", line 297, in interact
+    raise Exception(
+    ...<2 lines>...
+    )
+Exception: ui.interact called with non-empty widget/layer stack. Did you forget a ui.close() somewhere?
+Stack was <Layer: 'transient'>
+<Many: <renpy.display.layout.Fixed object at 0x0000000012a1e300>>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "renpy/bootstrap.py", line 401, in bootstrap
+    renpy.main.main()
+    ~~~~~~~~~~~~~~~^^
+  File "renpy/main.py", line 596, in main
+    run(restart)
+    ~~~^^^^^^^^^
+  File "renpy/main.py", line 137, in run
+    renpy.execution.run_context(True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "renpy/execution.py", line 1050, in run_context
+    context.run()
+    ~~~~~~~~~~~^^
+  File "game/script.rpy", line 120, in script
+    "Los Angeles, 1996."
+  File "game/script.rpy", line 120, in script
+    "Los Angeles, 1996."
+  File "renpy/test/testexecution.py", line 58, in exception_handler
+    phase_controller.handle_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "renpy/test/testexecution.py", line 584, in handle_exception
+    new_state = self.active_phase.error(status)
+                ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "renpy/test/testexecution.py", line 658, in error
+    raise RuntimeError("Block is not a TestHook.")
+RuntimeError: Block is not a TestHook.
+
+While running game code:
+  File "game/script.rpy", line 120, in script
+    "Los Angeles, 1996."
+Exception: ui.interact called with non-empty widget/layer stack. Did you forget a ui.close() somewhere?
+Stack was <Layer: 'transient'>
+<Many: <renpy.display.layout.Fixed object at 0x0000000012a1e300>>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "game/script.rpy", line 120, in script
+    "Los Angeles, 1996."
+  File "game/script.rpy", line 120, in script
+    "Los Angeles, 1996."
+RuntimeError: Block is not a TestHook.

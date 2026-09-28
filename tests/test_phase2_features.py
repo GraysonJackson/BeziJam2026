@@ -262,7 +262,7 @@ def test_a012_ica_timeline_and_text():
         d7_text = f.read()
 
     assert "Dhampir and my LAPD patrol tracked them across four rooftops overnight" in d7_text
-    assert "hospital check-in logs during the murder" in d7_text
+    assert "hospital records covering the murder" in d7_text
     print("A012 tests passed!")
 
 

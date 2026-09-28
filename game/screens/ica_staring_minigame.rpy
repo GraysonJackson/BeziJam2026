@@ -6,10 +6,10 @@ screen ica_staring_minigame():
 
     add "gui/bgtile.png"
     add Solid("#172C3C66")
-    key "game_menu" action Function(ica_staring_abort)
 
     if ica_staring_phase == "active":
-        timer ICA_STARING_TICK_INTERVAL repeat True action Function(ica_staring_tick)
+        if not minigame_paused:
+            timer ICA_STARING_TICK_INTERVAL repeat True action Function(ica_staring_tick)
         key "K_SPACE" action Function(ica_staring_click)
 
     fixed:
@@ -164,6 +164,9 @@ screen ica_staring_minigame():
                 xpos 1280
                 ypos 45
                 action Function(ica_staring_abort)
+
+    use minigame_controls("staring")
+
 
 style ica_staring_title:
     is gui_text

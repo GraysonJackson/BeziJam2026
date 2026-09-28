@@ -13,9 +13,15 @@ label UlyssesEvening:
     elif dayWin == 3:
         "You follow the smell of fresh coffee to Ulysses's office. The jazz is quiet enough to leave room for the rain ticking against the window."
     elif dayWin == 4:
-        "Only the desk lamp is on when you reach Ulysses's office. A record turns at low volume while an old staff photograph rests face-down beside the case folder."
+        if ulyssesPersonalEvenings >= 3:
+            "Only the desk lamp is on when you reach Ulysses's office. A record turns at low volume while an old staff photograph rests face-down beside the case folder."
+        else:
+            "Only the desk lamp is on when you reach Ulysses's office. A record turns at low volume beside the day's open case folder."
     elif dayWin == 5:
-        "A cassette case, two books, and a folded chessboard have displaced the usual second stack of files in Ulysses's office. The day's report still occupies the center of his desk."
+        if ulyssesPersonalEvenings >= 4:
+            "A cassette case, two books, and a folded chessboard have displaced the usual second stack of files in Ulysses's office. The day's report still occupies the center of his desk."
+        else:
+            "A second stack of cross-referenced files occupies the corner of Ulysses's desk beside the daily report."
     elif dayWin >= 6:
         "Ulysses's office is brighter than usual. Every remaining file is already arranged across his desk, and the record player is silent."
     else:
@@ -28,6 +34,10 @@ label UlyssesEvening:
 
     call expression ulysses_report_label from _call_expression
     call UlyssesFocusComment from _call_UlyssesFocusComment
+
+    if dayWin == 1:
+        u "One more thing. LAPD and the DA gave us seven days with this case. After that, LAPD takes over, the files are unsealed, and our operational control is frozen."
+        u "I would prefer to hand them a culprit. Get some sleep before we try again tomorrow."
 
     if dayWin >= 6:
         call UlyssesEveningSix from _call_UlyssesEveningSix
@@ -60,6 +70,7 @@ label UlyssesEvening:
                     u "Go home before Winston finds another reason to order food for twelve people."
 
         if ulysses_stay_for_personal_time:
+            $ play_route_music(audio.music_ulysses, fadein=1.5)
             if ulyssesPersonalEvenings == 1:
                 call UlyssesEveningOne from _call_UlyssesEveningOne
             elif ulyssesPersonalEvenings == 2:
@@ -71,12 +82,14 @@ label UlyssesEvening:
             else:
                 call UlyssesEveningFive from _call_UlyssesEveningFive
 
+    $ stop_route_music(fadeout=1.0)
     hide ulysses
     $ ulyssesEveningsCompleted += 1
     jump advanceDayAfterDebrief
 
 
 label UlyssesFocusComment:
+    show ulysses at slot(0, total=1), bright zorder 10
     $ ulysses_route_counts_value = ulysses_visit_counts()
     $ ulysses_distinct_value = ulysses_distinct_routes()
     $ ulysses_favorite_value = ulysses_favorite_route()
@@ -150,6 +163,7 @@ label UlyssesFocusComment:
 
 
 label UlyssesEveningOne:
+    show ulysses at slot(0, total=1), bright zorder 10
     $ ulysses_day_one_helped = False
     $ ulysses_day_one_left_promptly = False
     "Ulysses aligns your report with the edge of the folder and adds one brief note in the margin. Only when the formal work is closed does he lean back."
@@ -236,6 +250,7 @@ label UlyssesEveningOne:
 
 
 label UlyssesEveningTwo:
+    show ulysses at slot(0, total=1), bright zorder 10
     $ ulysses_day_two_player_wrote_plan = True
     "After the report, Ulysses opens a narrow filing cabinet beside his desk. Its drawers are labeled FIRE, GRAVITY, PHASING, LAB, POLICE, and WINSTON."
     u "Contingency plans. Do not confuse them with predictions. These are based entirely on past mistakes, which provides more material than I need."
@@ -300,6 +315,7 @@ label UlyssesEveningTwo:
 
 
 label UlyssesEveningThree:
+    show ulysses at slot(0, total=1), bright zorder 10
     $ ulysses_day_three_seen = True
     $ ulysses_day_three_tension = False
     $ ulysses_day_three_choice = ""
@@ -321,9 +337,10 @@ label UlyssesEveningThree:
             u "The smaller details change. You appear determined to weaponize that fact."
 
     "He pours fresh black coffee and leaves the second cup for you to prepare however you like. The music remains low enough that neither of you has to raise your voice."
-    u "There is a more important limit. I cannot tell anyone what will happen. Not aloud, not in writing, not through a clever sequence of yes-or-no answers."
-    u "People sometimes ask why Winston cannot simply negate my power while I speak. Foresight is memory already burned into my mind, not an active radiating field. Suppressing my power does not erase the memory, and speaking a forbidden future triggers systemic shock that physical dampening cannot prevent."
-    u "Vague advice is safe only when it communicates no future event. Anything more exact triggers the penalty against me."
+    u "There is a more important limit. I cannot tell anyone what will happen. Not aloud, not in writing, not through hints."
+    u "Early on, Winston and I tried testing it. We thought if he held my hand and suppressed my power, I could write down a warning safely. But foresight is memory already burned into my skull, not an active radiating field. The moment my pen touched paper, the shock nearly stopped my heart."
+    u "Winston had to drag me off the floor. We never attempted a workaround again."
+    u "Vague advice is safe only when it conveys no concrete outcome. Anything more exact triggers the penalty immediately."
 
     menu:
         "Ask how he learned the boundary, without asking what he saw.":
@@ -347,19 +364,21 @@ label UlyssesEveningThree:
         "When the final page is filed, he rests one hand on the closed folder."
         u "The future is not permission to take a choice away from someone. Neither is curiosity."
     else:
-        "You return to the remaining forms. At one point both of you reach for the same page. Your fingers meet over the paper and remain there for one quiet second."
+        "You return to the remaining forms. When you both reach across the desk, you sort the final files into neat stacks side by side."
         if ulyssesRomanceInterest >= ULYSSES_ROMANCE_WARM_THRESHOLD:
-            "Ulysses looks at your joined hands, then at you."
+            "Your fingers brush over the edge of the final folder. Ulysses doesn't pull away immediately; his hand lingers a beat against yours before he catches himself."
+            "He looks at your joined hands, then up at you."
             u "That detail changed."
             "He withdraws carefully, visibly flustered despite whatever larger shape of the evening he remembers."
         else:
-            "Ulysses lets you take the page and redirects his attention to the next file."
+            "Ulysses aligns the finished packet and closes his pen with a quiet, satisfied click."
         u "The future is not permission to stop participating in the present, recruit. I try to remember that."
 
     return
 
 
 label UlyssesEveningFour:
+    show ulysses at slot(0, total=1), bright zorder 10
     $ ulysses_day_four_release = "quiet"
     "Ulysses reaches the final paragraph of your report and taps one changed word with the end of his pen. You wrote that a witness may return tomorrow instead of promising that they will."
     u "You revised the wording."
@@ -469,6 +488,7 @@ label UlyssesEveningFour:
 
 
 label UlyssesEveningFive:
+    show ulysses at slot(0, total=1), bright zorder 10
     $ ulysses_day_five_activity = "chess"
     $ ulysses_day_five_music = "cassette"
     "When the report is complete, Ulysses reaches automatically for another stack. You place one hand over the top page before he can lift it."
@@ -484,7 +504,7 @@ label UlyssesEveningFive:
             $ uly -= 1
             u "A dramatic approach. Put the confidential case file down, please. Then we can take the same break without committing theft."
 
-    "Ulysses is eventually convinced. He loosens his tie, removes his vest, and moves from behind the desk to the guest side. A jazz record gives way to a cassette selected from a drawer containing classical music, Duran Duran, U2, the Cranberries, and several louder albums Winston has labeled DEPRESSING ULY MUSIC."
+    "Ulysses is eventually convinced. He loosens his tie, removes his vest, and moves from behind the desk to the guest side. He pulls open a shallow desk drawer containing classical music, Duran Duran, U2, the Cranberries, and several louder tapes Winston has labeled DEPRESSING ULY MUSIC."
 
     if ulysses_completed_visits("ica") >= 5:
         "Pink walls surround the orderly desk and dark shelves. Ulysses follows your glance around the room."
@@ -560,6 +580,7 @@ label UlyssesEveningFive:
 
 
 label UlyssesEveningSix:
+    show ulysses at slot(0, total=1), bright zorder 10
     $ ulysses_day_six_invited_closeness = False
     "Ulysses places every remaining suspect file across his desk. Tonight the music is off. The only sounds are paper, the office clock, and distant traffic."
 
@@ -597,6 +618,15 @@ label UlyssesEveningSix:
             u "Of course. You did the work honestly, and I will see you in the briefing room tomorrow."
             "Ulysses walks you to the door. The closed accusation packet remains on his desk, complete without requiring the evening to become anything else."
             return
+
+    # Case preparation belongs to calendar Day Six. Personal conversations
+    # still follow the order the player has actually experienced.
+    if ulyssesPersonalEvenings < 6:
+        $ ulysses_next_personal_label = (
+            "UlyssesEveningOne", "UlyssesEveningTwo", "UlyssesEveningThree",
+            "UlyssesEveningFour", "UlyssesEveningFive")[ulyssesPersonalEvenings - 1]
+        call expression ulysses_next_personal_label from _call_UlyssesLatePersonalEpisode
+        return
 
     if ulyssesBoundaryViolation and not ulyssesBoundaryApology:
         menu:
@@ -731,6 +761,7 @@ label UlyssesCrossReportChoice:
 ## Razzle Dazzle reports
 
 label UlyssesReportRazzle1:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Razzle's message said, and I quote, 'WE ACTUALLY GOT SOMETHING,' followed by four exclamation marks. Give me the version suitable for a case file."
     "You describe Landon's interview, the identifying feature he definitely did not see, and the care Razzle took before closing the statement."
     u "Good. A negative identification is useful when the witness is certain about the absence rather than uncertain about the whole face."
@@ -753,11 +784,12 @@ label UlyssesReportRazzle1:
 
 
 label UlyssesReportRazzle2:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "No witness statement today. I did, however, receive a call from a restaurant asking whether ATLAS carries fire-alarm insurance."
-    "You explain the pizza eaten outside, the rooftop walk, and Razzle's admission that strangers often see the flames before they see her."
-    u "Razzle makes inconvenience look effortless. That does not mean it costs her nothing."
+    "You confirm that the excursion produced no physical evidence, summarizing the fire-safety precautions taken while off-site."
+    u "Razzle makes public precautions look effortless. That does not mean they cost her nothing."
     menu:
-        "Say she deserved a day where nobody treated her like a hazard.":
+        "Say she deserved an afternoon where nobody treated her like a hazard.":
             $ uly += 2
             $ ulysses_note_reporting_style("thoughtful")
             u "Agreed. I would prefer the city reach that conclusion without requiring us to reserve fireproof seating."
@@ -773,6 +805,7 @@ label UlyssesReportRazzle2:
 
 
 label UlyssesReportRazzle3:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Brandon's revised statement arrived before you did. It is considerably less crowded than his first account."
     "You explain the memory board, the irrelevant details removed from it, and the doorway observation that survived every pass."
     if height_memory_assisted:
@@ -799,6 +832,7 @@ label UlyssesReportRazzle3:
 
 
 label UlyssesReportRazzle4:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Elena could not give you the dramatic answer Razzle wanted. That may be the most reliable part of today's statement."
     "You recount the uncertain silhouette, the effect of posture and distance, and the grocery-store camera that may have captured the passing headlights."
     u "Good restraint. A witness who says 'I do not know' is providing information we can trust."
@@ -819,6 +853,7 @@ label UlyssesReportRazzle4:
 
 
 label UlyssesReportRazzle5:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Six hours of grocery-store tape. I assume the cat attacking the bag was not our culprit."
     "You describe the preserved frame, the position of the car, the killer's stress reaction under the headlights, and the brief sweep that exposed their loose hair."
     u "Useful, but not yet a formal identification. Recreating the light is better than pretending monochrome footage contains color because we want it to."
@@ -838,6 +873,7 @@ label UlyssesReportRazzle5:
 
 
 label UlyssesReportRazzle6:
+    show ulysses at slot(0, total=1), bright zorder 10
     "Ulysses reads Elena's signed certainty statement twice, then checks the numbered wig procedure and borrowed-car placement."
     u "No suggestive labels, no visible samples before the test, and the geometry matches the recorded frame. Good."
     if ulyssesCurrentClue:
@@ -860,6 +896,7 @@ label UlyssesReportRazzle6:
 ## Dhampir reports
 
 label UlyssesReportDhampir1:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "The scene officer reported that Dhampir left the house without killing anyone. They sounded pleasantly surprised."
     "You describe the hero-suit transformation, the reconstructed approach, the physical contradiction, and the ordinary pizza stop that followed."
     if ulyssesCurrentClue:
@@ -880,8 +917,9 @@ label UlyssesReportDhampir1:
 
 
 label UlyssesReportDhampir2:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Your report begins with a dead squirrel and ends with a vampire film. I assume the middle improves its relevance."
-    "You recount the convenience-store snacks, Dhampir's blood-laced popcorn, his running corrections during Blood Moon IV, and the rooftop conversation afterward."
+    "You report that the day was spent off-duty between convenience store errands and an old vampire film, producing no direct case leads."
     u "No case progress. Some useful understanding of the person conducting future scene work."
     menu:
         "Say people decide what Dhampir is before he speaks.":
@@ -898,6 +936,7 @@ label UlyssesReportDhampir2:
 
 
 label UlyssesReportDhampir3:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Madeline submitted twenty pages of scanner output. Dhampir submitted one page reading, 'We found the weird marks.' Reconcile them for me."
     "You describe the projected room, the impossible attack paths, and the wound-producing surfaces that the original investigators overlooked."
     if dhampir_ispy_result.get("quality") == "perfect":
@@ -924,6 +963,7 @@ label UlyssesReportDhampir3:
 
 
 label UlyssesReportDhampir4:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Today you reconstructed the minute after Enrico died rather than the attack itself."
     "You explain the movement through the room, the unlogged impression of the killer's reaction, and the numbered marker whose object never reached evidence."
     u "Keep the behavioral impression out of the formal exclusions. The missing item is the stronger next step."
@@ -943,6 +983,7 @@ label UlyssesReportDhampir4:
 
 
 label UlyssesReportDhampir5:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "The training-room dummy now requires replacement. Dhampir labeled the damage 'educational.'"
     "You report the controlled weapon tests, the influence of leverage and supernatural movement, and the subtle build implications that remain too uncertain for the notebook."
     u "Technique explains force more reliably than appearance in a powered population. Nicky will appreciate that sentence."
@@ -962,6 +1003,7 @@ label UlyssesReportDhampir5:
 
 
 label UlyssesReportDhampir6:
+    show ulysses at slot(0, total=1), bright zorder 10
     "Ulysses checks every seal number on the recovered fragment before reading the search log."
     u "Phasing located it. Procedure made it useful. Dhampir occasionally remembers that Nicky can sense joy."
     if ulyssesCurrentClue:
@@ -983,6 +1025,7 @@ label UlyssesReportDhampir6:
 ## Madeline reports
 
 label UlyssesReportMadeline1:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Madeline sent the database comparison ahead with the subject line 'OBVIOUS ONCE TESTED.' I assume it was less obvious before testing."
     "You explain the preserved fingerprint, the convicted comparison sample already in the database, and the mismatch that clears one person."
     if ulyssesCurrentClue:
@@ -1008,18 +1051,19 @@ label UlyssesReportMadeline1:
 
 
 label UlyssesReportMadeline2:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Winston's miniature-golf intervention succeeded, then. I had wondered where those passes went."
-    "You describe Madeline calculating every slope, becoming increasingly competitive, and eventually admitting over ice cream that she enjoyed herself."
+    "You report on the afternoon off-site at the miniature golf course and confirm that no formal physical evidence was gathered."
     u "She kept the scorecard, I assume."
-    u "Madeline and I dated until last year. There was no dramatic betrayal; we simply function better as colleagues. I mention it only because her habit of preserving 'sentimental data' is familiar."
     menu:
         "Confirm that she kept it for 'data collection.'":
             $ uly += 1
-            u "Naturally. Madeline has historically collected a remarkable amount of sentimental data."
+            u "Naturally. Madeline has historically collected a remarkable amount of 'sentimental data.'"
+            u "We dated until last year. We function substantially better as colleagues, but that habit hasn't changed."
         "Say failing safely seemed good for her.":
             $ uly += 2
             $ ulysses_note_reporting_style("thoughtful")
-            u "Yes. Intelligence becomes a cage when every mistake is expected to injure someone. A windmill offers lower stakes."
+            u "Yes. Constant pressure makes every small mistake feel catastrophic. A windmill offers lower stakes."
         "Say you let her win.":
             $ uly -= 2
             $ ulysses_note_reporting_style("deflecting")
@@ -1028,6 +1072,7 @@ label UlyssesReportMadeline2:
 
 
 label UlyssesReportMadeline3:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Ica's accidental contribution appears in Madeline's methods section beneath three increasingly angry revisions."
     "You explain the gravity shift, the safely halted centrifuge, and the counterweight method that turned the accident into a reproducible separation."
     if madeline_centrifuge_result.get("quality") == "perfect":
@@ -1054,6 +1099,7 @@ label UlyssesReportMadeline3:
 
 
 label UlyssesReportMadeline4:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Three elemental indicators activated in one wound sample. Madeline's machine was correct; her model was not."
     "You describe separating the injuries by sequence and the quiet physical observation that emerged once contact trauma was no longer treated as elemental residue."
     u "Keep that observation provisional. A useful model explains the sample without promoting every implication to proof."
@@ -1073,6 +1119,7 @@ label UlyssesReportMadeline4:
 
 
 label UlyssesReportMadeline5:
+    show ulysses at slot(0, total=1), bright zorder 10
     if mads_cutoff_violated:
         u "I have the telemetry log from Madeline's helmet calibration, recruit. The automatic timer triggered because you ignored her verbal stop command."
         "You report the residue pattern, but you cannot disguise the fact that you ignored protocol and forced her past her limit."
@@ -1109,6 +1156,7 @@ label UlyssesReportMadeline5:
 
 
 label UlyssesReportMadeline6:
+    show ulysses at slot(0, total=1), bright zorder 10
     "Ulysses reads the scanner controls, comparison standards, and repeated result before accepting Madeline's classification."
     if ulyssesCurrentClue:
         u "Her calibrated analysis supports this: [ulyssesCurrentClue]"
@@ -1131,6 +1179,7 @@ label UlyssesReportMadeline6:
 ## Nicky reports
 
 label UlyssesReportNicky1:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Nicky's alibi packet is already formatted, signed, and somehow contains fewer coffee stains than the version the station sent us."
     "You explain the timeline verification, the independent record, and the suspect whose alibi now holds."
     if ulyssesCurrentClue:
@@ -1151,6 +1200,7 @@ label UlyssesReportNicky1:
 
 
 label UlyssesReportNicky2:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "A record store, diner food, and a motorcycle ride. This is the first report this week with a soundtrack."
     if nicky_album_exchange_type == "gift":
         "You tell him about Nicky's hip-hop search, the album she bought you, and the way she became playful once police work was no longer in front of her."
@@ -1188,6 +1238,7 @@ label UlyssesReportNicky2:
 
 
 label UlyssesReportNicky3:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Razzle arrived for information and somehow left Nicky with a face-down matching exercise. Explain why that produced a lawful conclusion."
     "You describe pairing original records with corroboration, correcting the clothing-distorted descriptions, and separating measured build from assumption."
     if nicky_memory_result.get("quality") == "perfect":
@@ -1203,10 +1254,14 @@ label UlyssesReportNicky3:
             $ uly += 2
             $ ulysses_note_reporting_style("thoughtful")
             u "Then the game clarified provenance rather than replacing it. Unorthodox, but defensible."
-        "Say you needed hints to finish the matching.":
+        "Say you needed hints to finish the matching." if nicky_memory_result.get("hints_used", 0) > 0:
             $ uly += 1
             $ ulysses_note_reporting_style("honest")
             u "Assistance is not contamination when it directs you back to the record."
+        "Note that cross-referencing contradictory statements took discipline." if nicky_memory_result.get("hints_used", 0) == 0:
+            $ uly += 1
+            $ ulysses_note_reporting_style("honest")
+            u "Careful attention pays dividends. Nicky's files punish careless reading."
         "Credit intuition instead of the files.":
             $ uly -= 1
             u "Intuition may tell you where to look. It does not sign an affidavit."
@@ -1214,6 +1269,7 @@ label UlyssesReportNicky3:
 
 
 label UlyssesReportNicky4:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "The original report observed extraordinary force and invented a large attacker to explain it. In this building, that is a particularly careless assumption."
     "You describe separating observations from copied conclusions, Nicky lifting the reconstruction table with one hand, and the quieter injury detail in the corrected path."
     u "Good. Preserve the observation; remove the costume somebody dressed it in."
@@ -1233,6 +1289,7 @@ label UlyssesReportNicky4:
 
 
 label UlyssesReportNicky5:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "The outer custody bag was altered without initials. The inner seal remained intact. Nicky appears to have documented every molecule in the hallway."
     "You explain the quarantine, supervised limited test, uncertain blood profile, and the seven-minute television break after the sample returned to storage."
     u "A compromised chain changes what we may claim. It does not forbid us from learning where to seek clean evidence."
@@ -1252,6 +1309,7 @@ label UlyssesReportNicky5:
 
 
 label UlyssesReportNicky6:
+    show ulysses at slot(0, total=1), bright zorder 10
     "Ulysses reviews the warrant dates, residue controls, and repeated behavioral records before he reaches the final profile."
     if ulyssesCurrentClue:
         u "The independent supports establish this: [ulyssesCurrentClue]"
@@ -1274,6 +1332,7 @@ label UlyssesReportNicky6:
 ## Winston reports
 
 label UlyssesReportWinston1:
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Winston's report contains a useful interrogation summary, a takeout menu, and a drawing of a pencil ramp. Tell me which portion occupied the day."
     "You explain the conversational roles, the unrelated embarrassing lie that exposed the rehearsed answer, and the suspect cleared without Winston suppressing anyone's power."
     if ulyssesCurrentClue:
@@ -1333,10 +1392,14 @@ label UlyssesReportWinston3:
             $ uly += 2
             $ ulysses_note_reporting_style("thoughtful")
             u "Good. The method tested stability; it did not reward breaking people."
-        "Admit Winston finished some interviews for you.":
+        "Admit Winston finished some interviews for you." if winston_pressure_result.get("quality") == "assisted":
             $ uly += 1
             $ ulysses_note_reporting_style("honest")
             u "Then study how he changed tone. Assistance should leave you more capable next time."
+        "Credit Winston's pacing for keeping the suspects talking." if winston_pressure_result.get("quality") != "assisted":
+            $ uly += 1
+            $ ulysses_note_reporting_style("honest")
+            u "He understands how to alternate pressure with ease. It is a useful skill to study."
         "Say Dhampir's intimidation was the most efficient part.":
             $ uly -= 1
             u "Efficient at producing fear. Winston's method required usable answers. Those are not synonymous."
@@ -1366,10 +1429,14 @@ label UlyssesReportWinston5:
     "You report the heightened-hearing witness, the careful pacing, and the reconstructed aftermath whose final two sounds still lack a verified order."
     u "Then the impression remains provisional. His second statement and telephone record should settle the sequence when you return to it."
     menu:
-        "Emphasize that the witness controlled when to stop.":
+        "Emphasize that the witness controlled when to stop." if winston_day_five_care != "pushed":
             $ uly += 3
             $ ulysses_note_reporting_style("thoughtful")
             u "Good. A terrified witness is not a resource to consume. Winston understood that immediately."
+        "Admit that Winston had to intervene when you rushed the witness." if winston_day_five_care == "pushed":
+            $ uly += 1
+            $ ulysses_note_reporting_style("honest")
+            u "Then remember his intervention. A frightened witness is not an obstacle to bulldoze. You are fortunate Winston stopped you before you contaminated the testimony."
         "Say the likely reaction category belongs in the notebook now.":
             $ uly -= 2
             u "Not until the order is independently fixed. Likely is not another spelling of proven."
@@ -1538,10 +1605,10 @@ label UlyssesReportIca5:
 
 
 label UlyssesReportIca6:
-    "Ulysses listens without interrupting as you describe the killer entering ATLAS, attempting to use Enrico's cipher key on the workshop lockbox, overlooking both of you, and bolting through the fire exit after Ica intercepted the wallet."
-    "He opens the safe, verifies the photographed chain, and compares the wallet and key to Enrico's property record."
+    "Ulysses listens without interrupting as you describe the killer entering the warehouse, opening Enrico's lockbox with the key from his wallet, and bolting through the fire exit after Ica stopped the contents from burning."
+    "Nicky's evidence receipt lies beside the recovered wallet and key. Ulysses checks the seal numbers, then compares them to Enrico's property record."
     $ ulysses_ica_killer_name = suspectNames[killer]
-    u "Six days of games, one attempted destruction of evidence, and [ulysses_ica_killer_name] personally delivering the answer to our office."
+    u "Six days of games, one attempted destruction of evidence, and [ulysses_ica_killer_name] personally delivering the answer to the warehouse."
     u "Nicky and Dhampir are coordinating with LAPD patrol to run down their escape vector across the rail yard. We'll have them in custody before morning."
     u "I owe you an apology. I doubted your judgment because the method appeared to contain no judgment whatsoever. Somehow, staying with Ica worked."
     menu:
@@ -1555,5 +1622,5 @@ label UlyssesReportIca6:
         "Take full credit for solving the case.":
             $ uly -= 1
             $ ulysses_note_reporting_style("deflecting")
-            u "Ica noticed the intrusion, saved the evidence, documented the scene, and called Nicky. You sat very effectively nearby."
+            u "Ica stopped the fire and called Nicky. You stayed with the evidence. Take credit for what you did."
     return

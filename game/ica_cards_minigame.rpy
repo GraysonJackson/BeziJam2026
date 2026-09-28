@@ -72,6 +72,7 @@ init python:
         _ica_cards_reset_state()
         if approach_id is not None:
             ica_cards_choose_approach(approach_id)
+        push_minigame_music()
         renpy.call_screen("ica_cards_minigame")
 
     def _ica_cards_build_deck():
@@ -184,15 +185,24 @@ init python:
         if player_won_round:
             store.ica_cards_player_score += store.ica_cards_current_wager
             if leeway_win:
+                p_card = store.ica_cards_current_player_card
+                i_card = store.ica_cards_current_ica_card
+                if p_card == i_card:
+                    leeway_desc = "tiebreak leeway"
+                elif prediction == "lower":
+                    leeway_desc = "-{} leeway".format(store.ica_cards_difficulty_reduction)
+                else:
+                    leeway_desc = "+{} leeway".format(store.ica_cards_difficulty_reduction)
+
                 if store.ica_cards_approach == "cheat":
                     store.ica_cards_round_result = (
-                        "Sleight of hand flips the round! Your {} (+{} leeway) beats Ica's {}."
-                        .format(store.ica_cards_current_player_card, store.ica_cards_difficulty_reduction, store.ica_cards_current_ica_card)
+                        "Sleight of hand flips the round! Your {} ({}) beats Ica's {}."
+                        .format(p_card, leeway_desc, i_card)
                     )
                 else:
                     store.ica_cards_round_result = (
-                        "Distracted call! Your {} (+{} banter leeway) edges past Ica's {}."
-                        .format(store.ica_cards_current_player_card, store.ica_cards_difficulty_reduction, store.ica_cards_current_ica_card)
+                        "Distracted call! Your {} ({} banter) edges past Ica's {}."
+                        .format(p_card, leeway_desc, i_card)
                     )
             elif store.ica_cards_current_wager == 2:
                 store.ica_cards_round_result = "Your double call lands. Ica barely sits up, which is as close as she gets to panic."
@@ -272,6 +282,7 @@ init python:
         store.ica_cards_result_applied = True
         store.ica_cards_phase = "complete"
         store.ica_cards_session_active = False
+        pop_minigame_music()
         renpy.hide_screen("ica_cards_minigame")
         renpy.end_interaction(True)
 
@@ -281,6 +292,7 @@ init python:
             return
         store.ica_cards_phase = "aborted"
         store.ica_cards_session_active = False
+        pop_minigame_music()
         renpy.hide_screen("ica_cards_minigame")
         renpy.end_interaction(True)
 

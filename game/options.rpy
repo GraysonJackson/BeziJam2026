@@ -1,4 +1,4 @@
-﻿## This file contains options that can be changed to customize your game.
+## This file contains options that can be changed to customize your game.
 ##
 ## Lines beginning with two '#' marks are comments, and you shouldn't uncomment
 ## them. Lines beginning with a single '#' mark are commented-out code, and you
@@ -70,7 +70,7 @@ define config.rollback_enabled = False
 ## the player is at the main menu. This file will continue playing into the
 ## game, until it is stopped or another file is played.
 
-# define config.main_menu_music = "main-menu-theme.ogg"
+define config.main_menu_music = "audio/music/treehouse_party.ogg"
 
 
 ## Transitions #################################################################
@@ -202,6 +202,17 @@ init python:
     ## README or instructions, you may want to remove these lines.
     build.classify('**.txt', None)
     build.classify('**.md', None)
+    ## Square brackets are character classes in Ren'Py build patterns.
+    build.classify('JDSherbert - Minigame Music Pack*/**', None)
+    build.classify('JDSherbert - Nostalgia Music Pack*/**', None)
+    build.classify('docs/**', None)
+    build.classify('tests/**', None)
+    build.classify('tmp/**', None)
+    build.classify('tools/**', None)
+    build.classify('project.json', None)
+    build.classify('game/testcases.rpy*', None)
+    build.classify('game/release_testcases.rpy*', None)
+    build.classify('LICENSE.pdf', None)
 
     ## To archive files, classify them as 'archive'.
 

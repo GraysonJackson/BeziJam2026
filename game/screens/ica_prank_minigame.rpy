@@ -6,10 +6,10 @@ screen ica_prank_minigame():
 
     add "gui/bgtile.png"
     add Solid("#172C3C99")
-    key "game_menu" action Function(ica_prank_abort)
 
     if ica_prank_phase == "active":
-        timer ICA_PRANK_PATROL_INTERVAL repeat True action Function(ica_prank_tick)
+        if not minigame_paused:
+            timer ICA_PRANK_PATROL_INTERVAL repeat True action Function(ica_prank_tick)
         key "K_UP" action Function(ica_prank_move, 0, -1)
         key "K_DOWN" action Function(ica_prank_move, 0, 1)
         key "K_LEFT" action Function(ica_prank_move, -1, 0)
@@ -22,7 +22,8 @@ screen ica_prank_minigame():
         key "K_SPACE" action Function(ica_prank_interact)
         key "K_q" action Function(ica_prank_use_assist)
     elif ica_prank_phase == "caught":
-        timer ICA_PRANK_CAUGHT_DELAY action Function(ica_prank_reset_to_checkpoint)
+        if not minigame_paused:
+            timer ICA_PRANK_CAUGHT_DELAY action Function(ica_prank_reset_to_checkpoint)
 
     fixed:
         xalign 0.5
@@ -119,6 +120,9 @@ screen ica_prank_minigame():
                     spacing 18
                     text _("CAUGHT") style "ica_prank_caught_title"
                     text _("Ica pulls you back to the last checkpoint. Finished work stays finished.") style "ica_prank_caught_body"
+
+    use minigame_controls("prank")
+
 
 style ica_prank_title:
     is gui_text

@@ -152,7 +152,17 @@ This file records the creator's decisions after reviewing the audit reports. Fut
 102. **Powers & Forensics Limits — Locked.** Powers leave elemental signatures but don't alter anatomy or grant shapeshifting; Dhampir's build inferences rely on physical collision dimensions (shoulder impact height, arm span).
 103. **Gallery Unlock Rules — Approved.** Unlocks upon reaching outro/credits after viewing; grouped by character with spoiler-safe status hints; soft clues unlogged with writable player notes field.
 
+## September 27, 2026 — second review clarifications
+
+104. **Ica's pursuit response — Creator confirmed.** She keeps the recruit with the recovered evidence while Nicky handles pursuit. Do not frame this as deliberately selfish obstruction.
+105. **Suspects and locations — Creator confirmed.** All nine suspects are ATLAS staff with badges. Enrico was killed in his home. His lockbox is at the warehouse.
+106. **Ulysses late-start personal scenes — Creator confirmed.** After mandatory Day Six case preparation, offer the next personal episode in experienced order. Do not skip ahead to the sixth personal conversation.
+107. **Music preferences — Creator confirmed.** Blackjack is the intended bouncy jazz/minigame track. Smooth Driving may be considered for Ulysses after listening; its final placement remains pending audition.
+108. **Second-pass work order — Creator instructed.** Implement in steps with a resumable checked progress ledger. UI is the second-highest priority after case/progression correctness.
+
+109. **Forensic exclusion corroboration — Creator confirmed.** Add brief independent corroboration (such as a verified alibi) before clearing suspects based on nonmatching prints or injuries. Keep current puzzle answers.
+110. **Witness feature simplification — Creator confirmed.** Razzle's removable features, including glasses and piercings, remain decisive under the game's simplified rules. Do not add a mandatory second clue or change these puzzle answers.
+
 ## Implementation rule for future passes
 
 If a future audit recommends reversing a **Locked** decision above, treat the recommendation as a documented disagreement rather than an actionable defect. Ask the creator before changing it. Accepted items may be refined for continuity, voice, pacing, and technical safety without reopening their underlying direction.
-

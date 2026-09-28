@@ -134,7 +134,8 @@ class TestPhase5Minigames(unittest.TestCase):
         rules_path = os.path.join(ROOT, "game", "screens", "minigame_rules.rpy")
         with open(rules_path, "r", encoding="utf-8") as f:
             rules_content = f.read()
-        self.assertIn("Flirting and cheating grant a one-time special move; playing fair relies on steady Bite and Pace rhythm.", rules_content)
+        self.assertIn("Flirting and cheating grant a one-time special move; playing fair relies on steady", rules_content)
+        self.assertIn("Bite and Pace rhythm.", rules_content)
 
 
 if __name__ == "__main__":

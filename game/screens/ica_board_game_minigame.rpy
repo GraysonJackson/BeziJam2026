@@ -102,11 +102,13 @@ screen ica_board_game_minigame():
                     textbutton _("Withdraw from Race") action Function(ica_board_withdraw)
 
                 elif ica_board_phase == "ica_turn":
-                    timer 1.0 action Function(ica_board_ica_turn)
+                    if not minigame_paused:
+                        timer 1.0 action Function(ica_board_ica_turn)
                     textbutton _("Resolve Ica's turn (or wait...)") action Function(ica_board_ica_turn)
 
                 elif ica_board_phase == "winston_turn":
-                    timer 1.0 action Function(ica_board_winston_turn)
+                    if not minigame_paused:
+                        timer 1.0 action Function(ica_board_winston_turn)
                     textbutton _("Resolve Winston's turn (or wait...)") action Function(ica_board_winston_turn)
 
                 elif ica_board_phase == "complete_pending":
@@ -119,6 +121,9 @@ screen ica_board_game_minigame():
                     else:
                         text _("Winston wins the race and celebrates like he just saved the city.") style "ica_board_body"
                     textbutton _("Finish Game") action Function(finish_ica_board_game_minigame)
+
+    use minigame_controls("board")
+
 
 style ica_board_title:
     is gui_text

@@ -8,6 +8,7 @@ screen suspect_notebook():
     add Solid("#00000099")
 
     key "game_menu" action Hide("suspect_notebook")
+    key "K_ESCAPE" action Hide("suspect_notebook")
 
     frame:
         xalign 0.5
@@ -142,6 +143,7 @@ screen suspect_notepad():
     add Solid("#00000099")
 
     key "game_menu" action Hide("suspect_notepad")
+    key "K_ESCAPE" action Hide("suspect_notepad")
 
     frame:
         xalign 0.5
@@ -162,10 +164,16 @@ screen suspect_notepad():
                 size 42
                 color "#251d18"
 
-            text _("Write anything you want to remember. These notes are stored in your save."):
-                size 22
-                color "#654c3c"
-                xmaximum 524
+            hbox:
+                xsize 524
+                text _("Write anything you want to remember. Stored in your save."):
+                    size 20
+                    color "#654c3c"
+                    xmaximum 390
+                text "[len(playerInvestigationNotes)]/4000":
+                    xalign 1.0
+                    size 19
+                    color "#8d3027"
 
             frame:
                 xsize 524
@@ -178,7 +186,6 @@ screen suspect_notepad():
                     ysize 646
                     scrollbars "vertical"
                     mousewheel True
-                    draggable True
 
                     input:
                         value VariableInputValue("playerInvestigationNotes")

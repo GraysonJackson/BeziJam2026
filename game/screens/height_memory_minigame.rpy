@@ -2,10 +2,11 @@ screen height_memory_minigame():
     modal True
     zorder 250
 
+
     add "gui/bgtile.png"
     add Solid("#172C3C55")
-    timer 0.5 repeat True action Function(height_memory_tick)
-    key "game_menu" action Function(abort_height_memory_minigame)
+    if not minigame_paused:
+        timer 0.5 repeat True action Function(height_memory_tick)
 
     fixed:
         xalign 0.5
@@ -117,6 +118,9 @@ screen height_memory_minigame():
             textbutton "Let Razzle finish":
                 action Function(abort_height_memory_minigame)
                 text_size 23
+
+    use minigame_controls("height")
+
 
 style height_memory_minigame_button_text:
     font "MonaspaceNeon-Regular.otf"

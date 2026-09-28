@@ -53,7 +53,8 @@ screen day_seven_accusation():
     add Solid("#171313")
     add "debriefRoomOutline" alpha 0.16
 
-    key "game_menu" action NullAction()
+    key "game_menu" action ShowMenu("save")
+    key "K_ESCAPE" action ShowMenu("save")
 
     frame:
         align (0.5, 0.5)
@@ -172,6 +173,12 @@ screen day_seven_accusation():
                     xsize 390
 
 
+    textbutton "Save / Settings":
+        align (0.98, 0.985)
+        style "minigame_panel_button"
+        action ShowMenu("save")
+
+
 style day_seven_action_button:
     ysize 58
     background Solid("#e4d8bc")
@@ -200,6 +207,8 @@ style day_seven_accuse_button_text is day_seven_action_button_text:
 screen day_seven_confirm_accusation(suspect_id):
     modal True
     zorder 260
+    key "game_menu" action Hide("day_seven_confirm_accusation")
+    key "K_ESCAPE" action Hide("day_seven_confirm_accusation")
 
     add Solid("#000000b8")
 
@@ -251,7 +260,8 @@ screen day_seven_partner_choice():
 
     add Solid("#171313")
     add "debriefRoomOutline" alpha 0.16
-    key "game_menu" action NullAction()
+    key "game_menu" action ShowMenu("save")
+    key "K_ESCAPE" action ShowMenu("save")
 
     frame:
         align (0.5, 0.5)
@@ -297,9 +307,17 @@ screen day_seven_partner_choice():
                     partner_name="no one")
 
 
+    textbutton "Save / Settings":
+        align (0.98, 0.985)
+        style "minigame_panel_button"
+        action ShowMenu("save")
+
+
 screen day_seven_confirm_partner(partner_id, partner_name):
     modal True
     zorder 260
+    key "game_menu" action Hide("day_seven_confirm_partner")
+    key "K_ESCAPE" action Hide("day_seven_confirm_partner")
 
     add Solid("#000000b8")
 
@@ -424,7 +442,7 @@ transform day_seven_credit_scroll:
     xpos 0.5
     xanchor 0.5
     ypos 1080
-    linear 45.0 ypos -3500
+    linear 48.0 ypos -3800
 
 
 screen day_seven_credits():
@@ -432,9 +450,10 @@ screen day_seven_credits():
     zorder 300
 
     add Solid("#090809")
-    timer 45.0 action Return()
+    timer 48.0 action Return()
     key "dismiss" action Return()
     key "game_menu" action Return()
+    key "K_ESCAPE" action Return()
 
     vbox at day_seven_credit_scroll:
         xsize 1400
@@ -487,7 +506,20 @@ screen day_seven_credits():
             size 31
             color "#f0d9cf"
 
-        null height 100
+        null height 80
+
+        text "MUSIC":
+            xalign 0.5
+            size 42
+            color "#E47751"
+            font "fonts/RandoSharpie.ttf"
+        text "Music by JDSherbert\nMinigame Music Pack & Nostalgia Music Pack\nhttps://jdsherbert.itch.io":
+            xalign 0.5
+            text_align 0.5
+            size 31
+            color "#f0d9cf"
+
+        null height 80
 
         text "ASSET AND TOOL CREDITS":
             xalign 0.5

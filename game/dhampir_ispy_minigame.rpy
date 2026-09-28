@@ -183,9 +183,9 @@ init python:
                 or store.dhampir_ispy_phase != "complete_pending"):
             return
 
-        if store.dhampir_ispy_mistakes <= 1 and store.dhampir_ispy_hints_used == 0:
+        if store.dhampir_ispy_mistakes == 0 and store.dhampir_ispy_hints_used == 0:
             quality = "perfect"
-        elif store.dhampir_ispy_mistakes <= 3:
+        elif store.dhampir_ispy_mistakes <= 2:
             quality = "careful"
         else:
             quality = "messy"

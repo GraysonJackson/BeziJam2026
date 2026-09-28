@@ -6,12 +6,12 @@ screen ica_eating_minigame():
 
     add "gui/bgtile.png"
     add Solid("#172C3CCC")
-    key "game_menu" action Function(ica_eating_abort)
     key "K_SPACE" action Function(ica_eating_action, "bite")
     key "K_r" action Function(ica_eating_action, "pace")
 
     if ica_eating_phase == "active":
-        timer ICA_EATING_TICK_INTERVAL repeat True action Function(ica_eating_tick)
+        if not minigame_paused:
+            timer ICA_EATING_TICK_INTERVAL repeat True action Function(ica_eating_tick)
 
     fixed:
         xalign 0.5
@@ -72,7 +72,7 @@ screen ica_eating_minigame():
                 if ica_eating_flirt_slowdown_left > 0.0:
                     text _("Distracted for [ica_eating_flirt_slowdown_left:.1f]s") style "ica_eating_flirt_status"
                 else:
-                    text _("Cheating incidents witnessed: [ica_eating_ica_cheat_stage + 1]") style "ica_eating_meter_label"
+                    text _("Total cheats witnessed (incl. pre-game): [ica_eating_ica_cheat_stage + 1]") size 22 style "ica_eating_meter_label"
 
         text _("[ica_eating_feedback]") style "ica_eating_feedback":
             ypos 455
@@ -99,28 +99,36 @@ screen ica_eating_minigame():
             ypos 650
             spacing 35
 
-            textbutton _("TAKE A BITE"):
+            textbutton (_("TAKE A BITE\n(-0.9 Stamina)") if ica_eating_stamina >= ICA_EATING_BITE_STAMINA_COST else _("TAKE A BITE\n(Low Stamina - Choke Risk!)")):
                 xsize 350
                 ysize 82
+                text_text_align 0.5
+                text_size 20
                 sensitive ica_eating_action_cooldown <= 0.0
                 action Function(ica_eating_action, "bite")
 
-            textbutton _("PACE YOURSELF"):
+            textbutton _("PACE YOURSELF\n(+1.5 Stamina)"):
                 xsize 350
                 ysize 82
+                text_text_align 0.5
+                text_size 20
                 sensitive ica_eating_action_cooldown <= 0.0
                 action Function(ica_eating_action, "pace")
 
             if ica_eating_approach == "flirt":
-                textbutton _("LEAN IN"):
+                textbutton _("LEAN IN\n(Distract Ica)"):
                     xsize 350
                     ysize 82
+                    text_text_align 0.5
+                    text_size 20
                     sensitive not ica_eating_special_used and ica_eating_action_cooldown <= 0.0
                     action Function(ica_eating_action, "special")
             elif ica_eating_approach == "cheat":
-                textbutton _("PALM ONE"):
+                textbutton _("PALM ONE\n(+1.25 Progress)"):
                     xsize 350
                     ysize 82
+                    text_text_align 0.5
+                    text_size 20
                     sensitive not ica_eating_special_used and ica_eating_action_cooldown <= 0.0
                     action Function(ica_eating_action, "special")
             else:
@@ -128,14 +136,18 @@ screen ica_eating_minigame():
                     xsize 350
                     ysize 82
                     background Solid("#243846")
-                    text _("PURE RHYTHM") style "ica_eating_no_tricks":
+                    text _("PURE RHYTHM\n(No Tricks)") style "ica_eating_no_tricks":
                         xalign 0.5
                         yalign 0.5
+                        text_align 0.5
 
         textbutton _("Withdraw"):
             xpos 1280
             ypos 35
             action Function(ica_eating_abort)
+
+    use minigame_controls("eating")
+
 
 style ica_eating_title:
     is gui_text

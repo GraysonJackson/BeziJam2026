@@ -40,6 +40,7 @@ screen game_menu(title):
 
         textbutton _("Display") action ShowMenu("display_prefs") text_size 33
         textbutton _("Audio") action ShowMenu("audio_prefs")
+        textbutton _("Accessibility") action ShowMenu("accessibility_prefs") text_size 18 text_xoffset 5
         null height 20
 
 

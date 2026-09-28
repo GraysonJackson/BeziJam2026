@@ -4,6 +4,7 @@ screen winston_pressure_minigame():
     modal True
     zorder 250
 
+
     add Solid("#090B10")
     add "gui/bgtile.png" alpha 0.13
 
@@ -165,6 +166,9 @@ screen winston_pressure_minigame():
             text _("[winston_pressure_feedback]") style "winston_pressure_feedback":
                 ypos 805
                 xsize 1220
+
+    use minigame_controls("blackjack")
+
 
 style winston_pressure_title:
     is gui_text

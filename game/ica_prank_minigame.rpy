@@ -141,6 +141,7 @@ init python:
         """Use the approach selected in dialogue and open the stealth map."""
         store.ica_clear_minigame_result("prank")
         _ica_prank_reset_state(approach_id)
+        push_minigame_music()
         renpy.call_screen("ica_prank_minigame")
 
     def ica_prank_set_checkpoint(restart=True):
@@ -239,7 +240,7 @@ init python:
             store.ica_prank_feedback = "Ica calls out something distracting. Ulysses stops to reconsider his life."
         elif store.ica_prank_approach == "cheat":
             store.ica_prank_safe_ticks = 2
-            store.ica_prank_feedback = "Ica bends the light around you with floating office junk. You're briefly covered."
+            store.ica_prank_feedback = "Ica floats a cluster of office junk to block Ulysses's sightline. You're briefly covered."
         renpy.restart_interaction()
 
     def ica_prank_interact():
@@ -342,6 +343,7 @@ init python:
         store.ica_prank_completion_recorded = True
         store.ica_prank_phase = "complete"
         store.ica_prank_session_active = False
+        pop_minigame_music()
         renpy.hide_screen("ica_prank_minigame")
         renpy.end_interaction(True)
 
@@ -351,6 +353,7 @@ init python:
             return
         store.ica_prank_phase = "aborted"
         store.ica_prank_session_active = False
+        pop_minigame_music()
         renpy.hide_screen("ica_prank_minigame")
         renpy.end_interaction(True)
 

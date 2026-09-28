@@ -1,5 +1,7 @@
 # Date and Deduce: implementation guide
 
+> Historical first-pass guide. The active follow-up is [implementation_guide_round_2.md](implementation_guide_round_2.md), with status in [implementation_progress_round_2.md](implementation_progress_round_2.md). Do not treat this older checklist as the remaining implementation queue. Approved canon stays in `audit_decisions.md`.
+
 Prepared from the September 27, 2026 conversation audit. This document preserves all **234 findings**, using matching IDs A001–A234. It turns criticism into bounded work, checks, and questions. It is a handoff for an implementing model; creating this guide did not change the game.
 
 ## Start here: instructions to the implementing model
