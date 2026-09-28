@@ -482,5 +482,106 @@ class HistoryScreenLayoutStressTests(unittest.TestCase):
             )
 
 
+class GameMenuButtonsStressTests(unittest.TestCase):
+    """Stress-tests for in-game navigation sticky tabs (game_menu.rpy).
+    Ensures 'Main Menu', 'Quit Game', and other navigation buttons fit inside the 133x45 sticky tabs.
+    """
+
+    def setUp(self):
+        self.game_menu_content = (SCREENS_DIR / "game_menu.rpy").read_text(encoding="utf-8")
+        self.randowb_path = FONTS_DIR / "RandoWB.ttf"
+        self.od_path = FONTS_DIR / "OpenDyslexic-Regular.ttf"
+        self.od3_path = FONTS_DIR / "_OpenDyslexic3-Regular.ttf"
+        with Image.open(GUI_DIR / "menusticky_idle.png") as sticky_img:
+            self.tab_w, self.tab_h = sticky_img.size
+
+        self.assertTrue(self.randowb_path.is_file(), "RandoWB.ttf must exist")
+        self.assertTrue(self.od_path.is_file(), "OpenDyslexic-Regular.ttf must exist")
+        self.assertEqual(self.tab_w, 133, "Sticky tab width must be 133px")
+        self.assertEqual(self.tab_h, 45, "Sticky tab height must be 45px")
+
+    def _get_text_width(self, font_path, size, text):
+        font = ImageFont.truetype(str(font_path), size)
+        bbox = font.getbbox(text)
+        return bbox[2] - bbox[0]
+
+    def test_game_menu_main_menu_and_quit_game_declarations(self):
+        """Verify Main Menu and Quit Game define explicit text_size <= 21 and text_xoffset."""
+        mm_match = re.search(r'textbutton\s+_\("Main Menu"\).*?text_size\s+(\d+)\s+text_xoffset\s+(\d+)', self.game_menu_content)
+        qg_match = re.search(r'textbutton\s+_\("Quit Game"\).*?text_size\s+(\d+)\s+text_xoffset\s+(\d+)', self.game_menu_content)
+
+        self.assertIsNotNone(mm_match, "Main Menu button must declare explicit text_size and text_xoffset")
+        self.assertIsNotNone(qg_match, "Quit Game button must declare explicit text_size and text_xoffset")
+
+        mm_size = int(mm_match.group(1))
+        mm_offset = int(mm_match.group(2))
+        qg_size = int(qg_match.group(1))
+        qg_offset = int(qg_match.group(2))
+
+        self.assertLessEqual(mm_size, 21, f"Main Menu text_size ({mm_size}) must be <= 21 to fit within 133px tab")
+        self.assertLessEqual(qg_size, 21, f"Quit Game text_size ({qg_size}) must be <= 21 to fit within 133px tab")
+        self.assertGreaterEqual(mm_offset, 0)
+        self.assertGreaterEqual(qg_offset, 0)
+
+    def test_game_menu_button_style_states_defined(self):
+        """Verify style game_menu_button defines idle, hover, insensitive, and selected backgrounds."""
+        style_match = re.search(r'style\s+game_menu_button:(.*?)(?=\nstyle|\Z)', self.game_menu_content, re.DOTALL)
+        self.assertIsNotNone(style_match, "style game_menu_button must exist")
+        style_body = style_match.group(1)
+
+        self.assertIn("idle_background", style_body)
+        self.assertIn("hover_background", style_body)
+        self.assertIn("insensitive_background", style_body, "insensitive_background must be defined so tabs don't vanish")
+        self.assertIn("selected_idle_background", style_body)
+        self.assertIn("selected_hover_background", style_body)
+
+    def test_main_menu_and_quit_game_fit_inside_sticky_tab_box(self):
+        """Verify Main Menu and Quit Game text + offset fit inside 133px across all font variants."""
+        fonts = [
+            ("RandoWB", self.randowb_path),
+            ("OpenDyslexic", self.od_path),
+            ("OpenDyslexic3", self.od3_path),
+        ]
+        buttons = [
+            ("Main Menu", 20, 5),
+            ("Quit Game", 20, 5),
+        ]
+
+        for font_name, font_file in fonts:
+            for label, size, offset in buttons:
+                w = self._get_text_width(font_file, size, label)
+                total_w = w + offset
+                self.assertLess(
+                    total_w, self.tab_w,
+                    f"'{label}' total width ({total_w}px = {w}px + {offset}px offset) exceeds {self.tab_w}px tab in {font_name}"
+                )
+
+    def test_all_game_menu_navigation_buttons_fit_inside_sticky_tab_box(self):
+        """Verify all default navigation buttons fit cleanly within 133px sticky tabs in primary font."""
+        # (label, size, offset)
+        buttons = [
+            ("Start", 35, 10),
+            ("Log", 35, 10),
+            ("Save", 35, 10),
+            ("Load", 35, 10),
+            ("Display", 33, 10),
+            ("Audio", 35, 10),
+            ("Accessibility", 18, 5),
+            ("About", 35, 10),
+            ("Help", 35, 10),
+            ("Main Menu", 20, 5),
+            ("Quit Game", 20, 5),
+        ]
+
+        for label, size, offset in buttons:
+            w = self._get_text_width(self.randowb_path, size, label)
+            total_w = w + offset
+            self.assertLess(
+                total_w, self.tab_w,
+                f"'{label}' total width ({total_w}px = {w}px + {offset}px offset) exceeds {self.tab_w}px tab in RandoWB"
+            )
+
+
 if __name__ == "__main__":
     unittest.main()
+

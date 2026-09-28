@@ -49,8 +49,8 @@ screen game_menu(title):
         textbutton _("Help") action ShowMenu("help")
 
         if not main_menu:
-            textbutton _("Main Menu") action MainMenu(confirm=True)
-            textbutton _("Quit Game") action Quit(confirm=True)
+            textbutton _("Main Menu") action MainMenu(confirm=True) text_size 20 text_xoffset 5
+            textbutton _("Quit Game") action Quit(confirm=True) text_size 20 text_xoffset 5
 
     imagebutton auto "gui/return_%s.png" action Return() focus_mask True
 
@@ -96,6 +96,9 @@ style game_menu_label_text:
 style game_menu_button:
     idle_background "gui/menusticky_idle.png"
     hover_background "gui/menusticky_hover.png"
+    insensitive_background "gui/menusticky_idle.png"
+    selected_idle_background "gui/menusticky_idle.png"
+    selected_hover_background "gui/menusticky_hover.png"
 
 style game_menu_button_text:
     is main_menu_button_text
