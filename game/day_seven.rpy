@@ -1,4 +1,5 @@
 ## The complete Day Seven finale.
+## Group scenes share one speaker tag so each portrait replaces the previous one.
 
 label DaySevenStart:
     $ stop_route_music(fadeout=1.0)
@@ -21,7 +22,7 @@ label DaySevenStart:
     $ day_seven_selected_name = suspectNames[daySevenSelectedSuspect]
 
     scene debriefRoomOutline with fade
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "You are formally accusing [day_seven_selected_name] of murdering Enrico Edge."
     "The file remains open beneath Ulysses's hand. Nobody reaches for it."
 
@@ -52,7 +53,7 @@ label DaySevenIcaEvidenceOpening:
     scene black with fade
     "The hallway outside the briefing room is quiet when Ica rolls alongside you in her chair. Enrico Edge's bloodstained wallet floats above her shoulder inside a clear evidence bag."
 
-    show ica happy at slot(0, total=1), bright zorder 10
+    show ica happy as day_seven_speaker at slot(0, total=1), bright zorder 10
 
     i "Morning, freshie. Brought our group-project contribution."
     "She gives the bag a tiny gravitational nudge. It rotates in the air, displaying Enrico's initials and the dark stain along one edge."
@@ -64,14 +65,14 @@ label DaySevenIcaEvidenceOpening:
             i "Yeah, yeah. Forms before justice. His favorite superhero slogan."
             "She floats the evidence bag into your hands, waits until you have a secure grip, then takes it back before you can carry it normally."
         "Admit this is the strongest evidence anyone found.":
-            show ica flirty at slot(0, total=1), bright zorder 10
+            show ica flirty as day_seven_speaker at slot(0, total=1), bright zorder 10
             i "See? Shameless bums stay winning."
             "The wallet makes one slow victory lap around the two of you before settling above her shoulder again."
         "Ask whether she prepared anything to say.":
             i "Sure did. 'That's the killer. They had the dead guy's wallet.'"
             i "Short, accurate, leaves more time for not talking."
 
-    show ica at slot(0, total=1), bright zorder 10
+    show ica as day_seven_speaker at slot(0, total=1), bright zorder 10
     "Voices shift behind the briefing-room door. Ica lowers the wallet to table height, and the joking edge of the moment gives way to what the evidence means."
     i "Ready?"
     "You enter together. The wallet floats in ahead of both of you."
@@ -86,77 +87,77 @@ label DaySevenTeamBriefing:
 
     if daySevenIcaSpecial:
         "The floating evidence bag reaches the center of the table. Every head turns toward it."
-        show razzle at slot(0, total=1), bright zorder 10
+        show razzle as day_seven_speaker at slot(0, total=1), bright zorder 10
         r "Is that Enrico's wallet?"
-        show madeline at slot(0, total=1), bright zorder 10
+        show madeline as day_seven_speaker at slot(0, total=1), bright zorder 10
         m "Where the hell did you get that?"
-        show ica at slot(0, total=1), bright zorder 10
+        show ica as day_seven_speaker at slot(0, total=1), bright zorder 10
         i "Killer brought it to the warehouse. Opened Enrico's lockbox and tried burning what was inside. We were sitting ten feet away."
-        show winston at slot(0, total=1), bright zorder 10
+        show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
         w "You solved the murder by making the warehouse look unattended."
-        show ica happy at slot(0, total=1), bright zorder 10
+        show ica happy as day_seven_speaker at slot(0, total=1), bright zorder 10
         i "I solved the murder by being approachable."
-        show dhampir at slot(0, total=1), bright zorder 10
+        show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
         d "You were lying on the floor eating chips."
-        show ica sly at slot(0, total=1), bright zorder 10
+        show ica sly as day_seven_speaker at slot(0, total=1), bright zorder 10
         i "Approachably."
         "Nicky rises, checks the evidence seal, and takes formal custody of the bag."
-        show nicky at slot(0, total=1), bright zorder 10
+        show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "Nobody touches this again until it is logged. Dhampir and my patrol chased them down after they bolted out the fire exit, but Ica, you and the recruit are still giving me separate statements after this."
-        show ulysses at slot(0, total=1), bright zorder 10
+        show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
         u "And despite the answer being unusually determined to identify itself, we will complete the accusation properly."
         u "The evidence decides the name. The comedy surrounding its recovery does not alter the procedure."
     else:
         "Ulysses waits until the door shuts before touching the first file."
 
-        show ulysses at slot(0, total=1), bright zorder 10
+        show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
         u "The investigative period is over. We have six days of reports, nine badge profiles, and the DA waiting on a name."
-        show winston at slot(0, total=1), bright zorder 10
+        show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
         w "No pressure, recruit. Just make sure it isn't me. The paperwork would be a nightmare."
-        show nicky at slot(0, total=1), bright zorder 10
+        show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "Winston."
-        show winston at slot(0, total=1), bright zorder 10
+        show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
         w "Kidding. Mostly."
-        show dhampir at slot(0, total=1), bright zorder 10
+        show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
         d "We've all seen the files. The room's ready when you are."
 
         "Madeline pulls one surviving file toward her. Nicky stops it with two fingers before it crosses the center line."
-        show madeline at slot(0, total=1), bright zorder 10
+        show madeline as day_seven_speaker at slot(0, total=1), bright zorder 10
         m "Some of these physical markers are obviously more discriminating than others."
-        show nicky at slot(0, total=1), bright zorder 10
+        show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "More discriminating does not mean independently sufficient."
-        show madeline at slot(0, total=1), bright zorder 10
+        show madeline as day_seven_speaker at slot(0, total=1), bright zorder 10
         m "I know what sufficient means."
-        show nicky at slot(0, total=1), bright zorder 10
+        show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "Then you know why the file stays in the middle."
-        show dhampir at slot(0, total=1), bright zorder 10
+        show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
         d "They're agreeing, by the way."
-        show razzle at slot(0, total=1), bright zorder 10
+        show razzle as day_seven_speaker at slot(0, total=1), bright zorder 10
         r "Really doesn't sound like it."
 
     $ day_seven_distinct_routes = ulysses_distinct_routes()
     $ day_seven_focus_route = day_seven_favorite_investigator()
 
     if day_seven_focus_route == "razzle":
-        show razzle at slot(0, total=1), bright zorder 10
+        show razzle as day_seven_speaker at slot(0, total=1), bright zorder 10
         r "We got real witness testimony, but whoever it is was hiding something. Trust the physical details they gave us."
     elif day_seven_focus_route == "dhampir":
-        show dhampir at slot(0, total=1), bright zorder 10
+        show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
         d "The entry angle and the wound spacing don't lie. Trust what the floor told us."
     elif day_seven_focus_route == "madeline":
-        show madeline at slot(0, total=1), bright zorder 10
+        show madeline as day_seven_speaker at slot(0, total=1), bright zorder 10
         m "The residue and centrifuge controls eliminated the impossible. The rest is your interpretation."
     elif day_seven_focus_route == "nicky":
-        show nicky at slot(0, total=1), bright zorder 10
+        show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "The alibis and timelines hold up on paper. Compare the physical access against the logs."
     elif day_seven_focus_route == "winston":
-        show winston at slot(0, total=1), bright zorder 10
+        show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
         w "People scramble when they get caught. Think about how they sounded when we pressed them."
     elif day_seven_focus_route == "ica" and not daySevenIcaSpecial:
-        show ica at slot(0, total=1), bright zorder 10
+        show ica as day_seven_speaker at slot(0, total=1), bright zorder 10
         i "You survived a week with all of us. If you can do that, picking one name is light work."
 
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
     if ulysses_one_each_strategy():
         u "You sampled every investigative method once. None of those reports was deep alone, but their overlap was enough for us to formally remove every remaining contradiction."
         u "You chose breadth and then did the difficult work of synthesis. I'm impressed."
@@ -172,28 +173,28 @@ label DaySevenTeamBriefing:
         "Defend the evidence chain.":
             $ daySevenBriefingResponse = "defend"
             "You walk through the eliminations, then separate them from the quieter observations that distinguish the survivors."
-            show ulysses at slot(0, total=1), bright zorder 10
+            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "Good. You understand which claims are formal and which require your judgment."
-            show nicky content happy at slot(0, total=1), bright zorder 10
+            show nicky content happy as day_seven_speaker at slot(0, total=1), bright zorder 10
             n "And you didn't turn uncertainty into a confession. Keep doing that."
         "Admit that some of the final judgment is uncertain.":
             $ daySevenBriefingResponse = "uncertain"
             "You acknowledge where the reports end and your interpretation begins. The admission sits heavily in the room, but nobody treats it as weakness."
-            show ulysses at slot(0, total=1), bright zorder 10
+            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "Honest uncertainty is part of competent judgment. It does not excuse you from making the judgment."
-            show dhampir at slot(0, total=1), bright zorder 10
+            show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
             d "Means you're taking it seriously. Better than pretending."
         "Make a joke before committing to the answer.":
             $ daySevenBriefingResponse = "joke"
             "You suggest accusing whichever suspect has the most inconvenient name to spell."
-            show winston at slot(0, total=1), bright zorder 10
+            show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
             w "Finally, an investigative standard designed around paperwork."
             "Ulysses waits until the brief laugh ends."
-            show ulysses at slot(0, total=1), bright zorder 10
+            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "Now use the actual evidence."
 
     "Ulysses squares the surviving files with the edge of the table and steps away from them."
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "Review your notes. Compare the complete profiles. Take as long as the work requires."
     u "When you confirm a name, it becomes the accusation this team acts upon."
     return
@@ -205,51 +206,51 @@ label DaySevenAccusationReview:
     $ day_seven_actual_name = suspectNames[killer]
     $ day_seven_cause = DHAMPIR_MURDER_CAUSES[killer]
 
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "We will test the selection against the record, not defend it because it has already been made."
     "He places the profile beside the accumulated reports and begins at the first verified elimination. Each discarded name remains discarded for a reason independent of your final choice."
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "The scene establishes that Enrico died from [day_seven_cause]. Enrico gave thirty years to this city before retiring to manage warehouse supplies and look out for rookies. We will not dishonor that service with an unproven guess."
 
-    show razzle at slot(0, total=1), bright zorder 10
+    show razzle as day_seven_speaker at slot(0, total=1), bright zorder 10
     r "The witness details have to fit without changing what anybody said."
-    show dhampir at slot(0, total=1), bright zorder 10
+    show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
     d "The room has to fit before and after the killing."
-    show madeline at slot(0, total=1), bright zorder 10
+    show madeline as day_seven_speaker at slot(0, total=1), bright zorder 10
     m "The physical trace has to survive the controls."
-    show nicky at slot(0, total=1), bright zorder 10
+    show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
     n "The records have to corroborate it."
-    show winston at slot(0, total=1), bright zorder 10
+    show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
     w "And the person has to behave like the same person across all of it."
-    show ica at slot(0, total=1), bright zorder 10
+    show ica as day_seven_speaker at slot(0, total=1), bright zorder 10
     i "Plus, if they bring the dead guy's wallet to work, that feels relevant."
 
     if daySevenSelectedSuspect == killer:
         if daySevenIcaSpecial or ulyssesCrossReportCompleted:
             "Ulysses turns the final page and sets the other files aside."
-            show ulysses at slot(0, total=1), bright zorder 10
+            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "The evidence leaves [day_seven_actual_name]. Nicky, confirm custody."
         elif max(ulysses_visit_counts().values()) >= 6:
             "You explain which observations distinguish the selected file from the other survivors. Ulysses checks them against your reports."
-            show ulysses at slot(0, total=1), bright zorder 10
+            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "The formal result narrowed the list. Those observations support your choice. Nicky, proceed."
         else:
             "Ulysses leaves the other surviving files open beside your selection."
-            show ulysses at slot(0, total=1), bright zorder 10
+            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "Nothing here rules [day_seven_actual_name] out. It doesn't rule everyone else out either."
-            show nicky at slot(0, total=1), bright zorder 10
+            show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
             n "We'll follow up on your recommendation. This file still needs an answer before we call the case solved."
     else:
         $ day_seven_mismatch_info_value = day_seven_mismatch_info(daySevenSelectedSuspect)
         $ day_seven_mismatch = day_seven_mismatch_info_value["text"]
         if day_seven_mismatch_info_value["kind"] == "insufficient_evidence":
             "Ulysses lays the surviving files beside the new alibi."
-            show ulysses at slot(0, total=1), bright zorder 10
+            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "[day_seven_mismatch]"
             u "And now patrol has verified that they couldn't have been there."
         else:
             "Ulysses stops at the contradiction and rotates the relevant case pages toward you."
-            show ulysses at slot(0, total=1), bright zorder 10
+            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "[day_seven_mismatch]"
             u "We had this before patrol left. We should have caught it here."
     return
@@ -262,12 +263,12 @@ label DaySevenSuccess:
     if daySevenIcaSpecial:
         "Nicky steps out to confirm the transfer from the holding room. The waiting lasts only a few minutes, though nobody manages to make them feel short."
         "When she returns, two officers escort [day_seven_actual_name] into the briefing room. Their eyes fix on the bloodstained wallet before anyone says a word."
-        show nicky at slot(0, total=1), bright zorder 10
+        show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "Dhampir and my LAPD patrol tracked them across four rooftops overnight after they bolted out the fire exit. Picked them up two hours ago trying to slip onto an outbound freight train. They're in custody now, and they've decided to speak in front of the team."
     else:
         "Nicky leaves the room with the reviewed file. The waiting lasts only a few minutes, though nobody manages to make them feel short."
         "When she returns, two officers escort [day_seven_actual_name] into the briefing room. The surviving evidence has been laid out where they can see every piece."
-        show nicky at slot(0, total=1), bright zorder 10
+        show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "The arrest is complete. They have also decided to speak in front of the team."
     "[day_seven_actual_name]" "Fine. I killed Enrico."
     $ day_seven_confession_chunks = day_seven_confession_pages(killer)
@@ -277,28 +278,28 @@ label DaySevenSuccess:
         $ day_seven_confession_page += 1
     "The admission leaves nowhere else for the week to turn. No one cheers immediately. Closing the case does not make the reason for gathering here less grim."
 
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "The accusation is correct. Enrico Edge's killer is in custody, and the evidence supporting that arrest is sound."
     "Only then does the room release the breath it has been holding."
-    show razzle hoorah at slot(0, total=1), bright zorder 10
+    show razzle hoorah as day_seven_speaker at slot(0, total=1), bright zorder 10
     r "Holy shit, we actually got them!"
-    show madeline at slot(0, total=1), bright zorder 10
+    show madeline as day_seven_speaker at slot(0, total=1), bright zorder 10
     m "Yes. Because the evidence was correct. Try celebrating without knocking it onto the floor."
-    show dhampir at slot(0, total=1), bright zorder 10
+    show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
     d "Nice work, new blood."
     if daySevenIcaSpecial or ulyssesCrossReportCompleted or max(ulysses_visit_counts().values()) >= 6:
-        show nicky content happy at slot(0, total=1), bright zorder 10
+        show nicky content happy as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "You made the call and you supported it. That's the job."
     else:
-        show nicky at slot(0, total=1), bright zorder 10
+        show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "The admission checks out. You picked the right person, rookie. Next time, bring me a tighter case before we move."
-    show ica happy at slot(0, total=1), bright zorder 10
+    show ica happy as day_seven_speaker at slot(0, total=1), bright zorder 10
     i "Congrats on continued employment, freshie. My condolences."
-    show winston at slot(0, total=1), bright zorder 10
+    show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
     w "Permanent paperwork privileges! Dreams really do come true."
 
     "Ulysses comes around the table and offers his hand."
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "Your probationary appointment is complete. As of today, you are a permanent investigator with ATLAS."
     "You take his hand. His grip is formal; the quiet approval in his expression is not."
 
@@ -307,26 +308,26 @@ label DaySevenSuccess:
     else:
         $ day_seven_favorite = day_seven_favorite_investigator()
         if day_seven_favorite == "razzle":
-            show razzle hoorah at slot(0, total=1), bright zorder 10
+            show razzle hoorah as day_seven_speaker at slot(0, total=1), bright zorder 10
             r "Knew my partner had it!"
         elif day_seven_favorite == "dhampir":
-            show dhampir at slot(0, total=1), bright zorder 10
+            show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
             d "Stuck with the ugly parts until they made sense. Respect."
         elif day_seven_favorite == "madeline":
-            show madeline at slot(0, total=1), bright zorder 10
+            show madeline as day_seven_speaker at slot(0, total=1), bright zorder 10
             m "Your conclusion was competent. Don't make me repeat that in front of everybody."
         elif day_seven_favorite == "nicky":
-            show nicky content happy at slot(0, total=1), bright zorder 10
+            show nicky content happy as day_seven_speaker at slot(0, total=1), bright zorder 10
             n "Good work, rookie. Guess I need a new nickname."
         elif day_seven_favorite == "winston":
-            show winston at slot(0, total=1), bright zorder 10
+            show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
             w "Newbie status revoked. I'm still calling you that though."
         elif day_seven_favorite == "ica":
-            show ica happy at slot(0, total=1), bright zorder 10
+            show ica happy as day_seven_speaker at slot(0, total=1), bright zorder 10
             i "You worked just enough to keep the job. Beautiful."
 
     "Winston begins ordering enough pizza for the building before Ulysses has formally ended the meeting. This time, Ulysses allows it."
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "The case is closed. Take the evening."
     "Chairs scrape back, conversation returns, and the briefing room slowly becomes a celebration. Before the night ends, you have one personal decision left to make."
     return
@@ -338,31 +339,31 @@ label DaySevenFailure:
 
     "Nicky takes your recommendation to the waiting patrol officers. The team stays at the table while they go to [day_seven_selected_name]'s address."
     "The first call confirms the detention. The second brings Nicky back into the room, phone cord pulled taut behind her."
-    show nicky angry accusation at slot(0, total=1), bright zorder 10
+    show nicky angry accusation as day_seven_speaker at slot(0, total=1), bright zorder 10
     n "Stop. They've produced hospital records covering the murder. Patrol verified the times with the ward. We detained the wrong person."
     call DaySevenAccusationReview from _call_DaySevenFailureReview
     "Another message reaches Nicky before Ulysses can close the file. She reads it, then stands so quickly that her chair strikes the wall."
-    show nicky angry accusation at slot(0, total=1), bright zorder 10
+    show nicky angry accusation as day_seven_speaker at slot(0, total=1), bright zorder 10
     n "[day_seven_actual_name] ran when word of the arrest got out. Patrol reached their apartment after they'd cleared the block."
     "The actual profile replaces your selected file at the center of the table. Once the missed contradiction is corrected, the rest of the evidence aligns around [day_seven_actual_name]."
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "The killer is [day_seven_actual_name]. Acting on your unsupported accusation alerted them and gave them the time and warning necessary to escape immediate custody."
 
-    show razzle sad at slot(0, total=1), bright zorder 10
+    show razzle sad as day_seven_speaker at slot(0, total=1), bright zorder 10
     r "We'll find them. We know who we're looking for now."
-    show dhampir at slot(0, total=1), bright zorder 10
+    show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
     d "Yeah. We will."
-    show madeline distress at slot(0, total=1), bright zorder 10
+    show madeline distress as day_seven_speaker at slot(0, total=1), bright zorder 10
     m "After we waste time repairing a conclusion that should not have broken."
-    show nicky at slot(0, total=1), bright zorder 10
+    show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
     n "[day_seven_selected_name] was wrongfully detained and is being released with our apologies. Nobody repeats that accusation outside this room without the correction attached."
-    show winston at slot(0, total=1), bright zorder 10
+    show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
     w "Team splits into pursuit and damage control. Same as always, only worse."
-    show ica sad at slot(0, total=1), bright zorder 10
+    show ica sad as day_seven_speaker at slot(0, total=1), bright zorder 10
     i "This is why I don't volunteer for decisions."
 
     "Ulysses remains standing at the head of the table. His anger is quiet enough that no one can mistake it for loss of control."
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "You were given evidence, time, and six people's expertise. You still selected a conclusion the record could not support."
     u "ATLAS cannot place that judgment behind an accusation carrying our authority. Your employment ends immediately."
 
@@ -370,26 +371,26 @@ label DaySevenFailure:
         "Accept responsibility.":
             $ daySevenFailureResponse = "accept"
             "You say the accusation was yours and the consequence belongs to you."
-            show ulysses at slot(0, total=1), bright zorder 10
+            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "Correct. Accountability does not repair the error, but refusing it would make the error impossible to learn from."
         "Argue that the final clues were too uncertain.":
             $ daySevenFailureResponse = "defend"
             "You point to the gaps, the conflicting impressions, and the pressure of making one final choice."
-            show ulysses at slot(0, total=1), bright zorder 10
+            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "Uncertainty was a reason to review your conclusion. You used it as permission to excuse one."
         "Make one last joke.":
             $ daySevenFailureResponse = "joke"
             "You ask whether being fired at least exempts you from the exit paperwork."
-            show winston at slot(0, total=1), bright zorder 10
+            show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
             w "It should. It absolutely will not."
-            show ulysses at slot(0, total=1), bright zorder 10
+            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "No."
 
     "The meeting breaks apart around the response. Nicky organizes the pursuit. Dhampir follows without needing instructions. Madeline takes the corrected profile, Razzle grabs the contact list, and Winston pauses beside you before duty pulls him toward the door."
-    show winston at slot(0, total=1), bright zorder 10
+    show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
     w "One bad call doesn't make you worthless. It does mean you have to live honestly with the call."
     "Ica gives you a small, crooked salute. Ulysses waits until the others have gone."
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "Collect your belongings. Someone will escort you through the secure exit when the immediate response is underway."
     "Later that evening, while ATLAS searches for [day_seven_actual_name], you return to the mostly empty office for the last of your things. There is still time for one final private conversation."
     return
