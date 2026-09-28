@@ -178,14 +178,14 @@ label start:
     show madeline at slot(2, total=8), dim zorder 0
 
     # Winston
-    show winston at slot(3, total=8), bright zorder 10
+    show winston happy at slot(3, total=8), bright zorder 10
     f "Winston Navarro. The other Co-leader of ATLAS. He's an idiot."
     f "Most of the time he's slacking off or ordering pizza for the team, but he's smarter than he lets on."
     f "His power is power negation, meaning he can cancel your power out and turn a fight into a straight up brawl!"
     show winston at slot(3, total=8), dim zorder 0
 
     # Dhampir
-    show dhampir at slot(4, total=8), bright zorder 10
+    show dhampir happy at slot(4, total=8), bright zorder 10
     f "Dhampir, longtime hero, but only a recent addition to the team."
     f "Dhampir has had... questionable methods to his heroism, but he truly does mean well."
     f "He's a super chill, laid-back dude, but when on the job, he has a 100 percent mortality rate."
@@ -315,7 +315,7 @@ label dayOneBrief:
     show nicky question at slot(2, total=3), bright zorder 10
     n "Oh! Are we the only ones here so far?"
 
-    show ulysses at slot(0, total=3), bright zorder 10
+    show ulysses disgruntled at slot(0, total=3), bright zorder 10
     show nicky at slot(2, total=3), dim zorder 0
     u "It would appear so. Nicky, this is the new recruit."
 
@@ -349,7 +349,7 @@ label dayOneBrief:
     hide madeline
 
     show ulysses at slot(0, total=3), dim zorder 0
-    show dhampir at slot(1, total=3), bright zorder 10
+    show dhampir happy at slot(1, total=3), bright zorder 10
     show winston at slot(2, total=3), dim zorder 0
 
     d "Sup."
@@ -359,21 +359,21 @@ label dayOneBrief:
     w "We on time for the meeting?"
 
     show winston at slot(2, total=3), dim zorder 0
-    show ulysses at slot(0, total=3), bright zorder 10
+    show ulysses disgruntled at slot(0, total=3), bright zorder 10
     u "Not at all. Where were you two??"
 
     show ulysses at slot(0, total=3), dim zorder 0
-    show dhampir at slot(1, total=3), bright zorder 10
+    show dhampir side eye at slot(1, total=3), bright zorder 10
     d "Ulysses, relaaaaax man. We were just playing some darts in Winston's office."
     d "Besides, seems like we're still missing some people anyway."
 
     show dhampir at slot(1, total=3), dim zorder 0
-    show winston at slot(2, total=3), bright zorder 10
+    show winston happy at slot(2, total=3), bright zorder 10
     w "Yeah, Ulysses! We're not the last people here, so TECHNICALLY we're not even late at all!"
     w "And it was a tough game of darts! Still annoyed about those triple 20s you were throwing, though, Dhampir!"
 
     show winston at slot(2, total=3), dim zorder 0
-    show dhampir at slot(1, total=3), bright zorder 10
+    show dhampir smug at slot(1, total=3), bright zorder 10
     d "Look man, practice makes perfect."
     d "You just gotta keep throwing darts and maybe one day you'll be on my level."
 
@@ -384,19 +384,19 @@ label dayOneBrief:
     d "If you're anything like Ulysses, this may be a rough job, but if you're like me and Winnie, you'll love it here."
 
     show dhampir at slot(1, total=3), dim zorder 0
-    show ulysses at slot(0, total=3), bright zorder 10
+    show ulysses disgruntled at slot(0, total=3), bright zorder 10
     u "For the love of God, PLEASE don't be like them."
 
     show ulysses at slot(0, total=3), dim zorder 0
-    show winston at slot(2, total=3), bright zorder 10
+    show winston meow at slot(2, total=3), bright zorder 10
     w "What's wrong with us?? We just know how to have fun, unlike you, Mr. Wet Blanket."
 
     show winston at slot(2, total=3), dim zorder 0
-    show ulysses at slot(0, total=3), bright zorder 10
+    show ulysses upset talking at slot(0, total=3), bright zorder 10
     u "Oh I'll show you wet blanket-"
 
     show ulysses at slot(0, total=3), dim zorder 0
-    show winston at slot(2, total=3), bright zorder 10
+    show winston shocked at slot(2, total=3), bright zorder 10
     w "ULY WAIT-"
 
     scene black with fade
@@ -406,13 +406,13 @@ label dayOneBrief:
     "A sign of weakness. Ulysses springs over the table and begins to throttle Winston."
 
     scene debriefRoomOutlineInverted
-    show ulysses at slot(0, total=3), bright zorder 10
-    show winston at slot(2, total=3), dim zorder 0
+    show ulysses upset talking at slot(0, total=3), bright zorder 10
+    show winston worried at slot(2, total=3), dim zorder 0
     u "WHO'S THE WET BLANKET NOW WINSTON?? WE'RE HAVING FUN, RIGHT WINSTON??"
 
     show ulysses at slot(0, total=3), dim zorder 0
     show winston at slot(2, total=3), dim zorder 0
-    show dhampir at slot(1, total=3), bright zorder 10
+    show dhampir shocked at slot(1, total=3), bright zorder 10
     d "Whoaaaaa man. You seem a bit angry right now, we should all chill out."
     hide dhampir
     hide winston
@@ -427,7 +427,7 @@ label dayOneBrief:
 
     "Razzle Dazzle runs into the room and jumps into the fray right as Ulysses and Winston quickly separate so as not to be burned."
     show razzle at slot(1, total=2), dim zorder 0
-    show ulysses at slot(0, total=2), bright zorder 10
+    show ulysses disgruntled at slot(0, total=2), bright zorder 10
     u "No, Razzle, sorry. Winston and I just had a disagreement."
 
     show ulysses at slot(0, total=2), dim zorder 0
@@ -454,7 +454,7 @@ label dayOneBrief:
             r "Oh? I hope you can handle some heat then..."
 
     show razzle at slot(0, total=1), dim zorder 0
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses disgruntled at slot(0, total=1), bright zorder 10
     u "Alright you two, that's enough of that. Looks like we're only missing one more now. Where is she?"
     hide razzle
 
@@ -464,7 +464,7 @@ label dayOneBrief:
     i "Oh, hey guys. We doing something in here?"
 
     show ica at slot(1, total=2), dim zorder 0
-    show ulysses at slot(0, total=2), bright zorder 10
+    show ulysses upset talking at slot(0, total=2), bright zorder 10
     u "Yes, we are. We're having a meeting that you're LATE to by over thirty minutes!"
 
     "Ica shrugs."
@@ -492,7 +492,7 @@ label dayOneBrief:
             i "Oh fun, another one of these nerds. Never mind then."
 
     hide ica
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses disgruntled at slot(0, total=1), bright zorder 10
     u "Okay, great, now that everyone's here can we please begin?"
 
     "The team nods their heads and begins to take seats around the table while Ulysses sets up a projection."
@@ -2221,6 +2221,7 @@ label DhampirDayOne:
     "Beyond the outfit, Dhampir seems different in every way."
     "Even his posture has changed. His shoulders square, his expression empties, and when he speaks again, the lazy drawl is gone, replaced by a gravelly voice."
 
+    show dhampir hero form at slot(0, total=1), bright zorder 10
     d "Stay close. Touch nothing unless I tell you to, new blood."
 
     menu:
@@ -2250,7 +2251,7 @@ label DhampirDayOne:
             d "Yeah. That's why at least one of 'em is stress-eating in the driveway right now."
 
     scene black with fade
-    show dhampir at slot(0, total=1), bright zorder 10
+    show dhampir hero form at slot(0, total=1), bright zorder 10
     "Outside, Dhampir chooses to walk instead of fly. The case file stays tucked under one arm while he points out a bakery he likes, a pawn shop he distrusts, and an alley where he once chased a man through three walls."
     "By the time Enrico's street comes into view, the casual commentary is gone. His shoulders square again before either of you reaches the police tape."
     "The two of you arrive at the crime scene."
@@ -2344,7 +2345,7 @@ label DhampirDayOne:
     d "Okay. Now pizza. Dramatic accusations can wait."
 
     scene black with fade
-    show dhampir at slot(0, total=1), bright zorder 10
+    show dhampir hero form at slot(0, total=1), bright zorder 10
     "The nearest pizza counter has metal stools and a cashier who does not react to Dhampir's Victorian murder suit. He orders two slices and produces a sealed blood packet for his own."
 
     menu:
@@ -2369,7 +2370,7 @@ label DhampirDayTwo:
     scene cubicleOutline
     "Dhampir is waiting at his desk with the entertainment section of the newspaper folded into a sharp little square."
 
-    show dhampir at slot(0, total=1), bright zorder 10
+    show dhampir happy at slot(0, total=1), bright zorder 10
 
     d "Cancel your plans. Cancel everything you can think of."
 
@@ -2416,7 +2417,7 @@ label DhampirDayTwo:
     "The recap expands through lunch. Dhampir happily answers every question, performs several lines in the wrong accents, and pauses twice to correct his own diagram when he remembers an additional secret twin."
 
     scene black with fade
-    show dhampir at slot(0, total=1), bright zorder 10
+    show dhampir happy at slot(0, total=1), bright zorder 10
     "By the time the day is coming to an end, you understand enough of the series to recognize at least four kinds of continuity error."
     "The two of you stop at a convenience store as the sun begins to set. Dhampir buys popcorn, some candy, and a small plastic cup with a lid."
 
@@ -2671,21 +2672,21 @@ label DhampirDayThree:
             show madeline at slot(1, total=2), bright zorder 10
             m "All three discrepancies. No false positives and no calibration assistance."
             show madeline at slot(1, total=2), dim zorder 0
-            show dhampir at slot(0, total=2), bright zorder 10
+            show dhampir happy at slot(0, total=2), bright zorder 10
             d "That's what we needed, new blood. Good job."
         elif dhampir_ispy_result["quality"] == "careful":
             show dhampir at slot(0, total=2), dim zorder 0
             show madeline at slot(1, total=2), bright zorder 10
             m "A few false positives, but you isolated all three useful discrepancies."
             show madeline at slot(1, total=2), dim zorder 0
-            show dhampir at slot(0, total=2), bright zorder 10
+            show dhampir happy at slot(0, total=2), bright zorder 10
             d "Found what mattered. Good shit dude."
         else:
             show dhampir at slot(0, total=2), dim zorder 0
             show madeline at slot(1, total=2), bright zorder 10
             m "Your search pattern was chaotic, but technically successful."
             show madeline at slot(1, total=2), dim zorder 0
-            show dhampir at slot(0, total=2), bright zorder 10
+            show dhampir side eye at slot(0, total=2), bright zorder 10
             d "Got there eventually and that's what matters right?"
     else:
         "Madeline takes over the scanner and methodically checks the remaining contact points."
@@ -2723,13 +2724,13 @@ label DhampirDayThree:
         "Nice work, both of you.":
             $ dhamp += 1
             show madeline at slot(1, total=2), dim zorder 0
-            show dhampir at slot(0, total=2), bright zorder 10
+            show dhampir happy at slot(0, total=2), bright zorder 10
             d "Team effort. Madeline brought the expensive flashlight."
             show dhampir at slot(0, total=2), dim zorder 0
             show madeline at slot(1, total=2), bright zorder 10
             m "It is a multiarrayed overlaying forensic scanner."
             show madeline at slot(1, total=2), dim zorder 0
-            show dhampir at slot(0, total=2), bright zorder 10
+            show dhampir smug at slot(0, total=2), bright zorder 10
             d "Very expensive flashlight."
         "Dhampir makes reconstruction look good.":
             $ dhamp += 2
@@ -2738,7 +2739,7 @@ label DhampirDayThree:
             show madeline at slot(1, total=2), bright zorder 10
             m "Flirting already? God, this makes you look desperate."
             show madeline at slot(1, total=2), dim zorder 0
-            show dhampir at slot(0, total=2), bright zorder 10
+            show dhampir side eye at slot(0, total=2), bright zorder 10
             d "They're just being friendly, Madeline. No need to bully them for it."
         "That took longer than it should have.":
             $ dhamp -= 1
@@ -2746,7 +2747,7 @@ label DhampirDayThree:
             show madeline at slot(1, total=2), bright zorder 10
             m "You are welcome to process several hundred spatial measurements manually next time."
             show madeline at slot(1, total=2), dim zorder 0
-            show dhampir at slot(0, total=2), bright zorder 10
+            show dhampir smug at slot(0, total=2), bright zorder 10
             d "She's rocking with us, new blood. Don't ruin it."
 
     "Madeline begins packing the scanner with the precision of someone who knows exactly where every cable belongs."
@@ -2764,13 +2765,13 @@ label DhampirDayThree:
         show madeline at slot(1, total=2), bright zorder 10
         m "Your heart rate increased during precisely that reconstruction."
         show madeline at slot(1, total=2), dim zorder 0
-        show dhampir at slot(0, total=2), bright zorder 10
+        show dhampir smug at slot(0, total=2), bright zorder 10
         d "Science says I'm hot."
         show dhampir at slot(0, total=2), dim zorder 0
         show madeline at slot(1, total=2), bright zorder 10
         m "Science said no such thing."
         show madeline at slot(1, total=2), dim zorder 0
-        show dhampir at slot(0, total=2), bright zorder 10
+        show dhampir side eye at slot(0, total=2), bright zorder 10
         d "Agree to disagree."
     else:
         "Madeline checks the final coordinates against her monitor."
@@ -2778,7 +2779,7 @@ label DhampirDayThree:
         show madeline at slot(1, total=2), bright zorder 10
         m "Trajectory analysis complete. The reconstruction geometry is internally consistent."
         show madeline at slot(1, total=2), dim zorder 0
-        show dhampir at slot(0, total=2), bright zorder 10
+        show dhampir happy at slot(0, total=2), bright zorder 10
         d "Told you. Clean work, new blood."
 
     "Madeline makes both of you help coil cables before she permits anyone to leave. Dhampir holds one end of each cord perfectly still and continues claiming the scanner is an expensive flashlight until she threatens to demonstrate its weight against his skull."
@@ -2830,8 +2831,10 @@ label DhampirDayFour:
             d "Not if they needed killing. Enrico didn't."
         "You could show the victim a little respect.":
             $ dhamp -= 2
+            show dhampir upset at slot(0, total=1), bright zorder 10
             d "I am. I'm doing the work right and I'm not turning his death into a performance."
 
+    show dhampir at slot(0, total=1), bright zorder 10
     "Dhampir sorts the forensic reconstruction photographs into three stacks: the initial staging, the mapped struggle trajectory, and the aftermath. He taps the last stack."
     d "We only need these today. Less noise."
 
@@ -2874,8 +2877,10 @@ label DhampirDayFour:
             d "That's all I ask."
         "So Enrico is just another body to you?":
             $ dhamp -= 2
+            show dhampir upset at slot(0, total=1), bright zorder 10
             d "No. Doing serious work is how I respect him. Making a show of being upset wouldn't help anybody."
 
+    show dhampir at slot(0, total=1), bright zorder 10
     "Dhampir returns to the photographs. Every pause lands at an exact mark, each step steering carefully clear of the space where Enrico fell."
     "You ask who taught him to work a death scene with that much control. His fingers move to the scarlet trinkets at his neck before he answers."
 
@@ -2884,6 +2889,7 @@ label DhampirDayFour:
 
     "His tone stays casual, but one hand briefly touches the scarlet trinkets at his neck again."
 
+    show dhampir sad at slot(0, total=1), bright zorder 10
     d "Most of them died. I killed the people responsible. Efficiently."
 
     "Dhampir lets the trinkets fall back against his shirt before looking at you."
@@ -2905,6 +2911,7 @@ label DhampirDayFour:
         d "Then they got me. Fangs, gun, bad attitude. Took underground shows and the Hunters before I found rooms where nobody looked disappointed."
         "He says it without asking for sympathy. The fact that he says it at all feels deliberate."
 
+    show dhampir at slot(0, total=1), bright zorder 10
     "Dhampir lifts the original evidence inventory and compares it to the room one last time."
 
     d "Huh."
@@ -2926,7 +2933,7 @@ label DhampirDayFive:
     "The sound of something heavy striking padding guides you down the hall. When you arrive, Dhampir is resetting a practice dummy that has folded nearly in half."
     "Dhampir has cleared a section of the ATLAS training area and dragged in a padded practice dummy, three replica weapons, and a stack of crime-scene photographs."
 
-    show dhampir at slot(0, total=1), bright zorder 10
+    show dhampir smug at slot(0, total=1), bright zorder 10
 
     d "We're testing force, angle, and reach."
     d "You get to hit me. Educationally of course."
@@ -3088,7 +3095,7 @@ label DhampirDaySix:
     d "Got it."
 
     "Dhampir becomes fully solid before extending his gloved hand over the clean tray."
-    show dhampir at slot(0, total=1), bright zorder 10
+    show dhampir shocked at slot(0, total=1), bright zorder 10
 
     "He opens his fingers. Resting against his palm is [dhampir_day_six_evidence]."
 
@@ -4893,7 +4900,7 @@ label WinstonDayOne:
     "Winston's office door is open. Three folders have been stacked into a ramp from his desk to the wastebasket, and Winston is attempting to roll a pencil down it without touching either side."
     "The pencil reaches the final folder, veers left, and lands beneath the couch."
 
-    show winston at slot(0, total=1), bright zorder 10
+    show winston happy at slot(0, total=1), bright zorder 10
 
     w "That was the control run."
     w "Hey, newbie. You here to work, or do you have the good sense to lie?"
@@ -4991,7 +4998,7 @@ label WinstonDayOne:
         "winston", 1, clue_text=winston_day_one_clue, expected_count=1)
 
     scene winstonOfficeOutline with fade
-    show winston at slot(0, total=1), bright zorder 10
+    show winston happy at slot(0, total=1), bright zorder 10
     "Back upstairs, Winston throws the cleared file onto the correct pile without looking. It lands squarely between two folders and stops."
     w "Lunch before paperwork. If we reverse that order, civilization as we know it ends."
     w "I'm ordering takeout, what do you want?"
@@ -5029,7 +5036,7 @@ label WinstonDayOne:
 
 label WinstonDayTwo:
     scene winstonOfficeOutline
-    show winston at slot(0, total=1), bright zorder 10
+    show winston meow at slot(0, total=1), bright zorder 10
     "Winston is asleep on the couch with one boot on the armrest and the other planted on a stack of unsigned supply requests. Mariah Carey plays quietly from a radio beside his desk."
     "The investigation folder is closed. A handwritten sign on top reads DAY OFF. THIS MEANS ME."
 
@@ -5047,7 +5054,7 @@ label WinstonDayTwo:
             w "That one's filed. Don't let Ulysses tell you otherwise."
 
     "Winston sits up, rubs both hands over his face, and checks the clock. He shows no alarm at the time."
-    show winston at slot(0, total=1), bright zorder 10
+    show winston meow at slot(0, total=1), bright zorder 10
     w "I have made an executive decision. I'm doing absolutely fucking nothing today."
     if dayWin >= 6:
         w "Final meeting's breathing down our necks. Which means if I don't take one afternoon now, Ulysses will find me fused to this couch tomorrow."
@@ -5073,7 +5080,7 @@ label WinstonDayTwo:
     "When you ask why the cofounder of ATLAS does not drive,"
     "he lists three crashes, a flooded loading dock,"
     "and an incident involving a statue that the city still blames on him."
-    show winston at slot(0, total=1), bright zorder 10
+    show winston worried at slot(0, total=1), bright zorder 10
     w "Bad luck. Every single time."
     "The taxi driver looks at him in the mirror and silently locks the window controls."
 
@@ -5141,7 +5148,7 @@ label WinstonDayTwo:
     w "C'mon, I have an idea to burn some more time."
 
     scene black with fade
-    show winston at slot(0, total=1), bright zorder 10
+    show winston happy at slot(0, total=1), bright zorder 10
     "The pool hall is dim, loud, and committed to pretending daylight does not exist."
     "Winston feeds coins into the table, selects a cue,"
     "and claims he is not competitive before the balls have finished rolling into place."
@@ -5196,7 +5203,7 @@ label WinstonDayTwo:
     "Winston gives the silence several seconds, visibly loses patience with it, and challenges you to one last shot before leaving."
 
     scene winstonOfficeOutline with fade
-    show winston at slot(0, total=1), bright zorder 10
+    show winston worried at slot(0, total=1), bright zorder 10
     "Back at ATLAS, a handwritten list waits on Winston's desk. Ulysses has organized the day's disasters by urgency, responsible party, and estimated repair cost."
     "Somebody screams from deeper in the building. Winston looks at the list, then at you."
     w "Still off the clock."
@@ -5231,7 +5238,7 @@ label WinstonDayThree:
     "Suspect folders form a crooked row across Winston's desk. Beside them sits a deck of cards labeled ATLAS CONTROLLED PRESSURE SYSTEM in marker."
     "Dhampir stands near the door in his hero suit, arms folded, expression severe enough to make the office feel several degrees colder."
 
-    show winston at slot(0, total=2), bright zorder 10
+    show winston happy at slot(0, total=2), bright zorder 10
     show dhampir at slot(1, total=2), dim zorder 0
 
     w "Newbie, welcome to behavioral science! Or interrogation 101 if you want to call it that."
@@ -5241,7 +5248,7 @@ label WinstonDayThree:
     d "I'm bad cop."
 
     show dhampir at slot(1, total=2), dim zorder 0
-    show winston at slot(0, total=2), bright zorder 10
+    show winston meow at slot(0, total=2), bright zorder 10
     w "He practiced that in the hall by the way."
 
     show winston at slot(0, total=2), dim zorder 0
@@ -5249,7 +5256,7 @@ label WinstonDayThree:
     d "No, I didn't."
 
     show dhampir at slot(1, total=2), dim zorder 0
-    show winston at slot(0, total=2), bright zorder 10
+    show winston happy at slot(0, total=2), bright zorder 10
     w "Yes he did."
 
     menu:
@@ -5286,7 +5293,7 @@ label WinstonDayThree:
         "Dhampir turns back toward the observation window. His posture loosens."
         d "Did I do it right?"
         show dhampir at slot(1, total=2), dim zorder 0
-        show winston at slot(0, total=2), bright zorder 10
+        show winston shocked at slot(0, total=2), bright zorder 10
         w "You were supposed to apply pressure, not make them see God."
         show winston at slot(0, total=2), dim zorder 0
         show dhampir at slot(1, total=2), bright zorder 10
@@ -5294,7 +5301,7 @@ label WinstonDayThree:
         "Dhampir turns to the suspect"
         d "Remember that."
         show dhampir at slot(1, total=2), dim zorder 0
-        show winston at slot(0, total=2), bright zorder 10
+        show winston pissed at slot(0, total=2), bright zorder 10
         w "Go play darts in my office before you scare the rest shitless."
         show winston at slot(0, total=2), dim zorder 0
         show dhampir at slot(1, total=2), bright zorder 10
@@ -5912,13 +5919,13 @@ label IcaDayThree:
 
     i "Yo, freshie. Perfect timing. We need a third."
     show ica at slot(0, total=2), dim zorder 0
-    show winston at slot(1, total=2), bright zorder 10
+    show winston happy at slot(1, total=2), bright zorder 10
     w "YES! Thank god, a third player! Take a seat, recruit."
     show winston at slot(1, total=2), dim zorder 0
     show ica at slot(0, total=2), bright zorder 10
     i "Told you they'd be into it."
     show ica at slot(0, total=2), dim zorder 0
-    show winston at slot(1, total=2), bright zorder 10
+    show winston happy at slot(1, total=2), bright zorder 10
     w "Ulysses had me doing paperwork all morning. You two just saved my life."
 
     menu:
@@ -5926,7 +5933,7 @@ label IcaDayThree:
             $ ica_board_selected_approach = "play_fair"
             $ ica += 2
             show ica happy at slot(0, total=2), dim zorder 0
-            show winston at slot(1, total=2), bright zorder 10
+            show winston happy at slot(1, total=2), bright zorder 10
             w "Red pawn claimed! I'm green, Ica's blue. Let's roll."
         "Sit beside Ica. \"Try not to get distracted.\"":
             $ ica_board_selected_approach = "flirt"
@@ -5950,13 +5957,13 @@ label IcaDayThree:
 
     "Winston clears a space for you and slides the red pawn across the cardboard."
     show ica at slot(0, total=2), dim zorder 0
-    show winston at slot(1, total=2), bright zorder 10
+    show winston happy at slot(1, total=2), bright zorder 10
     w "Okay! Short race. Pick one of two movement cards on your turn."
     show winston at slot(1, total=2), dim zorder 0
     show ica at slot(0, total=2), bright zorder 10
     i "Land on one of the other pawns and it goes back to start. Simple."
     show ica at slot(0, total=2), dim zorder 0
-    show winston at slot(1, total=2), bright zorder 10
+    show winston happy at slot(1, total=2), bright zorder 10
     w "Reach or pass the finish to win! If you overshoot, you stop at the finish."
     show winston at slot(1, total=2), dim zorder 0
     show ica at slot(0, total=2), bright zorder 10
@@ -5968,7 +5975,7 @@ label IcaDayThree:
     show ica at slot(0, total=2), bright zorder 10
     i "Wait, did you dig out Orbit & Evict again?"
     show ica at slot(0, total=2), dim zorder 0
-    show winston at slot(1, total=2), bright zorder 10
+    show winston meow at slot(1, total=2), bright zorder 10
     w "Official off-brand edition. Ours has plastic spacers instead of metal tokens, which makes it an executive upgrade."
     show winston at slot(1, total=2), dim zorder 0
     show ica at slot(0, total=2), bright zorder 10
@@ -5977,7 +5984,7 @@ label IcaDayThree:
     "Winston produces three drinks and an open bag of chips from behind his desk like he prepared for this exact emergency."
 
     show ica at slot(0, total=2), dim zorder 0
-    show winston at slot(1, total=2), bright zorder 10
+    show winston happy at slot(1, total=2), bright zorder 10
     w "Refreshments! Pick now. Ica keeps stealing the coldest one without touching it."
 
     menu:
@@ -5988,7 +5995,7 @@ label IcaDayThree:
             show ica at slot(0, total=2), bright zorder 10
             i "All that effort for a soda. Couldn't be me."
             show ica at slot(0, total=2), dim zorder 0
-            show winston at slot(1, total=2), bright zorder 10
+            show winston happy at slot(1, total=2), bright zorder 10
             w "First victory of the day! Count it!"
         "Take the warm drink nobody wants.":
             $ ica += 1
@@ -5996,11 +6003,11 @@ label IcaDayThree:
             show ica at slot(0, total=2), bright zorder 10
             i "Damn. Completely immune to stakes."
             show ica at slot(0, total=2), dim zorder 0
-            show winston at slot(1, total=2), bright zorder 10
+            show winston worried at slot(1, total=2), bright zorder 10
             w "No, no, we can get you ice! We have standards in this office!"
         "Let Winston choose.":
             show ica at slot(0, total=2), dim zorder 0
-            show winston at slot(1, total=2), bright zorder 10
+            show winston meow at slot(1, total=2), bright zorder 10
             w "Dealer's choice! You get the mystery flavor!"
             show winston at slot(1, total=2), dim zorder 0
             show ica at slot(0, total=2), bright zorder 10
@@ -6020,28 +6027,28 @@ label IcaDayThree:
             show ica happy at slot(0, total=2), bright zorder 10
             i "You got there first. Don't get smug about it, freshie."
             show ica happy at slot(0, total=2), dim zorder 0
-            show winston at slot(1, total=2), bright zorder 10
+            show winston pissed at slot(1, total=2), bright zorder 10
             w "REMATCH! I'm not ending the workday on a loss!"
         elif ica_board_winner == "ica":
             show winston at slot(1, total=2), dim zorder 0
             show ica happy at slot(0, total=2), bright zorder 10
             i "Race is over. I win. Try to keep up next time."
             show ica happy at slot(0, total=2), dim zorder 0
-            show winston at slot(1, total=2), bright zorder 10
+            show winston worried at slot(1, total=2), bright zorder 10
             w "No! I was one turn away!"
         elif ica_board_winner == "winston":
             show ica at slot(0, total=2), dim zorder 0
-            show winston at slot(1, total=2), bright zorder 10
+            show winston happy at slot(1, total=2), bright zorder 10
             w "YES! THAT'S HOW IT'S DONE!"
             show winston at slot(1, total=2), dim zorder 0
             show ica at slot(0, total=2), bright zorder 10
             i "Congrats, Winnie. You won the game in your own office. Huge day for you."
             show ica at slot(0, total=2), dim zorder 0
-            show winston at slot(1, total=2), bright zorder 10
+            show winston happy at slot(1, total=2), bright zorder 10
             w "Thank you! Finally, some respect!!"
         else:
             show ica at slot(0, total=2), dim zorder 0
-            show winston at slot(1, total=2), bright zorder 10
+            show winston pissed at slot(1, total=2), bright zorder 10
             w "Hey, you can't just step back when the board gets interesting!"
             show winston at slot(1, total=2), dim zorder 0
             show ica happy at slot(0, total=2), bright zorder 10
@@ -6049,7 +6056,7 @@ label IcaDayThree:
     else:
         "The race ends before anybody can call a winner. Winston immediately starts resetting the pieces."
         show ica at slot(0, total=2), dim zorder 0
-        show winston at slot(1, total=2), bright zorder 10
+        show winston pissed at slot(1, total=2), bright zorder 10
         w "That one didn't count. Again."
 
     if board_result.get("completed", False) and ica_board_winner != "withdrawn":
@@ -6057,7 +6064,7 @@ label IcaDayThree:
         "Ica could retrieve it with a thought. She waits until Winston is fully under the desk before doing so."
 
         show ica at slot(0, total=2), dim zorder 0
-        show winston at slot(1, total=2), bright zorder 10
+        show winston shocked at slot(1, total=2), bright zorder 10
         w "IT WAS IN MY HAND!"
         show winston at slot(1, total=2), dim zorder 0
         show ica at slot(0, total=2), bright zorder 10
@@ -6071,13 +6078,13 @@ label IcaDayThree:
         show ica flirty at slot(0, total=2), bright zorder 10
         i "Freshie's the only one making this interesting anyway."
         show ica flirty at slot(0, total=2), dim zorder 0
-        show winston at slot(1, total=2), bright zorder 10
+        show winston sly blush raised at slot(1, total=2), bright zorder 10
         w "Ooooooh."
         show winston at slot(1, total=2), dim zorder 0
         show ica at slot(0, total=2), bright zorder 10
         i "We're not flirting."
         show ica at slot(0, total=2), dim zorder 0
-        show winston at slot(1, total=2), bright zorder 10
+        show winston sly blush raised at slot(1, total=2), bright zorder 10
         w "I didn't say which one of you was flirting."
         show winston at slot(1, total=2), dim zorder 0
         show ica at slot(0, total=2), bright zorder 10
@@ -6091,7 +6098,7 @@ label IcaDayThree:
     "The final game ends only because the automatic lights dim around you. By the time the three of you finally look up, the entire workday is gone."
 
     show ica at slot(0, total=2), dim zorder 0
-    show winston at slot(1, total=2), bright zorder 10
+    show winston happy at slot(1, total=2), bright zorder 10
     w "Same time next round? I have darts too."
     show winston at slot(1, total=2), dim zorder 0
     show ica at slot(0, total=2), bright zorder 10
@@ -6380,21 +6387,21 @@ label IcaDayFive:
     "The door opens behind you."
 
     show ica at slot(0, total=2), dim zorder 0
-    show ulysses at slot(1, total=2), bright zorder 10
+    show ulysses upset talking at slot(1, total=2), bright zorder 10
 
     u "Why is my office pink??"
     show ulysses at slot(1, total=2), dim zorder 0
     show ica at slot(0, total=2), bright zorder 10
     i "Team building."
     show ica at slot(0, total=2), dim zorder 0
-    show ulysses at slot(1, total=2), bright zorder 10
+    show ulysses upset at slot(1, total=2), bright zorder 10
     u "Whose team??"
     show ulysses at slot(1, total=2), dim zorder 0
     show ica at slot(0, total=2), bright zorder 10
     i "Ours. You weren't invited."
 
     show ica at slot(0, total=2), dim zorder 0
-    show ulysses at slot(1, total=2), bright zorder 10
+    show ulysses disgruntled at slot(1, total=2), bright zorder 10
     "Ulysses closes his eyes and pinches the bridge of his nose."
 
     u "I knew this was going to happen, and it still hurts."
@@ -6404,7 +6411,7 @@ label IcaDayFive:
     show ica at slot(0, total=2), bright zorder 10
     i "Nah. Opening the cabinets would've been extra work."
     show ica at slot(0, total=2), dim zorder 0
-    show ulysses at slot(1, total=2), bright zorder 10
+    show ulysses disgruntled at slot(1, total=2), bright zorder 10
     u "Of course."
     u "Keep the windows open until the paint dries. I have a murder to solve."
 

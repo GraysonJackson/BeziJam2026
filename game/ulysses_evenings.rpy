@@ -302,6 +302,7 @@ label UlyssesEveningTwo:
             $ uly += 2
             $ ulyssesRomanceInterest += 2
             "Ulysses looks from the photograph to you, caught off-guard. A faint warmth reaches his face before he can look back down at the desk."
+            show ulysses blush at slot(0, total=1), bright zorder 10
             u "A compliment directed at the present is considerably harder to deflect. Thank you."
 
     "He returns the photograph to its exact place, but not before looking at Winston's blurred outline once more."
@@ -334,6 +335,7 @@ label UlyssesEveningThree:
             $ uly += 2
             $ ulyssesRomanceInterest += 2
             "You tell him his eyes are beautiful. The exact sentence pulls color into his face."
+            show ulysses blush startled at slot(0, total=1), bright zorder 10
             u "The smaller details change. You appear determined to weaponize that fact."
 
     "He pours fresh black coffee and leaves the second cup for you to prepare however you like. The music remains low enough that neither of you has to raise your voice."
@@ -352,6 +354,7 @@ label UlyssesEveningThree:
             $ ulyssesBoundaryViolation = True
             $ ulysses_day_three_tension = True
             $ ulysses_day_three_choice = "loophole"
+            show ulysses upset talking at slot(0, total=1), bright zorder 10
             u "No. There is no loophole, and my life is not a puzzle mechanism for you to test."
             "He moves the coffee aside and returns the open case forms to the center of the desk. The invitation to discuss his power is over."
         "Tell him he never has to prove the power to you.":
@@ -360,6 +363,7 @@ label UlyssesEveningThree:
             u "Thank you. Most people hear an impossible boundary and begin searching for the trick."
 
     if ulysses_day_three_tension:
+        show ulysses upset at slot(0, total=1), bright zorder 10
         "You finish the remaining forms in a silence that is no longer comfortable. Ulysses answers every work question precisely, but he does not reopen the personal conversation."
         "When the final page is filed, he rests one hand on the closed folder."
         u "The future is not permission to take a choice away from someone. Neither is curiosity."
@@ -368,6 +372,7 @@ label UlyssesEveningThree:
         if ulyssesRomanceInterest >= ULYSSES_ROMANCE_WARM_THRESHOLD:
             "Your fingers brush over the edge of the final folder. Ulysses doesn't pull away immediately; his hand lingers a beat against yours before he catches himself."
             "He looks at your joined hands, then up at you."
+            show ulysses blush talking at slot(0, total=1), bright zorder 10
             u "That detail changed."
             "He withdraws carefully, visibly flustered despite whatever larger shape of the evening he remembers."
         else:
@@ -401,6 +406,7 @@ label UlyssesEveningFour:
 
     "Instead of opening the next folder, Ulysses refreshes both coffees and lowers the jazz until the office feels private rather than merely quiet. He takes his time returning to the desk."
     if ulyssesBoundaryViolation and not ulyssesBoundaryApology:
+        show ulysses upset at slot(0, total=1), bright zorder 10
         u "There is a strict limit on my power: I cannot tell anyone what will happen. Anything exact triggers it violently against me."
         u "You pushed against that boundary before. I am stating the rule clearly now so there is no confusion: it is a matter of survival, not preference."
         u "Let us return to the case."
@@ -424,6 +430,7 @@ label UlyssesEveningFour:
     u "Last year, when I was nineteen, Dakota and I were working late. I had seen something that affected our friend, and I believed I had found language indirect enough to talk about why it bothered me."
     u "Dakota is a coworker I trust deeply. That trust made me blind to the dangers of connecting to someone and being able to tell them what's on my mind."
     "His thumb rests against the edge of the photograph. The next sentence takes longer than the rest."
+    show ulysses upset talking at slot(0, total=1), bright zorder 10
     u "I tried to tell Dakota. The power stopped me. I suffered a seizure before I finished and remained comatose for four months."
     "The statement is precise, but it no longer arrives without context. His grip on the photograph is the only part of him that looks rehearsed."
 
@@ -460,6 +467,7 @@ label UlyssesEveningFour:
             u "Perhaps. I would prefer not to have the value of it explained to me tonight."
 
     "To release the weight of the conversation, Ulysses pulls a ridiculous paperback from his shelf. Its cover depicts an astronaut arguing with a sentient vending machine."
+    show ulysses at slot(0, total=1), bright zorder 10
     u "Mysteries are unbearable. Comedy occasionally earns its uncertainty honestly."
 
     menu:
@@ -548,6 +556,7 @@ label UlyssesEveningFive:
             else:
                 "When both books come to rest on the table, you leave your hand beside his and turn it palm-up."
             "Ulysses looks at the invitation. The color reaches his face before his fingers settle carefully into yours."
+            show ulysses blush talking at slot(0, total=1), bright zorder 10
             u "This evening has become difficult to categorize. I was not sufficiently prepared."
             menu:
                 "Tell him he can stop categorizing it.":
@@ -643,6 +652,7 @@ label UlyssesEveningSix:
             $ ulyssesRomanceInterest += 2
             $ ulysses_day_six_invited_closeness = True
             "Ulysses looks down at the closed packet, then back at you."
+            show ulysses blush talking at slot(0, total=1), bright zorder 10
             u "They became the portion I most looked forward to as well. That sentence was not in the report."
         "Tell him you were glad you stayed late tonight." if ulyssesPersonalEvenings < 3 and not (ulyssesBoundaryViolation and not ulyssesBoundaryApology):
             $ uly += 2
@@ -674,6 +684,7 @@ label UlyssesEveningSix:
 
     if (uly >= ULYSSES_HIGH_THRESHOLD and ulyssesRomanceInterest >= ULYSSES_ROMANCE_HIGH_THRESHOLD and ulysses_day_six_invited_closeness and ulysses_romance_eligible):
         "Ulysses catches your hand before you can withdraw it. His composure lasts until your thumb brushes the edge of his vest."
+        show ulysses blush startled at slot(0, total=1), bright zorder 10
         menu:
             "Tell him he looks good when he forgets the next line.":
                 $ uly += 3
@@ -689,6 +700,7 @@ label UlyssesEveningSix:
                 "The two of you stay there, close enough that neither can mistake the silence for professionalism."
     elif (uly >= ULYSSES_WARM_THRESHOLD and ulyssesRomanceInterest >= ULYSSES_ROMANCE_WARM_THRESHOLD and ulysses_day_six_invited_closeness and ulysses_romance_eligible):
         "Ulysses catches your hand briefly, then releases it with a small, flustered smile."
+        show ulysses blush at slot(0, total=1), bright zorder 10
         u "You have become extremely comfortable adjusting your cofounder."
     else:
         if ulysses_day_six_invited_closeness:
@@ -1119,7 +1131,7 @@ label UlyssesReportMadeline4:
 
 
 label UlyssesReportMadeline5:
-    show ulysses at slot(0, total=1), bright zorder 10
+    show ulysses disgruntled at slot(0, total=1), bright zorder 10
     if mads_cutoff_violated:
         u "I have the telemetry log from Madeline's helmet calibration, recruit. The automatic timer triggered because you ignored her verbal stop command."
         "You report the residue pattern, but you cannot disguise the fact that you ignored protocol and forced her past her limit."

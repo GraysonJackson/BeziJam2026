@@ -53,11 +53,39 @@ image freddy blush = "images/FINISHEDSPRITES/freddyBlushMouthClose.png"
 image freddy blush agape = "images/FINISHEDSPRITES/freddyBlushMouthAgape.png"
 image freddy wtf = "images/FINISHEDSPRITES/freddyWhatTheFuckAreYouTalkingAboutMC.png"
 
-# --- REMAINING CAST (Outlines) ---
-image dhampir = Crop((438, 0, 2031, 2481), "images/dhampirBaseMouthClosed.png")
-image winston = Crop((438, 0, 2031, 2481), "images/winstonBaseMouthClosed.png")
-image ulysses = Crop((438, 0, 2031, 2481), "images/umbralBaseMouthClosed.png")
-image umbral = Crop((438, 0, 2031, 2481), "images/umbralBaseMouthClosed.png")
+# --- DHAMPIR ---
+image dhampir = "images/FINISHEDSPRITES/dramphierBaseNeutralMouthClosed.png"
+image dhampir mouth open = "images/FINISHEDSPRITES/dramphierBaseNeutralMouthOpen.png"
+image dhampir upset = "images/FINISHEDSPRITES/dramphierDudeYouUpsetTheFuckingChillAssVampireWhatTheFuckMC.png"
+image dhampir happy = "images/FINISHEDSPRITES/dramphierHappyHappyHappy.png"
+image dhampir shocked = "images/FINISHEDSPRITES/dramphierLaGaspe.png"
+image dhampir sad = "images/FINISHEDSPRITES/dramphierSadUpset.png"
+image dhampir side eye = "images/FINISHEDSPRITES/dramphierSideEyeMouthOpen.png"
+image dhampir smug = "images/FINISHEDSPRITES/dramphierSmugEyesClosed.png"
+image dhampir hero form = "images/FINISHEDSPRITES/dramphireSuperHeroForm.png"
+
+# --- WINSTON ---
+image winston = "images/FINISHEDSPRITES/winstonNeutralBaseMouthClosed.png"
+image winston mouth open = "images/FINISHEDSPRITES/winstonNeutralBaseMouthOpen.png"
+image winston happy = "images/FINISHEDSPRITES/winstonHappyHappyHappy.png"
+image winston meow = "images/FINISHEDSPRITES/winstonMeow.png"
+image winston worried = "images/FINISHEDSPRITES/winstonMeowWorried.png"
+image winston pissed = "images/FINISHEDSPRITES/winstonPissed.png"
+image winston shocked = "images/FINISHEDSPRITES/winstonShockFace.png"
+image winston sly blush = "images/FINISHEDSPRITES/winstonSlyBlush.png"
+image winston sly blush raised = "images/FINISHEDSPRITES/winstonSlyBlushEyeRaised.png"
+
+# --- ULYSSES ---
+# The finished set currently has a neutral open-mouth portrait but no matching
+# closed-mouth portrait. Use the finished neutral so the outline is retired.
+image ulysses = "images/FINISHEDSPRITES/umbralBaseNuetralMouthOpen.png"
+image ulysses blush = "images/FINISHEDSPRITES/umbralBlushLookAway.png"
+image ulysses blush talking = "images/FINISHEDSPRITES/umbralBlushLookAwayMouthOpen.png"
+image ulysses blush startled = "images/FINISHEDSPRITES/umbralBlushWideEye.png"
+image ulysses disgruntled = "images/FINISHEDSPRITES/umbralDisgrutal.png"
+image ulysses upset = "images/FINISHEDSPRITES/umbralUpsetUpset.png"
+image ulysses upset talking = "images/FINISHEDSPRITES/umbralUpsetUpsetMouthOpen.png"
+image umbral = "images/FINISHEDSPRITES/umbralBaseNuetralMouthOpen.png"
 
 # --- BACKGROUNDS ---
 image cubicleOutline = "images/cubicleFinal.jpg"

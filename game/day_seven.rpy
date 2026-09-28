@@ -93,11 +93,11 @@ label DaySevenTeamBriefing:
         m "Where the hell did you get that?"
         show ica as day_seven_speaker at slot(0, total=1), bright zorder 10
         i "Killer brought it to the warehouse. Opened Enrico's lockbox and tried burning what was inside. We were sitting ten feet away."
-        show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
+        show winston shocked as day_seven_speaker at slot(0, total=1), bright zorder 10
         w "You solved the murder by making the warehouse look unattended."
         show ica happy as day_seven_speaker at slot(0, total=1), bright zorder 10
         i "I solved the murder by being approachable."
-        show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
+        show dhampir side eye as day_seven_speaker at slot(0, total=1), bright zorder 10
         d "You were lying on the floor eating chips."
         show ica sly as day_seven_speaker at slot(0, total=1), bright zorder 10
         i "Approachably."
@@ -112,13 +112,13 @@ label DaySevenTeamBriefing:
 
         show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
         u "The investigative period is over. We have six days of reports, nine badge profiles, and the DA waiting on a name."
-        show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
+        show winston meow as day_seven_speaker at slot(0, total=1), bright zorder 10
         w "No pressure, recruit. Just make sure it isn't me. The paperwork would be a nightmare."
         show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "Winston."
-        show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
+        show winston worried as day_seven_speaker at slot(0, total=1), bright zorder 10
         w "Kidding. Mostly."
-        show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
+        show dhampir mouth open as day_seven_speaker at slot(0, total=1), bright zorder 10
         d "We've all seen the files. The room's ready when you are."
 
         "Madeline pulls one surviving file toward her. Nicky stops it with two fingers before it crosses the center line."
@@ -130,7 +130,7 @@ label DaySevenTeamBriefing:
         m "I know what sufficient means."
         show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "Then you know why the file stays in the middle."
-        show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
+        show dhampir side eye as day_seven_speaker at slot(0, total=1), bright zorder 10
         d "They're agreeing, by the way."
         show razzle as day_seven_speaker at slot(0, total=1), bright zorder 10
         r "Really doesn't sound like it."
@@ -142,7 +142,7 @@ label DaySevenTeamBriefing:
         show razzle as day_seven_speaker at slot(0, total=1), bright zorder 10
         r "We got real witness testimony, but whoever it is was hiding something. Trust the physical details they gave us."
     elif day_seven_focus_route == "dhampir":
-        show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
+        show dhampir mouth open as day_seven_speaker at slot(0, total=1), bright zorder 10
         d "The entry angle and the wound spacing don't lie. Trust what the floor told us."
     elif day_seven_focus_route == "madeline":
         show madeline as day_seven_speaker at slot(0, total=1), bright zorder 10
@@ -151,13 +151,13 @@ label DaySevenTeamBriefing:
         show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
         n "The alibis and timelines hold up on paper. Compare the physical access against the logs."
     elif day_seven_focus_route == "winston":
-        show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
+        show winston mouth open as day_seven_speaker at slot(0, total=1), bright zorder 10
         w "People scramble when they get caught. Think about how they sounded when we pressed them."
     elif day_seven_focus_route == "ica" and not daySevenIcaSpecial:
         show ica as day_seven_speaker at slot(0, total=1), bright zorder 10
         i "You survived a week with all of us. If you can do that, picking one name is light work."
 
-    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show ulysses blush as day_seven_speaker at slot(0, total=1), bright zorder 10
     if ulysses_one_each_strategy():
         u "You sampled every investigative method once. None of those reports was deep alone, but their overlap was enough for us to formally remove every remaining contradiction."
         u "You chose breadth and then did the difficult work of synthesis. I'm impressed."
@@ -182,12 +182,12 @@ label DaySevenTeamBriefing:
             "You acknowledge where the reports end and your interpretation begins. The admission sits heavily in the room, but nobody treats it as weakness."
             show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "Honest uncertainty is part of competent judgment. It does not excuse you from making the judgment."
-            show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
+            show dhampir happy as day_seven_speaker at slot(0, total=1), bright zorder 10
             d "Means you're taking it seriously. Better than pretending."
         "Make a joke before committing to the answer.":
             $ daySevenBriefingResponse = "joke"
             "You suggest accusing whichever suspect has the most inconvenient name to spell."
-            show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
+            show winston happy as day_seven_speaker at slot(0, total=1), bright zorder 10
             w "Finally, an investigative standard designed around paperwork."
             "Ulysses waits until the brief laugh ends."
             show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
@@ -214,13 +214,13 @@ label DaySevenAccusationReview:
 
     show razzle as day_seven_speaker at slot(0, total=1), bright zorder 10
     r "The witness details have to fit without changing what anybody said."
-    show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show dhampir mouth open as day_seven_speaker at slot(0, total=1), bright zorder 10
     d "The room has to fit before and after the killing."
     show madeline as day_seven_speaker at slot(0, total=1), bright zorder 10
     m "The physical trace has to survive the controls."
     show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
     n "The records have to corroborate it."
-    show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show winston mouth open as day_seven_speaker at slot(0, total=1), bright zorder 10
     w "And the person has to behave like the same person across all of it."
     show ica as day_seven_speaker at slot(0, total=1), bright zorder 10
     i "Plus, if they bring the dead guy's wallet to work, that feels relevant."
@@ -236,7 +236,7 @@ label DaySevenAccusationReview:
             u "The formal result narrowed the list. Those observations support your choice. Nicky, proceed."
         else:
             "Ulysses leaves the other surviving files open beside your selection."
-            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+            show ulysses disgruntled as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "Nothing here rules [day_seven_actual_name] out. It doesn't rule everyone else out either."
             show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
             n "We'll follow up on your recommendation. This file still needs an answer before we call the case solved."
@@ -245,12 +245,12 @@ label DaySevenAccusationReview:
         $ day_seven_mismatch = day_seven_mismatch_info_value["text"]
         if day_seven_mismatch_info_value["kind"] == "insufficient_evidence":
             "Ulysses lays the surviving files beside the new alibi."
-            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+            show ulysses upset talking as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "[day_seven_mismatch]"
             u "And now patrol has verified that they couldn't have been there."
         else:
             "Ulysses stops at the contradiction and rotates the relevant case pages toward you."
-            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+            show ulysses upset talking as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "[day_seven_mismatch]"
             u "We had this before patrol left. We should have caught it here."
     return
@@ -278,14 +278,14 @@ label DaySevenSuccess:
         $ day_seven_confession_page += 1
     "The admission leaves nowhere else for the week to turn. No one cheers immediately. Closing the case does not make the reason for gathering here less grim."
 
-    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show ulysses blush as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "The accusation is correct. Enrico Edge's killer is in custody, and the evidence supporting that arrest is sound."
     "Only then does the room release the breath it has been holding."
     show razzle hoorah as day_seven_speaker at slot(0, total=1), bright zorder 10
     r "Holy shit, we actually got them!"
     show madeline as day_seven_speaker at slot(0, total=1), bright zorder 10
     m "Yes. Because the evidence was correct. Try celebrating without knocking it onto the floor."
-    show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show dhampir happy as day_seven_speaker at slot(0, total=1), bright zorder 10
     d "Nice work, new blood."
     if daySevenIcaSpecial or ulyssesCrossReportCompleted or max(ulysses_visit_counts().values()) >= 6:
         show nicky content happy as day_seven_speaker at slot(0, total=1), bright zorder 10
@@ -295,11 +295,11 @@ label DaySevenSuccess:
         n "The admission checks out. You picked the right person, rookie. Next time, bring me a tighter case before we move."
     show ica happy as day_seven_speaker at slot(0, total=1), bright zorder 10
     i "Congrats on continued employment, freshie. My condolences."
-    show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show winston happy as day_seven_speaker at slot(0, total=1), bright zorder 10
     w "Permanent paperwork privileges! Dreams really do come true."
 
     "Ulysses comes around the table and offers his hand."
-    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show ulysses blush as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "Your probationary appointment is complete. As of today, you are a permanent investigator with ATLAS."
     "You take his hand. His grip is formal; the quiet approval in his expression is not."
 
@@ -311,7 +311,7 @@ label DaySevenSuccess:
             show razzle hoorah as day_seven_speaker at slot(0, total=1), bright zorder 10
             r "Knew my partner had it!"
         elif day_seven_favorite == "dhampir":
-            show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
+            show dhampir happy as day_seven_speaker at slot(0, total=1), bright zorder 10
             d "Stuck with the ugly parts until they made sense. Respect."
         elif day_seven_favorite == "madeline":
             show madeline as day_seven_speaker at slot(0, total=1), bright zorder 10
@@ -320,14 +320,14 @@ label DaySevenSuccess:
             show nicky content happy as day_seven_speaker at slot(0, total=1), bright zorder 10
             n "Good work, rookie. Guess I need a new nickname."
         elif day_seven_favorite == "winston":
-            show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
+            show winston happy as day_seven_speaker at slot(0, total=1), bright zorder 10
             w "Newbie status revoked. I'm still calling you that though."
         elif day_seven_favorite == "ica":
             show ica happy as day_seven_speaker at slot(0, total=1), bright zorder 10
             i "You worked just enough to keep the job. Beautiful."
 
     "Winston begins ordering enough pizza for the building before Ulysses has formally ended the meeting. This time, Ulysses allows it."
-    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show ulysses blush as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "The case is closed. Take the evening."
     "Chairs scrape back, conversation returns, and the briefing room slowly becomes a celebration. Before the night ends, you have one personal decision left to make."
     return
@@ -346,24 +346,24 @@ label DaySevenFailure:
     show nicky angry accusation as day_seven_speaker at slot(0, total=1), bright zorder 10
     n "[day_seven_actual_name] ran when word of the arrest got out. Patrol reached their apartment after they'd cleared the block."
     "The actual profile replaces your selected file at the center of the table. Once the missed contradiction is corrected, the rest of the evidence aligns around [day_seven_actual_name]."
-    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show ulysses upset talking as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "The killer is [day_seven_actual_name]. Acting on your unsupported accusation alerted them and gave them the time and warning necessary to escape immediate custody."
 
     show razzle sad as day_seven_speaker at slot(0, total=1), bright zorder 10
     r "We'll find them. We know who we're looking for now."
-    show dhampir as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show dhampir sad as day_seven_speaker at slot(0, total=1), bright zorder 10
     d "Yeah. We will."
     show madeline distress as day_seven_speaker at slot(0, total=1), bright zorder 10
     m "After we waste time repairing a conclusion that should not have broken."
     show nicky as day_seven_speaker at slot(0, total=1), bright zorder 10
     n "[day_seven_selected_name] was wrongfully detained and is being released with our apologies. Nobody repeats that accusation outside this room without the correction attached."
-    show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show winston worried as day_seven_speaker at slot(0, total=1), bright zorder 10
     w "Team splits into pursuit and damage control. Same as always, only worse."
     show ica sad as day_seven_speaker at slot(0, total=1), bright zorder 10
     i "This is why I don't volunteer for decisions."
 
     "Ulysses remains standing at the head of the table. His anger is quiet enough that no one can mistake it for loss of control."
-    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show ulysses upset talking as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "You were given evidence, time, and six people's expertise. You still selected a conclusion the record could not support."
     u "ATLAS cannot place that judgment behind an accusation carrying our authority. Your employment ends immediately."
 
@@ -371,26 +371,26 @@ label DaySevenFailure:
         "Accept responsibility.":
             $ daySevenFailureResponse = "accept"
             "You say the accusation was yours and the consequence belongs to you."
-            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+            show ulysses upset as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "Correct. Accountability does not repair the error, but refusing it would make the error impossible to learn from."
         "Argue that the final clues were too uncertain.":
             $ daySevenFailureResponse = "defend"
             "You point to the gaps, the conflicting impressions, and the pressure of making one final choice."
-            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+            show ulysses upset talking as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "Uncertainty was a reason to review your conclusion. You used it as permission to excuse one."
         "Make one last joke.":
             $ daySevenFailureResponse = "joke"
             "You ask whether being fired at least exempts you from the exit paperwork."
-            show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
+            show winston worried as day_seven_speaker at slot(0, total=1), bright zorder 10
             w "It should. It absolutely will not."
-            show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+            show ulysses upset as day_seven_speaker at slot(0, total=1), bright zorder 10
             u "No."
 
     "The meeting breaks apart around the response. Nicky organizes the pursuit. Dhampir follows without needing instructions. Madeline takes the corrected profile, Razzle grabs the contact list, and Winston pauses beside you before duty pulls him toward the door."
-    show winston as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show winston worried as day_seven_speaker at slot(0, total=1), bright zorder 10
     w "One bad call doesn't make you worthless. It does mean you have to live honestly with the call."
     "Ica gives you a small, crooked salute. Ulysses waits until the others have gone."
-    show ulysses as day_seven_speaker at slot(0, total=1), bright zorder 10
+    show ulysses upset as day_seven_speaker at slot(0, total=1), bright zorder 10
     u "Collect your belongings. Someone will escort you through the secure exit when the immediate response is underway."
     "Later that evening, while ATLAS searches for [day_seven_actual_name], you return to the mostly empty office for the last of your things. There is still time for one final private conversation."
     return
@@ -555,6 +555,7 @@ label DaySevenEndingWinston:
 
     if _winn_romance_ready:
         if daySevenCaseSolved:
+            show winston sly blush raised at slot(0, total=1), bright zorder 10
             "He sets down his soda when he sees you."
             w "Thought you might come looking for me. Either that or you're here to steal my pizza."
         else:
@@ -580,12 +581,14 @@ label DaySevenEndingWinston:
 
     if _winn_intent == "romance":
         if daySevenRelationshipOutcome == "romance":
+            show winston shocked at slot(0, total=1), bright zorder 10
             w "Oh."
             "For once, Winston reaches for a joke and finds himself a full second too slow."
             if daySevenCaseSolved:
                 w "You solve one murder and immediately decide to attempt something dangerous. I respect the momentum."
             else:
                 w "I think today proved you can make a terrible decision. This isn't one of them."
+            show winston sly blush at slot(0, total=1), bright zorder 10
             w "Yeah, newbie. Romantic date. Pool first, disgusting burgers after. I'm winning at both, somehow."
             "His familiar grin returns as he catches you at the waist and pulls you close. It disappears again when you kiss him."
             "On Saturday night at Barney's Billiards, the neon sign hums above worn green felt. Winston misses an effortless eight-ball corner shot because he's distracted laughing at your commentary."
@@ -595,11 +598,13 @@ label DaySevenEndingWinston:
             "He laughs, chalking his cue and shaking his head with quiet, genuine affection."
         elif _winn_friend_ready:
             $ daySevenRelationshipOutcome = "friend"
+            show winston worried at slot(0, total=1), bright zorder 10
             w "I like you. A lot, actually. Just not in the direction you're aiming, newbie."
             w "Friend version's still available though. Pool, food, occasional unsanctioned hero work—strictly no payroll implications."
             "He keeps the promise. Friendship with Winston remains noisy, competitive, and dependable whenever it matters."
         else:
             $ daySevenRelationshipOutcome = "rejection"
+            show winston worried at slot(0, total=1), bright zorder 10
             w "No, newbie. You caught me charming at close range and drew an unsafe conclusion."
             w "I mean it kindly. There isn't a date here."
             "He offers an honest handshake and wishes you well."
@@ -803,6 +808,7 @@ label DaySevenEndingUlysses:
 
     if not daySevenCaseSolved:
         "You look down at the surrendered badge between you, then meet his eyes."
+        show ulysses upset at slot(0, total=1), bright zorder 10
         u "No."
         "The answer arrives without cruelty and without room to misread it."
         u "I care about what these evenings meant. That makes it more important, not less, that I answer honestly."
@@ -818,6 +824,7 @@ label DaySevenEndingUlysses:
 
     if _uly_romance_ready:
         "He pauses with his hand resting on the final folder, looking up with that rare, unshielded focus. The usual formal distance in his posture softens as you approach."
+        show ulysses blush at slot(0, total=1), bright zorder 10
         u "You stayed. I was beginning to think you had joined Winston's pizza committee."
     elif _uly_friend_ready:
         "He stacks the surviving files neatly with a tired, respectful nod."
@@ -840,6 +847,7 @@ label DaySevenEndingUlysses:
     if _uly_intent == "romance":
         if daySevenRelationshipOutcome == "romance":
             "Color reaches Ulysses's face before he finishes setting down the file. Knowing the question existed has done nothing to make answering it easy."
+            show ulysses blush startled at slot(0, total=1), bright zorder 10
             u "An evening away from ATLAS. Explicitly personal. Intentionally uncertain."
             "You nod."
             u "Yes. There is a bookstore that stays open late and a restaurant nearby with no connection to Winston's standing pizza orders."
@@ -852,11 +860,13 @@ label DaySevenEndingUlysses:
             "He reaches out, his fingers sliding between yours."
         elif _uly_friend_ready:
             $ daySevenRelationshipOutcome = "friend"
+            show ulysses blush talking at slot(0, total=1), bright zorder 10
             u "I value you. I value the hours we spent working alone, and I would like those conversations to continue."
             u "But I cannot honestly call that desire romantic. Friendship is what I can offer."
             "The answer is gentle and exact. In the weeks after the case, quiet evenings of books, reports, and private jokes continue without either of you pretending they are dates."
         else:
             $ daySevenRelationshipOutcome = "rejection"
+            show ulysses disgruntled at slot(0, total=1), bright zorder 10
             u "No. You are asking for an intimacy we have not built."
             u "You have earned a place on this team. Do not confuse professional respect with a promise I did not make."
             "He remains polite, but the boundary is complete. The two of you return to the celebration as coworkers."
@@ -1012,9 +1022,11 @@ label DaySevenEndingDhampir:
         $ _dham_friend_ready = daySevenRelationshipOutcome in ("friend", "romance")
 
     if _dham_romance_ready:
+        show dhampir smug at slot(0, total=1), bright zorder 10
         "He glances up as you approach, sliding a hot slice of pizza onto a paper plate with an easy smirk. He tilts his head, eyes bright."
         d "Been waiting for you, new blood. Thought you might want something to eat that wasn't touched by five other detectives."
     elif _dham_friend_ready:
+        show dhampir happy at slot(0, total=1), bright zorder 10
         "He raises his paper plate in a casual salute, offering an easy grin."
         d "Surviving the week, I see. Grab a slice if Winston left any."
     else:
@@ -1034,9 +1046,11 @@ label DaySevenEndingDhampir:
 
     if _dham_intent == "romance":
         if daySevenRelationshipOutcome == "romance":
+            show dhampir shocked at slot(0, total=1), bright zorder 10
             d "Damn. I had a joke ready, but you made the question all sincere. Kinda fucked up of you."
             if not daySevenCaseSolved:
                 d "You got today wrong. Badly. I don't think that makes every decent thing you did before it fake."
+            show dhampir happy at slot(0, total=1), bright zorder 10
             d "Yeah, new blood. There's an underground show this weekend. Music's loud, building's probably condemned, pizza place stays open late. Romantic enough?"
             "You tell him it depends on the kiss. Dhampir grins, leans in, and gives you enough evidence to settle the question."
             d "There. Peer reviewed."
@@ -1049,11 +1063,13 @@ label DaySevenEndingDhampir:
             "He laughs, bumping his shoulder against yours against the iron railing."
         elif _dham_friend_ready:
             $ daySevenRelationshipOutcome = "friend"
+            show dhampir sad at slot(0, total=1), bright zorder 10
             d "Not feeling the romantic part, new blood. Sorry."
             d "Still want you around, though. Movies, shows, pizza, hanging out without pretending it needs another label."
             "Dhampir's friendship remains easy and sincere. He keeps inviting you to terrible films and saving the best commentary for the walk afterward."
         else:
             $ daySevenRelationshipOutcome = "rejection"
+            show dhampir side eye at slot(0, total=1), bright zorder 10
             d "Nah. We don't have that."
             d "Nothing wrong with asking once. Just take the answer the same way."
             "He gives you a casual nod and heads down the stairs."
