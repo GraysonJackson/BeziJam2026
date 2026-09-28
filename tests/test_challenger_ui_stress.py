@@ -356,5 +356,131 @@ class MainMenuAdversarialStressTests(unittest.TestCase):
         )
 
 
+class HistoryScreenLayoutStressTests(unittest.TestCase):
+    """Adversarial stress-tests for history_screen.rpy layout, bounds, fonts, and notebook margins."""
+
+    def setUp(self):
+        self.history_content = (SCREENS_DIR / "history_screen.rpy").read_text(encoding="utf-8")
+        self.neon_path = FONTS_DIR / "MonaspaceNeon-Regular.otf"
+        self.sharpie_path = FONTS_DIR / "RandoSharpie.ttf"
+        self.od_path = FONTS_DIR / "OpenDyslexic-Regular.ttf"
+
+    def _get_text_width(self, font_path, size, text):
+        font = ImageFont.truetype(str(font_path), size)
+        bbox = font.getbbox(text)
+        return bbox[2] - bbox[0]
+
+    def test_history_container_stays_within_notebook_paper_bounds(self):
+        """Stress-test: History container xpos, ypos, and dimensions must reside within notebook paper bounds."""
+        # Menubook page properties:
+        # Spiral holes end at x=676
+        # Sticky navigation tabs start at x=1267 (xalign 1.0, xoffset -520 -> 1400 - 133 = 1267)
+        # Notebook title pos (650, 177) -> title bottom ~240
+        # Notebook page bottom ~915
+
+        xpos_match = re.search(r'xpos\s+(\d+)', self.history_content)
+        ypos_match = re.search(r'ypos\s+(\d+)', self.history_content)
+        xsize_match = re.search(r'style\s+history_container:.*?xsize\s+(\d+)', self.history_content, re.DOTALL)
+        ysize_match = re.search(r'style\s+history_container:.*?ysize\s+(\d+)', self.history_content, re.DOTALL)
+
+        self.assertIsNotNone(xpos_match, "history_container must declare an explicit xpos")
+        self.assertIsNotNone(ypos_match, "history_container must declare an explicit ypos")
+        self.assertIsNotNone(xsize_match, "history_container must declare an explicit xsize")
+        self.assertIsNotNone(ysize_match, "history_container must declare an explicit ysize")
+
+        xpos = int(xpos_match.group(1))
+        ypos = int(ypos_match.group(1))
+        xsize = int(xsize_match.group(1))
+        ysize = int(ysize_match.group(1))
+
+        # Must clear the spiral holes on the left
+        self.assertGreater(
+            xpos, 676,
+            f"Container xpos ({xpos}px) must clear spiral holes (<= 676px)"
+        )
+        # Must not extend past the sticky tabs on the right
+        container_right = xpos + xsize
+        self.assertLessEqual(
+            container_right, 1260,
+            f"Container right edge ({container_right}px) must not overlap tabs (>= 1267px)"
+        )
+        # Vertical placement
+        self.assertGreaterEqual(
+            ypos, 240,
+            f"Container ypos ({ypos}px) must be below Log title (~240px)"
+        )
+        container_bottom = ypos + ysize
+        self.assertLessEqual(
+            container_bottom, 900,
+            f"Container bottom ({container_bottom}px) must be within notebook paper (< 915px)"
+        )
+
+    def test_history_content_and_scrollbar_clearance(self):
+        """Verify inner frame and scrollbar fit without clipping or colliding with tabs."""
+        frame_match = re.search(r'style\s+history_frame:.*?xsize\s+(\d+)', self.history_content, re.DOTALL)
+        cont_match = re.search(r'style\s+history_container:.*?xsize\s+(\d+)', self.history_content, re.DOTALL)
+        who_match = re.search(r'label\s+h\.who.*?xsize\s+(\d+)', self.history_content, re.DOTALL)
+        what_match = re.search(r'text\s+what:.*?xsize\s+(\d+)', self.history_content, re.DOTALL)
+
+        self.assertIsNotNone(frame_match)
+        self.assertIsNotNone(cont_match)
+        self.assertIsNotNone(who_match)
+        self.assertIsNotNone(what_match)
+
+        frame_w = int(frame_match.group(1))
+        cont_w = int(cont_match.group(1))
+        who_w = int(who_match.group(1))
+        what_w = int(what_match.group(1))
+
+        # Check scrollbar channel
+        scrollbar_margin = cont_w - frame_w
+        scrollbar_w = 29
+        self.assertGreaterEqual(
+            scrollbar_margin, scrollbar_w,
+            f"Scrollbar channel ({scrollbar_margin}px) must accommodate vertical scrollbar ({scrollbar_w}px)"
+        )
+
+        # Check content components fit within frame
+        # hbox spacing is 15
+        content_w = who_w + 15 + what_w
+        self.assertLessEqual(
+            content_w, frame_w,
+            f"Total content width ({content_w}px) must fit within history_frame ({frame_w}px)"
+        )
+
+    def test_all_speaker_names_fit_within_who_label(self):
+        """Stress-test all character speaker names to ensure individual words fit inside who label width."""
+        speakers = [
+            "Winston", "Dhampir", "Ica", "Madeline", "Razzle Dazzle", "Nicky",
+            "Ulysses", "Freddy", "Victor", "Jermiah", "Barry", "Carl", "Tucker",
+            "Edgar", "Simon", "Kyle", "Alan"
+        ]
+        who_match = re.search(r'label\s+h\.who.*?xsize\s+(\d+)', self.history_content, re.DOTALL)
+        who_w = int(who_match.group(1))
+
+        for name in speakers:
+            for word in name.split():
+                w = self._get_text_width(self.sharpie_path, 33, word)
+                self.assertLessEqual(
+                    w, who_w,
+                    f"Speaker word '{word}' ({w}px) exceeds who label width ({who_w}px)"
+                )
+
+    def test_empty_history_message_fits_inside_container(self):
+        """Verify the empty history message fits cleanly within container width."""
+        cont_match = re.search(r'style\s+history_container:.*?xsize\s+(\d+)', self.history_content, re.DOTALL)
+        cont_w = int(cont_match.group(1))
+        empty_text = "The dialogue history is empty."
+        for font_name, font_file, size in [
+            ("Monaspace Neon", self.neon_path, 26),
+            ("OpenDyslexic", self.od_path, 26),
+        ]:
+            w = self._get_text_width(font_file, size, empty_text)
+            self.assertLess(
+                w, cont_w,
+                f"Empty history text ({w}px) exceeds container width ({cont_w}px) in {font_name}"
+            )
+
+
 if __name__ == "__main__":
     unittest.main()

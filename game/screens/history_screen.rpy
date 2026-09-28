@@ -45,19 +45,19 @@ screen history():
                             ## from the Character, if set
                             if "color" in h.who_args:
                                 text_color h.who_args["color"]
-                            xsize 180  # this number and the null width
+                            xsize 130  # this number and the null width
                                         # number should be the same
                     else:
-                        null width 180
+                        null width 130
 
                     $ what = renpy.filter_text_tags(h.what, allow=gui.history_allow_tags)
                     text what:
                         substitute False
-                        xsize 860
+                        xsize 380
 
             if not _history_list:
                 text _("The dialogue history is empty."):
-                    size 28
+                    size 26
                     xalign 0.5
                     color "#b87160"
                     font "fonts/MonaspaceNeon-Regular.otf"
@@ -69,16 +69,16 @@ define gui.history_allow_tags = { "alt", "noalt", "rt", "rb", "art" }
 
 
 style history_container:
-    xsize 1150
-    ysize 660
-    xalign 0.5
-    ypos 230
+    xpos 685
+    ypos 250
+    xsize 565
+    ysize 620
     padding (0, 0)
     background None
 
 
 style history_frame:
-    xsize 1100
+    xsize 525
     ysize None
     background None
 
