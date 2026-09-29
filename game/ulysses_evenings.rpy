@@ -3,7 +3,7 @@
 ## personal route. Ulysses is never selected from the daytime menu.
 
 label UlyssesEvening:
-    scene winstonOfficeOutline with fade
+    scene ulyOfficeFinal with fade
     $ ulysses_report_label = ulysses_prepare_evening()
 
     if ulysses_completed_visits("ica") >= 5:

@@ -2256,6 +2256,8 @@ label DhampirDayOne:
     show dhampir hero form at slot(0, total=1), bright zorder 10
     "Outside, Dhampir chooses to walk instead of fly. The case file stays tucked under one arm while he points out a bakery he likes, a pawn shop he distrusts, and an alley where he once chased a man through three walls."
     "By the time Enrico's street comes into view, the casual commentary is gone. His shoulders square again before either of you reaches the police tape."
+    scene crimeSceneFinal with fade
+    show dhampir hero form at slot(0, total=1), bright zorder 10
     "The two of you arrive at the crime scene."
     "Enrico Edge's house remains sealed behind police tape. The body has been removed, but dark stains, numbered evidence markers, and the outline of a violent struggle remain."
     "Two officers recognize Dhampir and exchange the exhausted look of people who have already completed (and are anticipating more) paperwork about him."
@@ -2634,7 +2636,7 @@ label DhampirDayThree:
     "Madeline makes you inventory the scanner case before anyone leaves. Dhampir carries the main unit while she watches him like he personally offended several pieces of precision equipment."
     "The drive is mostly occupied by Madeline explaining calibration and Dhampir translating each explanation into increasingly inaccurate metaphors."
 
-    scene black with fade
+    scene crimeSceneFinal with fade
 
     "Back at Enrico's house, the three of you wait while an officer unlocks the seal and records your entry. Dhampir's casual expression disappears the moment the door opens."
     "Madeline gives you the room's anchor markers one at a time. Once every projector is placed and checked, her scanner washes the room in pale geometric light. Old blood patterns, displaced furniture, and the victim's documented wounds appear as translucent overlays."
@@ -2786,6 +2788,7 @@ label DhampirDayThree:
 
     "Madeline makes both of you help coil cables before she permits anyone to leave. Dhampir holds one end of each cord perfectly still and continues claiming the scanner is an expensive flashlight until she threatens to demonstrate its weight against his skull."
 
+    scene black with fade
     hide madeline
     show dhampir at slot(0, total=1), bright zorder 10
 
@@ -2855,6 +2858,8 @@ label DhampirDayFour:
     scene black with fade
     show dhampir at slot(0, total=1), bright zorder 10
     "The route to Enrico's house has already become familiar. Dhampir talks until the police tape appears, then falls quiet halfway through a joke and does not finish it."
+    scene crimeSceneFinal with fade
+    show dhampir at slot(0, total=1), bright zorder 10
     "Inside, you reopen the room one photograph at a time. Dhampir waits for each angle to be placed before moving to the next mark."
     "Dhampir reconstructs only the minute after the fatal injury. He follows the numbered photographs in silence, moving from one contact point to the next."
 
@@ -3075,6 +3080,8 @@ label DhampirDaySix:
     scene black with fade
     show dhampir at slot(0, total=1), bright zorder 10
     "The final drive is quiet. Dhampir reviews Madeline's transparent angle overlays against a set of printed scene photographs while you watch familiar blocks pass the window. At the house, two officers record the search plan and unlock the scene one last time."
+    scene crimeSceneFinal with fade
+    show dhampir at slot(0, total=1), bright zorder 10
     "You photograph the intact seal before entering. Dhampir waits inside the doorway until the time, personnel, and conditions are written into the log."
     $ dhampir_day_six_drop = suspectAttributes[killer]["unique_drop"]
     $ dhampir_day_six_evidence = DHAMPIR_DROP_EVIDENCE_TEXT[dhampir_day_six_drop]
@@ -3139,6 +3146,9 @@ label DhampirDaySix:
     "Dhampir removes one glove with his teeth and hands the signed evidence transfer sheet to the waiting officers."
 
     "The officers take custody only after checking every line. Dhampir watches the bag disappear into a locked case, then finally steps back across the threshold and lets the crime scene close behind you."
+
+    scene black with fade
+    show dhampir at slot(0, total=1), bright zorder 10
 
     if dhamp >= DHAMPIR_HIGH_THRESHOLD:
         d "You work hard when it matters, you don't get stupid around a body, and your jokes are mostly decent."
@@ -3231,6 +3241,7 @@ label MadelineDayOne:
 
     scene black with fade
     "On the drive, Madeline reads the scene log aloud and interrupts herself every few lines to insult the formatting. By the time you reach Enrico's street, she has memorized the document and corrected it in three places."
+    scene crimeSceneFinal with fade
     "The police tape lifts in the afternoon wind. Inside, the house is quiet enough that the scanner's case sounds too loud when you set it down."
     "Madeline pulls on a fresh pair of gloves and kneels beside the sealed shard without touching it. A portable scanner projects the partial print several feet high across the wall."
 
@@ -6313,6 +6324,8 @@ label IcaDayFive:
 
     "Ica makes the paint cans follow you down the hall at ankle height. She still gives you the rollers to carry, apparently because using her power on all of it would feel too much like taking the task seriously."
 
+    scene ulyOfficeFinal with fade
+    show ica at slot(0, total=1), bright zorder 10
     "Ulysses is away from his office for the morning. Ica opens the door and surveys the room without stepping inside."
 
     i "This is gonna take forever."
