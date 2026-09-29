@@ -2,7 +2,8 @@
   "type": "template",
   "build_update": false,
   "packages": [
-    "pc"
+    "pc",
+    "mac"
   ],
   "add_from": true,
   "force_recompile": true,

@@ -83,6 +83,7 @@ transform freddy_corner:
 label start:
 
     $ initialize_investigation()
+    $ play_route_music(audio.music_title)
 
     # # Show a background. This uses a placeholder by default, but you can
     # # add a file (named either "bg room.png" or "bg room.jpg") to the
@@ -222,6 +223,7 @@ label start:
 
 label dayOneBrief:
     # Day 1, starting the meeting before splitting
+    $ play_route_music(audio.music_ulysses)
     scene black
     "Day One: 6 days left until a culprit is decided on."
 
@@ -430,7 +432,7 @@ label dayOneBrief:
     show ulysses disgruntled at slot(0, total=2), bright zorder 10
     u "No, Razzle, sorry. Winston and I just had a disagreement."
 
-    show ulysses at slot(0, total=2), dim zorder 0
+    hide ulysses
     show nicky at slot(0, total=2), bright zorder 10
     n "Winston called him a wet blanket."
 
@@ -453,10 +455,9 @@ label dayOneBrief:
             show razzle flirty at slot(0, total=1), bright zorder 10
             r "Oh? I hope you can handle some heat then..."
 
-    show razzle at slot(0, total=1), dim zorder 0
+    hide razzle
     show ulysses disgruntled at slot(0, total=1), bright zorder 10
     u "Alright you two, that's enough of that. Looks like we're only missing one more now. Where is she?"
-    hide razzle
 
     "As if on cue, the final member of your team strolls through the door, carrying a weight of carelessness about her."
 
@@ -572,6 +573,7 @@ label dayLoop:
     if dayWin >= 7:
         jump day7
 
+    $ play_route_music(audio.music_title)
     $ spendRazz = False
     $ spendDham = False
     $ spendMads = False

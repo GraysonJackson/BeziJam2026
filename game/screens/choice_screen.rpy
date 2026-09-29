@@ -10,30 +10,42 @@
 screen choice(items):
     style_prefix "choice"
 
-    frame:
-        xalign 0.5
-        ypos 25
-        xsize 1240
-        ysize 900
-        background None
-        padding (20, 20)
+    if len(items) <= 9:
+        vbox:
+            xalign 0.5
+            yalign 0.5
+            spacing (10 if len(items) >= 7 else 18)
+            for i in items:
+                textbutton i.caption:
+                    action i.action
+                    xsize 1140
+                    padding (38, (10 if len(items) >= 7 else 18), 38, (10 if len(items) >= 7 else 18))
+                    text_size (28 if len(items) >= 7 else 34)
+    else:
+        frame:
+            xalign 0.5
+            yalign 0.5
+            xsize 1240
+            ysize 900
+            background None
+            padding (20, 20)
 
-        viewport:
-            xfill True
-            mousewheel True
-            draggable True
-            pagekeys True
-            scrollbars "vertical"
+            viewport:
+                xfill True
+                mousewheel True
+                draggable True
+                pagekeys True
+                scrollbars "vertical"
 
-            vbox:
-                xalign 0.5
-                spacing (10 if len(items) >= 7 else 18)
-                for i in items:
-                    textbutton i.caption:
-                        action i.action
-                        xsize 1140
-                        padding (38, (10 if len(items) >= 7 else 18), 38, (10 if len(items) >= 7 else 18))
-                        text_size (28 if len(items) >= 7 else 34)
+                vbox:
+                    xalign 0.5
+                    spacing 10
+                    for i in items:
+                        textbutton i.caption:
+                            action i.action
+                            xsize 1140
+                            padding (38, 10, 38, 10)
+                            text_size 28
 
 
 style choice_vbox:
