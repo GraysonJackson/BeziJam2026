@@ -367,75 +367,103 @@ screen ending_gallery():
     $ unlocked = persistent.daySevenEndings or {}
     $ catalog = day_seven_ending_catalog()
 
-    viewport:
-        xpos 90
-        ypos 145
-        xsize 1080
-        ysize 820
-        mousewheel True
-        draggable True
-        pagekeys True
-        scrollbars "vertical"
+    # Match the notebook's content area; leave the sticky-note navigation clear.
+    vbox:
+        pos (690, 290)
+        xsize 565
+        spacing 14
 
-        vbox:
-            xsize 1010
-            spacing 15
+        text "UNLOCKED: [len(unlocked)] / [len(catalog)]":
+            size 27
+            color "#8d3027"
+            font "fonts/MonaspaceArgon-SemiBold.otf"
 
-            text "ENDING GALLERY — [len(unlocked)] / [len(catalog)]":
-                size 42
-                color "#E47751"
-                font "fonts/RandoSharpie.ttf"
+        text "Select an unlocked ending to replay it. Replays return here after the scene.":
+            size 20
+            color "#654c3c"
+            font "fonts/MonaspaceNeon-Regular.otf"
+            xmaximum 550
 
-            text "Unlocked endings can be replayed. Gallery replays return here and do not replay the credits.":
-                size 22
-                color "#DB8D7A"
-                xmaximum 1000
+        viewport:
+            id "ending_gallery_list"
+            xsize 565
+            ysize 480
+            mousewheel True
+            draggable True
+            pagekeys True
+            scrollbars "vertical"
+            side_spacing 12
 
-            for group_id, group_name in [
-                    ("razzle", "RAZZLE DAZZLE"),
-                    ("winston", "WINSTON"),
-                    ("nicky", "NICKY"),
-                    ("ica", "ICA"),
-                    ("ulysses", "ULYSSES"),
-                    ("madeline", "MADELINE"),
-                    ("dhampir", "DHAMPIR"),
-                    ("", "ATLAS TEAM & SOLO")]:
-                $ group_entries = [e for e in catalog if e["partner"] == group_id]
-                $ group_unlocked = [e for e in group_entries if e["key"] in unlocked]
+            vbox:
+                xsize 520
+                spacing 12
 
-                null height 8
-                text "[group_name] — ([len(group_unlocked)]/[len(group_entries)])":
-                    size 26
-                    color "#E47751"
-                    font "fonts/RandoSharpie.ttf"
+                for group_id, group_name in [
+                        ("razzle", "RAZZLE DAZZLE"),
+                        ("winston", "WINSTON"),
+                        ("nicky", "NICKY"),
+                        ("ica", "ICA"),
+                        ("ulysses", "ULYSSES"),
+                        ("madeline", "MADELINE"),
+                        ("dhampir", "DHAMPIR"),
+                        ("", "ATLAS TEAM & SOLO")]:
+                    $ group_entries = [e for e in catalog if e["partner"] == group_id]
+                    $ group_unlocked = [e for e in group_entries if e["key"] in unlocked]
 
-                for entry in group_entries:
-                    if entry["key"] in unlocked:
-                        textbutton entry["title"]:
-                            xsize 920
-                            text_size 23
-                            action Replay(
-                                "DaySevenGalleryReplay",
-                                scope={"daySevenGalleryReplayKey": entry["key"]},
-                                locked=False)
-                    else:
-                        $ status_label = "Solved" if entry["solved"] else "Unclosed"
-                        if entry["partner"] == "":
-                            $ hint_text = ("Team Celebration — Case " + status_label) if entry["solved"] else ("Solo Departure — Case " + status_label)
-                        elif entry["outcome"] == "romance":
-                            $ hint_text = entry["title"].split(" — ")[0] + " — Romance — Case " + status_label + " (Locked: Requires romantic connection)"
-                        elif entry["outcome"] == "friend":
-                            $ hint_text = entry["title"].split(" — ")[0] + " — Friendship — Case " + status_label + " (Locked: Requires friendship trust)"
+                    null height 8
+                    text "[group_name] — [len(group_unlocked)]/[len(group_entries)]":
+                        size 26
+                        color "#8d3027"
+                        font "fonts/RandoSharpie.ttf"
+
+                    for entry in group_entries:
+                        if entry["key"] in unlocked:
+                            $ replay_title = entry["title"].split(" — ", 1)[1] if entry["partner"] else entry["title"]
+                            textbutton replay_title:
+                                style "ending_gallery_button"
+                                action Replay(
+                                    "DaySevenGalleryReplay",
+                                    scope={"daySevenGalleryReplayKey": entry["key"]},
+                                    locked=False)
                         else:
-                            $ hint_text = entry["title"].split(" — ")[0] + " — Professional Distance — Case " + status_label + " (Locked)"
+                            $ status_label = "Solved" if entry["solved"] else "Unclosed"
+                            if entry["partner"] == "":
+                                $ hint_text = ("Team Celebration — Case " + status_label) if entry["solved"] else ("Solo Departure — Case " + status_label)
+                            elif entry["outcome"] == "romance":
+                                $ hint_text = "Romance — Case " + status_label + "\nLocked: Requires romantic connection"
+                            elif entry["outcome"] == "friend":
+                                $ hint_text = "Friendship — Case " + status_label + "\nLocked: Requires friendship trust"
+                            else:
+                                $ hint_text = "Professional Distance — Case " + status_label + "\nLocked"
 
-                        frame:
-                            xsize 920
-                            background Solid("#2a2323aa")
-                            padding (18, 12)
-                            text "[hint_text]":
-                                size 20
-                                color "#9b8d84"
+                            frame:
+                                xsize 520
+                                background Solid("#eee8df")
+                                padding (16, 12)
+                                text "[hint_text]":
+                                    size 20
+                                    color "#655950"
+                                    font "fonts/MonaspaceNeon-Regular.otf"
+                                    xmaximum 488
+
+
+style ending_gallery_button is button:
+    xsize 520
+    background Solid("#e4d8bc")
+    hover_background Solid("#f6d7c7")
+    padding (16, 12)
+
+style ending_gallery_button_text is button_text:
+    xalign 0.0
+    yalign 0.5
+    xoffset 0
+    yoffset 0
+    text_align 0.0
+    size 22
+    color "#00719a"
+    hover_color "#8d3027"
+    font "fonts/MonaspaceNeon-Regular.otf"
+    xmaximum 488
 
 
 transform day_seven_credit_scroll:
